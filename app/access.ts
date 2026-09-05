@@ -1,5 +1,4 @@
-import { SEOUL_DISTRICTS } from "./data";
-import { getNearbyStations, type NearbyStation } from "./stations";
+import { getNearbyStations, STATION_CATALOG, type NearbyStation } from "./stations";
 
 export type WorkplaceId =
   | "gwanghwamun"
@@ -71,27 +70,6 @@ const LINE_ORDER = [
   "우이신설선",
 ] as const;
 
-const DONG_STATION_CONTEXTS = [
-  ["노원구", "월계동"],
-  ["마포구", "대흥동"],
-  ["마포구", "아현동"],
-  ["송파구", "문정동"],
-  ["송파구", "잠실동"],
-  ["성동구", "행당동"],
-  ["성동구", "옥수동"],
-  ["성동구", "성수동1가"],
-  ["용산구", "한남동"],
-  ["강남구", "역삼동"],
-  ["강남구", "대치동"],
-  ["강남구", "개포동"],
-  ["강남구", "압구정동"],
-  ["강남구", "청담동"],
-  ["서초구", "잠원동"],
-  ["서초구", "반포동"],
-  ["서초구", "서초동"],
-  ["종로구", "평동"],
-] as const;
-
 /**
  * Converts display strings such as `2·8호선`, `1 / 5호선`,
  * `경의·중앙선`, and `공항철도` into stable, comparable line names.
@@ -107,7 +85,7 @@ export function parseTransitLines(value: string): string[] {
     .split("·")
     .flatMap((part) => {
       const matches = part.match(
-        /\d{1,2}(?:호선)?|수인분당선?|신분당선?|경의중앙선?|경춘선?|경강선?|공항철도|공항선|신림선?|우이신설선?/g,
+        /인천[12]호선|\d{1,2}(?:호선)?|수인분당선?|신분당선?|경의중앙선?|경춘선?|경강선?|공항철도|공항선|신림선?|우이신설선?/g,
       );
       return matches ?? [part];
     })
@@ -183,26 +161,14 @@ export const WORKPLACE_BY_ID = Object.fromEntries(
 ) as Record<WorkplaceId, Workplace>;
 
 function buildStationOptions(): StationOption[] {
-  const contexts: readonly (readonly [string, string])[] = [
-    ...SEOUL_DISTRICTS.map((district) => [district, ""] as const),
-    ...DONG_STATION_CONTEXTS,
-  ];
-  const byName = new Map<string, Set<string>>();
-
-  contexts.forEach(([district, dong]) => {
-    getNearbyStations(district, dong).forEach((station) => {
-      const lines = byName.get(station.name) ?? new Set<string>();
-      parseTransitLines(station.lines).forEach((line) => lines.add(line));
-      byName.set(station.name, lines);
-    });
-  });
-
-  return Array.from(byName.entries())
-    .map(([name, lineSet]) => {
-      const lines = Array.from(lineSet).sort(compareLines);
+  // Keep each line's station ID separate; equal names need not be a transfer.
+  return STATION_CATALOG
+    .map((station) => {
+      const { name } = station;
+      const lines = parseTransitLines(station.lines);
       const linesLabel = lines.join("·");
       return {
-        value: name,
+        value: station.key,
         name,
         lines,
         linesLabel,
@@ -212,7 +178,7 @@ function buildStationOptions(): StationOption[] {
     .sort((left, right) => left.name.localeCompare(right.name, "ko-KR"));
 }
 
-/** All stations currently represented by the district and dong station model. */
+/** Official station coordinates, including central Seoul. */
 export const STATION_OPTIONS: readonly StationOption[] = buildStationOptions();
 
 export function findDirectLineMatch(
@@ -244,20 +210,18 @@ export function findDirectLineMatch(
 }
 
 export function getDirectWorkplaceMatch(
-  district: string,
-  dong: string,
+  complexId: string,
   workplaceId: WorkplaceId,
 ): DirectLineMatch | null {
   return findDirectLineMatch(
-    getNearbyStations(district, dong),
+    getNearbyStations(complexId),
     workplaceId,
   );
 }
 
 export function hasDirectWorkplaceAccess(
-  district: string,
-  dong: string,
+  complexId: string,
   workplaceId: WorkplaceId,
 ): boolean {
-  return getDirectWorkplaceMatch(district, dong, workplaceId) !== null;
+  return getDirectWorkplaceMatch(complexId, workplaceId) !== null;
 }

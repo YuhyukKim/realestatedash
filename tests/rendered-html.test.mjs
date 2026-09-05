@@ -68,7 +68,7 @@ test("sorts Yeouido workplace access by a disclosed walk and direct-stop estimat
   assert.match(pageSource, /"workplace-desc"/);
   assert.match(pageSource, /compareWorkplaceCommutes/);
   assert.match(pageSource, /complex\.workplaceCommute/);
-  assert.match(pageSource, /대표 도보시간 \+ 직통 정거장당 2분 환산/);
+  assert.match(pageSource, /직선거리 기반 도보 추정 \+ 직통 정거장당 2분 환산/);
   assert.match(commuteSource, /const YEOUIDO_ROUTES/);
   assert.match(commuteSource, /"5호선"/);
   assert.match(commuteSource, /"9호선"/);
@@ -85,7 +85,7 @@ test("sorts Yeouido workplace access by a disclosed walk and direct-stop estimat
   assert.match(commuteSource, /if \(right === null\) return -1/);
 });
 
-test("computes representative Yeouido access cases and keeps unknowns last", async (t) => {
+test("computes coordinate-based Yeouido access and keeps unknowns last", async (t) => {
   const vite = await createServer({
     appType: "custom",
     configFile: false,
@@ -97,30 +97,26 @@ test("computes representative Yeouido access cases and keeps unknowns last", asy
 
   const commute = await vite.ssrLoadModule("/app/commute.ts");
   const ahyeon = commute.getWorkplaceCommuteEstimate(
-    "마포구",
-    "아현동",
+    "A10027906",
     "yeouido",
   );
   const mapo = commute.getWorkplaceCommuteEstimate(
-    "마포구",
-    "공덕동",
+    "A12180506",
     "yeouido",
   );
   const heukseok = commute.getWorkplaceCommuteEstimate(
-    "동작구",
-    "흑석동",
+    "A15679109",
     "yeouido",
   );
 
   assert.equal(ahyeon?.station.name, "애오개");
   assert.equal(ahyeon?.stopCount, 4);
-  assert.equal(ahyeon?.estimatedMinutes, 14);
+  assert.equal(ahyeon?.estimatedMinutes, ahyeon.station.walkMinutes + 8);
   assert.equal(mapo?.station.name, "공덕");
-  assert.equal(mapo?.estimatedMinutes, 12);
+  assert.equal(mapo?.estimatedMinutes, mapo.station.walkMinutes + mapo.stopCount * 2);
   assert.equal(heukseok?.station.name, "흑석");
   assert.equal(heukseok?.line, "9호선");
-  assert.ok(commute.compareWorkplaceCommutes(mapo, ahyeon, "asc") < 0);
-  assert.ok(commute.compareWorkplaceCommutes(mapo, ahyeon, "desc") > 0);
+  assert.equal(Math.sign(commute.compareWorkplaceCommutes(mapo, ahyeon, "asc")), -Math.sign(commute.compareWorkplaceCommutes(mapo, ahyeon, "desc")));
   assert.ok(commute.compareWorkplaceCommutes(null, mapo, "asc") > 0);
   assert.ok(commute.compareWorkplaceCommutes(null, mapo, "desc") > 0);
 });

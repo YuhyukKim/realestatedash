@@ -13,7 +13,7 @@ import type {
 } from "./complex-types";
 import { NaverMap } from "./naver-map";
 import type { PlacesResponse } from "./place-types";
-import type { NearbyStation } from "./stations";
+import { getNearbyStations, STATION_DISTANCE_NOTE } from "./stations";
 
 type DetailPeriod = 1 | 3 | 5 | 10 | "all";
 type ChartMetric = "sale" | "jeonse" | "ratio";
@@ -511,10 +511,8 @@ export default function ComplexDetailPanel({
   );
   const [mode, setMode] = useState<ComplexDetailResponse["mode"]>("live");
   const [message, setMessage] = useState("실거래 데이터를 불러오고 있습니다.");
-  const [nearbyStations, setNearbyStations] = useState<NearbyStation[]>([]);
-  const [nearbyStationsNote, setNearbyStationsNote] = useState(
-    "법정동 중심 직선거리 추정 · 실제 도보경로와 다를 수 있습니다.",
-  );
+  const nearbyStations = getNearbyStations(complex.id);
+  const nearbyStationsNote = STATION_DISTANCE_NOTE;
   const [places, setPlaces] = useState<PlacesResponse | null>(null);
   const [placesLoading, setPlacesLoading] = useState(true);
   const [placesError, setPlacesError] = useState("");
@@ -616,7 +614,7 @@ export default function ComplexDetailPanel({
               asOf: endMonth.replace("-", ""),
               master: "1",
               complexId: complex.id,
-              dataVersion: "real-v2",
+              dataVersion: "real-v3-coordinates",
             });
             if (complex.basePrice !== null && complex.basePrice > 0) {
               params.set("basePrice", String(complex.basePrice));
@@ -655,11 +653,6 @@ export default function ComplexDetailPanel({
                 ? "partial" : "unavailable",
           );
           setMessage([...new Set(payloads.filter((payload) => payload.mode !== "live").map((payload) => payload.message))].join(" ") || payloads[0]?.message || "단지 상세 실거래 자료");
-          setNearbyStations(payloads[0]?.nearbyStations ?? []);
-          setNearbyStationsNote(
-            payloads[0]?.nearbyStationsNote ??
-              "법정동 중심 직선거리 추정 · 실제 도보경로와 다를 수 있습니다.",
-          );
           setLoadProgress({ loaded: rangeIndex + 1, total: ranges.length });
         }
       } catch (loadError) {
@@ -867,14 +860,14 @@ export default function ComplexDetailPanel({
           {nearbyStations.length ? (
             <div className="detail-station-list">
               {nearbyStations.map((station, index) => (
-                <article key={`${station.name}-${station.lines}`}>
+                <article key={station.key ?? `${station.name}-${station.lines}`}>
                   <span className="station-rank">0{index + 1}</span>
                   <div className="station-main">
                     <strong>{station.name}역</strong>
                     <span>{station.lines}</span>
                   </div>
                   <div className="station-distance">
-                    <strong>약 {formatStationDistance(station.distanceMeters)}</strong>
+                    <strong>직선 {formatStationDistance(station.distanceMeters)}</strong>
                     <span>도보 약 {station.walkMinutes}분</span>
                   </div>
                   <a
@@ -888,7 +881,7 @@ export default function ComplexDetailPanel({
               ))}
             </div>
           ) : (
-            <p className="detail-station-empty">인근 지하철역 정보를 준비 중입니다.</p>
+            <p className="detail-station-empty">단지 좌표가 미확인이거나 반경 1.5km 내 확인된 역이 없습니다.</p>
           )}
           {workplaceAccess.length ? (
             <div className="detail-workplace-access">
@@ -920,7 +913,7 @@ export default function ComplexDetailPanel({
               대시보드에서 직장 1·2를 선택하면 이곳에 직통 가능 노선을 함께 표시합니다.
             </p>
           )}
-          <p className="detail-station-note">※ {nearbyStationsNote}</p>
+          <p className="detail-station-note">※ {nearbyStationsNote}<br />출처: 서울특별시 <a href="https://data.seoul.go.kr/dataList/OA-15818/S/1/datasetView.do" target="_blank" rel="noreferrer">공동주택 정보</a> · <a href="https://data.seoul.go.kr/dataList/OA-21232/S/1/datasetView.do" target="_blank" rel="noreferrer">역사마스터</a> (공공누리 1유형)</p>
         </section>
 
         <section className="detail-schools" aria-labelledby="nearby-schools-title">

@@ -3,7 +3,7 @@ import type {
   ComplexDetailResponse,
   ComplexTransaction,
 } from "../../complex-types";
-import { getNearbyStations } from "../../stations";
+import { getNearbyStations, STATION_DISTANCE_NOTE } from "../../stations";
 
 import { fetchMolitXml, isCanceledSale, tag, validMonth } from "../../molit-client";
 import { createMasterTradeMatcher, normalizeApartmentName } from "../../master-trade-matcher";
@@ -143,8 +143,8 @@ export async function GET(request: Request) {
   }
 
   const complex = { district, dong, apartment, buildYear: selected?.buildYear ?? null };
-  const nearbyStations = getNearbyStations(district, dong);
-  const nearbyStationsNote = "법정동 중심 직선거리 추정 · 실제 도보경로와 다를 수 있습니다.";
+  const nearbyStations = getNearbyStations(selected?.id ?? "");
+  const nearbyStationsNote = STATION_DISTANCE_NOTE;
   const respond = (mode: ComplexDetailResponse["mode"], transactions: ComplexTransaction[], message: string) =>
     Response.json({ mode, complex, nearbyStations, nearbyStationsNote, transactions, message } satisfies ComplexDetailResponse,
       { headers: { "Cache-Control": "no-store" } });

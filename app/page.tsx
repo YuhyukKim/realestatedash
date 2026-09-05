@@ -27,7 +27,7 @@ import {
 } from "./complex-master";
 import { SEOUL_DISTRICTS, type Trade } from "./data";
 import { groupTradesByMaster } from "./master-trade-matcher";
-import { getNearbyStations, type NearbyStation } from "./stations";
+import { getNearbyStations, selectNearbyStation, TRANSIT_COVERAGE, type NearbyStation } from "./stations";
 
 import { applyAreaPriceFilter, latestSalesByArea, type AreaSaleSummary } from "./area-sales";
 
@@ -195,7 +195,7 @@ export function mergeMasterWithTrades(
       periodTrades,
       latestObservedTrade,
       station:
-        getNearbyStations(mergedRecord.district, mergedRecord.dong)[0] ?? null,
+        getNearbyStations(mergedRecord.id)[0] ?? null,
     };
   });
 }
@@ -351,31 +351,16 @@ export default function Home() {
         );
       })
 
-      .filter((complex) => {
-        if (selectedStationRange === "all") return true;
-        return Boolean(
-          complex.station && complex.station.distanceMeters <= stationRange.max,
-        );
+      .flatMap((complex) => {
+        const station = selectNearbyStation(getNearbyStations(complex.record.id), selectedSubways, stationRange.max);
+        if ((selectedSubways.length || selectedStationRange !== "all") && !station) return [];
+        return [{ ...complex, station }];
       })
       .filter((complex) =>
         selectedWorkplaces.every((workplaceId) =>
-          hasDirectWorkplaceAccess(
-            complex.record.district,
-            complex.record.dong,
-            workplaceId,
-          ),
+          hasDirectWorkplaceAccess(complex.record.id, workplaceId),
         ),
       )
-      .filter((complex) => {
-        if (!selectedSubways.length) return true;
-        const nearbyNames = getNearbyStations(
-          complex.record.district,
-          complex.record.dong,
-        ).map((station) => station.name);
-        return selectedSubways.some((stationName) =>
-          nearbyNames.includes(stationName),
-        );
-      })
       .filter((complex) => {
         if (!keyword) return true;
         return `${complex.record.district} ${complex.record.dong} ${complex.record.name} ${complex.record.address}`
@@ -388,8 +373,7 @@ export default function Home() {
         ...complex,
         workplaceCommute: selectedWorkplace1
           ? getWorkplaceCommuteEstimate(
-              complex.record.district,
-              complex.record.dong,
+              complex.record.id,
               selectedWorkplace1,
             )
           : null,
@@ -789,12 +773,13 @@ export default function Home() {
               </label>
             </div>
             <small className="finder-filter-note">
-              여의도 접근순 = 대표 도보시간 + 직통 정거장당 2분 환산 · 대기·혼잡 제외 · 2곳은 모두 충족
+              여의도 접근순 = 직선거리 기반 도보 추정 + 직통 정거장당 2분 환산 · 대기·혼잡 제외 · 2곳은 모두 충족
             </small>
           </div>
 
           <div className="finder-filter-group finder-access-filter">
             <span className="finder-filter-title">인근 지하철역 선택</span>
+            <small className="finder-filter-note">단지·역사 좌표 간 직선거리 · 역 미선택 시 가장 가까운 역, 선택 시 해당 역 기준(2곳은 하나 이상 충족). 반경 1.5km 내 역만 조회합니다. 좌표 확인 {TRANSIT_COVERAGE.geocodedComplexes.toLocaleString()}/{TRANSIT_COVERAGE.totalComplexes.toLocaleString()}개 · 미확인 단지는 역·거리·직장 필터에서 제외됩니다.</small>
             <div className="finder-select-pair">
               <label>
                 <span>지하철 1</span>
@@ -979,10 +964,10 @@ export default function Home() {
                                 <>
                                   <strong>{complex.station.name}역</strong>
                                   <span>{complex.station.lines}</span>
-                                  <small>도보 {complex.station.walkMinutes}분</small>
+                                  <small>직선 {Math.round(complex.station.distanceMeters)}m</small>
                                 </>
                               ) : (
-                                <span>인근역 정보 확인 중</span>
+                                <span>좌표 미확인 또는 1.5km 내 역 없음</span>
                               )}
                             </div>
                             {(selectedWorkplace1 || selectedWorkplace2) && (
@@ -994,8 +979,7 @@ export default function Home() {
                                       workplaceId === selectedWorkplace1
                                         ? complex.workplaceCommute
                                         : getWorkplaceCommuteEstimate(
-                                            record.district,
-                                            record.dong,
+                                            record.id,
                                             workplaceId,
                                           );
                                     if (commute) {
@@ -1010,9 +994,8 @@ export default function Home() {
                                       );
                                     }
                                     const match = getDirectWorkplaceMatch(
-                                      record.district,
-                                      record.dong,
-                                      workplaceId,
+                                      record.id,
+                                            workplaceId,
                                     );
                                     return match ? (
                                       <span key={workplaceId}>

@@ -1,0 +1,49 @@
+import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
+import test from "node:test";
+import { fileURLToPath } from "node:url";
+import { createServer } from "vite";
+
+test("coordinate transit: radius, selected station, missing data and official coverage", async (t) => {
+  const vite = await createServer({ appType: "custom", configFile: false, logLevel: "silent", root: fileURLToPath(new URL("../", import.meta.url)), server: { middlewareMode: true, hmr: false } });
+  t.after(() => vite.close());
+  const transit = await vite.ssrLoadModule("/app/stations.ts");
+  const access = await vite.ssrLoadModule("/app/access.ts");
+  const origin = { latitude: 37.55, longitude: 126.95 };
+  const north = (meters) => ({ latitude: origin.latitude + meters / 6371008.8 * 180 / Math.PI, longitude: origin.longitude });
+  const points = [199.99, 200.01, 400, 900, 1501].map((m) => ({ ...north(m), key: String(m), name: String(m), lines: "5호선" }));
+  const stations = transit.getStationDistances(origin, points);
+  assert.equal(transit.straightLineMeters(origin, origin), 0);
+  assert.ok(Math.abs(transit.straightLineMeters(origin, north(200)) - 200) < 1e-6);
+  assert.equal(stations.length, 4);
+  assert.equal(transit.selectNearbyStation(stations, [], 200)?.key, "199.99");
+  assert.equal(transit.selectNearbyStation(stations, ["200.01"], 200), null, "no rounded boundary inclusion");
+  assert.equal(transit.selectNearbyStation(stations, ["900"], 500), null, "a different 400m station must not satisfy the selected station radius");
+  assert.equal(transit.selectNearbyStation(stations, ["900", "400"], 500)?.key, "400");
+  assert.equal(transit.selectNearbyStation(stations, ["900"], Infinity)?.key, "900", "sorting/display uses selected station rather than nearest other station");
+  assert.deepEqual(transit.getNearbyStations("unknown-complex"), []);
+  assert.deepEqual(transit.getStationDistances(null), []);
+  assert.equal(transit.selectNearbyStation([], [], Infinity), null);
+  assert.equal(access.hasDirectWorkplaceAccess("unknown-complex", "yeouido"), false);
+  assert.deepEqual(access.parseTransitLines("인천1호선"), ["인천1호선"]);
+  assert.equal(access.findDirectLineMatch([{ name: "인천역", lines: "인천1호선", distanceMeters: 100, walkMinutes: 2 }], "gwanghwamun"), null);
+
+  const gongdeok = transit.getNearbyStations("A10027906");
+  const aeogae = gongdeok.find((s) => s.name === "애오개");
+  assert.ok(aeogae && aeogae.distanceMeters > 0 && aeogae.distanceMeters < 200);
+  assert.ok(transit.selectNearbyStation(gongdeok, [aeogae.key], 200));
+  assert.ok(access.hasDirectWorkplaceAccess("A10027906", "yeouido"));
+  const central = transit.getNearbyStations("A10026881");
+  assert.ok(central.length, "중구 서울역센트럴자이 must have actual station distances");
+  const sinchon = access.STATION_OPTIONS.filter((s) => s.name === "신촌");
+  assert.ok(sinchon.length >= 2, "same-name non-transfer stations stay distinct by ID");
+  assert.equal(new Set(access.STATION_OPTIONS.map((s) => s.value)).size, access.STATION_OPTIONS.length);
+
+  const master = await vite.ssrLoadModule("/db/seed.ts");
+  const ids = new Set(master.getComplexSeed().map((s) => s.id));
+  const snapshot = JSON.parse(await readFile(new URL("../app/transit-coordinates.json", import.meta.url), "utf8"));
+  assert.equal(snapshot.coverage.totalComplexes, ids.size);
+  assert.equal(Object.keys(snapshot.complexes).length, snapshot.coverage.geocodedComplexes);
+  assert.ok(Object.keys(snapshot.complexes).every((id) => ids.has(id)));
+  assert.ok(snapshot.coverage.geocodedComplexes < ids.size, "partial coordinate coverage must remain disclosed");
+});

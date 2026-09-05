@@ -166,20 +166,19 @@ function getStopCount(
 }
 
 /**
- * Returns the best direct approach among every representative nearby station.
+ * Returns the best direct approach among coordinate-verified stations within 1.5km.
  * This is deliberately a comparable estimate, not a claim of door-to-door time:
- * representative walk time + two minutes per direct subway stop. Waiting,
+ * straight-line walking estimate + two minutes per direct subway stop. Waiting,
  * congestion, express services, and platform transfers are not included.
  */
 export function getWorkplaceCommuteEstimate(
-  district: string,
-  dong: string,
+  complexId: string,
   workplaceId: WorkplaceId,
 ): WorkplaceCommuteEstimate | null {
   const workplaceRoute = WORKPLACE_ROUTES[workplaceId];
   if (!workplaceRoute) return null;
 
-  const candidates = getNearbyStations(district, dong).flatMap((station) =>
+  const candidates = getNearbyStations(complexId).flatMap((station) =>
     parseTransitLines(station.lines).flatMap((line) => {
       const routes = workplaceRoute.lines[line];
       if (!routes) return [];
