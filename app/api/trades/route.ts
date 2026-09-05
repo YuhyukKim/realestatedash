@@ -1,31 +1,23 @@
-import { DISTRICT_CODES, sampleTrades, type Trade } from "../../data";
+import { DISTRICT_CODES, type Trade } from "../../data";
+
+import { fetchMolitXml, isCanceledSale, tag, validMonth } from "../../molit-client";
+
+import { getD1OrNull } from "../../../db";
+import { replaceDistrictMonthSales } from "../../../db/area-sales";
+import { getComplexSeed } from "../../../db/seed";
+import { listComplexesFromSeed } from "../../../db/complexes";
+const master = listComplexesFromSeed(getComplexSeed(), { limit: 20_000, offset: 0 }).complexes;
 
 export const dynamic = "force-dynamic";
 
 const API_URL =
   "https://apis.data.go.kr/1613000/RTMSDataSvcAptTrade/getRTMSDataSvcAptTrade";
 
-function decodeXml(value: string) {
-  return value
-    .replaceAll("&lt;", "<")
-    .replaceAll("&gt;", ">")
-    .replaceAll("&amp;", "&")
-    .replaceAll("&quot;", '"')
-    .replaceAll("&#39;", "'");
-}
-
-function tag(block: string, ...names: string[]) {
-  for (const name of names) {
-    const match = block.match(new RegExp(`<${name}>([\\s\\S]*?)<\\/${name}>`));
-    if (match) return decodeXml(match[1].trim());
-  }
-  return "";
-}
-
 function parseTrades(xml: string, district: string): Trade[] {
   const items = xml.match(/<item>[\s\S]*?<\/item>/g) ?? [];
 
   return items
+    .filter((item) => !isCanceledSale(item))
     .map((item, index) => {
       const rawPrice = tag(item, "dealAmount", "거래금액").replaceAll(",", "");
       const year = tag(item, "dealYear", "년");
@@ -48,6 +40,7 @@ function parseTrades(xml: string, district: string): Trade[] {
         date: `${year}-${month}-${day}`,
         floor: Number(tag(item, "floor", "층")) || 0,
         buildYear,
+        jibun: tag(item, "jibun", "지번") || null,
       } satisfies Trade;
     })
     .filter((trade): trade is Trade => trade !== null);
@@ -58,30 +51,7 @@ async function fetchDistrict(
   month: string,
   serviceKey: string,
 ) {
-  const url = new URL(API_URL);
-  let normalizedKey = serviceKey;
-  try {
-    normalizedKey = decodeURIComponent(serviceKey);
-  } catch {
-    // Keep the original key when it is not URI encoded.
-  }
-  url.searchParams.set("serviceKey", normalizedKey);
-  url.searchParams.set("LAWD_CD", DISTRICT_CODES[district]);
-  url.searchParams.set("DEAL_YMD", month);
-  url.searchParams.set("pageNo", "1");
-  url.searchParams.set("numOfRows", "1000");
-
-  const response = await fetch(url, { cache: "no-store" });
-  if (!response.ok) {
-    throw new Error(`${district} 데이터 조회 실패 (${response.status})`);
-  }
-
-  const xml = await response.text();
-  const resultCode = tag(xml, "resultCode");
-  if (resultCode && resultCode !== "00" && resultCode !== "000") {
-    throw new Error(tag(xml, "resultMsg") || `${district} API 오류`);
-  }
-
+  const xml = await fetchMolitXml(API_URL, DISTRICT_CODES[district], month, serviceKey);
   return parseTrades(xml, district);
 }
 
@@ -89,15 +59,16 @@ export async function GET(request: Request) {
   const url = new URL(request.url);
   const month =
     url.searchParams.get("month")?.replace(/\D/g, "").slice(0, 6) || "202607";
+  if (!validMonth(month)) return Response.json({ message: "조회 월이 올바르지 않습니다." }, { status: 400 });
   const serviceKey = process.env.MOLIT_API_KEY;
 
   if (!serviceKey) {
     return Response.json({
-      mode: "demo",
-      trades: sampleTrades,
-      updatedAt: "2026-07-22T09:00:00+09:00",
-      message: "공공데이터포털 API 키를 연결하면 실제 신고 자료로 자동 전환됩니다.",
-    });
+      mode: "unavailable",
+      trades: [],
+      updatedAt: new Date().toISOString(),
+      message: "실거래 API가 연결되지 않아 가격을 표시하지 않습니다.",
+    }, { headers: { "Cache-Control": "no-store" } });
   }
 
   try {
@@ -105,14 +76,21 @@ export async function GET(request: Request) {
       DISTRICT_CODES,
     ) as (keyof typeof DISTRICT_CODES)[];
     const batches: Trade[][] = [];
+    const d1 = getD1OrNull();
+    let storageFailed = !d1;
 
     for (let i = 0; i < districts.length; i += 5) {
       const batch = districts.slice(i, i + 5);
       batches.push(
         ...(await Promise.all(
-          batch.map((district) =>
-            fetchDistrict(district, month, serviceKey),
-          ),
+          batch.map(async (district) => {
+            const trades = await fetchDistrict(district, month, serviceKey);
+            if (d1) {
+              try { await replaceDistrictMonthSales(d1, master, district, month, trades); }
+              catch { storageFailed = true; }
+            }
+            return trades;
+          }),
         )),
       );
     }
@@ -121,18 +99,17 @@ export async function GET(request: Request) {
       mode: "live",
       trades: batches.flat(),
       updatedAt: new Date().toISOString(),
-      message: "국토교통부 실거래 신고 자료",
+      message: storageFailed ? "국토교통부 실거래 신고 자료 · 면적별 DB 저장 미완료" : "국토교통부 실거래 신고 자료 · 면적별 최근 매매 DB 저장 완료",
     });
   } catch (error) {
     return Response.json({
-      mode: "demo",
-      trades: sampleTrades,
-      updatedAt: "2026-07-22T09:00:00+09:00",
+      mode: "unavailable",
+      trades: [],
+      updatedAt: new Date().toISOString(),
       message:
         error instanceof Error
-          ? `${error.message} — 예시 데이터로 표시합니다.`
-          : "실거래 조회 중 오류가 발생해 예시 데이터로 표시합니다.",
-    });
+          ? `${error.message} — 확인되지 않은 가격은 표시하지 않습니다.`
+          : "실거래 조회에 실패해 가격을 표시하지 않습니다.",
+    }, { headers: { "Cache-Control": "no-store" } });
   }
 }
-

@@ -15,20 +15,22 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     metadataBase,
-    title: "서울 아파트 실거래가 배치표",
+    title: "JAYDEN RESEARCH | 내집어디",
     description:
-      "서울 아파트 실거래가를 가격대, 자치구, 전용면적별로 비교하고 엑셀로 내려받는 대시보드",
+      "공식 서울 아파트 단지 마스터에서 가격, 입주·준공년도, 직장 직통권, 인근역으로 찾고 실거래·지도·교통·학교를 비교하는 대시보드",
     openGraph: {
-      title: "제이든 리서치 | 서울 아파트 실거래가",
-      description: "10개 가격대로 읽는 서울 아파트 시장",
+      title: "JAYDEN RESEARCH | 내집어디",
+      description:
+        "공식 서울 아파트 단지 마스터에서 직장·지하철·입주년도 조건으로 좁히고, 실거래·지도·교통·학교까지 비교하는 주거 대시보드",
       type: "website",
-      images: [{ url: "/og-cardnews.png", width: 1731, height: 909 }],
+      images: [{ url: "/og-naejibeodi.png", width: 1717, height: 916 }],
     },
     twitter: {
       card: "summary_large_image",
-      title: "제이든 리서치 | 서울 아파트 실거래가",
-      description: "10개 가격대로 읽는 서울 아파트 시장",
-      images: ["/og-cardnews.png"],
+      title: "JAYDEN RESEARCH | 내집어디",
+      description:
+        "공식 서울 아파트 단지 마스터에서 직장·지하철·입주년도 조건으로 좁히고, 실거래·지도·교통·학교까지 비교하는 주거 대시보드",
+      images: ["/og-naejibeodi.png"],
     },
   };
 }
@@ -44,4 +46,3 @@ export default function RootLayout({
     </html>
   );
 }
-

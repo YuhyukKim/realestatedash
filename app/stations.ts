@@ -63,4 +63,3 @@ const DONG_STATIONS: Record<string, NearbyStation[]> = {
 export function getNearbyStations(district: string, dong: string): NearbyStation[] {
   return DONG_STATIONS[`${district}:${dong}`] ?? DISTRICT_STATIONS[district] ?? [];
 }
-

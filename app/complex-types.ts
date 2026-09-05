@@ -13,7 +13,7 @@ export type ComplexTransaction = {
 };
 
 export type ComplexDetailResponse = {
-  mode: "demo" | "live";
+  mode: "partial" | "live" | "unavailable";
   complex: {
     district: string;
     dong: string;
@@ -25,4 +25,3 @@ export type ComplexDetailResponse = {
   nearbyStationsNote: string;
   message: string;
 };
-
