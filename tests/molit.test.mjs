@@ -142,3 +142,92 @@ test("pre-2011 ranges do not request rent; malformed or excessive month ranges a
     assert.equal((await detailRoute.GET(new Request("http://localhost/api/complex?complexId=A12175203&" + range))).status, 400);
   }
 });
+
+test("temporary transport failures retry once, but authentication errors never retry or leak the key", async () => {
+  for (const failure of [
+    () => { throw new DOMException("timed out", "TimeoutError"); },
+    () => { throw new TypeError("fetch failed with credential"); },
+    () => new Response("", { status: 503 }),
+    () => new Response("", { status: 429 }),
+  ]) {
+    let calls = 0;
+    globalThis.fetch = async () => ++calls === 1 ? failure() : new Response(envelope([item()]));
+    assert.match(await client.fetchMolitXml("https://example.test/api", "11440", "202607", "secret-test-key"), /<item>/);
+    assert.equal(calls, 2);
+  }
+  let calls = 0;
+  globalThis.fetch = async () => { calls++; return new Response("", { status: 403 }); };
+  await assert.rejects(client.fetchMolitXml("https://example.test/api", "11440", "202607", "secret-test-key"),
+    (error) => error.message === "공공데이터 조회 실패 (403)");
+  assert.equal(calls, 1);
+  globalThis.fetch = async () => { throw new TypeError("https://example.test/?serviceKey=secret-test-key"); };
+  await assert.rejects(client.fetchMolitXml("https://example.test/api", "11440", "202607", "secret-test-key"),
+    (error) => !error.message.includes("secret-test-key") && /재시도 완료/.test(error.message));
+});
+
+test("one failing district preserves complete districts and caps simultaneous upstream requests", async () => {
+  process.env.MOLIT_API_KEY = "test";
+  let active = 0, peak = 0;
+  globalThis.fetch = async (input) => {
+    active++;
+    peak = Math.max(peak, active);
+    await new Promise((resolve) => setTimeout(resolve, 2));
+    active--;
+    const district = new URL(String(input)).searchParams.get("LAWD_CD");
+    return district === "11680" ? new Response("", { status: 403 })
+      : new Response(envelope(district === "11440" ? [item()] : []));
+  };
+  const response = await tradesRoute.GET(new Request("http://localhost/api/trades?month=202607"));
+  const payload = await response.json();
+  assert.equal(payload.mode, "partial");
+  assert.equal(payload.trades.length, 1);
+  assert.equal(payload.completedDistricts.length, 24);
+  assert.ok(payload.completedDistricts.includes("마포구"));
+  assert.deepEqual(payload.failedDistricts, [{ district: "강남구", reason: "공공데이터 조회 실패 (403)" }]);
+  assert.ok(peak <= 3);
+  assert.equal(response.headers.get("cache-control"), "no-store");
+});
+
+test("district-scoped requests only fetch that district and validate the district name", async () => {
+  process.env.MOLIT_API_KEY = "test";
+  const calls = [];
+  globalThis.fetch = async (input) => {
+    calls.push(new URL(String(input)).searchParams.get("LAWD_CD"));
+    return new Response(envelope([]));
+  };
+  const payload = await (await tradesRoute.GET(new Request("http://localhost/api/trades?month=202607&district=" + encodeURIComponent("마포구")))).json();
+  assert.equal(payload.mode, "live");
+  assert.deepEqual(payload.completedDistricts, ["마포구"]);
+  assert.deepEqual(calls, ["11440"]);
+  assert.equal((await tradesRoute.GET(new Request("http://localhost/api/trades?district=invalid"))).status, 400);
+});
+
+test("parent cancellation stops upstream work without retries", async () => {
+  const controller = new AbortController();
+  let calls = 0;
+  globalThis.fetch = async () => { calls++; controller.abort(); throw new DOMException("aborted", "AbortError"); };
+  await assert.rejects(client.fetchMolitXml("https://example.test/api", "11440", "202607", "test", controller.signal));
+  assert.equal(calls, 1);
+  calls = 0;
+  process.env.MOLIT_API_KEY = "test";
+  const payload = await (await tradesRoute.GET(new Request("http://localhost/api/trades?month=202607", { signal: controller.signal }))).json();
+  assert.equal(payload.mode, "unavailable");
+  assert.equal(payload.failedDistricts.length, 25);
+  assert.equal(calls, 0);
+});
+
+test("partial refresh removes canceled current-month prices only in successfully refreshed districts", async () => {
+  const { mergeMasterWithTrades } = await server.ssrLoadModule("/app/page.tsx");
+  const base = { name: "테스트단지", dong: "테스트동", address: "", buildYear: 2014, households: 100,
+    buildingCount: 1, parking: 100, latestSale: { price: 10, date: "2026-07-10" },
+    latestJeonse: null, areas: [84.9], source: "K-apt" };
+  const masters = [{ ...base, id: "mapo", district: "마포구" }, { ...base, id: "gangnam", district: "강남구" }];
+  const summaries = Object.fromEntries(masters.map((row) => [row.id, [{ area: 84.9, price: 10, date: "2026-07-10" }]]));
+  const merged = mergeMasterWithTrades(masters, [], summaries, "202607", ["마포구"]);
+  assert.equal(merged[0].record.latestSale, null);
+  assert.equal(merged[0].record.areaSales.length, 0);
+  assert.equal(merged[1].record.latestSale.price, 10);
+  assert.equal(merged[1].record.areaSales.length, 1);
+  const unavailable = mergeMasterWithTrades(masters, [], summaries, undefined, []);
+  assert.equal(unavailable[0].record.latestSale.price, 10);
+});
