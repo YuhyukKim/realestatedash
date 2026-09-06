@@ -23,6 +23,7 @@ export function validMonth(value: string) {
 
 export async function fetchMolitXml(
   endpoint: string, districtCode: string, month: string, serviceKey: string,
+  signal?: AbortSignal,
 ) {
   const url = new URL(endpoint);
   let key = serviceKey;
@@ -37,16 +38,33 @@ export async function fetchMolitXml(
     url.searchParams.set("pageNo", String(page));
     let xml = "";
     for (let attempt = 0; attempt < 2; attempt += 1) {
-      const response = await fetch(url, { cache: "no-store", signal: AbortSignal.timeout(15_000) });
-      if (!response.ok) {
-        if (attempt === 0 && (response.status === 429 || response.status >= 500)) {
+      signal?.throwIfAborted();
+      const timeout = AbortSignal.timeout(attempt === 0 ? 15_000 : 20_000);
+      const requestSignal = signal ? AbortSignal.any([signal, timeout]) : timeout;
+      try {
+        const response = await fetch(url, { cache: "no-store", signal: requestSignal });
+        if (!response.ok) {
+          await response.body?.cancel();
+          if (attempt === 0 && (response.status === 429 || response.status >= 500)) {
+            await new Promise((resolve) => setTimeout(resolve, 350));
+            continue;
+          }
+          // Do not retry authentication errors, or expose the credential-bearing URL.
+          throw new MolitHttpError(response.status);
+        }
+        xml = await response.text();
+        break;
+      } catch (error) {
+        if (signal?.aborted) throw new Error("조회 제한시간 초과 또는 요청 취소");
+        if (error instanceof MolitHttpError) throw error;
+        if (attempt === 0) {
           await new Promise((resolve) => setTimeout(resolve, 350));
           continue;
         }
-        throw new Error(`공공데이터 조회 실패 (${response.status})`);
+        throw new Error(timeout.aborted || (error instanceof Error && ["TimeoutError", "AbortError"].includes(error.name))
+          ? "공공데이터 응답 시간 초과 (재시도 완료)"
+          : "공공데이터 연결 실패 (재시도 완료)");
       }
-      xml = await response.text();
-      break;
     }
     if (!["00", "000"].includes(tag(xml, "resultCode"))) {
       // Do not expose upstream messages that may contain request credentials.
@@ -68,4 +86,8 @@ export async function fetchMolitXml(
   }
   // Never silently label a truncated month as complete.
   throw new Error("실거래 페이지 수가 조회 한도를 초과했습니다.");
+}
+
+class MolitHttpError extends Error {
+  constructor(status: number) { super(`공공데이터 조회 실패 (${status})`); }
 }
