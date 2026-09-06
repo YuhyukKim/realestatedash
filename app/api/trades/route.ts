@@ -50,66 +50,61 @@ async function fetchDistrict(
   district: keyof typeof DISTRICT_CODES,
   month: string,
   serviceKey: string,
+  signal?: AbortSignal,
 ) {
-  const xml = await fetchMolitXml(API_URL, DISTRICT_CODES[district], month, serviceKey);
+  const xml = await fetchMolitXml(API_URL, DISTRICT_CODES[district], month, serviceKey, signal);
   return parseTrades(xml, district);
 }
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
-  const month =
-    url.searchParams.get("month")?.replace(/\D/g, "").slice(0, 6) || "202607";
+  const month = url.searchParams.get("month")?.replace(/\D/g, "").slice(0, 6) || "202607";
+  const requestedDistrict = url.searchParams.get("district");
   if (!validMonth(month)) return Response.json({ message: "조회 월이 올바르지 않습니다." }, { status: 400 });
+  if (requestedDistrict && !Object.hasOwn(DISTRICT_CODES, requestedDistrict)) {
+    return Response.json({ message: "조회 지역이 올바르지 않습니다." }, { status: 400 });
+  }
   const serviceKey = process.env.MOLIT_API_KEY;
+  const headers = { "Cache-Control": "no-store" };
+  if (!serviceKey) return Response.json({
+    mode: "unavailable", trades: [], completedDistricts: [], failedDistricts: [],
+    updatedAt: new Date().toISOString(), message: "실거래 API가 연결되지 않아 가격을 표시하지 않습니다.",
+  }, { headers });
 
-  if (!serviceKey) {
-    return Response.json({
-      mode: "unavailable",
-      trades: [],
-      updatedAt: new Date().toISOString(),
-      message: "실거래 API가 연결되지 않아 가격을 표시하지 않습니다.",
-    }, { headers: { "Cache-Control": "no-store" } });
-  }
-
-  try {
-    const districts = Object.keys(
-      DISTRICT_CODES,
-    ) as (keyof typeof DISTRICT_CODES)[];
-    const batches: Trade[][] = [];
-    const d1 = getD1OrNull();
-    let storageFailed = !d1;
-
-    for (let i = 0; i < districts.length; i += 5) {
-      const batch = districts.slice(i, i + 5);
-      batches.push(
-        ...(await Promise.all(
-          batch.map(async (district) => {
-            const trades = await fetchDistrict(district, month, serviceKey);
-            if (d1) {
-              try { await replaceDistrictMonthSales(d1, master, district, month, trades); }
-              catch { storageFailed = true; }
-            }
-            return trades;
-          }),
-        )),
-      );
+  const districts = (requestedDistrict ? [requestedDistrict] : Object.keys(DISTRICT_CODES)) as (keyof typeof DISTRICT_CODES)[];
+  // Bound the whole response, including paging and retries, not just each fetch.
+  const signal = AbortSignal.any([request.signal, AbortSignal.timeout(45_000)]);
+  const d1 = getD1OrNull();
+  const trades: Trade[] = [];
+  const completedDistricts: string[] = [];
+  const failedDistricts: { district: string; reason: string }[] = [];
+  let storageFailed = !d1;
+  let cursor = 0;
+  await Promise.all(Array.from({ length: Math.min(3, districts.length) }, async () => {
+    while (cursor < districts.length) {
+      const district = districts[cursor++];
+      try {
+        signal.throwIfAborted();
+        const rows = await fetchDistrict(district, month, serviceKey, signal);
+        trades.push(...rows);
+        completedDistricts.push(district);
+        if (d1) {
+          try { await replaceDistrictMonthSales(d1, master, district, month, rows); }
+          catch { storageFailed = true; }
+        }
+      } catch (error) {
+        failedDistricts.push({ district, reason: signal.aborted ? "조회 제한시간 초과 또는 요청 취소"
+          : error instanceof Error ? error.message : "실거래 조회 실패" });
+      }
     }
-
-    return Response.json({
-      mode: "live",
-      trades: batches.flat(),
-      updatedAt: new Date().toISOString(),
-      message: storageFailed ? "국토교통부 실거래 신고 자료 · 면적별 DB 저장 미완료" : "국토교통부 실거래 신고 자료 · 면적별 최근 매매 DB 저장 완료",
-    });
-  } catch (error) {
-    return Response.json({
-      mode: "unavailable",
-      trades: [],
-      updatedAt: new Date().toISOString(),
-      message:
-        error instanceof Error
-          ? `${error.message} — 확인되지 않은 가격은 표시하지 않습니다.`
-          : "실거래 조회에 실패해 가격을 표시하지 않습니다.",
-    }, { headers: { "Cache-Control": "no-store" } });
-  }
+  }));
+  trades.sort((a, b) => b.date.localeCompare(a.date) || a.id.localeCompare(b.id));
+  completedDistricts.sort();
+  failedDistricts.sort((a, b) => a.district.localeCompare(b.district));
+  const mode = completedDistricts.length === 0 ? "unavailable" : failedDistricts.length ? "partial" : "live";
+  const message = failedDistricts.length
+    ? `매매 조회 ${completedDistricts.length}/${districts.length}개 구 완료. 미조회: ${failedDistricts.map((f) => f.district + " (" + f.reason + ")").join(", ")}. 성공한 지역과 저장된 가격만 표시합니다.`
+    : storageFailed ? "국토교통부 실거래 신고 자료 · 면적별 DB 저장 미완료" : "국토교통부 실거래 신고 자료 · 면적별 최근 매매 DB 저장 완료";
+  return Response.json({ mode, trades, completedDistricts, failedDistricts, storageFailed,
+    updatedAt: new Date().toISOString(), message }, { headers });
 }
