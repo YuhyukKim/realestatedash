@@ -152,6 +152,7 @@ export async function GET(request: Request) {
   if (!serviceKey) return respond("unavailable", [], "실거래 API가 연결되지 않았습니다. 확인되지 않은 가격은 표시하지 않습니다.");
   if (!selected) return Response.json({ message: "단지를 특정할 수 없습니다. 목록에서 다시 선택해 주세요." }, { status: 404 });
 
+  const signal = AbortSignal.any([request.signal, AbortSignal.timeout(45_000)]);
   const transactions: ComplexTransaction[] = [];
   const failed: string[] = [];
   let successCount = 0;
@@ -163,7 +164,7 @@ export async function GET(request: Request) {
       ].map(async ({ endpoint, label, parse }) => {
         try {
           // A failed later page discards the entire month/type, never a silent partial month.
-          const xml = await fetchMolitXml(endpoint, districtCode, month, serviceKey);
+          const xml = await fetchMolitXml(endpoint, districtCode, month, serviceKey, signal);
           transactions.push(...parse(xml, selected.id, district));
           successCount += 1;
         } catch {
