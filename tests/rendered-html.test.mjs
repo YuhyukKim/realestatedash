@@ -359,15 +359,13 @@ test("builds dashboard results from the apartment master as well as trades", asy
   );
 
   assert.match(pageSource, /공식 서울 아파트 단지 마스터/);
-  assert.match(pageSource, /최근 매매 없음/);
-  assert.match(pageSource, /fetch\(["']\/api\/complexes\?limit=20000["']\)/);
+  assert.match(pageSource, /매매가 미확인/);
+  assert.match(pageSource, /fetch\(["']\/api\/complexes\?limit=20000["'], \{ signal \}\)/);
   assert.match(pageSource, /setMasterComplexes\(data\.complexes/);
-  assert.match(pageSource, /mergeMasterWithTrades\(masterComplexes, trades, storedSales, refreshedMonth\)/);
+  assert.match(pageSource, /mergeMasterWithTrades\(masterComplexes, trades, storedSales, refreshedMonth, refreshedDistricts\)/);
   assert.match(pageSource, /useState<ComplexMasterRecord\[\]>\(\[\]\)/);
-  assert.match(
-    pageSource,
-    /catch\s*\{[\s\S]*?setMasterComplexes\(\[\]\)/,
-  );
+  assert.match(pageSource, /loadController\.current\?\.abort\(\)/);
+  assert.match(pageSource, /기존 목록을 유지합니다/);
   assert.doesNotMatch(pageSource, /sampleComplexesFromTrades|molit:/);
 });
 
@@ -588,7 +586,8 @@ test("client accepts only real trades and sends the canonical ID to history requ
   const panel = await readFile(new URL("../app/complex-detail.tsx", import.meta.url), "utf8");
   assert.ok(!page.includes("sampleTrades"));
   assert.ok(!page.includes('masterMode === "live" ||'));
-  assert.ok(page.includes('setTrades(data.mode === "live" ? data.trades : [])'));
+  assert.ok(page.includes('data.mode === "live" || data.mode === "partial"'));
+  assert.ok(page.includes("setTrades(hasRealResponse ? data.trades : [])"));
   assert.ok(panel.includes("complexId: complex.id"));
   assert.ok(panel.includes('if (payload.mode === "live") cacheRef.current'));
 });
