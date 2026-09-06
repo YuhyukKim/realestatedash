@@ -1,51 +1,105 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import {
+  STATION_OPTIONS,
+  WORKPLACES,
+  WORKPLACE_BY_ID,
+  getDirectWorkplaceMatch,
+  hasDirectWorkplaceAccess,
+  type WorkplaceId,
+} from "./access";
+import {
+  compareWorkplaceCommutes,
+  getWorkplaceCommuteEstimate,
+  supportsWorkplaceCommuteSort,
+  type WorkplaceCommuteEstimate,
+} from "./commute";
 import ComplexDetailPanel from "./complex-detail";
-import { SEOUL_DISTRICTS, sampleTrades, type Trade } from "./data";
+import {
+  NO_SALE_BUCKET,
+  compareComplexes,
+  normalizeComplexRecord,
+  toComplexDetailSeed,
+  type ComplexMasterRecord,
+  type ComplexesApiResponse,
+  type ComplexSortMode,
+} from "./complex-master";
+import { SEOUL_DISTRICTS, type Trade } from "./data";
+import { groupTradesByMaster } from "./master-trade-matcher";
+import { getNearbyStations, selectNearbyStation, TRANSIT_COVERAGE, type NearbyStation } from "./stations";
 
-type DataMode = "demo" | "live";
+import { applyAreaPriceFilter, latestSalesByArea, type AreaSaleSummary } from "./area-sales";
 
-type ApiResponse = {
+type DataMode = "unavailable" | "live";
+type MasterLoadState = "loading" | "ready" | "error";
+
+type TradesApiResponse = {
   mode: DataMode;
   trades: Trade[];
   updatedAt: string;
   message: string;
 };
 
+type ComplexResult = {
+  key: string;
+  record: ComplexMasterRecord;
+  periodTrades: Trade[];
+  latestObservedTrade: Trade | null;
+  station: NearbyStation | null;
+};
+
+type RankedComplexResult = ComplexResult & {
+  workplaceCommute: WorkplaceCommuteEstimate | null;
+};
+
+type ApartmentSortMode =
+  | ComplexSortMode
+  | "distance-asc"
+  | "distance-desc"
+  | "workplace-asc"
+  | "workplace-desc";
+
 const PRICE_BANDS = [
-  { id: "under-6", label: "6억 미만", min: 0, max: 6, accent: "#55c2a3" },
-  { id: "6-10", label: "6억~10억", min: 6, max: 11, accent: "#75b8ed" },
-  { id: "11-15", label: "11억~15억", min: 11, max: 16, accent: "#8f9cf4" },
-  { id: "16-20", label: "16억~20억", min: 16, max: 21, accent: "#ae8de8" },
-  { id: "21-25", label: "21억~25억", min: 21, max: 26, accent: "#d47fb0" },
-  { id: "26-30", label: "26억~30억", min: 26, max: 31, accent: "#ec7f85" },
-  { id: "31-40", label: "31억~40억", min: 31, max: 41, accent: "#f29962" },
-  { id: "41-50", label: "41억~50억", min: 41, max: 51, accent: "#e9b949" },
-  { id: "51-70", label: "51억~70억", min: 51, max: 71, accent: "#b0bf48" },
-  { id: "71-100", label: "71억~100억", min: 71, max: Infinity, accent: "#7489e8" },
+  { id: "under-6", label: "6억 미만", min: 0, max: 6, accent: "#58a88c" },
+  { id: "6-10", label: "6억~10억", min: 6, max: 11, accent: "#5b93c7" },
+  { id: "11-15", label: "11억~15억", min: 11, max: 16, accent: "#6478bd" },
+  { id: "16-20", label: "16억~20억", min: 16, max: 21, accent: "#7a69a9" },
+  { id: "21-25", label: "21억~25억", min: 21, max: 26, accent: "#a45f82" },
+  { id: "26-30", label: "26억~30억", min: 26, max: 31, accent: "#c36068" },
+  { id: "31-40", label: "31억~40억", min: 31, max: 41, accent: "#d17a4f" },
+  { id: "41-50", label: "41억~50억", min: 41, max: 51, accent: "#b48a34" },
+  { id: "51-70", label: "51억~70억", min: 51, max: 71, accent: "#7d9341" },
+  { id: "71-100", label: "71억 이상", min: 71, max: Infinity, accent: "#4d68a8" },
 ] as const;
 
 const AREA_BANDS = [
-  { id: "all", label: "전체 면적", min: 0, max: Infinity },
-  { id: "small", label: "40㎡ 이하", min: 0, max: 40 },
-  { id: "40-59", label: "40~59㎡", min: 40, max: 60 },
-  { id: "60-84", label: "60~84㎡", min: 60, max: 85 },
-  { id: "85-114", label: "85~114㎡", min: 85, max: 115 },
-  { id: "115-plus", label: "115㎡ 이상", min: 115, max: Infinity },
+  { id: "all", label: "전체", min: 0, max: Infinity },
+  { id: "small", label: "10평대", min: 0, max: 60 },
+  { id: "20s", label: "20평대", min: 60, max: 85 },
+  { id: "30s", label: "30평대", min: 85, max: 115 },
+  { id: "40s", label: "40평대", min: 115, max: 150 },
+  { id: "large", label: "50평+", min: 150, max: Infinity },
 ] as const;
 
-const BUILDING_AGE_BANDS = [
-  { id: "all", label: "전체 연식", min: 0, max: Infinity },
-  { id: "0-5", label: "5년 이하", min: 0, max: 6 },
-  { id: "6-10", label: "6~10년", min: 6, max: 11 },
-  { id: "11-20", label: "11~20년", min: 11, max: 21 },
-  { id: "21-30", label: "21~30년", min: 21, max: 31 },
-  { id: "31-plus", label: "31년 이상", min: 31, max: Infinity },
-  { id: "unknown", label: "연식 미확인", min: 0, max: 0 },
+const MOVE_IN_YEAR_BANDS = [
+  { id: "all", label: "전체 연도", min: 0, max: Infinity },
+  { id: "2021-plus", label: "2021년 이후", min: 2021, max: Infinity },
+  { id: "2011-2020", label: "2011~2020년", min: 2011, max: 2021 },
+  { id: "2001-2010", label: "2001~2010년", min: 2001, max: 2011 },
+  { id: "1991-2000", label: "1991~2000년", min: 1991, max: 2001 },
+  { id: "1981-1990", label: "1981~1990년", min: 1981, max: 1991 },
+  { id: "before-1981", label: "1980년 이전", min: 0, max: 1981 },
+  { id: "unknown", label: "연도 미확인", min: 0, max: 0 },
 ] as const;
 
-const COLLAPSED_TRADE_LIMIT = 16;
+const STATION_RANGES = [
+  { id: "all", label: "전체", max: Infinity },
+  { id: "200", label: "200m", max: 200 },
+  { id: "500", label: "500m", max: 500 },
+  { id: "800", label: "800m", max: 800 },
+  { id: "1000", label: "1km", max: 1000 },
+] as const;
 
 function formatPrice(price: number) {
   return Number.isInteger(price) ? `${price}억` : `${price.toFixed(1)}억`;
@@ -56,111 +110,327 @@ function formatDate(date: string) {
   return `${Number(month)}.${day}`;
 }
 
+function formatPyeong(area: number) {
+  return `${(area / 3.3058).toFixed(0)}평`;
+}
+
 function getPriceBand(price: number) {
   return PRICE_BANDS.find((band) => price >= band.min && price < band.max);
 }
 
-function getBuildingAge(trade: Trade) {
-  if (!trade.buildYear) return null;
-  const dealYear = Number(trade.date.slice(0, 4));
-  if (!Number.isFinite(dealYear)) return null;
-  return Math.max(0, dealYear - trade.buildYear);
+function getBuildingAge(buildYear: number | null) {
+  if (!buildYear) return null;
+  return Math.max(0, new Date().getFullYear() - buildYear);
 }
 
-function formatBuildingInfo(trade: Trade) {
-  const age = getBuildingAge(trade);
-  return trade.buildYear && age !== null
-    ? `${trade.buildYear}년식 · ${age}년`
+function formatBuildingInfo(buildYear: number | null) {
+  const age = getBuildingAge(buildYear);
+  return buildYear && age !== null
+    ? `${buildYear}년 · ${age}년차`
     : "연식 미확인";
 }
 
+function compareStationDistances(
+  left: ComplexResult,
+  right: ComplexResult,
+  direction: "asc" | "desc",
+) {
+  const leftDistance = left.station?.distanceMeters ?? null;
+  const rightDistance = right.station?.distanceMeters ?? null;
+
+  if (leftDistance === null && rightDistance === null) {
+    return left.record.name.localeCompare(right.record.name, "ko");
+  }
+  if (leftDistance === null) return 1;
+  if (rightDistance === null) return -1;
+
+  const distanceDifference =
+    direction === "asc"
+      ? leftDistance - rightDistance
+      : rightDistance - leftDistance;
+  return (
+    distanceDifference || left.record.name.localeCompare(right.record.name, "ko")
+  );
+}
+
+export function mergeMasterWithTrades(
+  master: ComplexMasterRecord[],
+  trades: Trade[],
+  storedSales: Record<string, AreaSaleSummary[]> = {},
+  refreshedMonth?: string,
+): ComplexResult[] {
+  const normalizedMaster = master.map(normalizeComplexRecord);
+  const { tradesByMasterId } = groupTradesByMaster(normalizedMaster, trades);
+  return normalizedMaster.map((record) => {
+    const periodTrades = tradesByMasterId.get(record.id) ?? [];
+    const ordered = [...periodTrades].sort((a, b) =>
+      b.date.localeCompare(a.date),
+    );
+    const latestObservedTrade = ordered[0] ?? null;
+    const areaSales = latestSalesByArea([
+      ...(storedSales[record.id] ?? record.areaSales ?? []).filter((sale) =>
+        !refreshedMonth || sale.date.replaceAll("-", "").slice(0, 6) !== refreshedMonth),
+      ...periodTrades,
+    ]);
+    const storedLatest = [...areaSales].sort((a, b) => b.date.localeCompare(a.date) || b.price - a.price)[0];
+    const existingSale = storedLatest ?? record.latestSale;
+    const observedSale = latestObservedTrade
+      ? { price: latestObservedTrade.price, date: latestObservedTrade.date }
+      : null;
+    const latestSale =
+      !existingSale ||
+      (observedSale && observedSale.date.localeCompare(existingSale.date) > 0)
+        ? observedSale
+        : existingSale;
+    const mergedRecord = normalizeComplexRecord({
+      ...record,
+      latestSale,
+      areaSales,
+      areas: [...record.areas, ...areaSales.map((sale) => sale.area)],
+    });
+
+    return {
+      key: mergedRecord.id,
+      record: mergedRecord,
+      periodTrades,
+      latestObservedTrade,
+      station:
+        getNearbyStations(mergedRecord.id)[0] ?? null,
+    };
+  });
+}
+
 export default function Home() {
-  const [trades, setTrades] = useState<Trade[]>(sampleTrades);
+  const [masterComplexes, setMasterComplexes] =
+    useState<ComplexMasterRecord[]>([]);
+  const [trades, setTrades] = useState<Trade[]>([]);
+  const [storedSales, setStoredSales] = useState<Record<string, AreaSaleSummary[]>>({});
+  const [refreshedMonth, setRefreshedMonth] = useState<string | undefined>();
   const [selectedDistrict, setSelectedDistrict] = useState("서울 전체");
   const [selectedArea, setSelectedArea] = useState("all");
-  const [selectedBuildingAge, setSelectedBuildingAge] = useState("all");
+  const [selectedMoveInYear, setSelectedMoveInYear] = useState("all");
+  const [selectedPriceBand, setSelectedPriceBand] = useState("all");
+  const [selectedStationRange, setSelectedStationRange] = useState("all");
+  const [selectedWorkplace1, setSelectedWorkplace1] = useState<WorkplaceId | "">("");
+  const [selectedWorkplace2, setSelectedWorkplace2] = useState<WorkplaceId | "">("");
+  const [selectedSubway1, setSelectedSubway1] = useState("");
+  const [selectedSubway2, setSelectedSubway2] = useState("");
+  const [visibleResultLimit, setVisibleResultLimit] = useState(60);
+  const [sortMode, setSortMode] =
+    useState<ApartmentSortMode>("price-desc");
   const [search, setSearch] = useState("");
   const [month, setMonth] = useState("2026-07");
-  const [mode, setMode] = useState<DataMode>("demo");
+  const [mode, setMode] = useState<DataMode>("unavailable");
+  const [masterLoadState, setMasterLoadState] =
+    useState<MasterLoadState>("loading");
   const [statusMessage, setStatusMessage] = useState(
-    "공공데이터 API 연결 전 예시 데이터를 표시하고 있습니다.",
+    "공식 서울 아파트 단지 마스터와 실거래 자료를 불러오고 있습니다.",
   );
   const [updatedAt, setUpdatedAt] = useState("2026-07-22T09:00:00+09:00");
-  const [loading, setLoading] = useState(false);
-  const [expanded, setExpanded] = useState<Record<string, boolean>>({});
-  const [selectedTrade, setSelectedTrade] = useState<Trade | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [selectedComplex, setSelectedComplex] =
+    useState<ComplexMasterRecord | null>(null);
 
-  async function loadTrades(targetMonth: string) {
+  async function loadDashboard(targetMonth: string) {
     setLoading(true);
+    if (!masterComplexes.length) setMasterLoadState("loading");
     try {
-      const response = await fetch(
-        `/api/trades?month=${targetMonth.replace("-", "")}`,
-      );
-      const data = (await response.json()) as ApiResponse;
-      setTrades(data.trades);
-      setMode(data.mode);
-      setUpdatedAt(data.updatedAt);
-      setStatusMessage(data.message);
+      const [masterResult, tradesResult] = await Promise.allSettled([
+        fetch("/api/complexes?limit=20000"),
+        fetch(`/api/trades?month=${targetMonth.replace("-", "")}`),
+      ]);
+
+      let tradesMode: DataMode = "unavailable";
+      const messages: string[] = [];
+
+      if (masterResult.status === "fulfilled" && masterResult.value.ok) {
+        const data = (await masterResult.value.json()) as ComplexesApiResponse;
+        if (data.complexes.length) {
+          setMasterComplexes(data.complexes.map(normalizeComplexRecord));
+          setMasterLoadState("ready");
+          if (data.updatedAt) setUpdatedAt(data.updatedAt);
+        } else {
+          setMasterComplexes([]);
+          setMasterLoadState("error");
+          messages.push("단지 마스터 응답이 비어 있어 결과를 표시하지 않습니다.");
+        }
+        if (data.message) messages.push(data.message);
+      } else {
+        setMasterLoadState("error");
+        messages.push("단지 마스터 연결을 확인할 수 없어 결과를 표시하지 않습니다.");
+      }
+
+      if (tradesResult.status === "fulfilled" && tradesResult.value.ok) {
+        const data = (await tradesResult.value.json()) as TradesApiResponse;
+        setTrades(data.mode === "live" ? data.trades : []);
+        tradesMode = data.mode === "live" ? "live" : "unavailable";
+        setUpdatedAt(data.updatedAt);
+        if (data.message) messages.push(data.message);
+      } else {
+        setTrades([]);
+        messages.push("선택 월 실거래는 현재 연결되지 않았습니다.");
+      }
+
+      setRefreshedMonth(tradesMode === "live" ? targetMonth.replace("-", "") : undefined);
+      try {
+        const response = await fetch(`/api/area-summaries?month=${targetMonth.replace("-", "")}`);
+        if (!response.ok) throw new Error("summary unavailable");
+        const saved = await response.json();
+        setStoredSales(saved.mode === "stored" ? saved.summaries : {});
+        if (saved.message) messages.push(saved.message);
+      } catch {
+        setStoredSales({});
+        messages.push("저장된 면적별 매매를 불러오지 못해 현재 조회한 거래만 반영합니다.");
+      }
+      setMode(tradesMode);
+      setStatusMessage(messages.join(" "));
     } catch {
-      setTrades(sampleTrades);
-      setMode("demo");
-      setStatusMessage("연결 상태를 확인할 수 없어 예시 데이터를 표시합니다.");
+      setMasterComplexes([]);
+      setMasterLoadState("error");
+      setTrades([]);
+      setMode("unavailable");
+      setStatusMessage(
+        "단지 마스터를 불러오지 못해 결과를 표시하지 않습니다.",
+      );
     } finally {
       setLoading(false);
     }
   }
 
   useEffect(() => {
-    void loadTrades(month);
+    const initialLoad = window.setTimeout(() => {
+      void loadDashboard(month);
+    }, 0);
+    return () => window.clearTimeout(initialLoad);
     // The first request hydrates the dashboard with the configured data source.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const filteredTrades = useMemo(() => {
-    const area = AREA_BANDS.find((band) => band.id === selectedArea)!;
-    const buildingAge = BUILDING_AGE_BANDS.find(
-      (band) => band.id === selectedBuildingAge,
-    )!;
-    const keyword = search.trim().toLowerCase();
-
-    return trades
-      .filter(
-        (trade) =>
-          selectedDistrict === "서울 전체" ||
-          trade.district === selectedDistrict,
-      )
-      .filter((trade) => trade.area >= area.min && trade.area < area.max)
-      .filter((trade) => {
-        if (selectedBuildingAge === "all") return true;
-        const age = getBuildingAge(trade);
-        if (selectedBuildingAge === "unknown") return age === null;
-        return age !== null && age >= buildingAge.min && age < buildingAge.max;
-      })
-      .filter((trade) => {
-        if (!keyword) return true;
-        return `${trade.district} ${trade.dong} ${trade.apartment}`
-          .toLowerCase()
-          .includes(keyword);
-      })
-      .sort((a, b) => b.price - a.price || b.date.localeCompare(a.date));
-  }, [trades, selectedDistrict, selectedArea, selectedBuildingAge, search]);
-
-  const groupedTrades = useMemo(
-    () =>
-      PRICE_BANDS.map((band) => ({
-        ...band,
-        trades: filteredTrades.filter(
-          (trade) => trade.price >= band.min && trade.price < band.max,
-        ),
-      })),
-    [filteredTrades],
+  const mergedComplexes = useMemo(
+    () => mergeMasterWithTrades(masterComplexes, trades, storedSales, refreshedMonth),
+    [masterComplexes, trades, storedSales, refreshedMonth],
   );
 
+  const complexes = useMemo(() => {
+    const area = AREA_BANDS.find((band) => band.id === selectedArea)!;
+    const moveInYear = MOVE_IN_YEAR_BANDS.find(
+      (band) => band.id === selectedMoveInYear,
+    )!;
+    const priceBand = PRICE_BANDS.find((band) => band.id === selectedPriceBand);
+    const stationRange = STATION_RANGES.find(
+      (range) => range.id === selectedStationRange,
+    )!;
+    const keyword = search.trim().toLowerCase();
+    const selectedWorkplaces = [selectedWorkplace1, selectedWorkplace2].filter(
+      (value): value is WorkplaceId => Boolean(value),
+    );
+    const selectedSubways = [selectedSubway1, selectedSubway2].filter(Boolean);
+
+    const filteredComplexes = mergedComplexes
+      .filter(
+        (complex) =>
+          selectedDistrict === "서울 전체" ||
+          complex.record.district === selectedDistrict,
+      )
+      .flatMap((complex) => {
+        const record = applyAreaPriceFilter(complex.record, selectedArea === "all" ? null : area, priceBand);
+        if (!record) return [];
+        const periodTrades = complex.periodTrades.filter((trade) =>
+          selectedArea === "all" || (trade.area >= area.min && trade.area < area.max));
+        return [{ ...complex, record, periodTrades }];
+      })
+      .filter((complex) => {
+        if (selectedMoveInYear === "all") return true;
+        if (selectedMoveInYear === "unknown") {
+          return complex.record.buildYear === null;
+        }
+        return Boolean(
+          complex.record.buildYear &&
+            complex.record.buildYear >= moveInYear.min &&
+            complex.record.buildYear < moveInYear.max,
+        );
+      })
+
+      .flatMap((complex) => {
+        const station = selectNearbyStation(getNearbyStations(complex.record.id), selectedSubways, stationRange.max);
+        if ((selectedSubways.length || selectedStationRange !== "all") && !station) return [];
+        return [{ ...complex, station }];
+      })
+      .filter((complex) =>
+        selectedWorkplaces.every((workplaceId) =>
+          hasDirectWorkplaceAccess(complex.record.id, workplaceId),
+        ),
+      )
+      .filter((complex) => {
+        if (!keyword) return true;
+        return `${complex.record.district} ${complex.record.dong} ${complex.record.name} ${complex.record.address}`
+          .toLowerCase()
+          .includes(keyword);
+      });
+
+    return filteredComplexes
+      .map<RankedComplexResult>((complex) => ({
+        ...complex,
+        workplaceCommute: selectedWorkplace1
+          ? getWorkplaceCommuteEstimate(
+              complex.record.id,
+              selectedWorkplace1,
+            )
+          : null,
+      }))
+      .sort((left, right) => {
+        if (sortMode === "distance-asc" || sortMode === "distance-desc") {
+          return compareStationDistances(
+            left,
+            right,
+            sortMode === "distance-asc" ? "asc" : "desc",
+          );
+        }
+        if (sortMode === "workplace-asc" || sortMode === "workplace-desc") {
+          return (
+            compareWorkplaceCommutes(
+              left.workplaceCommute,
+              right.workplaceCommute,
+              sortMode === "workplace-asc" ? "asc" : "desc",
+            ) || left.record.name.localeCompare(right.record.name, "ko-KR")
+          );
+        }
+        return compareComplexes(left.record, right.record, sortMode);
+      });
+  }, [
+    mergedComplexes,
+    selectedDistrict,
+    selectedArea,
+    selectedMoveInYear,
+    selectedPriceBand,
+    selectedStationRange,
+    selectedWorkplace1,
+    selectedWorkplace2,
+    selectedSubway1,
+    selectedSubway2,
+    search,
+    sortMode,
+  ]);
+
   const summary = useMemo(() => {
-    if (!filteredTrades.length) {
-      return { count: 0, median: 0, average: 0, latest: "-" };
+    const prices = complexes
+      .map((complex) => complex.record.latestSale?.price ?? null)
+      .filter((price): price is number => price !== null)
+      .sort((a, b) => a - b);
+    const periodTradeCount = complexes.reduce(
+      (total, complex) => total + complex.periodTrades.length,
+      0,
+    );
+    if (!prices.length) {
+      return {
+        count: 0,
+        median: 0,
+        average: 0,
+        latest: "-",
+        periodTradeCount,
+        noSaleCount: complexes.length,
+      };
     }
-    const prices = filteredTrades.map((trade) => trade.price).sort((a, b) => a - b);
     const middle = Math.floor(prices.length / 2);
     const median =
       prices.length % 2
@@ -168,357 +438,713 @@ export default function Home() {
         : (prices[middle - 1] + prices[middle]) / 2;
     const average =
       prices.reduce((total, price) => total + price, 0) / prices.length;
-    const latest = [...filteredTrades].sort((a, b) =>
-      b.date.localeCompare(a.date),
-    )[0].date;
-    return { count: prices.length, median, average, latest };
-  }, [filteredTrades]);
+    const latest = complexes
+      .map((complex) => complex.record.latestSale?.date ?? null)
+      .filter((date): date is string => date !== null)
+      .sort((a, b) => b.localeCompare(a))[0] ?? "-";
+    return {
+      count: prices.length,
+      median,
+      average,
+      latest,
+      periodTradeCount,
+      noSaleCount: complexes.length - prices.length,
+    };
+  }, [complexes]);
+
+  const distribution = useMemo(() => {
+    const bands = [
+      ...PRICE_BANDS.map((band) => ({
+        ...band,
+        count: complexes.filter((complex) => {
+          const price = complex.record.latestSale?.price;
+          return price !== undefined && price >= band.min && price < band.max;
+        }).length,
+      })),
+      {
+        ...NO_SALE_BUCKET,
+        count: complexes.filter((complex) => !complex.record.latestSale).length,
+      },
+    ];
+    const max = Math.max(1, ...bands.map((band) => band.count));
+    return bands.map((band) => ({ ...band, ratio: (band.count / max) * 100 }));
+  }, [complexes]);
+
+  const activeConditions = useMemo(() => {
+    const selectedSubways = [selectedSubway1, selectedSubway2].filter(Boolean);
+    const conditions = [
+      selectedDistrict,
+      AREA_BANDS.find((band) => band.id === selectedArea)?.label,
+      selectedMoveInYear === "all"
+        ? null
+        : `입주·준공 ${MOVE_IN_YEAR_BANDS.find((band) => band.id === selectedMoveInYear)?.label}`,
+      selectedPriceBand === "all"
+        ? null
+        : PRICE_BANDS.find((band) => band.id === selectedPriceBand)?.label,
+      selectedStationRange === "all"
+        ? null
+        : `역 ${STATION_RANGES.find((range) => range.id === selectedStationRange)?.label} 이내`,
+      selectedWorkplace1 ? WORKPLACE_BY_ID[selectedWorkplace1].label : null,
+      selectedWorkplace2 ? WORKPLACE_BY_ID[selectedWorkplace2].label : null,
+      selectedSubways.length
+        ? `인근역 ${selectedSubways.map((name) => `${name}역`).join(" 또는 ")}`
+        : null,
+    ];
+    return conditions.filter(Boolean) as string[];
+  }, [
+    selectedDistrict,
+    selectedArea,
+    selectedMoveInYear,
+    selectedPriceBand,
+    selectedStationRange,
+    selectedWorkplace1,
+    selectedWorkplace2,
+    selectedSubway1,
+    selectedSubway2,
+  ]);
 
   async function downloadExcel() {
     const XLSX = await import("xlsx");
-    const rows = filteredTrades.map((trade) => ({
-      가격구간: getPriceBand(trade.price)?.label ?? "",
-      표시결과: `[${trade.district} ${trade.dong}] ${trade.apartment} (${formatPrice(trade.price)})`,
-      자치구: trade.district,
-      법정동: trade.dong,
-      아파트명: trade.apartment,
-      "거래금액(억원)": trade.price,
-      "전용면적(㎡)": trade.area,
-      건축연도: trade.buildYear ?? "",
-      "거래당시 연식(년)": getBuildingAge(trade) ?? "",
-      계약일: trade.date,
-      층: trade.floor,
+    const rows = complexes.map(({ record, station, periodTrades }) => ({
+      가격구간: record.latestSale
+        ? getPriceBand(record.latestSale.price)?.label ?? ""
+        : "최근 매매 없음",
+      자치구: record.district,
+      법정동: record.dong,
+      아파트명: record.name,
+      주소: record.address,
+      "최근매매가(억원)": record.latestSale?.price ?? "",
+      최근매매일: record.latestSale?.date ?? "",
+      "전용면적(㎡)": record.areas.join(", "),
+      건축연도: record.buildYear ?? "",
+      현재연식: getBuildingAge(record.buildYear) ?? "",
+      세대수: record.households ?? "",
+      동수: record.buildingCount ?? "",
+      인근역: station?.name ?? "",
+      "선택월 거래(건)": periodTrades.length,
+      출처: record.source,
     }));
     const sheet = XLSX.utils.json_to_sheet(rows);
     sheet["!cols"] = [
       { wch: 13 },
-      { wch: 44 },
       { wch: 10 },
       { wch: 12 },
       { wch: 24 },
-      { wch: 16 },
-      { wch: 14 },
-      { wch: 12 },
+      { wch: 35 },
       { wch: 18 },
-      { wch: 13 },
+      { wch: 14 },
+      { wch: 24 },
+      { wch: 12 },
+      { wch: 12 },
+      { wch: 10 },
       { wch: 8 },
+      { wch: 14 },
+      { wch: 14 },
+      { wch: 20 },
     ];
     const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, sheet, "실거래가");
+    XLSX.utils.book_append_sheet(workbook, sheet, "서울 단지 마스터");
     const district = selectedDistrict.replace(" ", "");
     XLSX.writeFile(
       workbook,
-      `서울_아파트_실거래가_${month.replace("-", "")}_${district}.xlsx`,
+      `서울_아파트_단지마스터_${month.replace("-", "")}_${district}.xlsx`,
     );
   }
 
   function resetFilters() {
     setSelectedDistrict("서울 전체");
     setSelectedArea("all");
-    setSelectedBuildingAge("all");
+    setSelectedMoveInYear("all");
+    setSelectedPriceBand("all");
+    setSelectedStationRange("all");
+    setSelectedWorkplace1("");
+    setSelectedWorkplace2("");
+    setSelectedSubway1("");
+    setSelectedSubway2("");
+    setVisibleResultLimit(60);
+    setSortMode("price-desc");
     setSearch("");
   }
 
   return (
-    <main className="dashboard-shell">
-      <header className="topbar">
-        <div className="brand">
-          <span className="brand-mark" aria-hidden="true">
-            JR
+    <main className="dashboard-shell finder-layout">
+      <header className="finder-topbar">
+        <a className="finder-brand" href="#top" aria-label="JAYDEN RESEARCH 내집어디 홈">
+          <span className="finder-brand-mark" aria-hidden="true">JR</span>
+          <span>
+            <strong>JAYDEN RESEARCH</strong>
+            <small>내집어디</small>
           </span>
-          <div>
-            <p className="brand-eyebrow">JAYDEN RESEARCH</p>
-            <strong>서울 주거시장 데이터 노트</strong>
-          </div>
-        </div>
-        <div className={`data-status ${mode}`}>
-          <span className="status-dot" aria-hidden="true" />
-          {mode === "live" ? "실거래 데이터 연결됨" : "예시 데이터 모드"}
+        </a>
+        <div className={`finder-data-status ${mode}`}>
+          <span aria-hidden="true" />
+          {mode === "live" ? "LIVE DATA" : "실거래 미연결"}
         </div>
       </header>
 
-      <section className="hero">
-        <span className="hero-page" aria-hidden="true">01</span>
-        <div className="hero-story">
-          <p className="section-kicker">SEOUL APARTMENT MARKET · DATA BRIEF</p>
-          <h1><mark>10개 가격대</mark>로 읽는<br />서울 아파트 시장.</h1>
-          <p className="hero-copy">
-            국토교통부 실거래 신고 자료를 가격대·지역·면적·연식으로 정리했습니다.
-            단지별 매매와 전월세 흐름까지 한 화면에서 비교해보세요.
+      <section className="finder-intro" id="top">
+        <div>
+          <p className="finder-kicker">JAYDEN RESEARCH · SEOUL HOUSING</p>
+          <h1>조건으로 좁히고,<br /><em>단지로 비교하세요.</em></h1>
+          <p>
+            공식 서울 아파트 단지 마스터에서 가격·면적·입주·준공년도·직장 직통권으로
+            후보를 찾고, 실거래가 없는 단지까지 빠짐없이 비교합니다.
           </p>
-          <p className="hero-byline">JAYDEN RESEARCH · SEOUL HOUSING SERIES</p>
         </div>
-        <div className="hero-actions">
-          <label className="month-field">
-            <span>계약 연월</span>
-            <input
-              type="month"
-              value={month}
-              onChange={(event) => setMonth(event.target.value)}
-            />
-          </label>
-          <button
-            className="refresh-button"
-            onClick={() => void loadTrades(month)}
-            disabled={loading}
-          >
-            {loading ? "불러오는 중…" : "데이터 새로고침"}
-          </button>
+        <div className="finder-intro-stats" aria-label="현재 조회 결과 요약">
+          <article>
+            <span>조회 단지</span>
+            <strong>{complexes.length.toLocaleString()}</strong>
+            <small>COMPLEXES</small>
+          </article>
+          <article>
+            <span>최근 매매 중위가</span>
+            <strong>{summary.count ? formatPrice(summary.median) : "-"}</strong>
+            <small>MEDIAN</small>
+          </article>
+          <article>
+            <span>최근 계약</span>
+            <strong>{summary.latest === "-" ? "-" : summary.latest.slice(5)}</strong>
+            <small>LATEST DEAL</small>
+          </article>
         </div>
       </section>
 
-      <section className="summary-strip" aria-label="조회 결과 요약">
-        <article>
-          <span>표본 거래</span>
-          <strong>{summary.count.toLocaleString()}건</strong>
-          <small>{selectedDistrict}</small>
-        </article>
-        <article>
-          <span>중위 거래가</span>
-          <strong>{summary.count ? formatPrice(summary.median) : "-"}</strong>
-          <small>선택 조건 기준</small>
-        </article>
-        <article>
-          <span>평균 거래가</span>
-          <strong>{summary.count ? formatPrice(summary.average) : "-"}</strong>
-          <small>선택 조건 기준</small>
-        </article>
-        <article>
-          <span>최근 계약일</span>
-          <strong>{summary.latest === "-" ? "-" : summary.latest.slice(5)}</strong>
-          <small>
-            {new Date(updatedAt).toLocaleString("ko-KR", {
-              month: "numeric",
-              day: "numeric",
-              hour: "2-digit",
-              minute: "2-digit",
-            })}{" "}
-            갱신
-          </small>
-        </article>
-      </section>
-
-      <section className="control-panel" aria-label="실거래가 필터">
-        <div className="control-heading">
-          <div>
-            <p className="section-kicker">RESEARCH SCOPE</p>
-            <h2>분석 조건</h2>
-          </div>
-          <button className="reset-button" onClick={resetFilters}>
-            조건 초기화
-          </button>
-        </div>
-
-        <div className="filter-row">
-          <div className="filter-label">
-            <span>01</span>
+      <div className="finder-workspace">
+        <aside className="finder-filter-panel" aria-label="아파트 검색 조건">
+          <div className="finder-panel-heading">
             <div>
-              <strong>지역</strong>
-              <small>서울 전체 또는 자치구</small>
+              <span>01</span>
+              <h2>아파트 찾기</h2>
             </div>
+            <button type="button" onClick={resetFilters}>초기화</button>
           </div>
-          <div className="toggle-list district-list">
-            {["서울 전체", ...SEOUL_DISTRICTS].map((district) => (
-              <button
-                key={district}
-                aria-pressed={selectedDistrict === district}
-                className={selectedDistrict === district ? "active" : ""}
-                onClick={() => setSelectedDistrict(district)}
-              >
-                {district}
-              </button>
-            ))}
-          </div>
-        </div>
 
-        <div className="filter-row">
-          <div className="filter-label">
-            <span>02</span>
-            <div>
-              <strong>전용면적</strong>
-              <small>거래 전용면적 구간</small>
-            </div>
-          </div>
-          <div className="toggle-list">
-            {AREA_BANDS.map((area) => (
-              <button
-                key={area.id}
-                aria-pressed={selectedArea === area.id}
-                className={selectedArea === area.id ? "active" : ""}
-                onClick={() => setSelectedArea(area.id)}
-              >
-                {area.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="filter-row">
-          <div className="filter-label">
-            <span>03</span>
-            <div>
-              <strong>연식</strong>
-              <small>계약연도 기준 건축연식</small>
-            </div>
-          </div>
-          <div className="toggle-list">
-            {BUILDING_AGE_BANDS.map((buildingAge) => (
-              <button
-                key={buildingAge.id}
-                aria-pressed={selectedBuildingAge === buildingAge.id}
-                className={selectedBuildingAge === buildingAge.id ? "active" : ""}
-                onClick={() => setSelectedBuildingAge(buildingAge.id)}
-              >
-                {buildingAge.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="filter-row search-row">
-          <div className="filter-label">
-            <span>04</span>
-            <div>
-              <strong>검색</strong>
-              <small>동·아파트명</small>
-            </div>
-          </div>
-          <label className="search-field">
+          <label className="finder-search-field">
             <span aria-hidden="true">⌕</span>
             <input
               type="search"
               value={search}
               onChange={(event) => setSearch(event.target.value)}
-              placeholder="예: 아현동, 공덕자이"
+              placeholder="주소 또는 단지명 검색"
             />
           </label>
-        </div>
-      </section>
 
-      <section className="board-section">
-        <div className="board-heading">
-          <div>
-            <p className="section-kicker">PRICE MAP</p>
-            <h2>가격대별 배치표</h2>
-            <p>
-              거래금액 내림차순 · 71억~100억 구간에는 100억 초과 거래도
-              함께 표시됩니다. 단지를 누르면 매매·전월세 상세 추이를 볼 수 있습니다.
-            </p>
+          <div className="finder-filter-group">
+            <label htmlFor="district-select">지역</label>
+            <select
+              id="district-select"
+              value={selectedDistrict}
+              onChange={(event) => setSelectedDistrict(event.target.value)}
+            >
+              <option>서울 전체</option>
+              {SEOUL_DISTRICTS.map((district) => (
+                <option key={district}>{district}</option>
+              ))}
+            </select>
+          </div>
+
+          <div className="finder-filter-group">
+            <span className="finder-filter-title">전용면적</span>
+            <div className="finder-chip-grid three">
+              {AREA_BANDS.map((area) => (
+                <button
+                  key={area.id}
+                  type="button"
+                  aria-pressed={selectedArea === area.id}
+                  className={selectedArea === area.id ? "active" : ""}
+                  onClick={() => setSelectedArea(area.id)}
+                >
+                  {area.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="finder-filter-group">
+            <span className="finder-filter-title">매매 가격</span>
+            <small className="finder-filter-note">선택 면적별 최근 매매 기준 · 미수집 가격 제외 · 같은 날 여러 거래는 최고가 기준</small>
+            <div className="finder-chip-grid two">
+              <button
+                type="button"
+                className={selectedPriceBand === "all" ? "active" : ""}
+                aria-pressed={selectedPriceBand === "all"}
+                onClick={() => setSelectedPriceBand("all")}
+              >
+                전체 가격
+              </button>
+              {PRICE_BANDS.map((band) => (
+                <button
+                  key={band.id}
+                  type="button"
+                  aria-pressed={selectedPriceBand === band.id}
+                  className={selectedPriceBand === band.id ? "active" : ""}
+                  onClick={() => setSelectedPriceBand(band.id)}
+                >
+                  {band.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="finder-filter-group">
+            <label htmlFor="move-in-year-select">입주·준공년도</label>
+            <select
+              id="move-in-year-select"
+              value={selectedMoveInYear}
+              onChange={(event) => setSelectedMoveInYear(event.target.value)}
+            >
+              {MOVE_IN_YEAR_BANDS.map((band) => (
+                <option key={band.id} value={band.id}>{band.label}</option>
+              ))}
+            </select>
+            <small className="finder-filter-note">공동주택 단지 마스터의 사용승인·준공년도 기준</small>
+          </div>
+
+          <div className="finder-filter-group">
+            <span className="finder-filter-title">가까운 지하철역</span>
+            <div className="finder-chip-grid five">
+              {STATION_RANGES.map((range) => (
+                <button
+                  key={range.id}
+                  type="button"
+                  aria-pressed={selectedStationRange === range.id}
+                  className={selectedStationRange === range.id ? "active" : ""}
+                  onClick={() => setSelectedStationRange(range.id)}
+                >
+                  {range.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="finder-filter-group finder-access-filter">
+            <span className="finder-filter-title">직장 직통권</span>
+            <div className="finder-select-pair">
+              <label>
+                <span>직장 1</span>
+                <select
+                  aria-label="직장 1 선택"
+                  value={selectedWorkplace1}
+                  onChange={(event) => {
+                    const workplaceId = event.target.value as WorkplaceId | "";
+                    setSelectedWorkplace1(workplaceId);
+                    if (
+                      !supportsWorkplaceCommuteSort(workplaceId) &&
+                      (sortMode === "workplace-asc" ||
+                        sortMode === "workplace-desc")
+                    ) {
+                      setSortMode("price-desc");
+                    }
+                  }}
+                >
+                  <option value="">선택 안 함</option>
+                  {WORKPLACES.map((workplace) => (
+                    <option
+                      key={workplace.id}
+                      value={workplace.id}
+                      disabled={selectedWorkplace2 === workplace.id}
+                    >
+                      {workplace.name}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                <span>직장 2</span>
+                <select
+                  aria-label="직장 2 선택"
+                  value={selectedWorkplace2}
+                  onChange={(event) =>
+                    setSelectedWorkplace2(event.target.value as WorkplaceId | "")
+                  }
+                >
+                  <option value="">선택 안 함</option>
+                  {WORKPLACES.map((workplace) => (
+                    <option
+                      key={workplace.id}
+                      value={workplace.id}
+                      disabled={selectedWorkplace1 === workplace.id}
+                    >
+                      {workplace.name}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
+            <small className="finder-filter-note">
+              여의도 접근순 = 직선거리 기반 도보 추정 + 직통 정거장당 2분 환산 · 대기·혼잡 제외 · 2곳은 모두 충족
+            </small>
+          </div>
+
+          <div className="finder-filter-group finder-access-filter">
+            <span className="finder-filter-title">인근 지하철역 선택</span>
+            <small className="finder-filter-note">단지·역사 좌표 간 직선거리 · 역 미선택 시 가장 가까운 역, 선택 시 해당 역 기준(2곳은 하나 이상 충족). 반경 1.5km 내 역만 조회합니다. 좌표 확인 {TRANSIT_COVERAGE.geocodedComplexes.toLocaleString()}/{TRANSIT_COVERAGE.totalComplexes.toLocaleString()}개 · 미확인 단지는 역·거리·직장 필터에서 제외됩니다.</small>
+            <div className="finder-select-pair">
+              <label>
+                <span>지하철 1</span>
+                <select
+                  aria-label="지하철 1 선택"
+                  value={selectedSubway1}
+                  onChange={(event) => setSelectedSubway1(event.target.value)}
+                >
+                  <option value="">선택 안 함</option>
+                  {STATION_OPTIONS.map((station) => (
+                    <option
+                      key={station.value}
+                      value={station.value}
+                      disabled={selectedSubway2 === station.value}
+                    >
+                      {station.label}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                <span>지하철 2</span>
+                <select
+                  aria-label="지하철 2 선택"
+                  value={selectedSubway2}
+                  onChange={(event) => setSelectedSubway2(event.target.value)}
+                >
+                  <option value="">선택 안 함</option>
+                  {STATION_OPTIONS.map((station) => (
+                    <option
+                      key={station.value}
+                      value={station.value}
+                      disabled={selectedSubway1 === station.value}
+                    >
+                      {station.label}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
+            <small className="finder-filter-note">
+              선택한 두 역 중 한 곳이 인근역인 단지를 표시
+            </small>
+          </div>
+
+          <div className="finder-month-control">
+            <label htmlFor="deal-month">실거래 기준월</label>
+            <input
+              id="deal-month"
+              type="month"
+              value={month}
+              onChange={(event) => setMonth(event.target.value)}
+            />
           </div>
           <button
-            className="excel-button"
-            onClick={() => void downloadExcel()}
-            disabled={!filteredTrades.length}
+            className="finder-search-button"
+            type="button"
+            onClick={() => void loadDashboard(month)}
+            disabled={loading}
           >
-            <span aria-hidden="true">↓</span>
-            엑셀 다운로드
+            {loading ? "불러오는 중…" : "단지·실거래 갱신"}
+            <span aria-hidden="true">→</span>
           </button>
-        </div>
+        </aside>
 
-        <div className="price-board">
-          {groupedTrades.map((band) => {
-            const visible = expanded[band.id]
-              ? band.trades
-              : band.trades.slice(0, COLLAPSED_TRADE_LIMIT);
-            return (
-              <article
-                className="price-column"
-                key={band.id}
-                style={{ "--band-accent": band.accent } as React.CSSProperties}
+        <section className="finder-results" id="finder-results">
+          <header className="finder-results-heading">
+            <div>
+              <p className="finder-kicker">APARTMENT RESULTS</p>
+              <h2><strong>{complexes.length.toLocaleString()}</strong>개 단지</h2>
+            </div>
+            <label className="finder-sort">
+              <span>정렬</span>
+              <select
+                value={sortMode}
+                onChange={(event) =>
+                  setSortMode(event.target.value as ApartmentSortMode)
+                }
               >
-                <header>
-                  <div>
-                    <span className="band-index">
-                      {String(
-                        PRICE_BANDS.findIndex((item) => item.id === band.id) + 1,
-                      ).padStart(2, "0")}
-                    </span>
-                    <h3>{band.label}</h3>
-                  </div>
-                  <strong>{band.trades.length}</strong>
-                </header>
-                <div className="trade-list">
-                  {visible.length ? (
-                    visible.map((trade) => (
-                      <button
-                        type="button"
-                        className="trade-item"
-                        key={trade.id}
-                        onClick={() => setSelectedTrade(trade)}
-                        aria-label={`${trade.apartment} 단지 상세 보기`}
-                        title={`[${trade.district} ${trade.dong}] ${trade.apartment} ${trade.area.toFixed(1)}㎡ · ${trade.floor}층 · ${formatDate(trade.date)} · ${formatBuildingInfo(trade)} · ${formatPrice(trade.price)}`}
-                      >
-                        <div className="trade-line">
-                          <span className="trade-location">
-                            [{trade.district} {trade.dong}]
-                          </span>
-                          <strong className="trade-name">{trade.apartment}</strong>
-                          <small className="trade-meta">
-                            {trade.area.toFixed(1)}㎡ · {trade.floor}층 ·{" "}
-                            {formatDate(trade.date)} ·{" "}
-                            {trade.buildYear ? `${trade.buildYear}년식` : "연식 미확인"}
-                          </small>
-                        </div>
-                        <strong className="trade-price">
-                          {formatPrice(trade.price)}
-                        </strong>
-                      </button>
-                    ))
-                  ) : (
-                    <div className="empty-column">
-                      <span>—</span>
-                      <p>조건에 맞는 거래가 없습니다.</p>
-                    </div>
-                  )}
+                <option value="price-desc">높은 가격순</option>
+                <option value="price-asc">낮은 가격순</option>
+                <option value="latest">최근 거래순</option>
+                <option value="distance-asc">가까운 거리순</option>
+                <option value="distance-desc">먼 거리순</option>
+                <option
+                  value="workplace-asc"
+                  disabled={!supportsWorkplaceCommuteSort(selectedWorkplace1)}
+                >
+                  {selectedWorkplace1
+                    ? `${WORKPLACE_BY_ID[selectedWorkplace1].name} 접근 가까운 순`
+                    : "직장 1 접근 가까운 순"}
+                </option>
+                <option
+                  value="workplace-desc"
+                  disabled={!supportsWorkplaceCommuteSort(selectedWorkplace1)}
+                >
+                  {selectedWorkplace1
+                    ? `${WORKPLACE_BY_ID[selectedWorkplace1].name} 접근 먼 순`
+                    : "직장 1 접근 먼 순"}
+                </option>
+              </select>
+            </label>
+          </header>
+
+          <div className="finder-condition-bar">
+            <span>조회 조건</span>
+            <div>
+              {activeConditions.map((condition) => (
+                <em key={condition}>{condition}</em>
+              ))}
+            </div>
+            <small>
+              최근 매매 {summary.count.toLocaleString()}개 · 선택월 거래{" "}
+              {summary.periodTradeCount.toLocaleString()}건
+            </small>
+          </div>
+
+          {masterLoadState === "loading" && !masterComplexes.length ? (
+            <div className="finder-empty-state" role="status">
+              <span aria-hidden="true">…</span>
+              <h3>공식 단지 마스터를 불러오고 있습니다.</h3>
+              <p>서울 25개 구의 단지 정보를 준비하는 중입니다.</p>
+            </div>
+          ) : masterLoadState === "error" && !masterComplexes.length ? (
+            <div className="finder-empty-state" role="alert">
+              <span aria-hidden="true">!</span>
+              <h3>단지 마스터를 불러오지 못했습니다.</h3>
+              <p>연결 상태를 확인한 뒤 단지·실거래 갱신을 다시 눌러주세요.</p>
+            </div>
+          ) : complexes.length ? (
+            <div className="finder-result-groups">
+              <section
+                className="finder-result-list"
+                aria-label="아파트 조회 결과"
+              >
+                <div className="finder-complex-list">
+                  {complexes
+                    .slice(0, visibleResultLimit)
+                    .map((complex) => {
+                      const { record, periodTrades } = complex;
+                      const latestSale = record.latestSale;
+                      const latestSaleArea = record.areaSales?.find((sale) =>
+                        sale.date === latestSale?.date && sale.price === latestSale?.price &&
+                        record.areas.includes(sale.area))?.area;
+                      const periodPrices = periodTrades.map((trade) => trade.price);
+                      const minPrice = periodPrices.length
+                        ? Math.min(...periodPrices)
+                        : null;
+                      const maxPrice = periodPrices.length
+                        ? Math.max(...periodPrices)
+                        : null;
+                      return (
+                        <button
+                          type="button"
+                          className={`finder-complex-card${latestSale ? "" : " no-trade"}`}
+                          key={complex.key}
+                          onClick={() => setSelectedComplex(record)}
+                          aria-label={`${record.name} 단지 상세 보기`}
+                        >
+                          <div className="finder-card-main">
+                            <div className="finder-card-location">
+                              <span>{record.district} {record.dong}</span>
+                              <small>
+                                {latestSale
+                                  ? `${formatDate(latestSale.date)} 최근 매매`
+                                  : "최근 매매 없음"}
+                              </small>
+                            </div>
+                            <h4>{record.name}</h4>
+                            <div className="finder-card-tags">
+                              <span>{formatBuildingInfo(record.buildYear)}</span>
+                              {record.households ? (
+                                <span>{record.households.toLocaleString()}세대</span>
+                              ) : (
+                                <span>세대수 확인 중</span>
+                              )}
+                              <span>선택월 거래 {periodTrades.length}건</span>
+                            </div>
+                            <div className="finder-station-line">
+                              <span className="finder-station-icon" aria-hidden="true">M</span>
+                              {complex.station ? (
+                                <>
+                                  <strong>{complex.station.name}역</strong>
+                                  <span>{complex.station.lines}</span>
+                                  <small>직선 {Math.round(complex.station.distanceMeters)}m</small>
+                                </>
+                              ) : (
+                                <span>좌표 미확인 또는 1.5km 내 역 없음</span>
+                              )}
+                            </div>
+                            {(selectedWorkplace1 || selectedWorkplace2) && (
+                              <div className="finder-direct-access">
+                                {[selectedWorkplace1, selectedWorkplace2]
+                                  .filter((value): value is WorkplaceId => Boolean(value))
+                                  .map((workplaceId) => {
+                                    const commute =
+                                      workplaceId === selectedWorkplace1
+                                        ? complex.workplaceCommute
+                                        : getWorkplaceCommuteEstimate(
+                                            record.id,
+                                            workplaceId,
+                                          );
+                                    if (commute) {
+                                      return (
+                                        <span key={workplaceId}>
+                                          {commute.workplaceName} · {commute.station.name}역 {commute.line} 직통 ·{" "}
+                                          약 {commute.estimatedMinutes}분
+                                          {commute.stopCount === 0
+                                            ? " · 목적역 생활권"
+                                            : ` · ${commute.stopCount}정거장`}
+                                        </span>
+                                      );
+                                    }
+                                    const match = getDirectWorkplaceMatch(
+                                      record.id,
+                                            workplaceId,
+                                    );
+                                    return match ? (
+                                      <span key={workplaceId}>
+                                        {match.workplace.name} · {match.sharedLines.join("·")} 직통
+                                      </span>
+                                    ) : null;
+                                  })}
+                              </div>
+                            )}
+                          </div>
+                          <div className={`finder-card-price${latestSale ? "" : " no-trade"}`}>
+                            <span>최근 매매</span>
+                            <strong>
+                              {latestSale ? formatPrice(latestSale.price) : "거래 없음"}
+                            </strong>
+                            {latestSaleArea ? (
+                              <small>
+                                {latestSaleArea.toFixed(1)}㎡ ·{" "}
+                                {formatPyeong(latestSaleArea)}
+                              </small>
+                            ) : record.areas.length ? (
+                              <small>전용면적 {record.areas.length}종 등록</small>
+                            ) : (
+                              <small>단지 마스터 등록</small>
+                            )}
+                            {minPrice !== null &&
+                              maxPrice !== null &&
+                              minPrice !== maxPrice && (
+                              <em>
+                                {formatPrice(minPrice)}~{formatPrice(maxPrice)}
+                              </em>
+                            )}
+                            <i aria-hidden="true">→</i>
+                          </div>
+                        </button>
+                      );
+                    })}
                 </div>
-                {band.trades.length > COLLAPSED_TRADE_LIMIT && (
+                {complexes.length > visibleResultLimit && (
                   <button
-                    className="more-button"
-                    onClick={() =>
-                      setExpanded((current) => ({
-                        ...current,
-                        [band.id]: !current[band.id],
-                      }))
-                    }
+                    type="button"
+                    className="finder-group-more"
+                    onClick={() => setVisibleResultLimit((current) => current + 60)}
                   >
-                    {expanded[band.id]
-                      ? "접기"
-                      : `${band.trades.length - COLLAPSED_TRADE_LIMIT}건 더 보기`}
+                    단지 더 보기 ·{" "}
+                    {Math.min(60, complexes.length - visibleResultLimit)}개
                   </button>
                 )}
-              </article>
-            );
-          })}
-        </div>
-      </section>
+              </section>
+            </div>
+          ) : (
+            <div className="finder-empty-state">
+              <span aria-hidden="true">⌕</span>
+              <h3>조건에 맞는 단지가 없습니다.</h3>
+              <p>지역이나 가격·면적 범위를 넓혀 다시 확인해보세요.</p>
+              <button type="button" onClick={resetFilters}>전체 조건으로 보기</button>
+            </div>
+          )}
+        </section>
 
-      <aside className={`source-notice ${mode}`}>
-        <div>
-          <strong>
-            {mode === "live" ? "국토교통부 실거래 신고 자료" : "예시 데이터 안내"}
-          </strong>
-          <p>{statusMessage}</p>
-        </div>
-        <span>{mode === "live" ? "LIVE" : "DEMO"}</span>
-      </aside>
+        <aside className="finder-insight-panel" id="market-snapshot">
+          <div className="finder-panel-heading compact">
+            <div>
+              <span>02</span>
+              <h2>시장 스냅샷</h2>
+            </div>
+          </div>
 
-      <footer>
-        <p><strong>JAYDEN RESEARCH</strong> · 서울 주거시장 데이터 노트</p>
-        <p>
-          거래금액은 억원 단위 · 전용면적은 ㎡ 단위 · 실거래 신고 자료는
-          취소·정정될 수 있습니다.
-        </p>
+          <div className="finder-key-metrics">
+            <article>
+              <span>중위가</span>
+              <strong>{summary.count ? formatPrice(summary.median) : "-"}</strong>
+            </article>
+            <article>
+              <span>평균가</span>
+              <strong>{summary.count ? formatPrice(summary.average) : "-"}</strong>
+            </article>
+          </div>
+
+          <section className="finder-distribution">
+            <header>
+              <h3>가격대별 단지 분포</h3>
+              <span>COMPLEX MIX</span>
+            </header>
+            <div>
+              {distribution.map((band) => (
+                <article key={band.id}>
+                  <span>{band.label}</span>
+                  <i><b style={{ width: `${band.ratio}%`, background: band.accent }} /></i>
+                  <strong>{band.count}</strong>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section className="finder-selection-guide">
+            <span className="finder-guide-icon" aria-hidden="true">↗</span>
+            <p className="finder-kicker">COMPLEX DETAIL</p>
+            <h3>단지를 선택해<br />가격 흐름을 확인하세요.</h3>
+            <p>
+              결과 카드를 누르면 면적별 매매·전세 차트와 최근 실거래, 위치 지도,
+              교통·학교 정보를 상세 패널에서 볼 수 있습니다.
+            </p>
+          </section>
+
+          <button
+            className="finder-excel-button"
+            type="button"
+            onClick={() => void downloadExcel()}
+            disabled={!complexes.length}
+          >
+            <span>↓</span>
+            조회 결과 엑셀 다운로드
+          </button>
+
+          <section className={`finder-source ${mode}`} id="data-guide">
+            <div>
+              <span aria-hidden="true" />
+              <strong>{masterLoadState === "ready" ? "단지 마스터 연결됨" : "단지 마스터 미연결"}</strong>
+            </div>
+            <p>{statusMessage}</p>
+            <small>
+              {new Date(updatedAt).toLocaleString("ko-KR", {
+                month: "numeric",
+                day: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+              })} 갱신
+            </small>
+          </section>
+        </aside>
+      </div>
+
+      <footer className="finder-footer">
+        <p><strong>JAYDEN RESEARCH</strong> · 내집어디</p>
+        <p>K-apt와 한국부동산원 공시대상 아파트를 중복 정리한 공식 마스터 기준입니다. 전수 건축물대장은 아니며 실거래 신고는 취소·정정될 수 있습니다.</p>
       </footer>
 
-      {selectedTrade && (
+      {selectedComplex && (
         <ComplexDetailPanel
-          key={selectedTrade.id}
-          trade={selectedTrade}
+          key={selectedComplex.id}
+          complex={toComplexDetailSeed(selectedComplex)}
           endMonth={month}
-          onClose={() => setSelectedTrade(null)}
+          workplaceIds={[selectedWorkplace1, selectedWorkplace2].filter(
+            (value): value is WorkplaceId => Boolean(value),
+          )}
+          onClose={() => setSelectedComplex(null)}
         />
       )}
     </main>
   );
 }
-

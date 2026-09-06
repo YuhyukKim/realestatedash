@@ -1,23 +1,34 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
-import type { Trade } from "./data";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
+import {
+  WORKPLACE_BY_ID,
+  findDirectLineMatch,
+  type WorkplaceId,
+} from "./access";
+import type { ComplexDetailSeed } from "./complex-master";
 import type {
   ComplexDetailResponse,
   ComplexTransaction,
 } from "./complex-types";
-import type { NearbyStation } from "./stations";
+import { NaverMap } from "./naver-map";
+import type { PlacesResponse } from "./place-types";
+import { getNearbyStations, STATION_DISTANCE_NOTE } from "./stations";
 
 type DetailPeriod = 1 | 3 | 5 | 10 | "all";
 type ChartMetric = "sale" | "jeonse" | "ratio";
 
 type Props = {
-  trade: Trade;
+  complex: ComplexDetailSeed;
   endMonth: string;
+  workplaceIds?: WorkplaceId[];
   onClose: () => void;
 };
 
 const SALE_FIRST_MONTH = "200601";
+const EMPTY_TRANSACTIONS: ComplexTransaction[] = [];
+const TRANSACTION_LIST_INITIAL_COUNT = 10;
+const TRANSACTION_LIST_STEP = 10;
 const PERIODS: { value: DetailPeriod; label: string }[] = [
   { value: 1, label: "1년" },
   { value: 3, label: "3년" },
@@ -83,6 +94,10 @@ function formatRent(transaction: ComplexTransaction) {
     ? `${Math.round(transaction.price * 10_000).toLocaleString()}만`
     : "0";
   return `${deposit} / ${transaction.monthlyRent.toLocaleString()}만`;
+}
+
+function naverMapSearchUrl(query: string) {
+  return `https://map.naver.com/p/search/${encodeURIComponent(query)}`;
 }
 
 function median(values: number[]) {
@@ -389,18 +404,30 @@ function TransactionList({
   transactions: ComplexTransaction[];
   type: "sale" | "rent";
 }) {
+  const [visibleCount, setVisibleCount] = useState(
+    TRANSACTION_LIST_INITIAL_COUNT,
+  );
+  const componentId = useId();
+
+  const visibleTransactions = transactions.slice(0, visibleCount);
+  const remainingCount = Math.max(0, transactions.length - visibleCount);
+  const hasMore = remainingCount > 0;
+  const isExpanded = visibleCount > TRANSACTION_LIST_INITIAL_COUNT;
+  const listId = `detail-transaction-list-${type}-${componentId}`;
+  const headingId = `detail-transaction-heading-${type}-${componentId}`;
+
   return (
-    <section className="detail-transaction-card">
+    <section className="detail-transaction-card" aria-labelledby={headingId}>
       <header>
         <div>
-          <h3>{title}</h3>
+          <h3 id={headingId}>{title}</h3>
           <p>{caption}</p>
         </div>
         <span>{transactions.length}건</span>
       </header>
-      <div className="detail-transaction-list">
+      <div className="detail-transaction-list" id={listId}>
         {transactions.length ? (
-          transactions.slice(0, 10).map((transaction) => (
+          visibleTransactions.map((transaction) => (
             <article key={transaction.id}>
               <div className="transaction-date">
                 <strong>{transaction.date.slice(5).replace("-", ".")}</strong>
@@ -428,21 +455,67 @@ function TransactionList({
           <div className="detail-list-empty">선택 조건의 최근 거래가 없습니다.</div>
         )}
       </div>
+      {transactions.length > TRANSACTION_LIST_INITIAL_COUNT && (
+        <div className="detail-transaction-more">
+          <button
+            type="button"
+            aria-controls={listId}
+            aria-expanded={isExpanded}
+            aria-label={
+              hasMore
+                ? `${title} 더보기, ${Math.min(TRANSACTION_LIST_STEP, remainingCount)}건`
+                : `${title} 접기, 처음 ${TRANSACTION_LIST_INITIAL_COUNT}건만 표시`
+            }
+            onClick={() =>
+              setVisibleCount((current) =>
+                hasMore
+                  ? Math.min(
+                      transactions.length,
+                      current + TRANSACTION_LIST_STEP,
+                    )
+                  : TRANSACTION_LIST_INITIAL_COUNT,
+              )
+            }
+          >
+            <span>
+              {hasMore
+                ? `더보기 · ${Math.min(TRANSACTION_LIST_STEP, remainingCount)}건`
+                : "접기 · 처음 10건만"}
+            </span>
+            <i aria-hidden="true">{hasMore ? "↓" : "↑"}</i>
+          </button>
+        </div>
+      )}
     </section>
   );
 }
 
-export default function ComplexDetailPanel({ trade, endMonth, onClose }: Props) {
+export default function ComplexDetailPanel({
+  complex,
+  endMonth,
+  workplaceIds = [],
+  onClose,
+}: Props) {
   const [period, setPeriod] = useState<DetailPeriod>(1);
   const [chartMetric, setChartMetric] = useState<ChartMetric>("sale");
-  const [transactions, setTransactions] = useState<ComplexTransaction[]>([]);
-  const [selectedArea, setSelectedArea] = useState(Math.round(trade.area));
-  const [mode, setMode] = useState<"demo" | "live">("demo");
-  const [message, setMessage] = useState("실거래 데이터를 불러오고 있습니다.");
-  const [nearbyStations, setNearbyStations] = useState<NearbyStation[]>([]);
-  const [nearbyStationsNote, setNearbyStationsNote] = useState(
-    "법정동 중심 직선거리 추정 · 실제 도보경로와 다를 수 있습니다.",
+  const [transactionState, setTransactionState] = useState<{
+    complexId: string;
+    items: ComplexTransaction[];
+  }>({ complexId: complex.id, items: [] });
+  const transactions =
+    transactionState.complexId === complex.id
+      ? transactionState.items
+      : EMPTY_TRANSACTIONS;
+  const [selectedArea, setSelectedArea] = useState<number | null>(
+    complex.defaultArea === null ? null : Math.round(complex.defaultArea),
   );
+  const [mode, setMode] = useState<ComplexDetailResponse["mode"]>("live");
+  const [message, setMessage] = useState("실거래 데이터를 불러오고 있습니다.");
+  const nearbyStations = getNearbyStations(complex.id);
+  const nearbyStationsNote = STATION_DISTANCE_NOTE;
+  const [places, setPlaces] = useState<PlacesResponse | null>(null);
+  const [placesLoading, setPlacesLoading] = useState(true);
+  const [placesError, setPlacesError] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [loadProgress, setLoadProgress] = useState({ loaded: 0, total: 1 });
@@ -483,61 +556,108 @@ export default function ComplexDetailPanel({ trade, endMonth, onClose }: Props) 
 
   useEffect(() => {
     const controller = new AbortController();
-    const ranges = chunkRanges(endMonth, period, trade.buildYear);
+
+    async function loadPlaces() {
+      setPlacesLoading(true);
+      setPlacesError("");
+      try {
+        const params = new URLSearchParams({
+          district: complex.district,
+          dong: complex.dong,
+          apartment: complex.apartment,
+        });
+        const response = await fetch(`/api/places?${params}`, {
+          signal: controller.signal,
+        });
+        if (!response.ok) throw new Error("생활권 정보를 불러오지 못했습니다.");
+        setPlaces((await response.json()) as PlacesResponse);
+      } catch (loadError) {
+        if (controller.signal.aborted) return;
+        setPlacesError(
+          loadError instanceof Error
+            ? loadError.message
+            : "생활권 정보를 불러오지 못했습니다.",
+        );
+      } finally {
+        if (!controller.signal.aborted) setPlacesLoading(false);
+      }
+    }
+
+    void loadPlaces();
+    return () => controller.abort();
+  }, [complex.apartment, complex.district, complex.dong]);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const ranges = chunkRanges(endMonth, period, complex.buildYear);
 
     async function load() {
       setLoading(true);
       setError("");
+      setMode("unavailable");
+      setMessage("");
+      setTransactionState({ complexId: complex.id, items: [] });
       setLoadProgress({ loaded: 0, total: ranges.length });
       try {
         const payloads: ComplexDetailResponse[] = [];
         for (const [rangeIndex, range] of ranges.entries()) {
-          const key = `${range.from}-${range.to}`;
+          const key = `${complex.id}:${range.from}-${range.to}`;
           if (cacheRef.current[key]) {
             payloads.push(cacheRef.current[key]);
           } else {
             const params = new URLSearchParams({
-              district: trade.district,
-              dong: trade.dong,
-              apartment: trade.apartment,
+              district: complex.district,
+              dong: complex.dong,
+              apartment: complex.apartment,
               from: range.from,
               to: range.to,
               asOf: endMonth.replace("-", ""),
-              basePrice: String(trade.price),
-              baseArea: String(trade.area),
+              master: "1",
+              complexId: complex.id,
+              dataVersion: "real-v3-coordinates",
             });
-            if (trade.aptSeq) params.set("aptSeq", trade.aptSeq);
-            if (trade.buildYear) params.set("buildYear", String(trade.buildYear));
+            if (complex.basePrice !== null && complex.basePrice > 0) {
+              params.set("basePrice", String(complex.basePrice));
+            }
+            if (complex.defaultArea !== null && complex.defaultArea > 0) {
+              params.set("baseArea", String(complex.defaultArea));
+            }
+            if (complex.referenceDate) {
+              params.set("referenceDate", complex.referenceDate);
+            }
+            if (complex.buildYear) {
+              params.set("buildYear", String(complex.buildYear));
+            }
 
             const response = await fetch(`/api/complex?${params}`, {
               signal: controller.signal,
             });
             if (!response.ok) throw new Error("단지 상세 데이터를 불러오지 못했습니다.");
             const payload = (await response.json()) as ComplexDetailResponse;
-            cacheRef.current[key] = payload;
+            if (payload.mode === "live") cacheRef.current[key] = payload;
             payloads.push(payload);
           }
 
           if (controller.signal.aborted) return;
           const merged = payloads
-            .flatMap((payload) => payload.transactions)
+            .flatMap((payload) => payload.mode === "live" || payload.mode === "partial" ? payload.transactions : [])
             .filter(
               (transaction, index, all) =>
                 all.findIndex((candidate) => candidate.id === transaction.id) === index,
             )
             .sort((a, b) => b.date.localeCompare(a.date));
-          setTransactions(merged);
-          setMode(payloads.every((payload) => payload.mode === "live") ? "live" : "demo");
-          setMessage(payloads[0]?.message ?? "단지 상세 실거래 자료");
-          setNearbyStations(payloads[0]?.nearbyStations ?? []);
-          setNearbyStationsNote(
-            payloads[0]?.nearbyStationsNote ??
-              "법정동 중심 직선거리 추정 · 실제 도보경로와 다를 수 있습니다.",
+          setTransactionState({ complexId: complex.id, items: merged });
+          setMode(
+            payloads.every((payload) => payload.mode === "live") ? "live"
+              : payloads.some((payload) => payload.mode === "live" || payload.mode === "partial")
+                ? "partial" : "unavailable",
           );
+          setMessage([...new Set(payloads.filter((payload) => payload.mode !== "live").map((payload) => payload.message))].join(" ") || payloads[0]?.message || "단지 상세 실거래 자료");
           setLoadProgress({ loaded: rangeIndex + 1, total: ranges.length });
         }
       } catch (loadError) {
         if (controller.signal.aborted) return;
+        setMode("partial");
         setError(
           loadError instanceof Error
             ? loadError.message
@@ -550,31 +670,73 @@ export default function ComplexDetailPanel({ trade, endMonth, onClose }: Props) 
 
     void load();
     return () => controller.abort();
-  }, [endMonth, period, trade]);
+  }, [complex, endMonth, period]);
 
   const areas = useMemo(
     () =>
-      [...new Set([Math.round(trade.area), ...transactions.map((item) => Math.round(item.area))])]
+      [
+        ...new Set(
+          [
+            ...complex.areas,
+            complex.defaultArea,
+            ...transactions.map((item) => item.area),
+          ]
+            .filter((area): area is number => area !== null && area > 0)
+            .map((area) => Math.round(area)),
+        ),
+      ]
         .sort((a, b) => a - b),
-    [trade.area, transactions],
+    [complex.areas, complex.defaultArea, transactions],
   );
-  const effectiveArea = areas.includes(selectedArea)
-    ? selectedArea
-    : areas.reduce((nearest, area) =>
-        Math.abs(area - selectedArea) < Math.abs(nearest - selectedArea) ? area : nearest,
-      );
+  const effectiveArea = !areas.length
+    ? null
+    : selectedArea !== null && areas.includes(selectedArea)
+      ? selectedArea
+      : selectedArea === null
+        ? areas[0]
+        : areas.reduce((nearest, area) =>
+            Math.abs(area - selectedArea) < Math.abs(nearest - selectedArea)
+              ? area
+              : nearest,
+          );
   const areaTransactions = useMemo(
-    () => transactions.filter((item) => Math.round(item.area) === effectiveArea),
+    () =>
+      effectiveArea === null
+        ? transactions
+        : transactions.filter((item) => Math.round(item.area) === effectiveArea),
     [effectiveArea, transactions],
   );
   const recentSales = areaTransactions.filter((item) => item.type === "sale");
   const recentRents = areaTransactions.filter((item) => item.type !== "sale");
   const latestSale = recentSales[0] ?? null;
   const latestJeonse = recentRents.find((item) => item.type === "jeonse") ?? null;
+  const latestSaleSummary =
+    latestSale ??
+    (complex.basePrice !== null && complex.referenceDate
+      ? { price: complex.basePrice, date: complex.referenceDate }
+      : null);
   const jeonseRatio =
     latestSale && latestJeonse
       ? Math.round((latestJeonse.price / latestSale.price) * 100)
       : null;
+  const locationQuery =
+    complex.address.trim() ||
+    places?.location.mapQuery ||
+    ["서울특별시", complex.district, complex.dong, complex.apartment].join(" ");
+  const areaCaption =
+    effectiveArea === null ? "면적 정보 없음" : `${effectiveArea}㎡ 기준`;
+  const workplaceAccess = workplaceIds.map((workplaceId) => ({
+    workplace: WORKPLACE_BY_ID[workplaceId],
+    match: findDirectLineMatch(nearbyStations, workplaceId),
+  }));
+  const schoolScopeLabel =
+    places?.schoolScope === "same-dong"
+      ? "같은 동 주소"
+      : places?.schoolScope === "same-district"
+        ? "같은 자치구"
+        : places?.schoolScope === "dong-name"
+          ? "동명 검색"
+          : "조회 안내";
 
   return (
     <div
@@ -594,11 +756,23 @@ export default function ComplexDetailPanel({ trade, endMonth, onClose }: Props) 
         <header className="detail-header">
           <div>
             <p className="section-kicker">JAYDEN RESEARCH · COMPLEX NOTE</p>
-            <h2 id="complex-detail-title">{trade.apartment}</h2>
+            <h2 id="complex-detail-title">{complex.apartment}</h2>
             <p>
-              {trade.district} {trade.dong}
+              {complex.district} {complex.dong}
               <span aria-hidden="true"> · </span>
-              {trade.buildYear ? `${trade.buildYear}년 준공` : "준공연도 미확인"}
+              {complex.buildYear ? `${complex.buildYear}년 준공` : "준공연도 미확인"}
+              {complex.households !== null && (
+                <>
+                  <span aria-hidden="true"> · </span>
+                  {complex.households.toLocaleString()}세대
+                </>
+              )}
+              {complex.buildingCount !== null && (
+                <>
+                  <span aria-hidden="true"> · </span>
+                  {complex.buildingCount}개 동
+                </>
+              )}
             </p>
           </div>
           <button className="detail-close" onClick={onClose} aria-label="단지 상세 닫기">
@@ -607,15 +781,19 @@ export default function ComplexDetailPanel({ trade, endMonth, onClose }: Props) 
         </header>
 
         <div className={`detail-source ${mode}`}>
-          <span>{mode === "live" ? "LIVE" : "DEMO"}</span>
+          <span>
+            {mode === "live" ? "LIVE" : mode === "partial" ? "일부 조회" : "NO DATA"}
+          </span>
           <p>{message}</p>
         </div>
 
         <section className="detail-summary" aria-label="단지 최근 가격 요약">
           <article>
             <span>최근 매매가</span>
-            <strong>{latestSale ? formatPrice(latestSale.price) : "-"}</strong>
-            <small>{latestSale?.date ?? "거래 없음"}</small>
+            <strong>
+              {latestSaleSummary ? formatPrice(latestSaleSummary.price) : "-"}
+            </strong>
+            <small>{latestSaleSummary?.date ?? "거래 없음"}</small>
           </article>
           <article>
             <span>최근 전세가</span>
@@ -629,13 +807,52 @@ export default function ComplexDetailPanel({ trade, endMonth, onClose }: Props) 
           </article>
         </section>
 
+        <section className="detail-location" aria-labelledby="detail-location-title">
+          <div className="detail-section-heading">
+            <div className="detail-section-heading-main">
+              <span className="detail-section-index">01</span>
+              <div>
+                <h3 id="detail-location-title">위치 지도</h3>
+                <p>{locationQuery}</p>
+              </div>
+            </div>
+            <span className="detail-section-label">LOCATION MAP</span>
+          </div>
+          <div className="detail-map-layout">
+            <NaverMap
+              query={locationQuery}
+              apartment={complex.apartment}
+              district={complex.district}
+              dong={complex.dong}
+              externalUrl={naverMapSearchUrl(locationQuery)}
+            />
+            <div className="detail-map-copy">
+              <span>NAVER DYNAMIC MAP</span>
+              <strong>{complex.apartment}</strong>
+              <p>
+                단지명과 법정동 주소로 찾은 위치입니다. 동일 명칭 단지가 있을 수 있으므로
+                상세 위치와 길찾기는 네이버지도에서 한 번 더 확인해 주세요.
+              </p>
+              <div>
+                <a
+                  href={naverMapSearchUrl(locationQuery)}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  네이버지도에서 열기
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section className="detail-stations" aria-labelledby="nearby-stations-title">
           <div className="detail-section-heading">
             <div className="detail-section-heading-main">
-              <span className="detail-section-index">03</span>
+              <span className="detail-section-index">02</span>
               <div>
-                <h3 id="nearby-stations-title">인근 지하철역</h3>
-                <p>단지 법정동 중심 · 가까운 역 3곳</p>
+                <h3 id="nearby-stations-title">교통정보</h3>
+                <p>인근 지하철역과 선택 직장 직통 노선</p>
               </div>
             </div>
             <span className="detail-section-label">SUBWAY ACCESS</span>
@@ -643,23 +860,126 @@ export default function ComplexDetailPanel({ trade, endMonth, onClose }: Props) 
           {nearbyStations.length ? (
             <div className="detail-station-list">
               {nearbyStations.map((station, index) => (
-                <article key={`${station.name}-${station.lines}`}>
+                <article key={station.key ?? `${station.name}-${station.lines}`}>
                   <span className="station-rank">0{index + 1}</span>
                   <div className="station-main">
                     <strong>{station.name}역</strong>
                     <span>{station.lines}</span>
                   </div>
                   <div className="station-distance">
-                    <strong>약 {formatStationDistance(station.distanceMeters)}</strong>
+                    <strong>직선 {formatStationDistance(station.distanceMeters)}</strong>
                     <span>도보 약 {station.walkMinutes}분</span>
                   </div>
+                  <a
+                    href={naverMapSearchUrl(`${locationQuery} ${station.name}역`)}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    네이버지도
+                  </a>
                 </article>
               ))}
             </div>
           ) : (
-            <p className="detail-station-empty">인근 지하철역 정보를 준비 중입니다.</p>
+            <p className="detail-station-empty">단지 좌표가 미확인이거나 반경 1.5km 내 확인된 역이 없습니다.</p>
           )}
-          <p className="detail-station-note">※ {nearbyStationsNote}</p>
+          {workplaceAccess.length ? (
+            <div className="detail-workplace-access">
+              {workplaceAccess.map(({ workplace, match }) => (
+                <article key={workplace.id} className={match ? "available" : "unavailable"}>
+                  <div>
+                    <span>{match ? "DIRECT LINE" : "ROUTE CHECK"}</span>
+                    <strong>{workplace.name}</strong>
+                  </div>
+                  <p>
+                    {match
+                      ? `${match.station.name}역에서 ${match.sharedLines.join("·")} 환승 없이 연결`
+                      : "현재 생활권 역 정보에서 직통 노선이 확인되지 않습니다."}
+                  </p>
+                  <a
+                    href={naverMapSearchUrl(
+                      `${locationQuery} ${workplace.name} 대중교통`,
+                    )}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    네이버지도 경로 확인
+                  </a>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <p className="detail-workplace-hint">
+              대시보드에서 직장 1·2를 선택하면 이곳에 직통 가능 노선을 함께 표시합니다.
+            </p>
+          )}
+          <p className="detail-station-note">※ {nearbyStationsNote}<br />출처: 서울특별시 <a href="https://data.seoul.go.kr/dataList/OA-15818/S/1/datasetView.do" target="_blank" rel="noreferrer">공동주택 정보</a> · <a href="https://data.seoul.go.kr/dataList/OA-21232/S/1/datasetView.do" target="_blank" rel="noreferrer">역사마스터</a> (공공누리 1유형)</p>
+        </section>
+
+        <section className="detail-schools" aria-labelledby="nearby-schools-title">
+          <div className="detail-section-heading">
+            <div className="detail-section-heading-main">
+              <span className="detail-section-index">03</span>
+              <div>
+                <h3 id="nearby-schools-title">인근 학교정보</h3>
+                <p>{places?.source.name ?? "서울시교육청 학교정보"} · {schoolScopeLabel}</p>
+              </div>
+            </div>
+            <span className="detail-section-label">SCHOOL INFO</span>
+          </div>
+          {placesLoading ? (
+            <div className="detail-school-loading" aria-live="polite">
+              학교정보를 불러오는 중입니다.
+            </div>
+          ) : places?.schools.length ? (
+            <div className="detail-school-list">
+              {places.schools.map((school) => (
+                <article key={school.code}>
+                  <div>
+                    <span>{school.level}</span>
+                    {school.foundation && <em>{school.foundation}</em>}
+                  </div>
+                  <strong>{school.name}</strong>
+                  <p>{school.address}</p>
+                  <footer>
+                    {school.phone && <span>{school.phone}</span>}
+                    {school.homepage && (
+                      <a href={school.homepage} target="_blank" rel="noreferrer">
+                        홈페이지
+                      </a>
+                    )}
+                    <a
+                      href={naverMapSearchUrl(`${school.name} ${school.address}`)}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      지도
+                    </a>
+                  </footer>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <div className="detail-school-empty">
+              <p>{placesError || places?.note || "표시할 학교정보가 없습니다."}</p>
+              <a
+                href={naverMapSearchUrl(`${complex.district} ${complex.dong} 학교`)}
+                target="_blank"
+                rel="noreferrer"
+              >
+                지도에서 주변 학교 확인
+              </a>
+            </div>
+          )}
+          {places?.note && places.schools.length > 0 && (
+            <p className="detail-school-note">
+              ※ {places.note}
+              <span aria-hidden="true"> · </span>
+              <a href={places.source.url} target="_blank" rel="noreferrer">
+                공공데이터 원문
+              </a>
+            </p>
+          )}
         </section>
 
         <section className="detail-chart-section">
@@ -667,16 +987,20 @@ export default function ComplexDetailPanel({ trade, endMonth, onClose }: Props) 
             <div>
               <span className="detail-control-label">전용면적</span>
               <div className="detail-toggle-list" aria-label="전용면적 선택">
-                {areas.map((area) => (
-                  <button
-                    key={area}
-                    className={effectiveArea === area ? "active" : ""}
-                    aria-pressed={effectiveArea === area}
-                    onClick={() => setSelectedArea(area)}
-                  >
-                    {area}㎡
-                  </button>
-                ))}
+                {areas.length ? (
+                  areas.map((area) => (
+                    <button
+                      key={area}
+                      className={effectiveArea === area ? "active" : ""}
+                      aria-pressed={effectiveArea === area}
+                      onClick={() => setSelectedArea(area)}
+                    >
+                      {area}㎡
+                    </button>
+                  ))
+                ) : (
+                  <span>면적 정보 없음</span>
+                )}
               </div>
             </div>
             <div>
@@ -705,7 +1029,7 @@ export default function ComplexDetailPanel({ trade, endMonth, onClose }: Props) 
                     ? "전세 실거래가 추이"
                     : "전세가율 추이"}
               </h3>
-              <p>월별 중위값과 거래량 · {effectiveArea}㎡ 기준</p>
+              <p>월별 중위값과 거래량 · {areaCaption}</p>
             </div>
             <div className="chart-metric-tabs" aria-label="차트 지표 선택">
               {([
@@ -754,7 +1078,7 @@ export default function ComplexDetailPanel({ trade, endMonth, onClose }: Props) 
                 transactions={areaTransactions}
                 endMonth={endMonth}
                 period={period}
-                buildYear={trade.buildYear}
+                buildYear={complex.buildYear}
                 metric={chartMetric}
               />
             </>
@@ -763,14 +1087,16 @@ export default function ComplexDetailPanel({ trade, endMonth, onClose }: Props) 
 
         <div className="detail-list-grid">
           <TransactionList
+            key={`sale:${complex.id}:${effectiveArea ?? "all"}:${period}`}
             title="최근 매매 실거래"
-            caption={`${effectiveArea}㎡ 기준 · 최신 계약순`}
+            caption={`${areaCaption} · 최신 계약순`}
             transactions={recentSales}
             type="sale"
           />
           <TransactionList
+            key={`rent:${complex.id}:${effectiveArea ?? "all"}:${period}`}
             title="최근 전세·월세 실거래"
-            caption={`${effectiveArea}㎡ 기준 · 보증금/월세`}
+            caption={`${areaCaption} · 보증금/월세`}
             transactions={recentRents}
             type="rent"
           />
@@ -785,4 +1111,3 @@ export default function ComplexDetailPanel({ trade, endMonth, onClose }: Props) 
     </div>
   );
 }
-

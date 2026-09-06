@@ -1,6 +1,27 @@
 {
   "version": "7",
   "dialect": "sqlite",
-  "entries": []
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1787190220315,
+      "tag": "0000_majestic_major_mapleleaf",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1787217193687,
+      "tag": "0001_salty_kitty_pryde",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1788592474538,
+      "tag": "0002_real_prism",
+      "breakpoints": true
+    }
+  ]
 }
-

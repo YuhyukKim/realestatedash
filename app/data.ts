@@ -9,6 +9,7 @@ export type Trade = {
   date: string;
   floor: number;
   buildYear: number | null;
+  jibun: string | null;
 };
 
 export const SEOUL_DISTRICTS = [
@@ -67,7 +68,7 @@ export const DISTRICT_CODES: Record<(typeof SEOUL_DISTRICTS)[number], string> = 
   강동구: "11740",
 };
 
-const sampleTradeRows: Omit<Trade, "buildYear" | "aptSeq">[] = [
+const sampleTradeRows: Omit<Trade, "buildYear" | "aptSeq" | "jibun">[] = [
   { id: "s01", district: "도봉구", dong: "창동", apartment: "주공18단지", price: 4.8, area: 49.9, date: "2026-07-18", floor: 11 },
   { id: "s02", district: "노원구", dong: "월계동", apartment: "미륭미성삼호3차", price: 4.95, area: 59.2, date: "2026-07-17", floor: 8 },
   { id: "s03", district: "금천구", dong: "시흥동", apartment: "벽산1단지", price: 4.6, area: 59.9, date: "2026-07-15", floor: 13 },
@@ -197,5 +198,5 @@ export const sampleTrades: Trade[] = sampleTradeRows.map((trade) => ({
   ...trade,
   aptSeq: null,
   buildYear: SAMPLE_BUILD_YEARS[trade.id] ?? null,
+  jibun: null,
 }));
-
