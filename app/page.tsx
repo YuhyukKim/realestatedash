@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   STATION_OPTIONS,
   WORKPLACES,
@@ -31,12 +31,13 @@ import { getNearbyStations, selectNearbyStation, TRANSIT_COVERAGE, type NearbySt
 
 import { applyAreaPriceFilter, latestSalesByArea, type AreaSaleSummary } from "./area-sales";
 
-type DataMode = "unavailable" | "live";
+type DataMode = "unavailable" | "live" | "partial" | "stored";
 type MasterLoadState = "loading" | "ready" | "error";
 
 type TradesApiResponse = {
-  mode: DataMode;
+  mode: "unavailable" | "live" | "partial";
   trades: Trade[];
+  completedDistricts?: string[];
   updatedAt: string;
   message: string;
 };
@@ -158,6 +159,7 @@ export function mergeMasterWithTrades(
   trades: Trade[],
   storedSales: Record<string, AreaSaleSummary[]> = {},
   refreshedMonth?: string,
+  refreshedDistricts?: string[],
 ): ComplexResult[] {
   const normalizedMaster = master.map(normalizeComplexRecord);
   const { tradesByMasterId } = groupTradesByMaster(normalizedMaster, trades);
@@ -167,13 +169,15 @@ export function mergeMasterWithTrades(
       b.date.localeCompare(a.date),
     );
     const latestObservedTrade = ordered[0] ?? null;
+    const districtRefreshed = !!refreshedMonth && (!refreshedDistricts || refreshedDistricts.includes(record.district));
+    const isRefreshedSale = (sale: { date: string }) => districtRefreshed && sale.date.replaceAll("-", "").slice(0, 6) === refreshedMonth;
     const areaSales = latestSalesByArea([
       ...(storedSales[record.id] ?? record.areaSales ?? []).filter((sale) =>
-        !refreshedMonth || sale.date.replaceAll("-", "").slice(0, 6) !== refreshedMonth),
+        !isRefreshedSale(sale)),
       ...periodTrades,
     ]);
     const storedLatest = [...areaSales].sort((a, b) => b.date.localeCompare(a.date) || b.price - a.price)[0];
-    const existingSale = storedLatest ?? record.latestSale;
+    const existingSale = storedLatest ?? (record.latestSale && !isRefreshedSale(record.latestSale) ? record.latestSale : null);
     const observedSale = latestObservedTrade
       ? { price: latestObservedTrade.price, date: latestObservedTrade.date }
       : null;
@@ -206,6 +210,8 @@ export default function Home() {
   const [trades, setTrades] = useState<Trade[]>([]);
   const [storedSales, setStoredSales] = useState<Record<string, AreaSaleSummary[]>>({});
   const [refreshedMonth, setRefreshedMonth] = useState<string | undefined>();
+  const [refreshedDistricts, setRefreshedDistricts] = useState<string[]>([]);
+  const loadController = useRef<AbortController | null>(null);
   const [selectedDistrict, setSelectedDistrict] = useState("서울 전체");
   const [selectedArea, setSelectedArea] = useState("all");
   const [selectedMoveInYear, setSelectedMoveInYear] = useState("all");
@@ -232,83 +238,109 @@ export default function Home() {
     useState<ComplexMasterRecord | null>(null);
 
   async function loadDashboard(targetMonth: string) {
+    loadController.current?.abort();
+    const controller = new AbortController();
+    loadController.current = controller;
+    const signal = AbortSignal.any([controller.signal, AbortSignal.timeout(60_000)]);
+    const current = () => loadController.current === controller && !controller.signal.aborted;
+    const requestMonth = targetMonth.replace("-", "");
     setLoading(true);
+    setTrades([]);
+    setStoredSales({});
+    setRefreshedMonth(undefined);
+    setRefreshedDistricts([]);
+    setMode("unavailable");
+    setStatusMessage("저장된 매매 자료를 먼저 불러오고 최신 실거래를 조회합니다.");
     if (!masterComplexes.length) setMasterLoadState("loading");
-    try {
-      const [masterResult, tradesResult] = await Promise.allSettled([
-        fetch("/api/complexes?limit=20000"),
-        fetch(`/api/trades?month=${targetMonth.replace("-", "")}`),
-      ]);
+    const messages: string[] = [];
+    let tradesMode: DataMode = "unavailable";
+    let savedCount = 0;
 
-      let tradesMode: DataMode = "unavailable";
-      const messages: string[] = [];
-
-      if (masterResult.status === "fulfilled" && masterResult.value.ok) {
-        const data = (await masterResult.value.json()) as ComplexesApiResponse;
-        if (data.complexes.length) {
-          setMasterComplexes(data.complexes.map(normalizeComplexRecord));
-          setMasterLoadState("ready");
-          if (data.updatedAt) setUpdatedAt(data.updatedAt);
-        } else {
-          setMasterComplexes([]);
-          setMasterLoadState("error");
-          messages.push("단지 마스터 응답이 비어 있어 결과를 표시하지 않습니다.");
-        }
-        if (data.message) messages.push(data.message);
-      } else {
-        setMasterLoadState("error");
-        messages.push("단지 마스터 연결을 확인할 수 없어 결과를 표시하지 않습니다.");
+    async function readSavedSales() {
+      const response = await fetch(`/api/area-summaries?month=${requestMonth}`, { signal, cache: "no-store" });
+      if (!response.ok) throw new Error("summary unavailable");
+      const saved = await response.json();
+      if (saved.mode !== "stored") throw new Error("summary unavailable");
+      if (!current()) return;
+      savedCount = Object.values(saved.summaries as Record<string, AreaSaleSummary[]>)
+        .reduce((count, rows) => count + rows.length, 0);
+      setStoredSales(saved.summaries);
+      if (savedCount && tradesMode === "unavailable") {
+        setMode("stored");
+        setStatusMessage("저장된 매매가를 표시합니다. 가격 옆 날짜는 계약일이며, 최신 자료를 조회 중입니다.");
       }
-
-      if (tradesResult.status === "fulfilled" && tradesResult.value.ok) {
-        const data = (await tradesResult.value.json()) as TradesApiResponse;
-        setTrades(data.mode === "live" ? data.trades : []);
-        tradesMode = data.mode === "live" ? "live" : "unavailable";
-        setUpdatedAt(data.updatedAt);
-        if (data.message) messages.push(data.message);
-      } else {
-        setTrades([]);
-        messages.push("선택 월 실거래는 현재 연결되지 않았습니다.");
-      }
-
-      setRefreshedMonth(tradesMode === "live" ? targetMonth.replace("-", "") : undefined);
-      try {
-        const response = await fetch(`/api/area-summaries?month=${targetMonth.replace("-", "")}`);
-        if (!response.ok) throw new Error("summary unavailable");
-        const saved = await response.json();
-        setStoredSales(saved.mode === "stored" ? saved.summaries : {});
-        if (saved.message) messages.push(saved.message);
-      } catch {
-        setStoredSales({});
-        messages.push("저장된 면적별 매매를 불러오지 못해 현재 조회한 거래만 반영합니다.");
-      }
-      setMode(tradesMode);
-      setStatusMessage(messages.join(" "));
-    } catch {
-      setMasterComplexes([]);
-      setMasterLoadState("error");
-      setTrades([]);
-      setMode("unavailable");
-      setStatusMessage(
-        "단지 마스터를 불러오지 못해 결과를 표시하지 않습니다.",
-      );
-    } finally {
-      setLoading(false);
     }
+
+    // Each source renders independently: slow MOLIT requests must not block the master or saved prices.
+    const masterTask = (async () => {
+      try {
+        const response = await fetch("/api/complexes?limit=20000", { signal });
+        if (!response.ok) throw new Error("master unavailable");
+        const data = (await response.json()) as ComplexesApiResponse;
+        if (!data.complexes.length) throw new Error("empty master");
+        if (!current()) return;
+        setMasterComplexes(data.complexes.map(normalizeComplexRecord));
+        setMasterLoadState("ready");
+        if (data.updatedAt) setUpdatedAt(data.updatedAt);
+        if (data.message) messages.push(data.message);
+      } catch {
+        if (!current()) return;
+        setMasterLoadState(masterComplexes.length ? "ready" : "error");
+        messages.push(masterComplexes.length
+          ? "단지 목록 갱신 실패: 기존 목록을 유지합니다."
+          : "단지 마스터 연결을 확인할 수 없습니다.");
+      }
+    })();
+    const savedTask = readSavedSales().catch(() => {
+      messages.push("저장된 매매 자료를 불러오지 못했습니다.");
+    });
+    const tradesTask = (async () => {
+      try {
+        const response = await fetch(`/api/trades?month=${requestMonth}`, { signal, cache: "no-store" });
+        if (!response.ok) throw new Error("trades unavailable");
+        const data = (await response.json()) as TradesApiResponse;
+        if (!current()) return;
+        const hasRealResponse = data.mode === "live" || data.mode === "partial";
+        setTrades(hasRealResponse ? data.trades : []);
+        tradesMode = hasRealResponse ? data.mode : "unavailable";
+        setRefreshedMonth(hasRealResponse ? requestMonth : undefined);
+        setRefreshedDistricts(data.completedDistricts ?? (data.mode === "live" ? [...SEOUL_DISTRICTS] : []));
+        if (data.updatedAt) setUpdatedAt(data.updatedAt);
+        if (data.message) messages.push(data.message);
+        // Wait for the initial snapshot before re-reading so an older response cannot overwrite the refreshed DB.
+        await savedTask;
+        if (hasRealResponse && current()) {
+          try { await readSavedSales(); }
+          catch { messages.push("저장 자료 갱신 실패: 이번에 조회된 거래와 기존 저장 자료를 유지합니다."); }
+        }
+      } catch {
+        if (current()) messages.push("선택 월 실거래 조회에 실패했습니다. 미조회 지역은 거래가 없는 지역을 뜻하지 않습니다.");
+      }
+    })();
+
+    await Promise.allSettled([masterTask, savedTask, tradesTask]);
+    if (!current()) return;
+    setMode(tradesMode === "unavailable" && savedCount ? "stored" : tradesMode);
+    messages.push("저장된 가격의 날짜는 계약일입니다. 조회 실패 지역의 저장 가격은 최신 여부를 확인하지 못했습니다.");
+    setStatusMessage(messages.join(" "));
+    setLoading(false);
   }
 
   useEffect(() => {
     const initialLoad = window.setTimeout(() => {
       void loadDashboard(month);
     }, 0);
-    return () => window.clearTimeout(initialLoad);
+    return () => {
+      window.clearTimeout(initialLoad);
+      loadController.current?.abort();
+    };
     // The first request hydrates the dashboard with the configured data source.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const mergedComplexes = useMemo(
-    () => mergeMasterWithTrades(masterComplexes, trades, storedSales, refreshedMonth),
-    [masterComplexes, trades, storedSales, refreshedMonth],
+    () => mergeMasterWithTrades(masterComplexes, trades, storedSales, refreshedMonth, refreshedDistricts),
+    [masterComplexes, trades, storedSales, refreshedMonth, refreshedDistricts],
   );
 
   const complexes = useMemo(() => {
@@ -508,7 +540,7 @@ export default function Home() {
     const rows = complexes.map(({ record, station, periodTrades }) => ({
       가격구간: record.latestSale
         ? getPriceBand(record.latestSale.price)?.label ?? ""
-        : "최근 매매 없음",
+        : "매매가 미확인",
       자치구: record.district,
       법정동: record.dong,
       아파트명: record.name,
@@ -578,7 +610,7 @@ export default function Home() {
         </a>
         <div className={`finder-data-status ${mode}`}>
           <span aria-hidden="true" />
-          {mode === "live" ? "LIVE DATA" : "실거래 미연결"}
+          {loading ? "최신 자료 조회 중" : mode === "live" ? "LIVE DATA" : mode === "partial" ? "일부 지역 조회" : mode === "stored" ? "저장된 매매" : "실거래 미연결"}
         </div>
       </header>
 
@@ -945,7 +977,7 @@ export default function Home() {
                               <small>
                                 {latestSale
                                   ? `${formatDate(latestSale.date)} 최근 매매`
-                                  : "최근 매매 없음"}
+                                  : "매매가 미확인"}
                               </small>
                             </div>
                             <h4>{record.name}</h4>
