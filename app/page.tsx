@@ -15,7 +15,7 @@ import {
   supportsWorkplaceCommuteSort,
   type WorkplaceCommuteEstimate,
 } from "./commute";
-import { seoulMonth } from "./site-config";
+import { isSelectableMonth, seoulMonth } from "./site-config";
 
 const ComplexDetailPanel = lazy(() => import("./complex-detail"));
 import {
@@ -241,7 +241,7 @@ export default function Home() {
     useState<ComplexMasterRecord | null>(null);
 
   async function loadDashboard(targetMonth: string, refreshLive = false) {
-    if (!/^20\d{2}-(0[1-9]|1[0-2])$/.test(targetMonth)) return;
+    if (!isSelectableMonth(targetMonth)) return;
     if (refreshLive && selectedDistrict === "서울 전체") return;
     loadController.current?.abort();
     const controller = new AbortController();
@@ -873,6 +873,7 @@ export default function Home() {
               min="2006-01"
               max={seoulMonth()}
               onChange={(event) => {
+                if (!isSelectableMonth(event.target.value)) return;
                 setMonth(event.target.value);
                 void loadDashboard(event.target.value);
               }}
