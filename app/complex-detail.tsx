@@ -755,7 +755,7 @@ export default function ComplexDetailPanel({
       >
         <header className="detail-header">
           <div>
-            <p className="section-kicker">JAYDEN RESEARCH · COMPLEX NOTE</p>
+            <p className="section-kicker">내집어디 · 단지 정보</p>
             <h2 id="complex-detail-title">{complex.apartment}</h2>
             <p>
               {complex.district} {complex.dong}
