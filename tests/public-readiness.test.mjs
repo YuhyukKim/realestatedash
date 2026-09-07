@@ -91,7 +91,9 @@ test("public browsing is stored-first, scoped refresh is explicit, and unknown i
   assert.match(page, /useDeferredValue\(search\)/);
   assert.match(page, /선택월 거래 미조회/);
   assert.match(page, /가격 미확인/);
-  assert.doesNotMatch(page, /JAYDEN RESEARCH/);
+  assert.doesNotMatch(page, /JAYDEN\s*RESEARCH|JADEN\s*RESEARCH|제이든\s*리서치|>JR</i);
+  const panel = await readFile(new URL("../app/complex-detail.tsx", import.meta.url), "utf8");
+  assert.doesNotMatch(panel, /JAYDEN\s*RESEARCH|JADEN\s*RESEARCH|제이든\s*리서치|>JR</i);
   assert.doesNotMatch(seed, /sampleTrades|sampleFallback/);
   assert.doesNotMatch(layout, /x-forwarded-host|requestHeaders\.get/);
 });
