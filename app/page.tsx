@@ -1180,7 +1180,7 @@ export default function Home() {
       </div>
 
       <footer className="finder-footer">
-        <p><strong>내집어디</strong> · 운영: 제이든 리서치</p>
+        <p><strong>내집어디</strong></p>
         <p>K-apt와 한국부동산원 공시대상 아파트를 중복 정리한 공식 마스터 기준입니다. 전수 건축물대장은 아니며 실거래 신고는 취소·정정될 수 있습니다.</p>
       </footer>
 
