@@ -14,3 +14,7 @@ export function siteOrigin(value: string | undefined) {
     return url.origin;
   } catch { return null; }
 }
+
+export function isSelectableMonth(value: string, now = new Date()) {
+  return /^20\d{2}-(0[1-9]|1[0-2])$/.test(value) && value >= "2006-01" && value <= seoulMonth(now);
+}
