@@ -31,7 +31,8 @@ test("renders the Seoul apartment dashboard", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /JAYDEN RESEARCH/);
+  assert.match(html, /운영: 제이든 리서치/);
+  assert.match(html, /<title>내집어디/);
   assert.match(html, /내집어디/);
   assert.match(html, /공식 서울 아파트 단지 마스터/);
   assert.match(html, /공식 단지 마스터를 불러오고 있습니다/);
