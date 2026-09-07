@@ -1,5 +1,5 @@
 import {
-  ensureComplexSchema,
+  readComplexSeedProgress,
   listComplexesFromD1,
   listComplexesFromSeed,
   normalizeComplexName,
@@ -61,36 +61,16 @@ function getFilters(url: URL): ComplexListFilters {
 export async function GET(request: Request) {
   const url = new URL(request.url);
   const filters = getFilters(url);
-  const seedOnly = url.searchParams.get("seedOnly") === "1";
-  const seedBatch = integerParam(url.searchParams.get("seedBatch"), 1, 100) ?? 100;
+  if (url.searchParams.get("seedOnly") === "1") {
+    return Response.json({ message: "DB 적재는 인증된 관리자 POST 요청으로만 가능합니다." },
+      { status: 405, headers: { Allow: "POST", "Cache-Control": "no-store" } });
+  }
   const seed = getComplexSeed();
   const d1 = getD1OrNull();
 
   if (d1) {
     try {
-      await ensureComplexSchema(d1);
-      const seedProgress = await seedComplexesIfEmpty(
-        d1,
-        seed,
-        COMPLEX_SEED_VERSION,
-        seedBatch,
-      );
-      if (seedOnly) {
-        const response: ComplexesApiResponse = {
-          mode: "live",
-          complexes: [],
-          updatedAt: new Date().toISOString(),
-          message: seedProgress.complete && seedProgress.exact
-            ? "서울 아파트 단지 마스터 DB 적재가 완료되었습니다."
-            : seedProgress.complete
-              ? `DB에 이전 마스터 ${seedProgress.stale.toLocaleString()}개가 남아 있어 내장 마스터를 사용합니다.`
-              : `단지 마스터를 분할 적재 중입니다. ${seedProgress.remaining.toLocaleString()}개가 남았습니다.`,
-          seedProgress,
-        };
-        return Response.json(response, {
-          headers: { "Cache-Control": "no-store" },
-        });
-      }
+      const seedProgress = await readComplexSeedProgress(d1, seed, COMPLEX_SEED_VERSION);
       const useD1Master = seedProgress.complete && seedProgress.exact;
       const result = useD1Master
         ? await listComplexesFromD1(d1, filters, COMPLEX_SEED_VERSION)
@@ -103,14 +83,12 @@ export async function GET(request: Request) {
           ? "서울 아파트 단지 마스터 DB를 기준으로 조회했습니다. 최근 거래가 없는 단지도 포함됩니다."
           : seedProgress.complete
             ? `DB에 이전 마스터 ${seedProgress.stale.toLocaleString()}개가 남아 있어, 검증된 내장 마스터 ${seedProgress.total.toLocaleString()}개만 표시합니다.`
-            : `공식 단지 마스터 ${seedProgress.seeded.toLocaleString()}/${seedProgress.total.toLocaleString()}개를 DB에 안전하게 나눠 적재 중입니다. 전체 목록은 내장 마스터로 빠짐없이 표시합니다.`,
+            : `공식 단지 마스터 ${seedProgress.seeded.toLocaleString()}/${seedProgress.total.toLocaleString()}개 DB 적재. 목록은 검증된 내장 마스터를 사용하며 실거래 수집 범위와 다릅니다.`,
         seedProgress,
       };
       return Response.json(response, {
         headers: {
-          "Cache-Control": useD1Master
-            ? "public, max-age=60, s-maxage=300"
-            : "no-store",
+          "Cache-Control": "public, max-age=60, s-maxage=300",
         },
       });
     } catch (error) {
@@ -129,4 +107,29 @@ export async function GET(request: Request) {
   return Response.json(response, {
     headers: { "Cache-Control": "public, max-age=30, s-maxage=60" },
   });
+}
+
+/** Operators only. Apply schema migrations through deployment before seeding. */
+export async function POST(request: Request) {
+  const expected = process.env.DATA_REFRESH_TOKEN;
+  if (!expected || expected.length < 32) return Response.json({ message: "관리자 적재가 설정되지 않았습니다." }, { status: 503 });
+  const provided = request.headers.get("authorization") ?? "";
+  const encode = (value: string) => new TextEncoder().encode(value);
+  const [left, right] = await Promise.all([
+    crypto.subtle.digest("SHA-256", encode(provided)),
+    crypto.subtle.digest("SHA-256", encode("Bearer " + expected)),
+  ]);
+  const l = new Uint8Array(left), r = new Uint8Array(right);
+  let difference = 0;
+  for (let i = 0; i < l.length; i++) difference |= l[i] ^ r[i];
+  if (difference !== 0) return Response.json({ message: "인증이 필요합니다." }, { status: 401, headers: { "Cache-Control": "no-store" } });
+  const d1 = getD1OrNull();
+  if (!d1) return Response.json({ message: "DB를 사용할 수 없습니다." }, { status: 503 });
+  const seedBatch = integerParam(new URL(request.url).searchParams.get("seedBatch"), 1, 100) ?? 100;
+  try {
+    const seedProgress = await seedComplexesIfEmpty(d1, getComplexSeed(), COMPLEX_SEED_VERSION, seedBatch);
+    return Response.json({ seedProgress }, { headers: { "Cache-Control": "no-store" } });
+  } catch {
+    return Response.json({ message: "DB 적재 실패. 마이그레이션과 연결을 확인해 주세요." }, { status: 503, headers: { "Cache-Control": "no-store" } });
+  }
 }

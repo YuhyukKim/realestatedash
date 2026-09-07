@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { lazy, Suspense, useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
 import {
   STATION_OPTIONS,
   WORKPLACES,
@@ -15,7 +15,9 @@ import {
   supportsWorkplaceCommuteSort,
   type WorkplaceCommuteEstimate,
 } from "./commute";
-import ComplexDetailPanel from "./complex-detail";
+import { isSelectableMonth, seoulMonth } from "./site-config";
+
+const ComplexDetailPanel = lazy(() => import("./complex-detail"));
 import {
   NO_SALE_BUCKET,
   compareComplexes,
@@ -225,19 +227,22 @@ export default function Home() {
   const [sortMode, setSortMode] =
     useState<ApartmentSortMode>("price-desc");
   const [search, setSearch] = useState("");
-  const [month, setMonth] = useState("2026-07");
+  const [month, setMonth] = useState(() => seoulMonth());
+  const deferredSearch = useDeferredValue(search);
   const [mode, setMode] = useState<DataMode>("unavailable");
   const [masterLoadState, setMasterLoadState] =
     useState<MasterLoadState>("loading");
   const [statusMessage, setStatusMessage] = useState(
     "공식 서울 아파트 단지 마스터와 실거래 자료를 불러오고 있습니다.",
   );
-  const [updatedAt, setUpdatedAt] = useState("2026-07-22T09:00:00+09:00");
+  const [updatedAt, setUpdatedAt] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedComplex, setSelectedComplex] =
     useState<ComplexMasterRecord | null>(null);
 
-  async function loadDashboard(targetMonth: string) {
+  async function loadDashboard(targetMonth: string, refreshLive = false) {
+    if (!isSelectableMonth(targetMonth)) return;
+    if (refreshLive && selectedDistrict === "서울 전체") return;
     loadController.current?.abort();
     const controller = new AbortController();
     loadController.current = controller;
@@ -250,7 +255,7 @@ export default function Home() {
     setRefreshedMonth(undefined);
     setRefreshedDistricts([]);
     setMode("unavailable");
-    setStatusMessage("저장된 매매 자료를 먼저 불러오고 최신 실거래를 조회합니다.");
+    setStatusMessage(refreshLive ? `${selectedDistrict}의 최신 실거래를 확인합니다.` : "단지 목록과 저장된 매매 자료를 불러옵니다.");
     if (!masterComplexes.length) setMasterLoadState("loading");
     const messages: string[] = [];
     let tradesMode: DataMode = "unavailable";
@@ -267,7 +272,7 @@ export default function Home() {
       setStoredSales(saved.summaries);
       if (savedCount && tradesMode === "unavailable") {
         setMode("stored");
-        setStatusMessage("저장된 매매가를 표시합니다. 가격 옆 날짜는 계약일이며, 최신 자료를 조회 중입니다.");
+        setStatusMessage("저장된 매매가를 표시합니다. 가격 옆 날짜는 계약일입니다.");
       }
     }
 
@@ -295,16 +300,17 @@ export default function Home() {
       messages.push("저장된 매매 자료를 불러오지 못했습니다.");
     });
     const tradesTask = (async () => {
+      if (!refreshLive) return;
       try {
-        const response = await fetch(`/api/trades?month=${requestMonth}`, { signal, cache: "no-store" });
+        const response = await fetch(`/api/trades?month=${requestMonth}&district=${encodeURIComponent(selectedDistrict)}`, { signal, cache: "no-store" });
         if (!response.ok) throw new Error("trades unavailable");
         const data = (await response.json()) as TradesApiResponse;
         if (!current()) return;
         const hasRealResponse = data.mode === "live" || data.mode === "partial";
         setTrades(hasRealResponse ? data.trades : []);
-        tradesMode = hasRealResponse ? data.mode : "unavailable";
+        tradesMode = hasRealResponse ? "partial" : "unavailable";
         setRefreshedMonth(hasRealResponse ? requestMonth : undefined);
-        setRefreshedDistricts(data.completedDistricts ?? (data.mode === "live" ? [...SEOUL_DISTRICTS] : []));
+        setRefreshedDistricts(data.completedDistricts ?? (data.mode === "live" ? [selectedDistrict] : []));
         if (data.updatedAt) setUpdatedAt(data.updatedAt);
         if (data.message) messages.push(data.message);
         // Wait for the initial snapshot before re-reading so an older response cannot overwrite the refreshed DB.
@@ -321,7 +327,7 @@ export default function Home() {
     await Promise.allSettled([masterTask, savedTask, tradesTask]);
     if (!current()) return;
     setMode(tradesMode === "unavailable" && savedCount ? "stored" : tradesMode);
-    messages.push("저장된 가격의 날짜는 계약일입니다. 조회 실패 지역의 저장 가격은 최신 여부를 확인하지 못했습니다.");
+    messages.push("가격의 날짜는 계약일입니다. 실시간 시세나 매물 호가가 아니며, 선택월 실거래 미조회는 거래 0건을 의미하지 않습니다.");
     setStatusMessage(messages.join(" "));
     setLoading(false);
   }
@@ -352,7 +358,7 @@ export default function Home() {
     const stationRange = STATION_RANGES.find(
       (range) => range.id === selectedStationRange,
     )!;
-    const keyword = search.trim().toLowerCase();
+    const keyword = deferredSearch.trim().toLowerCase();
     const selectedWorkplaces = [selectedWorkplace1, selectedWorkplace2].filter(
       (value): value is WorkplaceId => Boolean(value),
     );
@@ -440,7 +446,7 @@ export default function Home() {
     selectedWorkplace2,
     selectedSubway1,
     selectedSubway2,
-    search,
+    deferredSearch,
     sortMode,
   ]);
 
@@ -553,7 +559,8 @@ export default function Home() {
       세대수: record.households ?? "",
       동수: record.buildingCount ?? "",
       인근역: station?.name ?? "",
-      "선택월 거래(건)": periodTrades.length,
+      "선택월 거래(건)": refreshedDistricts.includes(record.district) ? periodTrades.length : "",
+      "선택월 조회상태": refreshedDistricts.includes(record.district) ? "조회 완료" : "미조회",
       출처: record.source,
     }));
     const sheet = XLSX.utils.json_to_sheet(rows);
@@ -601,26 +608,26 @@ export default function Home() {
   return (
     <main className="dashboard-shell finder-layout">
       <header className="finder-topbar">
-        <a className="finder-brand" href="#top" aria-label="JAYDEN RESEARCH 내집어디 홈">
-          <span className="finder-brand-mark" aria-hidden="true">JR</span>
+        <a className="finder-brand" href="#top" aria-label="내집어디 홈">
+          <span className="finder-brand-mark" aria-hidden="true">집</span>
           <span>
-            <strong>JAYDEN RESEARCH</strong>
-            <small>내집어디</small>
+            <strong>내집어디</strong>
+            <small>서울 아파트 찾기</small>
           </span>
         </a>
         <div className={`finder-data-status ${mode}`}>
           <span aria-hidden="true" />
-          {loading ? "최신 자료 조회 중" : mode === "live" ? "LIVE DATA" : mode === "partial" ? "일부 지역 조회" : mode === "stored" ? "저장된 매매" : "실거래 미연결"}
+          {loading ? "자료 불러오는 중" : mode === "live" ? "실거래 확인" : mode === "partial" ? "일부 지역 확인" : mode === "stored" ? "저장된 매매" : "매매 자료 미확인"}
         </div>
       </header>
 
       <section className="finder-intro" id="top">
         <div>
-          <p className="finder-kicker">JAYDEN RESEARCH · SEOUL HOUSING</p>
-          <h1>조건으로 좁히고,<br /><em>단지로 비교하세요.</em></h1>
+          <p className="finder-kicker">서울 아파트 탐색</p>
+          <h1>내 조건에 맞는 <em>집 찾기</em></h1>
           <p>
             공식 서울 아파트 단지 마스터에서 가격·면적·입주·준공년도·직장 직통권으로
-            후보를 찾고, 실거래가 없는 단지까지 빠짐없이 비교합니다.
+            후보를 찾습니다. 등록 단지와 실거래 수집 범위는 서로 다릅니다.
           </p>
         </div>
         <div className="finder-intro-stats" aria-label="현재 조회 결과 요약">
@@ -863,7 +870,13 @@ export default function Home() {
               id="deal-month"
               type="month"
               value={month}
-              onChange={(event) => setMonth(event.target.value)}
+              min="2006-01"
+              max={seoulMonth()}
+              onChange={(event) => {
+                if (!isSelectableMonth(event.target.value)) return;
+                setMonth(event.target.value);
+                void loadDashboard(event.target.value);
+              }}
             />
           </div>
           <button
@@ -872,9 +885,15 @@ export default function Home() {
             onClick={() => void loadDashboard(month)}
             disabled={loading}
           >
-            {loading ? "불러오는 중…" : "단지·실거래 갱신"}
+            {loading ? "불러오는 중…" : "저장 자료 다시 불러오기"}
             <span aria-hidden="true">→</span>
           </button>
+          <button className="finder-live-button" type="button"
+            onClick={() => void loadDashboard(month, true)}
+            disabled={loading || selectedDistrict === "서울 전체"}>
+            선택 지역 실거래 확인
+          </button>
+          <p className="finder-filter-note">지역을 선택하면 해당 구만 추가 조회합니다. 처음 방문할 때는 공공데이터에 실거래를 요청하지 않습니다.</p>
         </aside>
 
         <section className="finder-results" id="finder-results">
@@ -924,8 +943,7 @@ export default function Home() {
               ))}
             </div>
             <small>
-              최근 매매 {summary.count.toLocaleString()}개 · 선택월 거래{" "}
-              {summary.periodTradeCount.toLocaleString()}건
+              가격 확인 {summary.count.toLocaleString()}개 · {refreshedDistricts.length ? `확인된 선택월 거래 ${summary.periodTradeCount.toLocaleString()}건` : "선택월 거래 미조회"}
             </small>
           </div>
 
@@ -988,7 +1006,7 @@ export default function Home() {
                               ) : (
                                 <span>세대수 확인 중</span>
                               )}
-                              <span>선택월 거래 {periodTrades.length}건</span>
+                              <span>{refreshedDistricts.includes(record.district) ? `선택월 거래 ${periodTrades.length}건` : "선택월 거래 미조회"}</span>
                             </div>
                             <div className="finder-station-line">
                               <span className="finder-station-icon" aria-hidden="true">M</span>
@@ -1041,7 +1059,7 @@ export default function Home() {
                           <div className={`finder-card-price${latestSale ? "" : " no-trade"}`}>
                             <span>최근 매매</span>
                             <strong>
-                              {latestSale ? formatPrice(latestSale.price) : "거래 없음"}
+                              {latestSale ? formatPrice(latestSale.price) : "가격 미확인"}
                             </strong>
                             {latestSaleArea ? (
                               <small>
@@ -1150,23 +1168,24 @@ export default function Home() {
             </div>
             <p>{statusMessage}</p>
             <small>
-              {new Date(updatedAt).toLocaleString("ko-KR", {
+              {updatedAt ? new Date(updatedAt).toLocaleString("ko-KR", {
                 month: "numeric",
                 day: "numeric",
                 hour: "2-digit",
                 minute: "2-digit",
-              })} 갱신
+              }) : "확인 전"} · 목록 응답 시각 (실거래 수집 완료 시각 아님)
             </small>
           </section>
         </aside>
       </div>
 
       <footer className="finder-footer">
-        <p><strong>JAYDEN RESEARCH</strong> · 내집어디</p>
+        <p><strong>내집어디</strong> · 운영: 제이든 리서치</p>
         <p>K-apt와 한국부동산원 공시대상 아파트를 중복 정리한 공식 마스터 기준입니다. 전수 건축물대장은 아니며 실거래 신고는 취소·정정될 수 있습니다.</p>
       </footer>
 
       {selectedComplex && (
+        <Suspense fallback={<div className="finder-detail-loading" role="status">단지 상세 정보를 준비하고 있습니다.<button type="button" onClick={() => setSelectedComplex(null)}>닫기</button></div>}>
         <ComplexDetailPanel
           key={selectedComplex.id}
           complex={toComplexDetailSeed(selectedComplex)}
@@ -1176,6 +1195,7 @@ export default function Home() {
           )}
           onClose={() => setSelectedComplex(null)}
         />
+        </Suspense>
       )}
     </main>
   );

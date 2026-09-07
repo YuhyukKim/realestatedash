@@ -223,6 +223,18 @@ function getSeedAreas(record: ComplexSeedRecord) {
   ).sort((left, right) => left - right);
 }
 
+/** Read-only completeness check; public listing must never trigger a backfill. */
+export async function readComplexSeedProgress(d1: D1Database, records: readonly ComplexSeedRecord[], seedVersion: string) {
+  const validIds = new Set(records.filter(record => record.id?.trim() && getSeedName(record) && record.district?.trim()).map(record => record.id));
+  const rows = await d1.prepare("SELECT complex_id FROM apartment_complex_seed_memberships WHERE seed_version = ?")
+    .bind(seedVersion).all<{ complex_id: string }>();
+  const existingIds = new Set(rows.results.map(row => row.complex_id));
+  const seeded = [...validIds].filter(id => existingIds.has(id)).length;
+  const stale = [...existingIds].filter(id => !validIds.has(id)).length;
+  return { complete: seeded === validIds.size, exact: seeded === validIds.size && stale === 0,
+    inserted: 0, seeded, stored: existingIds.size, stale, total: validIds.size, remaining: validIds.size - seeded };
+}
+
 export async function seedComplexesIfEmpty(
   d1: D1Database,
   records: readonly ComplexSeedRecord[],
