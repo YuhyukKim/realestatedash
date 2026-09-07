@@ -95,3 +95,10 @@ test("public browsing is stored-first, scoped refresh is explicit, and unknown i
   assert.doesNotMatch(seed, /sampleTrades|sampleFallback/);
   assert.doesNotMatch(layout, /x-forwarded-host|requestHeaders\.get/);
 });
+
+test("clearing the month or choosing an unavailable future month cannot relabel old results", () => {
+  const now = new Date("2026-09-07T03:00:00Z");
+  for (const value of ["", "2026-13", "2026-10", "2005-12", "2026-9"]) assert.equal(config.isSelectableMonth(value, now), false);
+  assert.equal(config.isSelectableMonth("2026-09", now), true);
+  assert.equal(config.isSelectableMonth("2006-01", now), true);
+});
