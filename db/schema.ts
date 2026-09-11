@@ -177,3 +177,42 @@ export const complexAreaMonthlySales = sqliteTable("complex_area_monthly_sales",
   index("idx_area_sales_month").on(table.month),
 ]);
 export type NewApartmentComplexRow = typeof apartmentComplexes.$inferInsert;
+
+
+/** Staged imports never replace the public head until a complete feed is verified. */
+export const tradeImportRuns = sqliteTable("trade_import_runs", {
+  id: text("id").primaryKey(),
+  district: text("district").notNull(), month: text("month").notNull(),
+  kind: text("kind", { enum: ["sale", "rent"] }).notNull(),
+  expectedCount: integer("expected_count").notNull(),
+  fetchedAt: text("fetched_at").notNull(),
+  createdAt: text("created_at").notNull(),
+  committed: integer("committed").notNull().default(0),
+  mappingVersion: text("mapping_version").notNull(),
+}, (t) => [index("idx_trade_import_scope").on(t.district, t.month, t.kind)]);
+
+export const tradeImportRows = sqliteTable("trade_import_rows", {
+  runId: text("run_id").notNull().references(() => tradeImportRuns.id, { onDelete: "cascade" }),
+  ordinal: integer("ordinal").notNull(),
+  // Not a master FK: preserve unmatched observations and imports while master loading is incomplete.
+  complexId: text("complex_id"),
+  type: text("type").notNull(), date: text("date").notNull(),
+  priceManwon: integer("price_manwon").notNull(),
+  monthlyRent: integer("monthly_rent").notNull(),
+  area: real("area").notNull(), floor: integer("floor"),
+  payload: text("payload").notNull(), batchHash: text("batch_hash").notNull(),
+}, (t) => [primaryKey({ columns: [t.runId, t.ordinal] }),
+  index("idx_trade_import_complex").on(t.runId, t.complexId, t.date)]);
+
+export const tradeSnapshotHeads = sqliteTable("trade_snapshot_heads", {
+  district: text("district").notNull(), month: text("month").notNull(), kind: text("kind").notNull(),
+  runId: text("run_id").notNull().references(() => tradeImportRuns.id),
+  fetchedAt: text("fetched_at").notNull(), recordCount: integer("record_count").notNull(),
+}, (t) => [primaryKey({ columns: [t.district, t.month, t.kind] }),
+  index("idx_trade_heads_month_kind").on(t.month, t.kind)]);
+
+export const tradeImportPrices = sqliteTable("trade_import_prices", {
+  runId: text("run_id").notNull().references(() => tradeImportRuns.id, { onDelete: "cascade" }),
+  complexId: text("complex_id").notNull(), area: real("area").notNull(),
+  priceManwon: integer("price_manwon").notNull(), date: text("date").notNull(),
+}, (t) => [primaryKey({ columns: [t.runId, t.complexId, t.area] })]);

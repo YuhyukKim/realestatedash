@@ -18,4 +18,8 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci
+      - name: Generate schema migration for this implementation
+        run: |
+          npm run db:generate
+          node --input-type=module -e 'import fs from "node:fs"; for (const p of fs.readdirSync("drizzle").filter(x=>x.endsWith(".sql")&&!/^000[0-2]_/.test(x)).map(x=>"drizzle/"+x).concat(["drizzle/meta/_journal.json","drizzle/meta/0003_snapshot.json"])) { if(fs.existsSync(p)) console.log("GENERATED_MIGRATION="+JSON.stringify({path:p,content:fs.readFileSync(p,"utf8")})); }'
       - run: npm test
