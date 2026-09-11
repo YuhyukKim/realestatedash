@@ -587,10 +587,12 @@ test("client accepts only real trades and sends the canonical ID to history requ
   const panel = await readFile(new URL("../app/complex-detail.tsx", import.meta.url), "utf8");
   assert.ok(!page.includes("sampleTrades"));
   assert.ok(!page.includes('masterMode === "live" ||'));
-  assert.ok(page.includes('data.mode === "live" || data.mode === "partial"'));
+  assert.ok(page.includes('data.mode === "stored" || data.mode === "partial"'));
   assert.ok(page.includes("setTrades(hasRealResponse ? data.trades : [])"));
   assert.ok(panel.includes("complexId: complex.id"));
-  assert.ok(panel.includes('if (payload.mode === "live") cacheRef.current'));
+  assert.ok(panel.includes('payload.mode === "stored" || payload.mode === "partial"'));
+  assert.ok(!panel.includes("cacheRef.current"));
+  assert.ok(panel.includes("미수집·미확인 기간"));
 });
 
 test("does not fabricate history for a master complex without an observed trade", async () => {

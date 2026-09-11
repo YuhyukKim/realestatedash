@@ -13,7 +13,7 @@ export type ComplexTransaction = {
 };
 
 export type ComplexDetailResponse = {
-  mode: "partial" | "live" | "unavailable";
+  mode: "partial" | "stored" | "unavailable";
   complex: {
     district: string;
     dong: string;
@@ -24,4 +24,6 @@ export type ComplexDetailResponse = {
   nearbyStations: NearbyStation[];
   nearbyStationsNote: string;
   message: string;
+  missing: { month: string; kind: "sale" | "rent" }[];
+  fetchedAt: string | null;
 };

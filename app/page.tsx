@@ -37,10 +37,10 @@ type DataMode = "unavailable" | "live" | "partial" | "stored";
 type MasterLoadState = "loading" | "ready" | "error";
 
 type TradesApiResponse = {
-  mode: "unavailable" | "live" | "partial";
+  mode: "unavailable" | "stored" | "partial";
   trades: Trade[];
   completedDistricts?: string[];
-  updatedAt: string;
+  fetchedAt: string | null;
   message: string;
 };
 
@@ -240,9 +240,8 @@ export default function Home() {
   const [selectedComplex, setSelectedComplex] =
     useState<ComplexMasterRecord | null>(null);
 
-  async function loadDashboard(targetMonth: string, refreshLive = false) {
+  async function loadDashboard(targetMonth: string) {
     if (!isSelectableMonth(targetMonth)) return;
-    if (refreshLive && selectedDistrict === "서울 전체") return;
     loadController.current?.abort();
     const controller = new AbortController();
     loadController.current = controller;
@@ -255,7 +254,8 @@ export default function Home() {
     setRefreshedMonth(undefined);
     setRefreshedDistricts([]);
     setMode("unavailable");
-    setStatusMessage(refreshLive ? `${selectedDistrict}의 최신 실거래를 확인합니다.` : "단지 목록과 저장된 매매 자료를 불러옵니다.");
+    setUpdatedAt(null);
+    setStatusMessage("단지 목록과 저장된 매매 자료를 불러옵니다.");
     if (!masterComplexes.length) setMasterLoadState("loading");
     const messages: string[] = [];
     let tradesMode: DataMode = "unavailable";
@@ -276,7 +276,7 @@ export default function Home() {
       }
     }
 
-    // Each source renders independently: slow MOLIT requests must not block the master or saved prices.
+    // Independent database reads; collection runs outside visitor requests.
     const masterTask = (async () => {
       try {
         const response = await fetch("/api/complexes?limit=20000", { signal });
@@ -286,7 +286,6 @@ export default function Home() {
         if (!current()) return;
         setMasterComplexes(data.complexes.map(normalizeComplexRecord));
         setMasterLoadState("ready");
-        if (data.updatedAt) setUpdatedAt(data.updatedAt);
         if (data.message) messages.push(data.message);
       } catch {
         if (!current()) return;
@@ -300,25 +299,18 @@ export default function Home() {
       messages.push("저장된 매매 자료를 불러오지 못했습니다.");
     });
     const tradesTask = (async () => {
-      if (!refreshLive) return;
       try {
-        const response = await fetch(`/api/trades?month=${requestMonth}&district=${encodeURIComponent(selectedDistrict)}`, { signal, cache: "no-store" });
+        const response = await fetch(`/api/trades?month=${requestMonth}`, { signal, cache: "no-store" });
         if (!response.ok) throw new Error("trades unavailable");
         const data = (await response.json()) as TradesApiResponse;
         if (!current()) return;
-        const hasRealResponse = data.mode === "live" || data.mode === "partial";
+        const hasRealResponse = data.mode === "stored" || data.mode === "partial";
         setTrades(hasRealResponse ? data.trades : []);
-        tradesMode = hasRealResponse ? "partial" : "unavailable";
+        tradesMode = data.mode;
         setRefreshedMonth(hasRealResponse ? requestMonth : undefined);
-        setRefreshedDistricts(data.completedDistricts ?? (data.mode === "live" ? [selectedDistrict] : []));
-        if (data.updatedAt) setUpdatedAt(data.updatedAt);
+        setRefreshedDistricts(data.completedDistricts ?? []);
+        setUpdatedAt(data.fetchedAt);
         if (data.message) messages.push(data.message);
-        // Wait for the initial snapshot before re-reading so an older response cannot overwrite the refreshed DB.
-        await savedTask;
-        if (hasRealResponse && current()) {
-          try { await readSavedSales(); }
-          catch { messages.push("저장 자료 갱신 실패: 이번에 조회된 거래와 기존 저장 자료를 유지합니다."); }
-        }
       } catch {
         if (current()) messages.push("선택 월 실거래 조회에 실패했습니다. 미조회 지역은 거래가 없는 지역을 뜻하지 않습니다.");
       }
@@ -560,7 +552,7 @@ export default function Home() {
       동수: record.buildingCount ?? "",
       인근역: station?.name ?? "",
       "선택월 거래(건)": refreshedDistricts.includes(record.district) ? periodTrades.length : "",
-      "선택월 조회상태": refreshedDistricts.includes(record.district) ? "조회 완료" : "미조회",
+      "선택월 조회상태": refreshedDistricts.includes(record.district) ? "수집 완료" : "미수집",
       출처: record.source,
     }));
     const sheet = XLSX.utils.json_to_sheet(rows);
@@ -888,12 +880,7 @@ export default function Home() {
             {loading ? "불러오는 중…" : "저장 자료 다시 불러오기"}
             <span aria-hidden="true">→</span>
           </button>
-          <button className="finder-live-button" type="button"
-            onClick={() => void loadDashboard(month, true)}
-            disabled={loading || selectedDistrict === "서울 전체"}>
-            선택 지역 실거래 확인
-          </button>
-          <p className="finder-filter-note">지역을 선택하면 해당 구만 추가 조회합니다. 처음 방문할 때는 공공데이터에 실거래를 요청하지 않습니다.</p>
+          <p className="finder-filter-note">새로고침은 저장 자료만 다시 읽습니다. 공공데이터 수집은 별도의 관리자 작업으로 진행됩니다.</p>
         </aside>
 
         <section className="finder-results" id="finder-results">
@@ -943,7 +930,7 @@ export default function Home() {
               ))}
             </div>
             <small>
-              가격 확인 {summary.count.toLocaleString()}개 · {refreshedDistricts.length ? `확인된 선택월 거래 ${summary.periodTradeCount.toLocaleString()}건` : "선택월 거래 미조회"}
+              가격 확인 {summary.count.toLocaleString()}개 · {refreshedDistricts.length ? `확인된 선택월 거래 ${summary.periodTradeCount.toLocaleString()}건` : "선택월 거래 미수집"}
             </small>
           </div>
 
@@ -1006,7 +993,7 @@ export default function Home() {
                               ) : (
                                 <span>세대수 확인 중</span>
                               )}
-                              <span>{refreshedDistricts.includes(record.district) ? `선택월 거래 ${periodTrades.length}건` : "선택월 거래 미조회"}</span>
+                              <span>{refreshedDistricts.includes(record.district) ? `선택월 거래 ${periodTrades.length}건` : "선택월 거래 미수집"}</span>
                             </div>
                             <div className="finder-station-line">
                               <span className="finder-station-icon" aria-hidden="true">M</span>
@@ -1173,7 +1160,8 @@ export default function Home() {
                 day: "numeric",
                 hour: "2-digit",
                 minute: "2-digit",
-              }) : "확인 전"} · 목록 응답 시각 (실거래 수집 완료 시각 아님)
+              timeZone: "Asia/Seoul",
+              }) : "수집 시각 미확인"} · 선택월 자료 중 최근 수집 시각
             </small>
           </section>
         </aside>

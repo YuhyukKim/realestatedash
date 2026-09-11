@@ -188,6 +188,7 @@ export const tradeImportRuns = sqliteTable("trade_import_runs", {
   fetchedAt: text("fetched_at").notNull(),
   createdAt: text("created_at").notNull(),
   committed: integer("committed").notNull().default(0),
+  abandoned: integer("abandoned").notNull().default(0),
   mappingVersion: text("mapping_version").notNull(),
 }, (t) => [index("idx_trade_import_scope").on(t.district, t.month, t.kind)]);
 

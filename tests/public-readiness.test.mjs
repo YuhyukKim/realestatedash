@@ -80,16 +80,16 @@ test("public seed URLs cannot write; operator endpoint fails closed without cred
   } }))).status, 503);
 });
 
-test("public browsing is stored-first, scoped refresh is explicit, and unknown is not zero", async () => {
+test("public browsing is read-only stored data and unknown is not zero", async () => {
   const page = await readFile(new URL("../app/page.tsx", import.meta.url), "utf8");
   const seed = await readFile(new URL("../db/seed.ts", import.meta.url), "utf8");
   const layout = await readFile(new URL("../app/layout.tsx", import.meta.url), "utf8");
-  assert.match(page, /refreshLive = false/);
-  assert.match(page, /if \(!refreshLive\) return/);
-  assert.match(page, /district=\$\{encodeURIComponent\(selectedDistrict\)\}/);
+  assert.doesNotMatch(page, /refreshLive|finder-live-button/);
+  assert.match(page, /저장 자료만 다시 읽습니다/);
+  assert.match(page, /data\.mode === "stored"/);
   assert.match(page, /lazy\(\(\) => import\("\.\/complex-detail"\)\)/);
   assert.match(page, /useDeferredValue\(search\)/);
-  assert.match(page, /선택월 거래 미조회/);
+  assert.match(page, /선택월 거래 미수집/);
   assert.match(page, /가격 미확인/);
   assert.doesNotMatch(page, /JAYDEN\s*RESEARCH|JADEN\s*RESEARCH|제이든\s*리서치|>JR</i);
   const panel = await readFile(new URL("../app/complex-detail.tsx", import.meta.url), "utf8");
