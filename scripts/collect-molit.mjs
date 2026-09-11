@@ -124,7 +124,7 @@ export async function main(env = process.env) {
     } catch {
       // Never print upstream errors/request objects; they may contain service keys.
       failures++;
-      console.error(JSON.stringify({ status: "failed", ...scope, message: "Collection/upload failed. Last complete snapshot retained; inspect key approval, quotas and ingestion configuration." }));
+      console.error(JSON.stringify({ status: "failed", ...scope, message: "Collection/upload failed or commit acknowledgement lost. No incomplete snapshot is published; verify the stored collection timestamp before retrying. Check key approval, quotas and ingestion configuration." }));
     }
   }
   console.log(JSON.stringify({ scopes: config.scopes.length, failures }));

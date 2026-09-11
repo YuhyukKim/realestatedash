@@ -592,19 +592,16 @@ test("client accepts only real trades and sends the canonical ID to history requ
   assert.ok(panel.includes("complexId: complex.id"));
   assert.ok(panel.includes('payload.mode === "stored" || payload.mode === "partial"'));
   assert.ok(!panel.includes("cacheRef.current"));
-  assert.ok(panel.includes("미수집·미확인 기간"));
+  assert.ok(panel.includes("emptyTradeMessage"));
 });
 
-test("does not fabricate history for a master complex without an observed trade", async () => {
+test("rejects an unknown complex rather than fabricating history", async () => {
   const response = await render(
     "/api/complex?district=강남구&dong=개포동&apartment=거래없는테스트단지&from=202507&to=202606&asOf=202607&buildYear=1986&master=1",
   );
-  assert.equal(response.status, 200);
-
+  assert.equal(response.status, 404);
   const payload = await response.json();
-  assert.equal(payload.mode, "unavailable");
-  assert.deepEqual(payload.transactions, []);
-  assert.match(payload.message, /예시 가격을 만들지 않습니다|확인되지 않은 가격/);
+  assert.match(payload.message, /단지를 특정할 수 없습니다/);
 });
 
 test("returns location and school context with a successful fallback response", async () => {

@@ -43,10 +43,10 @@ export async function appendImport(db: D1Database, id: string, offset: number, i
   catch { throw new ImportError("잘못된 거래 자료입니다. 기존 자료를 유지합니다.", 400); }
   const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(JSON.stringify(records)));
   const hash = Array.from(new Uint8Array(digest), b => b.toString(16).padStart(2, "0")).join("");
-  const existing = await db.prepare("SELECT COUNT(*) AS count, COALESCE(SUM(batch_hash = ?), 0) AS identical FROM trade_import_rows WHERE run_id = ? AND ordinal >= ? AND ordinal < ?")
-    .bind(hash, id, offset, offset + records.length).first<{ count: number; identical: number }>();
+  const existing = await db.prepare("SELECT COUNT(*) AS count, COALESCE(SUM(batch_hash = ?), 0) AS identical, COALESCE(SUM(complex_id IS NULL), 0) AS unmatched FROM trade_import_rows WHERE run_id = ? AND ordinal >= ? AND ordinal < ?")
+    .bind(hash, id, offset, offset + records.length).first<{ count: number; identical: number; unmatched: number }>();
   if (existing?.count) {
-    if (existing.count === records.length && existing.identical === records.length) return { accepted: records.length, repeated: true };
+    if (existing.count === records.length && existing.identical === records.length) return { accepted: records.length, unmatched: existing.unmatched, repeated: true };
     throw new ImportError("이미 적재된 위치의 내용이 다릅니다.");
   }
   if (run.committed) throw new ImportError("공개된 수집 자료는 변경할 수 없습니다.");
@@ -68,9 +68,9 @@ export async function appendImport(db: D1Database, id: string, offset: number, i
     .bind(hash, JSON.stringify(rows), id, TRADE_MAPPING_VERSION).run();
   } catch (error) {
     // Plain INSERT is atomic: a rejected overlapping/conflicting chunk adds no rows.
-    const after = await db.prepare("SELECT COUNT(*) AS count, COALESCE(SUM(batch_hash = ?), 0) AS identical FROM trade_import_rows WHERE run_id = ? AND ordinal >= ? AND ordinal < ?")
-      .bind(hash, id, offset, offset + rows.length).first<{ count: number; identical: number }>();
-    if (after?.count === rows.length && after.identical === rows.length) return { accepted: rows.length, repeated: true };
+    const after = await db.prepare("SELECT COUNT(*) AS count, COALESCE(SUM(batch_hash = ?), 0) AS identical, COALESCE(SUM(complex_id IS NULL), 0) AS unmatched FROM trade_import_rows WHERE run_id = ? AND ordinal >= ? AND ordinal < ?")
+      .bind(hash, id, offset, offset + rows.length).first<{ count: number; identical: number; unmatched: number }>();
+    if (after?.count === rows.length && after.identical === rows.length) return { accepted: rows.length, unmatched: after.unmatched, repeated: true };
     if (after?.count) throw new ImportError("이미 적재된 위치의 내용이 다릅니다.");
     throw error;
   }

@@ -1,5 +1,7 @@
 "use client";
 
+import { emptyTradeMessage, rentPeriodSupported } from "../lib/trade-coverage.mjs";
+
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 import {
   WORKPLACE_BY_ID,
@@ -699,9 +701,7 @@ export default function ComplexDetailPanel({
   const latestSale = recentSales[0] ?? null;
   const latestJeonse = recentRents.find((item) => item.type === "jeonse") ?? null;
   const latestSaleSummary = latestSale;
-  const emptyMessage = (kind: "sale" | "rent") => loading ? "저장 자료를 불러오는 중입니다."
-    : error || missing[kind] ? "미수집·미확인 기간이 있습니다. 거래 0건을 뜻하지 않습니다."
-    : "선택 기간·면적의 거래가 없습니다.";
+  const emptyMessage = (kind: "sale" | "rent") => emptyTradeMessage(kind, endMonth, loading, error, missing);
   const jeonseRatio =
     latestSale && latestJeonse
       ? Math.round((latestJeonse.price / latestSale.price) * 100)
@@ -1067,7 +1067,7 @@ export default function ComplexDetailPanel({
                 period={period}
                 buildYear={complex.buildYear}
                 metric={chartMetric}
-                emptyNote={chartMetric === "ratio" && !loading && !error && !missing.sale && !missing.rent
+                emptyNote={chartMetric === "ratio" && rentPeriodSupported(endMonth) && !loading && !error && !missing.sale && !missing.rent
                   ? "같은 월의 매매·전세 자료가 함께 있어야 전세가율을 표시합니다."
                   : emptyMessage(chartMetric === "sale" || (chartMetric === "ratio" && missing.sale) ? "sale" : "rent")}
               />
@@ -1092,7 +1092,7 @@ export default function ComplexDetailPanel({
             transactions={recentRents}
             type="rent"
             emptyNote={emptyMessage("rent")}
-            complete={!loading && !error && !missing.rent}
+            complete={rentPeriodSupported(endMonth) && !loading && !error && !missing.rent}
           />
         </div>
 

@@ -16,6 +16,7 @@ import {
   type WorkplaceCommuteEstimate,
 } from "./commute";
 import { isSelectableMonth, seoulMonth } from "./site-config";
+import { periodTradeLabel } from "../lib/trade-coverage.mjs";
 
 const ComplexDetailPanel = lazy(() => import("./complex-detail"));
 import {
@@ -930,7 +931,7 @@ export default function Home() {
               ))}
             </div>
             <small>
-              가격 확인 {summary.count.toLocaleString()}개 · {refreshedDistricts.length ? `확인된 선택월 거래 ${summary.periodTradeCount.toLocaleString()}건` : "선택월 거래 미수집"}
+              가격 확인 {summary.count.toLocaleString()}개 · {periodTradeLabel(selectedDistrict, refreshedDistricts, summary.periodTradeCount)}
             </small>
           </div>
 
@@ -1160,7 +1161,7 @@ export default function Home() {
                 day: "numeric",
                 hour: "2-digit",
                 minute: "2-digit",
-              timeZone: "Asia/Seoul",
+                timeZone: "Asia/Seoul",
               }) : "수집 시각 미확인"} · 선택월 자료 중 최근 수집 시각
             </small>
           </section>
