@@ -6,7 +6,9 @@ export type ComplexTransaction = {
   id: string;
   type: ComplexTransactionType;
   date: string;
+  /** Sale/deposit in eok; preserve all four decimal places (one manwon). */
   price: number;
+  /** Monthly rent in integer manwon, not eok. */
   monthlyRent: number;
   area: number;
   floor: number;

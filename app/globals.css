@@ -4703,3 +4703,28 @@ footer strong {
     scroll-behavior: auto !important; transition: none !important; animation: none !important;
   }
 }
+
+
+/* Full contract amounts must wrap rather than disappear in narrow cards. */
+.finder-card-price,
+.finder-card-price > strong,
+.detail-summary article,
+.transaction-price {
+  min-width: 0;
+}
+.finder-card-price > strong,
+.finder-card-price > em,
+.detail-summary strong,
+.transaction-price strong {
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.45;
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 640px) {
+  .finder-card-price {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+    column-gap: 12px;
+  }
+}

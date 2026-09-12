@@ -14,6 +14,7 @@ import type {
   ComplexTransaction,
 } from "./complex-types";
 import { NaverMap } from "./naver-map";
+import { formatPrice, formatRent } from "./price-format";
 import type { PlacesResponse } from "./place-types";
 import { getNearbyStations, STATION_DISTANCE_NOTE } from "./stations";
 
@@ -82,20 +83,8 @@ function chunkRanges(
   return ranges;
 }
 
-function formatPrice(price: number) {
-  return Number.isInteger(price) ? `${price}억` : `${price.toFixed(1)}억`;
-}
-
 function formatStationDistance(meters: number) {
   return meters >= 1000 ? `${(meters / 1000).toFixed(1)}km` : `${meters}m`;
-}
-
-function formatRent(transaction: ComplexTransaction) {
-  if (transaction.type === "jeonse") return formatPrice(transaction.price);
-  const deposit = transaction.price
-    ? `${Math.round(transaction.price * 10_000).toLocaleString()}만`
-    : "0";
-  return `${deposit} / ${transaction.monthlyRent.toLocaleString()}만`;
 }
 
 function naverMapSearchUrl(query: string) {
@@ -112,7 +101,7 @@ function median(values: number[]) {
 }
 
 function formatChartValue(metric: ChartMetric, value: number) {
-  return metric === "ratio" ? `${value.toFixed(1)}%` : `${value.toFixed(1)}억`;
+  return metric === "ratio" ? `${value.toFixed(1)}%` : `약 ${formatPrice(value)}`;
 }
 
 function smoothPath(points: { x: number; y: number }[]) {
@@ -125,7 +114,7 @@ function smoothPath(points: { x: number; y: number }[]) {
   }, `M${points[0].x},${points[0].y}`);
 }
 
-function PriceChart({
+export function PriceChart({
   transactions,
   endMonth,
   period,
@@ -291,7 +280,7 @@ function PriceChart({
         onPointerMove={(event) => updateActive(event.clientX, event.currentTarget)}
         onPointerLeave={() => setActiveIndex(null)}
       >
-        <desc>월별 실거래 중위값을 선과 거래량으로 표시한 차트입니다.</desc>
+        <desc>월별 실거래 중위값을 선과 거래량으로 표시한 차트입니다. 축은 요약 표시, 금액 중위값은 만원 단위 반올림이며 개별 계약금액은 아래 실거래 목록에서 확인할 수 있습니다.</desc>
         {yTicks.map((tick) => (
           <g key={tick}>
             <line
@@ -350,18 +339,20 @@ function PriceChart({
         )}
         <path d={path} className="chart-line chart-main-line" />
         <text
-          x={Math.min(width - right - 8, maxPoint.x + 7)}
+          x={maxPoint.x > width / 2 ? maxPoint.x - 7 : maxPoint.x + 7}
+          textAnchor={maxPoint.x > width / 2 ? "end" : "start"}
           y={Math.max(top + 10, maxPoint.y - 8)}
           className="chart-extreme-label maximum"
         >
-          최고 {formatChartValue(metric, points[maxPoint.index][metric] as number)}
+          최고 {metric === "ratio" ? "전세가율" : "중위값"} {formatChartValue(metric, points[maxPoint.index][metric] as number)}
         </text>
         <text
-          x={Math.min(width - right - 8, minPoint.x + 7)}
+          x={minPoint.x > width / 2 ? minPoint.x - 7 : minPoint.x + 7}
+          textAnchor={minPoint.x > width / 2 ? "end" : "start"}
           y={Math.min(plotBottom - 4, minPoint.y + 16)}
           className="chart-extreme-label minimum"
         >
-          최저 {formatChartValue(metric, points[minPoint.index][metric] as number)}
+          최저 {metric === "ratio" ? "전세가율" : "중위값"} {formatChartValue(metric, points[minPoint.index][metric] as number)}
         </text>
         {activePoint && (
           <g className="chart-active-layer">
@@ -374,9 +365,9 @@ function PriceChart({
             />
             <circle cx={activePoint.x} cy={activePoint.y} r="4" className="chart-active-dot" />
             <g
-              transform={`translate(${Math.min(width - 172, Math.max(left, activePoint.x - 76))},${Math.max(top + 4, activePoint.y - 72)})`}
+              transform={`translate(${Math.min(width - right - 230, Math.max(left, activePoint.x - 115))},${Math.max(top + 4, activePoint.y - 72)})`}
             >
-              <rect width="154" height="54" rx="8" className="chart-tooltip-card" />
+              <rect width="230" height="54" rx="8" className="chart-tooltip-card" />
               <text x="12" y="19" className="chart-tooltip-month">
                 {activePoint.month.slice(0, 4)}년 {Number(activePoint.month.slice(4))}월
               </text>
@@ -397,7 +388,7 @@ function PriceChart({
   );
 }
 
-function TransactionList({
+export function TransactionList({
   title,
   caption,
   transactions,
@@ -1079,7 +1070,7 @@ export default function ComplexDetailPanel({
           <TransactionList
             key={`sale:${complex.id}:${effectiveArea ?? "all"}:${period}`}
             title="최근 매매 실거래"
-            caption={`${areaCaption} · 최신 계약순`}
+            caption={`${areaCaption} · 최신 계약순 · 금액 만원 단위`}
             transactions={recentSales}
             type="sale"
             emptyNote={emptyMessage("sale")}
@@ -1088,7 +1079,7 @@ export default function ComplexDetailPanel({
           <TransactionList
             key={`rent:${complex.id}:${effectiveArea ?? "all"}:${period}`}
             title="최근 전세·월세 실거래"
-            caption={`${areaCaption} · 보증금/월세`}
+            caption={`${areaCaption} · 보증금/월세 · 금액 만원 단위`}
             transactions={recentRents}
             type="rent"
             emptyNote={emptyMessage("rent")}

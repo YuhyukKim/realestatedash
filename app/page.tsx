@@ -17,6 +17,7 @@ import {
 } from "./commute";
 import { isSelectableMonth, seoulMonth } from "./site-config";
 import { periodTradeLabel } from "../lib/trade-coverage.mjs";
+import { formatPrice, formatSummaryPrice } from "./price-format";
 
 const ComplexDetailPanel = lazy(() => import("./complex-detail"));
 import {
@@ -104,10 +105,6 @@ const STATION_RANGES = [
   { id: "800", label: "800m", max: 800 },
   { id: "1000", label: "1km", max: 1000 },
 ] as const;
-
-function formatPrice(price: number) {
-  return Number.isInteger(price) ? `${price}억` : `${price.toFixed(1)}억`;
-}
 
 function formatDate(date: string) {
   const [, month, day] = date.split("-");
@@ -631,7 +628,7 @@ export default function Home() {
           </article>
           <article>
             <span>최근 매매 중위가</span>
-            <strong>{summary.count ? formatPrice(summary.median) : "-"}</strong>
+            <strong>{summary.count ? formatSummaryPrice(summary.median) : "-"}</strong>
             <small>MEDIAN</small>
           </article>
           <article>
@@ -1105,11 +1102,11 @@ export default function Home() {
           <div className="finder-key-metrics">
             <article>
               <span>중위가</span>
-              <strong>{summary.count ? formatPrice(summary.median) : "-"}</strong>
+              <strong>{summary.count ? formatSummaryPrice(summary.median) : "-"}</strong>
             </article>
             <article>
               <span>평균가</span>
-              <strong>{summary.count ? formatPrice(summary.average) : "-"}</strong>
+              <strong>{summary.count ? formatSummaryPrice(summary.average) : "-"}</strong>
             </article>
           </div>
 
