@@ -5,7 +5,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { derivePagesData } from "../.cache/pages-data.mjs";
 import { staticOptions,validateSnapshot,scopeFile } from "../lib/pages-snapshots.mjs";
-import { collectSnapshots,persistSnapshots } from "../scripts/collect-pages.mjs";
+import { collectSnapshots,persistSnapshots,collectionFailureCode } from "../scripts/collect-pages.mjs";
 const row=(extra={})=>({apartment:"테스트",dong:"공덕동",jibun:"1",aptSeq:null,buildYear:2000,date:"2026-01-02",type:"sale",priceManwon:100000,monthlyRent:0,area:84,floor:3,...extra});
 const scope=(extra={})=>({version:1,district:"마포구",month:"202601",kind:"sale",fetchedAt:"2026-02-01T00:00:00.000Z",expectedCount:1,records:[row()],...extra});
 const seed=[{id:"apt",name:"테스트",district:"마포구",dong:"공덕동",jibunAddress:"서울특별시 마포구 공덕동 1",buildYear:2000,latestSale:{price:999,date:"2026-01-01"},areas:[59]}];
@@ -61,4 +61,16 @@ test("snapshot writer retains newer and suspiciously emptied data",async()=>{
   await assert.rejects(()=>persistSnapshots([scope({expectedCount:0,records:[]})],dir),/empty/);
   const saved=JSON.parse(await readFile(join(dir,"11440/202601.sale.json"),"utf8"));
   assert.equal(saved.expectedCount,1);
+});
+
+test("collector diagnostics are actionable without logging secrets or upstream text",()=>{
+  assert.equal(collectionFailureCode(new Error("공공데이터 조회 실패 (403)")),"UPSTREAM_HTTP_403");
+  assert.equal(collectionFailureCode(new Error("공공데이터 응답 시간 초과 (재시도 완료)")),"UPSTREAM_TIMEOUT");
+  assert.equal(collectionFailureCode(new Error("Invalid money field")),"INVALID_MONEY");
+  for (const input of [
+    new Error("https://apis.data.go.kr?serviceKey=do-not-log"),
+    new Error("공공데이터 조회 실패 (403) serviceKey=do-not-log"),
+    new Error("Invalid money field do-not-log"),
+    {message:"do-not-log"}, "do-not-log",
+  ]) assert.equal(collectionFailureCode(input),"UNCLASSIFIED_FAILURE");
 });
