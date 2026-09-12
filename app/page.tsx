@@ -1,6 +1,6 @@
 "use client";
 
-import { apiFetch } from "./api-client";
+import { apiFetch, refreshApiCache } from "./api-client";
 
 import { lazy, Suspense, useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
 import {
@@ -258,6 +258,8 @@ export default function Home() {
     setUpdatedAt(null);
     setStatusMessage("단지 목록과 저장된 매매 자료를 불러옵니다.");
     if (!masterComplexes.length) setMasterLoadState("loading");
+    await refreshApiCache().catch(() => {}); // Individual reads below report any load error.
+    if (!current()) return;
     const messages: string[] = [];
     let tradesMode: DataMode = "unavailable";
     let savedCount = 0;

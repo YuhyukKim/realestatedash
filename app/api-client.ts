@@ -8,3 +8,11 @@ export async function apiFetch(path: string, init?: RequestInit): Promise<Respon
   }
   return fetch(path, init);
 }
+
+/** Begin one consistent public-data generation for a dashboard refresh. */
+export async function refreshApiCache(): Promise<void> {
+  if (typeof __GITHUB_PAGES__ !== "undefined" && __GITHUB_PAGES__) {
+    const { staticApi } = await import("../pages/static-api");
+    staticApi.refresh();
+  }
+}

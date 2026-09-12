@@ -89,3 +89,12 @@ test("places and map config require no server",async()=>{
   assert.match(r.note,/배정학교/);
   assert.equal((await(await f.api("/api/map-config")).json()).enabled,false);
 });
+
+test("explicit dashboard refresh reloads the manifest and retains project base",async()=>{
+  const f=fixture();
+  await f.api("/api/complexes");
+  await f.api("/api/trades?month=202601");
+  f.api.refresh();
+  await f.api("/api/complexes");
+  assert.equal(f.requests.filter(url=>url.endsWith("data/manifest.json")).length,2);
+});
