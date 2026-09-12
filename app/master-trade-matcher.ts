@@ -1,3 +1,5 @@
+import { canonicalComplexRecords, complexIdentityNames } from "../lib/complex-identity.mjs";
+
 export type MasterMatchRecord = {
   id: string;
   name: string;
@@ -119,7 +121,7 @@ function buildMasterTradeIndex(master: readonly MasterMatchRecord[]) {
     byAlias: new Map(),
   };
 
-  master.forEach((record) => {
+  canonicalComplexRecords(master).forEach((record) => {
     const location = locationKey(record.district, record.dong);
     const indexed: IndexedMaster = {
       record,
@@ -131,15 +133,13 @@ function buildMasterTradeIndex(master: readonly MasterMatchRecord[]) {
     indexed.jibuns.forEach((jibun) =>
       appendToIndex(index.byJibun, `${location}:${jibun}`, indexed),
     );
-    if (indexed.exactName) {
-      appendToIndex(
-        index.byExactName,
-        `${location}:${indexed.exactName}`,
-        indexed,
-      );
+    const names = complexIdentityNames(record.id, record.name);
+    // Different raw spellings can normalize to the same key; index an ID once.
+    for (const name of new Set(names.map(normalizeApartmentName).filter(Boolean))) {
+      appendToIndex(index.byExactName, `${location}:${name}`, indexed);
     }
-    if (indexed.aliasName) {
-      appendToIndex(index.byAlias, `${location}:${indexed.aliasName}`, indexed);
+    for (const name of new Set(names.map(normalizeApartmentAlias).filter(Boolean))) {
+      appendToIndex(index.byAlias, `${location}:${name}`, indexed);
     }
   });
 

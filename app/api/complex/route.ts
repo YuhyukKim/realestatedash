@@ -1,3 +1,4 @@
+import { canonicalComplexId, complexIdentityNames } from "../../../lib/complex-identity.mjs";
 import { DISTRICT_CODES } from "../../data";
 import type {
   ComplexDetailResponse,
@@ -48,8 +49,8 @@ export async function GET(request: Request) {
   const requestedApartment = url.searchParams.get("apartment") ?? "";
   const candidates = requestedId ? [] : master.filter((record) =>
     record.district === requestedDistrict && record.dong === requestedDong &&
-    normalizeApartmentName(record.name) === normalizeApartmentName(requestedApartment));
-  const selected = requestedId ? masterById.get(requestedId) : candidates.length === 1 ? candidates[0] : undefined;
+    complexIdentityNames(record.id, record.name).some(name => normalizeApartmentName(name) === normalizeApartmentName(requestedApartment)));
+  const selected = requestedId ? masterById.get(canonicalComplexId(requestedId)) : candidates.length === 1 ? candidates[0] : undefined;
   if (requestedId && !selected) return Response.json({ message: "단지 ID를 찾을 수 없습니다." }, { status: 404 });
   const district = selected?.district ?? requestedDistrict;
   const dong = selected?.dong ?? requestedDong;

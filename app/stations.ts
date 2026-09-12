@@ -1,3 +1,4 @@
+import { canonicalComplexId, RETIRED_COMPLEX_IDS } from "../lib/complex-identity.mjs";
 import coordinates from "./transit-coordinates.json";
 
 export type NearbyStation = {
@@ -11,14 +12,20 @@ export type Coordinate = { latitude: number; longitude: number };
 export type StationPoint = Coordinate & { key: string; name: string; lines: string };
 
 export const STATION_CATALOG: readonly StationPoint[] = coordinates.stations;
-export const TRANSIT_COVERAGE = coordinates.coverage;
+// The source artifact retains its raw catalogue scope; UI uses reviewed identities.
+export const TRANSIT_COVERAGE = {
+  ...coordinates.coverage,
+  sourceComplexes: coordinates.coverage.totalComplexes,
+  totalComplexes: coordinates.coverage.totalComplexes - RETIRED_COMPLEX_IDS.length,
+  geocodedComplexes: new Set(Object.keys(coordinates.complexes).map(canonicalComplexId)).size,
+};
 export const NEARBY_RADIUS_METERS = 1500;
 export const STATION_DISTANCE_NOTE = "서울시 단지·역사 대표 좌표 간 직선거리(출입구·보행경로 아님) · 인근역 반경 1.5km · 도보는 분당 65m 단순 환산 추정";
 const complexPoints = coordinates.complexes as Record<string, number[]>;
 const cache = new Map<string, NearbyStation[]>();
 
 export function getComplexCoordinates(id: string): Coordinate | null {
-  const point = complexPoints[id];
+  const point = complexPoints[canonicalComplexId(id)];
   return Array.isArray(point) && point.length === 2 &&
     Number.isFinite(point[0]) && Number.isFinite(point[1]) &&
     point[0] >= 37.4 && point[0] <= 37.75 && point[1] >= 126.7 && point[1] <= 127.25

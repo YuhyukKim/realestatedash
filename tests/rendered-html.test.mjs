@@ -1,3 +1,4 @@
+import { RETIRED_COMPLEX_IDS } from "../lib/complex-identity.mjs";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
@@ -228,8 +229,8 @@ test("returns the full apartment master including complexes without a recent sal
   assert.ok(Array.isArray(payload.complexes));
   assert.equal(
     payload.complexes.length,
-    rebMeta.mergedRecords,
-    "the unfiltered endpoint must return the exact deduplicated official master",
+    rebMeta.mergedRecords - RETIRED_COMPLEX_IDS.length,
+    "the unfiltered endpoint must return the reviewed canonical official master",
   );
   assert.equal(rebMeta.sourceKaptRecords, kaptMeta.records);
   assert.equal(

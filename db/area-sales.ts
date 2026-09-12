@@ -1,3 +1,4 @@
+import { canonicalComplexId } from "../lib/complex-identity.mjs";
 import { DISTRICT_CODES, type Trade } from "../app/data";
 import { validRecordMonth } from "../lib/molit-records.mjs";
 import { groupTradesByMaster, type MasterMatchRecord } from "../app/master-trade-matcher";
@@ -46,7 +47,8 @@ export async function readAreaSales(d1: D1Database, month: string): Promise<Reco
   ) WHERE rank = 1`).bind(month).all<{ complex_id: string; area: number; price_manwon: number; contract_date: string }>();
   const summaries: Record<string, AreaSaleSummary[]> = {};
   for (const row of result.results) {
-    (summaries[row.complex_id] ??= []).push({ area: row.area, price: row.price_manwon / 10_000, date: row.contract_date });
+    (summaries[canonicalComplexId(row.complex_id)] ??= []).push({ area: row.area, price: row.price_manwon / 10_000, date: row.contract_date });
   }
+  for (const id of Object.keys(summaries)) summaries[id] = latestSalesByArea(summaries[id]);
   return summaries;
 }

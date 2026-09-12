@@ -1,6 +1,8 @@
+import { canonicalComplexId, complexIdentityIds } from "../lib/complex-identity.mjs";
+import { latestSalesByArea } from "../app/area-sales";
 import { getComplexSeed, COMPLEX_SEED_VERSION } from "./seed";
 // Bump matcher suffix when canonical matching rules change.
-const TRADE_MAPPING_VERSION = COMPLEX_SEED_VERSION + ":matcher-v1";
+const TRADE_MAPPING_VERSION = COMPLEX_SEED_VERSION + ":matcher-v2";
 import { listComplexesFromSeed } from "./complexes";
 import { createMasterTradeMatcher } from "../app/master-trade-matcher";
 import { sanitizeRecord, CHUNK_SIZE, MAX_IMPORT_RECORDS } from "../lib/molit-records.mjs";
@@ -170,7 +172,7 @@ export async function readStoredDetail(db: D1Database, complexId: string, distri
   const result = await db.batch([
     db.prepare("SELECT h.* FROM trade_snapshot_heads h WHERE h.district = ? AND h.month >= ? AND h.month <= ?").bind(...args),
     db.prepare("SELECT o.run_id, o.ordinal, o.payload FROM trade_import_rows o JOIN trade_snapshot_heads h ON h.run_id = o.run_id " +
-      "WHERE h.district = ? AND h.month >= ? AND h.month <= ? AND o.complex_id = ?").bind(...args, complexId),
+      "WHERE h.district = ? AND h.month >= ? AND h.month <= ? AND o.complex_id IN (SELECT value FROM json_each(?))").bind(...args, JSON.stringify(complexIdentityIds(complexId))),
   ]);
   const heads = result[0].results as SnapshotHead[];
   const transactions = (result[1].results as StoredRow[]).map(row => {
@@ -192,6 +194,8 @@ export async function readStoredAreaSales(db: D1Database, month: string) {
     "SELECT *, ROW_NUMBER() OVER (PARTITION BY complex_id, area ORDER BY contract_date DESC, price_manwon DESC) AS position FROM candidates) WHERE position = 1")
     .bind(month, month).all<{ complex_id: string; area: number; price_manwon: number; contract_date: string }>();
   const summaries: Record<string, { area: number; price: number; date: string }[]> = {};
-  for (const row of rows.results) (summaries[row.complex_id] ??= []).push({ area: row.area, price: row.price_manwon / 10000, date: row.contract_date });
+  for (const row of rows.results) (summaries[canonicalComplexId(row.complex_id)] ??= []).push({ area: row.area, price: row.price_manwon / 10000, date: row.contract_date });
+  // Ranking by the former IDs alone can leave two prices for one canonical area.
+  for (const id of Object.keys(summaries)) summaries[id] = latestSalesByArea(summaries[id]);
   return summaries;
 }

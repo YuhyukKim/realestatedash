@@ -1,3 +1,4 @@
+import { complexIdentityNames } from "../lib/complex-identity.mjs";
 import { applyAreaPriceFilter } from "./area-sales";
 import type { ComplexMasterRecord } from "./complex-master";
 import type { Trade } from "./data";
@@ -25,7 +26,7 @@ export function filterApartmentCandidates<T extends { record: ComplexMasterRecor
   return complexes.flatMap(complex => {
     const original = complex.record;
     if (filters.district !== "서울 전체" && original.district !== filters.district) return [];
-    if (keyword && !`${original.district} ${original.dong} ${original.name} ${original.address}`.toLowerCase().includes(keyword)) return [];
+    if (keyword && !`${original.district} ${original.dong} ${complexIdentityNames(original.id, original.name).join(" ")} ${original.address}`.toLowerCase().includes(keyword)) return [];
     if (filters.moveInYear === "unknown") {
       if (original.buildYear !== null) return [];
     } else if (filters.moveInYear && (!original.buildYear ||
