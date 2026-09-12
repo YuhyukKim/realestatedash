@@ -4,11 +4,11 @@
 
 ## 구성
 
-- 운영 소스·수집 데이터 브랜치: `github-pages`
+- 운영 소스·수집 데이터 브랜치: `main`
 - 화면 호스팅: GitHub Pages
 - 실거래 수집: GitHub Actions (방문자 브라우저에서 공공 API를 호출하지 않음)
 - 데이터 보관: `data/scopes/<구 코드>/<YYYYMM>.<sale|rent>.json`
-- 기존 `main`과 Cloudflare 사이트는 전환 검증을 위해 그대로 보존. 이 브랜치를 main에 합치면 기존 Cloudflare Git 연동이 반응할 수 있으므로 먼저 연동 상태를 확인할 것.
+- Cloudflare 자동 빌드 연결은 해제하고 GitHub의 Cloudflare 배포 워크플로는 제거했다. 기존 Worker·D1·사이트는 삭제하지 않았다. 과거 설정은 Git 이력에서 복구 가능하다.
 
 ## 최초 설정
 
@@ -19,14 +19,14 @@
 3. Repository variables:
    - `PAGES_PUBLISH_ENABLED=true`: 새 GitHub 공개 주소 게시를 승인한 후 활성화
    - `NAVER_MAP_CLIENT_ID` (선택): 공개 Maps Client ID. 네이버 콘솔에 `https://yuhyukkim.github.io` 웹 서비스 URL을 추가해야 한다. 비밀키가 아님.
-4. `github-pages` 브랜치 푸시 → 빌드·검증 성공 → Pages 게시
+4. `main` 브랜치 푸시 → 빌드·검증 성공 → Pages 게시
 5. API 키, DATA_REFRESH_TOKEN, Cloudflare 토큰은 프런트엔드나 공개 파일에 넣지 않는다. DATA_REFRESH_TOKEN / PUBLIC_SITE_URL은 이 구성에서 사용하지 않는다.
 
 ## 수집
 
 Actions → **Collect MOLIT snapshots** → Run workflow:
 
-- **Branch: github-pages** 를 반드시 선택 (기본 main의 레거시 수집기는 사용하지 않음).
+- **Branch: main** 을 선택.
 - districts: 예 `마포구` 또는 `마포구,영등포구`
 - from / to: 예 `202608` / `202609`
 - kind: `sale`, `rent`, `both`

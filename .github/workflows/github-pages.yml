@@ -1,7 +1,7 @@
 name: GitHub Pages
 on:
   push:
-    branches: [github-pages]
+    branches: [main]
   workflow_dispatch:
   workflow_call:
 permissions:
@@ -11,13 +11,13 @@ concurrency:
   cancel-in-progress: false
 jobs:
   build:
-    if: github.ref == 'refs/heads/github-pages'
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: github-pages
+          ref: main
           persist-credentials: false
       - uses: actions/setup-node@v4
         with:
