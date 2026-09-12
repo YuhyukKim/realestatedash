@@ -6,7 +6,6 @@ import {
   WORKPLACES,
   WORKPLACE_BY_ID,
   getDirectWorkplaceMatch,
-  hasDirectWorkplaceAccess,
   type WorkplaceId,
 } from "./access";
 import {
@@ -31,9 +30,11 @@ import {
 } from "./complex-master";
 import { SEOUL_DISTRICTS, type Trade } from "./data";
 import { groupTradesByMaster } from "./master-trade-matcher";
-import { getNearbyStations, selectNearbyStation, TRANSIT_COVERAGE, type NearbyStation } from "./stations";
+import { getNearbyStations, stationAvailabilityMessage, type NearbyStation } from "./stations";
+import { filterApartmentCandidates, filterByTransit } from "./apartment-filter";
+import { TransitCoverageNotice } from "./transit-coverage";
 
-import { applyAreaPriceFilter, latestSalesByArea, type AreaSaleSummary } from "./area-sales";
+import { latestSalesByArea, type AreaSaleSummary } from "./area-sales";
 
 type DataMode = "unavailable" | "live" | "partial" | "stored";
 type MasterLoadState = "loading" | "ready" | "error";
@@ -339,63 +340,28 @@ export default function Home() {
     [masterComplexes, trades, storedSales, refreshedMonth, refreshedDistricts],
   );
 
+  const transitResults = useMemo(() => {
+    const area = AREA_BANDS.find(band => band.id === selectedArea)!;
+    const moveInYear = MOVE_IN_YEAR_BANDS.find(band => band.id === selectedMoveInYear)!;
+    const price = PRICE_BANDS.find(band => band.id === selectedPriceBand);
+    const stationRange = STATION_RANGES.find(range => range.id === selectedStationRange)!;
+    const candidates = filterApartmentCandidates(mergedComplexes, {
+      district: selectedDistrict,
+      area: selectedArea === "all" ? null : area,
+      price,
+      moveInYear: selectedMoveInYear === "all" ? null : selectedMoveInYear === "unknown" ? "unknown" : moveInYear,
+      keyword: deferredSearch,
+    });
+    return filterByTransit(candidates, {
+      stationKeys: [selectedSubway1, selectedSubway2].filter(Boolean),
+      maxStationMeters: stationRange.max,
+      workplaces: [selectedWorkplace1, selectedWorkplace2].filter((value): value is WorkplaceId => Boolean(value)),
+    });
+  }, [mergedComplexes, selectedDistrict, selectedArea, selectedMoveInYear, selectedPriceBand,
+    selectedStationRange, selectedWorkplace1, selectedWorkplace2, selectedSubway1, selectedSubway2, deferredSearch]);
+
   const complexes = useMemo(() => {
-    const area = AREA_BANDS.find((band) => band.id === selectedArea)!;
-    const moveInYear = MOVE_IN_YEAR_BANDS.find(
-      (band) => band.id === selectedMoveInYear,
-    )!;
-    const priceBand = PRICE_BANDS.find((band) => band.id === selectedPriceBand);
-    const stationRange = STATION_RANGES.find(
-      (range) => range.id === selectedStationRange,
-    )!;
-    const keyword = deferredSearch.trim().toLowerCase();
-    const selectedWorkplaces = [selectedWorkplace1, selectedWorkplace2].filter(
-      (value): value is WorkplaceId => Boolean(value),
-    );
-    const selectedSubways = [selectedSubway1, selectedSubway2].filter(Boolean);
-
-    const filteredComplexes = mergedComplexes
-      .filter(
-        (complex) =>
-          selectedDistrict === "서울 전체" ||
-          complex.record.district === selectedDistrict,
-      )
-      .flatMap((complex) => {
-        const record = applyAreaPriceFilter(complex.record, selectedArea === "all" ? null : area, priceBand);
-        if (!record) return [];
-        const periodTrades = complex.periodTrades.filter((trade) =>
-          selectedArea === "all" || (trade.area >= area.min && trade.area < area.max));
-        return [{ ...complex, record, periodTrades }];
-      })
-      .filter((complex) => {
-        if (selectedMoveInYear === "all") return true;
-        if (selectedMoveInYear === "unknown") {
-          return complex.record.buildYear === null;
-        }
-        return Boolean(
-          complex.record.buildYear &&
-            complex.record.buildYear >= moveInYear.min &&
-            complex.record.buildYear < moveInYear.max,
-        );
-      })
-
-      .flatMap((complex) => {
-        const station = selectNearbyStation(getNearbyStations(complex.record.id), selectedSubways, stationRange.max);
-        if ((selectedSubways.length || selectedStationRange !== "all") && !station) return [];
-        return [{ ...complex, station }];
-      })
-      .filter((complex) =>
-        selectedWorkplaces.every((workplaceId) =>
-          hasDirectWorkplaceAccess(complex.record.id, workplaceId),
-        ),
-      )
-      .filter((complex) => {
-        if (!keyword) return true;
-        return `${complex.record.district} ${complex.record.dong} ${complex.record.name} ${complex.record.address}`
-          .toLowerCase()
-          .includes(keyword);
-      });
-
+    const filteredComplexes = transitResults.matched;
     return filteredComplexes
       .map<RankedComplexResult>((complex) => ({
         ...complex,
@@ -425,20 +391,7 @@ export default function Home() {
         }
         return compareComplexes(left.record, right.record, sortMode);
       });
-  }, [
-    mergedComplexes,
-    selectedDistrict,
-    selectedArea,
-    selectedMoveInYear,
-    selectedPriceBand,
-    selectedStationRange,
-    selectedWorkplace1,
-    selectedWorkplace2,
-    selectedSubway1,
-    selectedSubway2,
-    deferredSearch,
-    sortMode,
-  ]);
+  }, [transitResults, selectedWorkplace1, sortMode]);
 
   const summary = useMemo(() => {
     const prices = complexes
@@ -808,7 +761,7 @@ export default function Home() {
 
           <div className="finder-filter-group finder-access-filter">
             <span className="finder-filter-title">인근 지하철역 선택</span>
-            <small className="finder-filter-note">단지·역사 좌표 간 직선거리 · 역 미선택 시 가장 가까운 역, 선택 시 해당 역 기준(2곳은 하나 이상 충족). 반경 1.5km 내 역만 조회합니다. 좌표 확인 {TRANSIT_COVERAGE.geocodedComplexes.toLocaleString()}/{TRANSIT_COVERAGE.totalComplexes.toLocaleString()}개 · 미확인 단지는 역·거리·직장 필터에서 제외됩니다.</small>
+            <small className="finder-filter-note">단지·역사 좌표 간 직선거리 · 역 미선택 시 가장 가까운 역, 선택 시 해당 역 기준(2곳은 하나 이상 충족). 반경 1.5km 내 역만 조회합니다. 직장 2곳은 모두 직통 접근이 가능해야 합니다. 좌표 미확인으로 제외된 단지는 결과 상단에서 따로 확인할 수 있습니다.</small>
             <div className="finder-select-pair">
               <label>
                 <span>지하철 1</span>
@@ -932,6 +885,16 @@ export default function Home() {
             </small>
           </div>
 
+          {(masterLoadState === "ready" || masterComplexes.length > 0) && (
+            <TransitCoverageNotice
+              key={JSON.stringify([selectedDistrict, selectedArea, selectedMoveInYear, selectedPriceBand,
+                selectedStationRange, selectedWorkplace1, selectedWorkplace2, selectedSubway1, selectedSubway2, deferredSearch])}
+              coverage={transitResults.coverage}
+              unverified={transitResults.unverified.map(complex => complex.record)}
+              onSelect={setSelectedComplex}
+            />
+          )}
+
           {masterLoadState === "loading" && !masterComplexes.length ? (
             <div className="finder-empty-state" role="status">
               <span aria-hidden="true">…</span>
@@ -1002,7 +965,7 @@ export default function Home() {
                                   <small>직선 {Math.round(complex.station.distanceMeters)}m</small>
                                 </>
                               ) : (
-                                <span>좌표 미확인 또는 1.5km 내 역 없음</span>
+                                <span>{stationAvailabilityMessage(record.id)}</span>
                               )}
                             </div>
                             {(selectedWorkplace1 || selectedWorkplace2) && (
@@ -1084,8 +1047,8 @@ export default function Home() {
           ) : (
             <div className="finder-empty-state">
               <span aria-hidden="true">⌕</span>
-              <h3>조건에 맞는 단지가 없습니다.</h3>
-              <p>지역이나 가격·면적 범위를 넓혀 다시 확인해보세요.</p>
+              <h3>{transitResults.coverage.active ? "확인된 좌표에서 교통 조건을 충족하는 단지가 없습니다." : "조건에 맞는 단지가 없습니다."}</h3>
+              <p>{transitResults.unverified.length ? `좌표 미확인 ${transitResults.unverified.length.toLocaleString()}개는 위 확인 필요 목록에서 별도로 확인하세요.` : "지역이나 가격·면적 범위를 넓혀 다시 확인해보세요."}</p>
               <button type="button" onClick={resetFilters}>전체 조건으로 보기</button>
             </div>
           )}

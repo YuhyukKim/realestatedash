@@ -19,7 +19,10 @@ const cache = new Map<string, NearbyStation[]>();
 
 export function getComplexCoordinates(id: string): Coordinate | null {
   const point = complexPoints[id];
-  return point ? { latitude: point[0], longitude: point[1] } : null;
+  return Array.isArray(point) && point.length === 2 &&
+    Number.isFinite(point[0]) && Number.isFinite(point[1]) &&
+    point[0] >= 37.4 && point[0] <= 37.75 && point[1] >= 126.7 && point[1] <= 127.25
+    ? { latitude: point[0], longitude: point[1] } : null;
 }
 
 export function straightLineMeters(a: Coordinate, b: Coordinate): number {
@@ -50,4 +53,12 @@ export function selectNearbyStation(stations: readonly NearbyStation[], selected
   return stations.filter((station) =>
     (!selectedKeys.length || selectedKeys.includes(station.key ?? "")) && station.distanceMeters <= maxMeters,
   ).sort((a, b) => a.distanceMeters - b.distanceMeters)[0] ?? null;
+}
+
+/** Distinguish absent coordinates from a measured radius with no registered station. */
+export function stationAvailabilityMessage(complexId: string): string {
+  if (!getComplexCoordinates(complexId)) return "단지 좌표 미확인 · 교통조건 확인 필요";
+  return getNearbyStations(complexId).length
+    ? "좌표 확인 · 인근 등록 역 정보 있음"
+    : "좌표 확인 · 반경 1.5km 내 등록된 역 없음";
 }

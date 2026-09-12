@@ -16,7 +16,7 @@ import type {
 import { NaverMap } from "./naver-map";
 import { formatPrice, formatRent } from "./price-format";
 import type { PlacesResponse } from "./place-types";
-import { getNearbyStations, STATION_DISTANCE_NOTE } from "./stations";
+import { getNearbyStations, stationAvailabilityMessage, STATION_DISTANCE_NOTE } from "./stations";
 
 type DetailPeriod = 1 | 3 | 5 | 10 | "all";
 type ChartMetric = "sale" | "jeonse" | "ratio";
@@ -859,7 +859,7 @@ export default function ComplexDetailPanel({
               ))}
             </div>
           ) : (
-            <p className="detail-station-empty">단지 좌표가 미확인이거나 반경 1.5km 내 확인된 역이 없습니다.</p>
+            <p className="detail-station-empty">{stationAvailabilityMessage(complex.id)}</p>
           )}
           {workplaceAccess.length ? (
             <div className="detail-workplace-access">
