@@ -1,6 +1,7 @@
 "use client";
 
 import { apiFetch } from "./api-client";
+import { usePanelFocus } from "./use-panel-focus";
 
 import { emptyTradeMessage, rentPeriodSupported } from "../lib/trade-coverage.mjs";
 
@@ -28,6 +29,7 @@ type Props = {
   endMonth: string;
   workplaceIds?: WorkplaceId[];
   onClose: () => void;
+  docked?: boolean;
 };
 
 const SALE_FIRST_MONTH = "200601";
@@ -86,7 +88,7 @@ function chunkRanges(
 }
 
 function formatStationDistance(meters: number) {
-  return meters >= 1000 ? `${(meters / 1000).toFixed(1)}km` : `${meters}m`;
+  return meters >= 1000 ? `${(meters / 1000).toFixed(1)}km` : `${Math.round(meters)}m`;
 }
 
 function naverMapSearchUrl(query: string) {
@@ -496,6 +498,7 @@ export default function ComplexDetailPanel({
   endMonth,
   workplaceIds = [],
   onClose,
+  docked = false,
 }: Props) {
   const [period, setPeriod] = useState<DetailPeriod>(1);
   const [chartMetric, setChartMetric] = useState<ChartMetric>("sale");
@@ -524,37 +527,7 @@ export default function ComplexDetailPanel({
   const [fetchedAt, setFetchedAt] = useState<string | null>(null);
   const panelRef = useRef<HTMLElement>(null);
 
-  useEffect(() => {
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    panelRef.current?.focus();
-
-    function onKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") onClose();
-      if (event.key !== "Tab" || !panelRef.current) return;
-      const focusable = Array.from(
-        panelRef.current.querySelectorAll<HTMLElement>(
-          'button:not([disabled]), [href], input:not([disabled]), [tabindex]:not([tabindex="-1"])',
-        ),
-      );
-      if (!focusable.length) return;
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-      }
-    }
-
-    window.addEventListener("keydown", onKeyDown);
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      window.removeEventListener("keydown", onKeyDown);
-    };
-  }, [onClose]);
+  usePanelFocus(panelRef, onClose, !docked);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -720,15 +693,15 @@ export default function ComplexDetailPanel({
 
   return (
     <div
-      className="detail-backdrop"
+      className={docked ? "detail-docked" : "detail-backdrop"}
       onMouseDown={(event) => {
-        if (event.target === event.currentTarget) onClose();
+        if (!docked && event.target === event.currentTarget) onClose();
       }}
     >
       <section
         className="complex-detail-panel"
-        role="dialog"
-        aria-modal="true"
+        role={docked ? "region" : "dialog"}
+        aria-modal={docked ? undefined : true}
         aria-labelledby="complex-detail-title"
         ref={panelRef}
         tabIndex={-1}
@@ -760,6 +733,12 @@ export default function ComplexDetailPanel({
           </button>
         </header>
 
+        <nav className="detail-jump-nav" aria-label="단지 상세 탐색">
+          {[["trades","실거래"],["location","지도"],["transit","교통"],["schools","학교"]].map(([key,label]) =>
+            <button type="button" key={key} onClick={() => {
+              panelRef.current?.querySelector(`[data-detail-section="${key}"]`)?.scrollIntoView({block:"start", behavior:"instant"});
+            }}>{label}</button>)}
+        </nav>
         <div className={`detail-source ${mode}`}>
           <span>
             {mode === "stored" ? "저장 자료" : mode === "partial" ? "일부 수집" : "미확인"}
@@ -767,6 +746,7 @@ export default function ComplexDetailPanel({
           <p>{message}{fetchedAt ? ` · 최근 수집 ${new Date(fetchedAt).toLocaleString("ko-KR", { timeZone: "Asia/Seoul" })}` : ""}</p>
         </div>
 
+        <p className="detail-area-context">{areaCaption} · {period === "all" ? "전체" : `${period}년`} 조회 범위 내 최근 거래</p>
         <section className="detail-summary" aria-label="단지 최근 가격 요약">
           <article>
             <span>최근 매매가</span>
@@ -787,182 +767,7 @@ export default function ComplexDetailPanel({
           </article>
         </section>
 
-        <section className="detail-location" aria-labelledby="detail-location-title">
-          <div className="detail-section-heading">
-            <div className="detail-section-heading-main">
-              <span className="detail-section-index">01</span>
-              <div>
-                <h3 id="detail-location-title">위치 지도</h3>
-                <p>{locationQuery}</p>
-              </div>
-            </div>
-            <span className="detail-section-label">LOCATION MAP</span>
-          </div>
-          <div className="detail-map-layout">
-            <NaverMap
-              query={locationQuery}
-              apartment={complex.apartment}
-              district={complex.district}
-              dong={complex.dong}
-              externalUrl={naverMapSearchUrl(locationQuery)}
-            />
-            <div className="detail-map-copy">
-              <span>NAVER DYNAMIC MAP</span>
-              <strong>{complex.apartment}</strong>
-              <p>
-                단지명과 법정동 주소로 찾은 위치입니다. 동일 명칭 단지가 있을 수 있으므로
-                상세 위치와 길찾기는 네이버지도에서 한 번 더 확인해 주세요.
-              </p>
-              <div>
-                <a
-                  href={naverMapSearchUrl(locationQuery)}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  네이버지도에서 열기
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="detail-stations" aria-labelledby="nearby-stations-title">
-          <div className="detail-section-heading">
-            <div className="detail-section-heading-main">
-              <span className="detail-section-index">02</span>
-              <div>
-                <h3 id="nearby-stations-title">교통정보</h3>
-                <p>인근 지하철역과 선택 직장 직통 노선</p>
-              </div>
-            </div>
-            <span className="detail-section-label">SUBWAY ACCESS</span>
-          </div>
-          {nearbyStations.length ? (
-            <div className="detail-station-list">
-              {nearbyStations.map((station, index) => (
-                <article key={station.key ?? `${station.name}-${station.lines}`}>
-                  <span className="station-rank">0{index + 1}</span>
-                  <div className="station-main">
-                    <strong>{station.name}역</strong>
-                    <span>{station.lines}</span>
-                  </div>
-                  <div className="station-distance">
-                    <strong>직선 {formatStationDistance(station.distanceMeters)}</strong>
-                    <span>도보 약 {station.walkMinutes}분</span>
-                  </div>
-                  <a
-                    href={naverMapSearchUrl(`${locationQuery} ${station.name}역`)}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    네이버지도
-                  </a>
-                </article>
-              ))}
-            </div>
-          ) : (
-            <p className="detail-station-empty">{stationAvailabilityMessage(complex.id)}</p>
-          )}
-          {workplaceAccess.length ? (
-            <div className="detail-workplace-access">
-              {workplaceAccess.map(({ workplace, match }) => (
-                <article key={workplace.id} className={match ? "available" : "unavailable"}>
-                  <div>
-                    <span>{match ? "DIRECT LINE" : "ROUTE CHECK"}</span>
-                    <strong>{workplace.name}</strong>
-                  </div>
-                  <p>
-                    {match
-                      ? `${match.station.name}역에서 ${match.sharedLines.join("·")} 환승 없이 연결`
-                      : "현재 생활권 역 정보에서 직통 노선이 확인되지 않습니다."}
-                  </p>
-                  <a
-                    href={naverMapSearchUrl(
-                      `${locationQuery} ${workplace.name} 대중교통`,
-                    )}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    네이버지도 경로 확인
-                  </a>
-                </article>
-              ))}
-            </div>
-          ) : (
-            <p className="detail-workplace-hint">
-              대시보드에서 직장 1·2를 선택하면 이곳에 직통 가능 노선을 함께 표시합니다.
-            </p>
-          )}
-          <p className="detail-station-note">※ {nearbyStationsNote}<br />출처: 서울특별시 <a href="https://data.seoul.go.kr/dataList/OA-15818/S/1/datasetView.do" target="_blank" rel="noreferrer">공동주택 정보</a> · <a href="https://data.seoul.go.kr/dataList/OA-21232/S/1/datasetView.do" target="_blank" rel="noreferrer">역사마스터</a> (공공누리 1유형)</p>
-        </section>
-
-        <section className="detail-schools" aria-labelledby="nearby-schools-title">
-          <div className="detail-section-heading">
-            <div className="detail-section-heading-main">
-              <span className="detail-section-index">03</span>
-              <div>
-                <h3 id="nearby-schools-title">인근 학교정보</h3>
-                <p>{places?.source.name ?? "서울시교육청 학교정보"} · {schoolScopeLabel}</p>
-              </div>
-            </div>
-            <span className="detail-section-label">SCHOOL INFO</span>
-          </div>
-          {placesLoading ? (
-            <div className="detail-school-loading" aria-live="polite">
-              학교정보를 불러오는 중입니다.
-            </div>
-          ) : places?.schools.length ? (
-            <div className="detail-school-list">
-              {places.schools.map((school) => (
-                <article key={school.code}>
-                  <div>
-                    <span>{school.level}</span>
-                    {school.foundation && <em>{school.foundation}</em>}
-                  </div>
-                  <strong>{school.name}</strong>
-                  <p>{school.address}</p>
-                  <footer>
-                    {school.phone && <span>{school.phone}</span>}
-                    {school.homepage && (
-                      <a href={school.homepage} target="_blank" rel="noreferrer">
-                        홈페이지
-                      </a>
-                    )}
-                    <a
-                      href={naverMapSearchUrl(`${school.name} ${school.address}`)}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      지도
-                    </a>
-                  </footer>
-                </article>
-              ))}
-            </div>
-          ) : (
-            <div className="detail-school-empty">
-              <p>{placesError || places?.note || "표시할 학교정보가 없습니다."}</p>
-              <a
-                href={naverMapSearchUrl(`${complex.district} ${complex.dong} 학교`)}
-                target="_blank"
-                rel="noreferrer"
-              >
-                지도에서 주변 학교 확인
-              </a>
-            </div>
-          )}
-          {places?.note && places.schools.length > 0 && (
-            <p className="detail-school-note">
-              ※ {places.note}
-              <span aria-hidden="true"> · </span>
-              <a href={places.source.url} target="_blank" rel="noreferrer">
-                공공데이터 원문
-              </a>
-            </p>
-          )}
-        </section>
-
-        <section className="detail-chart-section">
+        <section className="detail-chart-section" data-detail-section="trades">
           <div className="detail-toolbar">
             <div>
               <span className="detail-control-label">전용면적</span>
@@ -1088,6 +893,181 @@ export default function ComplexDetailPanel({
             complete={rentPeriodSupported(endMonth) && !loading && !error && !missing.rent}
           />
         </div>
+
+        <section className="detail-location" data-detail-section="location" aria-labelledby="detail-location-title">
+          <div className="detail-section-heading">
+            <div className="detail-section-heading-main">
+              <span className="detail-section-index">01</span>
+              <div>
+                <h3 id="detail-location-title">위치 지도</h3>
+                <p>{locationQuery}</p>
+              </div>
+            </div>
+            <span className="detail-section-label">LOCATION MAP</span>
+          </div>
+          <div className="detail-map-layout">
+            <NaverMap
+              query={locationQuery}
+              apartment={complex.apartment}
+              district={complex.district}
+              dong={complex.dong}
+              externalUrl={naverMapSearchUrl(locationQuery)}
+            />
+            <div className="detail-map-copy">
+              <span>NAVER DYNAMIC MAP</span>
+              <strong>{complex.apartment}</strong>
+              <p>
+                단지명과 법정동 주소로 찾은 위치입니다. 동일 명칭 단지가 있을 수 있으므로
+                상세 위치와 길찾기는 네이버지도에서 한 번 더 확인해 주세요.
+              </p>
+              <div>
+                <a
+                  href={naverMapSearchUrl(locationQuery)}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  네이버지도에서 열기
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="detail-stations" data-detail-section="transit" aria-labelledby="nearby-stations-title">
+          <div className="detail-section-heading">
+            <div className="detail-section-heading-main">
+              <span className="detail-section-index">02</span>
+              <div>
+                <h3 id="nearby-stations-title">교통정보</h3>
+                <p>인근 지하철역과 선택 직장 직통 노선</p>
+              </div>
+            </div>
+            <span className="detail-section-label">SUBWAY ACCESS</span>
+          </div>
+          {nearbyStations.length ? (
+            <div className="detail-station-list">
+              {nearbyStations.map((station, index) => (
+                <article key={station.key ?? `${station.name}-${station.lines}`}>
+                  <span className="station-rank">0{index + 1}</span>
+                  <div className="station-main">
+                    <strong>{station.name}역</strong>
+                    <span>{station.lines}</span>
+                  </div>
+                  <div className="station-distance">
+                    <strong>직선 {formatStationDistance(station.distanceMeters)}</strong>
+                    <span>도보 약 {station.walkMinutes}분</span>
+                  </div>
+                  <a
+                    href={naverMapSearchUrl(`${locationQuery} ${station.name}역`)}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    네이버지도
+                  </a>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <p className="detail-station-empty">{stationAvailabilityMessage(complex.id)}</p>
+          )}
+          {workplaceAccess.length ? (
+            <div className="detail-workplace-access">
+              {workplaceAccess.map(({ workplace, match }) => (
+                <article key={workplace.id} className={match ? "available" : "unavailable"}>
+                  <div>
+                    <span>{match ? "DIRECT LINE" : "ROUTE CHECK"}</span>
+                    <strong>{workplace.name}</strong>
+                  </div>
+                  <p>
+                    {match
+                      ? `${match.station.name}역에서 ${match.sharedLines.join("·")} 환승 없이 연결`
+                      : "현재 생활권 역 정보에서 직통 노선이 확인되지 않습니다."}
+                  </p>
+                  <a
+                    href={naverMapSearchUrl(
+                      `${locationQuery} ${workplace.name} 대중교통`,
+                    )}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    네이버지도 경로 확인
+                  </a>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <p className="detail-workplace-hint">
+              대시보드에서 직장 1·2를 선택하면 이곳에 직통 가능 노선을 함께 표시합니다.
+            </p>
+          )}
+          <p className="detail-station-note">※ {nearbyStationsNote}<br />출처: 서울특별시 <a href="https://data.seoul.go.kr/dataList/OA-15818/S/1/datasetView.do" target="_blank" rel="noreferrer">공동주택 정보</a> · <a href="https://data.seoul.go.kr/dataList/OA-21232/S/1/datasetView.do" target="_blank" rel="noreferrer">역사마스터</a> (공공누리 1유형)</p>
+        </section>
+
+        <section className="detail-schools" data-detail-section="schools" aria-labelledby="nearby-schools-title">
+          <div className="detail-section-heading">
+            <div className="detail-section-heading-main">
+              <span className="detail-section-index">03</span>
+              <div>
+                <h3 id="nearby-schools-title">인근 학교정보</h3>
+                <p>{places?.source.name ?? "서울시교육청 학교정보"} · {schoolScopeLabel}</p>
+              </div>
+            </div>
+            <span className="detail-section-label">SCHOOL INFO</span>
+          </div>
+          {placesLoading ? (
+            <div className="detail-school-loading" aria-live="polite">
+              학교정보를 불러오는 중입니다.
+            </div>
+          ) : places?.schools.length ? (
+            <div className="detail-school-list">
+              {places.schools.map((school) => (
+                <article key={school.code}>
+                  <div>
+                    <span>{school.level}</span>
+                    {school.foundation && <em>{school.foundation}</em>}
+                  </div>
+                  <strong>{school.name}</strong>
+                  <p>{school.address}</p>
+                  <footer>
+                    {school.phone && <span>{school.phone}</span>}
+                    {school.homepage && (
+                      <a href={school.homepage} target="_blank" rel="noreferrer">
+                        홈페이지
+                      </a>
+                    )}
+                    <a
+                      href={naverMapSearchUrl(`${school.name} ${school.address}`)}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      지도
+                    </a>
+                  </footer>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <div className="detail-school-empty">
+              <p>{placesError || places?.note || "표시할 학교정보가 없습니다."}</p>
+              <a
+                href={naverMapSearchUrl(`${complex.district} ${complex.dong} 학교`)}
+                target="_blank"
+                rel="noreferrer"
+              >
+                지도에서 주변 학교 확인
+              </a>
+            </div>
+          )}
+          {places?.note && places.schools.length > 0 && (
+            <p className="detail-school-note">
+              ※ {places.note}
+              <span aria-hidden="true"> · </span>
+              <a href={places.source.url} target="_blank" rel="noreferrer">
+                공공데이터 원문
+              </a>
+            </p>
+          )}
+        </section>
 
         <p className="detail-footnote">
           실거래 신고 자료는 취소·정정될 수 있으며, 동·호수 정보는 개인정보 보호를 위해

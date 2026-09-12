@@ -36,7 +36,9 @@ import { getNearbyStations, stationAvailabilityMessage, type NearbyStation } fro
 import { filterApartmentCandidates, filterByTransit } from "./apartment-filter";
 import { TransitCoverageNotice } from "./transit-coverage";
 
-import { latestSalesByArea, type AreaSaleSummary } from "./area-sales";
+import { latestSalesByArea, applyAreaPriceFilter, type AreaSaleSummary } from "./area-sales";
+import { useShortlist } from "./use-shortlist";
+import { ComparisonPanel } from "./comparison-panel";
 
 type DataMode = "unavailable" | "live" | "partial" | "stored";
 type MasterLoadState = "loading" | "ready" | "error";
@@ -225,6 +227,19 @@ export default function Home() {
   const [selectedSubway1, setSelectedSubway1] = useState("");
   const [selectedSubway2, setSelectedSubway2] = useState("");
   const [visibleResultLimit, setVisibleResultLimit] = useState(60);
+  const [viewMode, setViewMode] = useState<"list" | "table">("list");
+  const [favoritesOnly, setFavoritesOnly] = useState(false);
+  const [filtersOpen, setFiltersOpen] = useState(false);
+  const [wideScreen, setWideScreen] = useState(false);
+  const [compareOpen, setCompareOpen] = useState(false);
+  const shortlist = useShortlist();
+  const favoriteSet = useMemo(() => new Set(shortlist.favorites), [shortlist.favorites]);
+  useEffect(() => {
+    const media = window.matchMedia("(min-width: 1280px)");
+    const update = () => setWideScreen(media.matches);
+    update(); media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
   const [sortMode, setSortMode] =
     useState<ApartmentSortMode>("price-desc");
   const [search, setSearch] = useState("");
@@ -349,7 +364,8 @@ export default function Home() {
     const moveInYear = MOVE_IN_YEAR_BANDS.find(band => band.id === selectedMoveInYear)!;
     const price = PRICE_BANDS.find(band => band.id === selectedPriceBand);
     const stationRange = STATION_RANGES.find(range => range.id === selectedStationRange)!;
-    const candidates = filterApartmentCandidates(mergedComplexes, {
+    const candidates = filterApartmentCandidates(favoritesOnly
+      ? mergedComplexes.filter(complex => favoriteSet.has(complex.key)) : mergedComplexes, {
       district: selectedDistrict,
       area: selectedArea === "all" ? null : area,
       price,
@@ -362,7 +378,7 @@ export default function Home() {
       workplaces: [selectedWorkplace1, selectedWorkplace2].filter((value): value is WorkplaceId => Boolean(value)),
     });
   }, [mergedComplexes, selectedDistrict, selectedArea, selectedMoveInYear, selectedPriceBand,
-    selectedStationRange, selectedWorkplace1, selectedWorkplace2, selectedSubway1, selectedSubway2, deferredSearch]);
+    selectedStationRange, selectedWorkplace1, selectedWorkplace2, selectedSubway1, selectedSubway2, deferredSearch, favoritesOnly, favoriteSet]);
 
   const complexes = useMemo(() => {
     const filteredComplexes = transitResults.matched;
@@ -455,38 +471,56 @@ export default function Home() {
     return bands.map((band) => ({ ...band, ratio: (band.count / max) * 100 }));
   }, [complexes]);
 
-  const activeConditions = useMemo(() => {
-    const selectedSubways = [selectedSubway1, selectedSubway2].filter(Boolean);
-    const conditions = [
-      selectedDistrict,
-      AREA_BANDS.find((band) => band.id === selectedArea)?.label,
-      selectedMoveInYear === "all"
-        ? null
-        : `입주·준공 ${MOVE_IN_YEAR_BANDS.find((band) => band.id === selectedMoveInYear)?.label}`,
-      selectedPriceBand === "all"
-        ? null
-        : PRICE_BANDS.find((band) => band.id === selectedPriceBand)?.label,
-      selectedStationRange === "all"
-        ? null
-        : `역 ${STATION_RANGES.find((range) => range.id === selectedStationRange)?.label} 이내`,
-      selectedWorkplace1 ? WORKPLACE_BY_ID[selectedWorkplace1].label : null,
-      selectedWorkplace2 ? WORKPLACE_BY_ID[selectedWorkplace2].label : null,
-      selectedSubways.length
-        ? `인근역 ${selectedSubways.map((name) => `${name}역`).join(" 또는 ")}`
-        : null,
-    ];
-    return conditions.filter(Boolean) as string[];
-  }, [
-    selectedDistrict,
-    selectedArea,
-    selectedMoveInYear,
-    selectedPriceBand,
-    selectedStationRange,
-    selectedWorkplace1,
-    selectedWorkplace2,
-    selectedSubway1,
-    selectedSubway2,
-  ]);
+  const activeConditions: {id: string; label: string; clear: () => void}[] = [
+    ...(search.trim() ? [{id:"search",label:search.trim(),clear:()=>setSearch("")}] : []),
+    ...(selectedDistrict !== "서울 전체" ? [{id:"district",label:selectedDistrict,clear:()=>setSelectedDistrict("서울 전체")}] : []),
+    ...(selectedArea !== "all" ? [{id:"area",label:AREA_BANDS.find(b=>b.id===selectedArea)!.label,clear:()=>setSelectedArea("all")}] : []),
+    ...(selectedPriceBand !== "all" ? [{id:"price",label:PRICE_BANDS.find(b=>b.id===selectedPriceBand)!.label,clear:()=>setSelectedPriceBand("all")}] : []),
+    ...(selectedMoveInYear !== "all" ? [{id:"year",label:"입주·준공 "+MOVE_IN_YEAR_BANDS.find(b=>b.id===selectedMoveInYear)!.label,clear:()=>setSelectedMoveInYear("all")}] : []),
+    ...(selectedStationRange !== "all" ? [{id:"distance",label:"역 "+STATION_RANGES.find(b=>b.id===selectedStationRange)!.label+" 이내",clear:()=>setSelectedStationRange("all")}] : []),
+    ...(selectedWorkplace1 ? [{id:"work1",label:"직장1 "+WORKPLACE_BY_ID[selectedWorkplace1].name,clear:()=>{
+      setSelectedWorkplace1(""); if (sortMode.startsWith("workplace")) setSortMode("price-desc");
+    }}] : []),
+    ...(selectedWorkplace2 ? [{id:"work2",label:"직장2 "+WORKPLACE_BY_ID[selectedWorkplace2].name,clear:()=>setSelectedWorkplace2("")}] : []),
+    ...(selectedSubway1 ? [{id:"station1",label:"인근역 "+(STATION_OPTIONS.find(s=>s.value===selectedSubway1)?.label ?? selectedSubway1),clear:()=>setSelectedSubway1("")}] : []),
+    ...(selectedSubway2 ? [{id:"station2",label:"인근역 "+(STATION_OPTIONS.find(s=>s.value===selectedSubway2)?.label ?? selectedSubway2),clear:()=>setSelectedSubway2("")}] : []),
+    ...(favoritesOnly ? [{id:"favorites",label:"관심 단지만",clear:()=>setFavoritesOnly(false)}] : []),
+  ];
+  useEffect(() => { setVisibleResultLimit(60); }, [selectedDistrict, selectedArea, selectedMoveInYear,
+    selectedPriceBand, selectedStationRange, selectedWorkplace1, selectedWorkplace2,
+    selectedSubway1, selectedSubway2, deferredSearch, favoritesOnly, sortMode, viewMode]);
+
+  const compareRecords = useMemo(() => {
+    const index = new Map(mergedComplexes.map(c => [c.key, c.record]));
+    const area = selectedArea === "all" ? null : AREA_BANDS.find(b => b.id === selectedArea)!;
+    return shortlist.compareIds.flatMap(id => {
+      const record = index.get(id);
+      if (!record) return [];
+      return [applyAreaPriceFilter(record, area, undefined) ?? {...record, latestSale:null, areaSales:[], areas:[]}];
+    });
+  }, [mergedComplexes, shortlist.compareIds, selectedArea]);
+  const selectedDetailSeed = useMemo(() => selectedComplex ? toComplexDetailSeed(selectedComplex) : null, [selectedComplex]);
+  const detailPanel = selectedComplex && selectedDetailSeed ? (
+    <Suspense fallback={<div className={wideScreen ? "finder-docked-loading" : "finder-detail-loading"} role="status">단지 상세 정보를 준비하고 있습니다.<button type="button" onClick={() => setSelectedComplex(null)}>닫기</button></div>}>
+      <ComplexDetailPanel key={selectedComplex.id} complex={selectedDetailSeed} endMonth={month}
+        docked={wideScreen}
+        workplaceIds={[selectedWorkplace1, selectedWorkplace2].filter((value): value is WorkplaceId => Boolean(value))}
+        onClose={() => setSelectedComplex(null)} />
+    </Suspense>
+  ) : null;
+  function resultActions(record: ComplexMasterRecord) {
+    const compared = shortlist.compareIds.includes(record.id);
+    return <div className="finder-card-actions">
+      <button type="button" disabled={!shortlist.storageReady} aria-pressed={favoriteSet.has(record.id)}
+        aria-label={record.name + " 관심 단지 " + (favoriteSet.has(record.id) ? "해제" : "저장")}
+        onClick={() => shortlist.toggleFavorite(record.id)}>
+        <span aria-hidden="true">{favoriteSet.has(record.id) ? "★" : "☆"}</span> 관심
+      </button>
+      <label><input type="checkbox" checked={compared}
+        disabled={!compared && shortlist.compareIds.length >= 3}
+        onChange={() => shortlist.toggleCompare(record.id)} aria-label={record.name + " 비교 선택"} />비교</label>
+    </div>;
+  }
 
   async function downloadExcel() {
     const XLSX = await import("xlsx");
@@ -550,10 +584,11 @@ export default function Home() {
     setVisibleResultLimit(60);
     setSortMode("price-desc");
     setSearch("");
+    setFavoritesOnly(false);
   }
 
   return (
-    <main className="dashboard-shell finder-layout">
+    <main className="dashboard-shell finder-layout explorer-layout">
       <header className="finder-topbar">
         <a className="finder-brand" href="#top" aria-label="내집어디 홈">
           <span className="finder-brand-mark" aria-hidden="true">집</span>
@@ -562,16 +597,21 @@ export default function Home() {
             <small>서울 아파트 찾기</small>
           </span>
         </a>
+        <div className="finder-header-tools">
+          <button className="finder-favorites-toggle" type="button" aria-pressed={favoritesOnly} onClick={() => setFavoritesOnly(value => !value)}>
+            ☆ 관심 단지 <strong>{shortlist.favorites.length}</strong>
+          </button>
         <div className={`finder-data-status ${mode}`}>
           <span aria-hidden="true" />
           {loading ? "자료 불러오는 중" : mode === "live" ? "실거래 확인" : mode === "partial" ? "일부 지역 확인" : mode === "stored" ? "저장된 매매" : "매매 자료 미확인"}
+        </div>
         </div>
       </header>
 
       <section className="finder-intro" id="top">
         <div>
-          <p className="finder-kicker">서울 아파트 탐색</p>
-          <h1>내 조건에 맞는 <em>집 찾기</em></h1>
+          <p className="finder-kicker">내집마련을 위한 서울 아파트 탐색</p>
+          <h1>조건으로 찾고, <em>나란히 비교하세요.</em></h1>
           <p>
             공식 서울 아파트 단지 마스터에서 가격·면적·입주·준공년도·직장 직통권으로
             후보를 찾습니다. 등록 단지와 실거래 수집 범위는 서로 다릅니다.
@@ -596,8 +636,8 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="finder-workspace">
-        <aside className="finder-filter-panel" aria-label="아파트 검색 조건">
+      <div className={`finder-workspace${selectedComplex && wideScreen ? " is-inspecting" : ""}`}>
+        <aside className={`finder-filter-panel${filtersOpen ? " filters-open" : ""}`} aria-label="아파트 검색 조건">
           <div className="finder-panel-heading">
             <div>
               <span>01</span>
@@ -606,16 +646,20 @@ export default function Home() {
             <button type="button" onClick={resetFilters}>초기화</button>
           </div>
 
+          <button type="button" className="finder-filter-toggle" aria-expanded={filtersOpen} aria-controls="finder-filter-body"
+            onClick={() => setFiltersOpen(value => !value)}>상세 조건 {activeConditions.length ? `· ${activeConditions.length}개 적용` : ""} <span aria-hidden="true">{filtersOpen ? "−" : "+"}</span></button>
           <label className="finder-search-field">
             <span aria-hidden="true">⌕</span>
             <input
               type="search"
+              aria-label="주소 또는 단지명 검색"
               value={search}
               onChange={(event) => setSearch(event.target.value)}
               placeholder="주소 또는 단지명 검색"
             />
           </label>
 
+          <div className="finder-filter-body" id="finder-filter-body">
           <div className="finder-filter-group">
             <label htmlFor="district-select">지역</label>
             <select
@@ -836,6 +880,8 @@ export default function Home() {
             <span aria-hidden="true">→</span>
           </button>
           <p className="finder-filter-note">새로고침은 저장 자료만 다시 읽습니다. 공공데이터 수집은 별도의 관리자 작업으로 진행됩니다.</p>
+          <button type="button" className="finder-mobile-apply" onClick={() => setFiltersOpen(false)}>조건 적용 · {complexes.length.toLocaleString()}개 결과 보기</button>
+          </div>
         </aside>
 
         <section className="finder-results" id="finder-results">
@@ -877,18 +923,30 @@ export default function Home() {
             </label>
           </header>
 
+          <div className="finder-view-toolbar">
+            <div role="group" aria-label="결과 보기 방식">
+              <button type="button" aria-pressed={viewMode === "list"} onClick={() => setViewMode("list")}>목록</button>
+              <button type="button" aria-pressed={viewMode === "table"} onClick={() => setViewMode("table")}>비교표</button>
+            </div>
+            <label><input type="checkbox" checked={favoritesOnly} onChange={e => setFavoritesOnly(e.target.checked)} />관심 단지만</label>
+            <small>☆ 관심 저장 · 최대 3개 비교</small>
+          </div>
+          {shortlist.storageWarning && <p className="finder-storage-warning" role="status">{shortlist.storageWarning}</p>}
           <div className="finder-condition-bar">
             <span>조회 조건</span>
             <div>
-              {activeConditions.map((condition) => (
-                <em key={condition}>{condition}</em>
-              ))}
+              {activeConditions.length ? activeConditions.map(condition => (
+                <button type="button" key={condition.id} onClick={condition.clear} aria-label={condition.label + " 조건 해제"}>
+                  {condition.label} <span aria-hidden="true">×</span>
+                </button>
+              )) : <span className="finder-all-conditions">서울 전체 · 조건 제한 없음</span>}
             </div>
             <small>
               가격 확인 {summary.count.toLocaleString()}개 · {periodTradeLabel(selectedDistrict, refreshedDistricts, summary.periodTradeCount)}
             </small>
           </div>
 
+          <p className="finder-coverage-summary">등록 단지 {masterComplexes.length.toLocaleString()}개와 가격 확인 {summary.count.toLocaleString()}개는 다릅니다. 가격·면적 조건을 적용하면 미확인 자료는 제외됩니다.</p>
           {(masterLoadState === "ready" || masterComplexes.length > 0) && (
             <TransitCoverageNotice
               key={JSON.stringify([selectedDistrict, selectedArea, selectedMoveInYear, selectedPriceBand,
@@ -913,6 +971,27 @@ export default function Home() {
             </div>
           ) : complexes.length ? (
             <div className="finder-result-groups">
+              {viewMode === "table" ? <>
+                <div className="finder-table-scroll" role="region" aria-label="아파트 결과 비교표" tabIndex={0}>
+                  <table className="finder-result-table">
+                    <caption className="sr-only">선택 조건에 맞는 아파트의 매매가와 생활 조건 비교</caption>
+                    <thead><tr><th scope="col">단지 · 위치</th><th scope="col">최근 매매 · 계약일</th><th scope="col">거래 전용면적</th><th scope="col">입주·준공 / 세대수</th><th scope="col">인근역 · 직선거리</th><th scope="col">관심 · 비교</th></tr></thead>
+                    <tbody>{complexes.slice(0, visibleResultLimit).map(({record, station}) => {
+                      const area = record.areaSales?.find(s => s.date === record.latestSale?.date && s.price === record.latestSale?.price && record.areas.includes(s.area))?.area;
+                      return <tr key={record.id} className={selectedComplex?.id === record.id ? "is-selected" : ""}>
+                        <th scope="row"><button type="button" onClick={() => setSelectedComplex(record)} aria-label={record.name + " 표에서 상세 보기"}>{record.name}</button><small>{record.district} {record.dong}</small></th>
+                        <td><strong>{record.latestSale ? formatPrice(record.latestSale.price) : "가격 미확인"}</strong><small>{record.latestSale?.date ?? "저장 자료 미확인"}</small></td>
+                        <td>{area ? area.toFixed(1) + "㎡" : "미확인"}</td>
+                        <td>{record.buildYear ? record.buildYear + "년" : "연도 미확인"}<small>{record.households ? record.households.toLocaleString() + "세대" : "세대수 미확인"}</small></td>
+                        <td>{station ? <>{station.name}역<small>{Math.round(station.distanceMeters).toLocaleString()}m · {station.lines}</small></> : stationAvailabilityMessage(record.id)}</td>
+                        <td>{resultActions(record)}</td>
+                      </tr>;
+                    })}</tbody>
+                  </table>
+                </div>
+                {complexes.length > visibleResultLimit && <button type="button" className="finder-group-more" onClick={() => setVisibleResultLimit(n => n + 60)}>단지 더 보기 · {Math.min(60, complexes.length - visibleResultLimit)}개</button>}
+              </> : <>
+
               <section
                 className="finder-result-list"
                 aria-label="아파트 조회 결과"
@@ -934,6 +1013,7 @@ export default function Home() {
                         ? Math.max(...periodPrices)
                         : null;
                       return (
+                        <article className={`finder-result-item${selectedComplex?.id === record.id ? " is-selected" : ""}`} key={complex.key}>
                         <button
                           type="button"
                           className={`finder-complex-card${latestSale ? "" : " no-trade"}`}
@@ -1033,6 +1113,8 @@ export default function Home() {
                             <i aria-hidden="true">→</i>
                           </div>
                         </button>
+                        {resultActions(record)}
+                        </article>
                       );
                     })}
                 </div>
@@ -1047,22 +1129,25 @@ export default function Home() {
                   </button>
                 )}
               </section>
+              </>}
             </div>
           ) : (
             <div className="finder-empty-state">
               <span aria-hidden="true">⌕</span>
               <h3>{transitResults.coverage.active ? "확인된 좌표에서 교통 조건을 충족하는 단지가 없습니다." : "조건에 맞는 단지가 없습니다."}</h3>
+              {favoritesOnly && <p>저장한 관심 단지에 현재 검색 조건을 적용한 결과입니다. 관심 단지를 추가하거나 조건 칩을 해제해보세요.</p>}
               <p>{transitResults.unverified.length ? `좌표 미확인 ${transitResults.unverified.length.toLocaleString()}개는 위 확인 필요 목록에서 별도로 확인하세요.` : "지역이나 가격·면적 범위를 넓혀 다시 확인해보세요."}</p>
               <button type="button" onClick={resetFilters}>전체 조건으로 보기</button>
             </div>
           )}
         </section>
 
+        {selectedComplex && wideScreen ? <aside className="finder-detail-dock" aria-label="선택한 아파트 상세">{detailPanel}</aside> : (
         <aside className="finder-insight-panel" id="market-snapshot">
           <div className="finder-panel-heading compact">
             <div>
               <span>02</span>
-              <h2>시장 스냅샷</h2>
+              <h2>조회 결과 요약</h2>
             </div>
           </div>
 
@@ -1130,26 +1215,26 @@ export default function Home() {
             </small>
           </section>
         </aside>
+        )}
       </div>
+
+      {shortlist.compareIds.length > 0 && <section className="finder-compare-tray" aria-label="비교할 단지">
+        <div><strong>비교 후보 {shortlist.compareIds.length}/3</strong><small>검색 조건을 바꿔도 후보는 유지됩니다.</small></div>
+        <div className="finder-compare-names">{compareRecords.map(record => <button type="button" key={record.id} onClick={() => shortlist.toggleCompare(record.id)} aria-label={record.name + " 비교에서 제외"}>{record.name} <span aria-hidden="true">×</span></button>)}</div>
+        <button type="button" className="finder-compare-open" disabled={compareRecords.length < 2} onClick={() => { setSelectedComplex(null); setCompareOpen(true); }}>나란히 비교{compareRecords.length < 2 ? " · 2개부터" : ""}</button>
+        <button type="button" className="finder-compare-clear" onClick={shortlist.clearCompare}>비교 초기화</button>
+      </section>}
 
       <footer className="finder-footer">
         <p><strong>내집어디</strong></p>
         <p>K-apt와 한국부동산원 공시대상 아파트를 중복 정리한 공식 마스터 기준입니다. 전수 건축물대장은 아니며 실거래 신고는 취소·정정될 수 있습니다.</p>
       </footer>
 
-      {selectedComplex && (
-        <Suspense fallback={<div className="finder-detail-loading" role="status">단지 상세 정보를 준비하고 있습니다.<button type="button" onClick={() => setSelectedComplex(null)}>닫기</button></div>}>
-        <ComplexDetailPanel
-          key={selectedComplex.id}
-          complex={toComplexDetailSeed(selectedComplex)}
-          endMonth={month}
-          workplaceIds={[selectedWorkplace1, selectedWorkplace2].filter(
-            (value): value is WorkplaceId => Boolean(value),
-          )}
-          onClose={() => setSelectedComplex(null)}
-        />
-        </Suspense>
-      )}
+      {selectedComplex && !wideScreen && detailPanel}
+      {compareOpen && <ComparisonPanel records={compareRecords} month={month}
+        areaLabel={AREA_BANDS.find(b => b.id === selectedArea)!.label}
+        onClose={() => setCompareOpen(false)}
+        onSelect={record => { setCompareOpen(false); setSelectedComplex(record); }} />}
     </main>
   );
 }

@@ -4780,3 +4780,173 @@ footer strong {
   outline: 3px solid #2f72d6;
   outline-offset: 3px;
 }
+
+
+/* Exploration workspace: original identity, compact search, shortlist and comparison. */
+.explorer-layout { max-width:1920px; padding:0 24px 32px; background:#f4f6fa; }
+.explorer-layout .finder-topbar { min-height:68px; }
+.finder-header-tools { display:flex; align-items:center; gap:14px; }
+.finder-favorites-toggle { display:flex; gap:8px; align-items:center; min-height:42px; padding:8px 13px; border:1px solid #d1dae6; border-radius:8px; background:white; font-size:13px; cursor:pointer; }
+.finder-favorites-toggle[aria-pressed="true"] { background:#eaf2ff; border-color:#3479df; }
+.finder-favorites-toggle strong { border-radius:20px; padding:1px 7px; background:#edf1f7; }
+.explorer-layout .finder-intro { min-height:0; margin:14px 0; padding:20px 24px; gap:20px; border-radius:12px; }
+.explorer-layout .finder-intro::after { display:none; }
+.explorer-layout .finder-intro h1 { margin:5px 0 8px; font-family:inherit; font-size:26px; font-weight:750; line-height:1.35; }
+.explorer-layout .finder-intro h1 em { font-style:normal; }
+.explorer-layout .finder-intro > div:first-child > p:last-child { font-size:13px; max-width:650px; }
+.explorer-layout .finder-intro-stats { min-width:300px; }
+.explorer-layout .finder-intro-stats article { min-height:74px; padding:12px; }
+.explorer-layout .finder-intro-stats strong { font-size:23px; margin:6px 0; }
+.explorer-layout .finder-intro-stats small { display:none; }
+.explorer-layout .finder-workspace { grid-template-columns:248px minmax(0,1fr) 260px; gap:12px; }
+.explorer-layout .finder-results, .explorer-layout .finder-insight-panel, .explorer-layout .finder-filter-panel { min-width:0; border-radius:12px; border-color:#dbe2ec; }
+.explorer-layout .finder-filter-panel, .explorer-layout .finder-insight-panel { top:80px; max-height:calc(100dvh - 96px); }
+.explorer-layout .finder-filter-panel { padding:15px 12px; }
+.explorer-layout .finder-filter-note { font-size:12px; line-height:1.6; }
+.explorer-layout .finder-panel-heading { margin-bottom:12px; }
+.explorer-layout .finder-filter-group { margin-top:18px; }
+.explorer-layout .finder-filter-group select, .explorer-layout .finder-chip-grid button { font-size:12px; }
+.finder-filter-toggle, .finder-mobile-apply { display:none; }
+.explorer-layout .finder-results-heading { padding:18px 18px 12px; gap:12px; }
+.explorer-layout .finder-results-heading h2 { font-size:24px; font-family:inherit; }
+.finder-view-toolbar { display:flex; flex-wrap:wrap; gap:12px; align-items:center; padding:0 18px 14px; font-size:12px; }
+.finder-view-toolbar > div { display:flex; padding:3px; border-radius:8px; background:#edf1f6; }
+.finder-view-toolbar button { min-height:36px; padding:6px 15px; border:0; border-radius:6px; background:transparent; color:#516176; cursor:pointer; }
+.finder-view-toolbar button[aria-pressed="true"] { color:#163d75; background:white; box-shadow:0 1px 4px #152b4f20; font-weight:750; }
+.finder-view-toolbar label { display:flex; align-items:center; gap:6px; cursor:pointer; }
+.explorer-layout input[type="checkbox"] { min-height:0; width:16px; height:16px; accent-color:#286dcc; }
+.finder-view-toolbar small { margin-left:auto; color:#64758a; }
+.explorer-layout .finder-condition-bar { grid-template-columns:1fr; gap:8px; padding:12px 16px; background:#f7f9fc; }
+.explorer-layout .finder-condition-bar > span { display:none; }
+.explorer-layout .finder-condition-bar > div { flex-wrap:wrap; overflow:visible; }
+.explorer-layout .finder-condition-bar button { min-height:32px; padding:5px 9px; border:1px solid #cbd9ec; border-radius:6px; background:white; color:#285484; font-size:12px; cursor:pointer; text-align:left; }
+.explorer-layout .finder-condition-bar button span { padding-left:5px; }
+.explorer-layout .finder-condition-bar small { white-space:normal; font-size:12px; }
+.finder-all-conditions { color:#5f6c7f; font-size:12px; }
+.finder-coverage-summary, .finder-storage-warning { margin:12px 16px 0; padding:10px 12px; border-radius:8px; background:#fff8e8; color:#725322; font-size:12px; line-height:1.6; }
+.finder-storage-warning { border:1px solid #d3ae5b; }
+.explorer-layout .finder-result-groups { padding:12px; }
+.explorer-layout .finder-result-list { border:0; background:transparent; }
+.explorer-layout .finder-complex-list { gap:10px; }
+.finder-result-item { min-width:0; overflow:hidden; border:1px solid #dce4ee; border-radius:9px; background:white; }
+.finder-result-item.is-selected { border-color:#357be0; box-shadow:0 0 0 1px #357be0; }
+.explorer-layout .finder-complex-card { min-height:128px; grid-template-columns:minmax(0,1fr) 136px; }
+.explorer-layout .finder-card-main { padding:16px; }
+.explorer-layout .finder-card-main h4 { margin:8px 0; font-size:17px; font-weight:750; }
+.explorer-layout .finder-card-price { padding:15px 12px; }
+.explorer-layout .finder-card-price strong { font-family:inherit; font-size:21px; }
+.explorer-layout .finder-card-price i { display:none; }
+.finder-card-actions { display:flex; justify-content:flex-end; align-items:center; gap:16px; padding:5px 14px; background:#f9fbfe; border-top:1px solid #edf1f6; font-size:12px; }
+.finder-card-actions button { display:flex; align-items:center; gap:5px; min-height:36px; padding:4px 8px; border:0; background:transparent; color:#586b83; cursor:pointer; }
+.finder-card-actions button[aria-pressed="true"] { color:#a06a00; font-weight:750; }
+.finder-card-actions button span { font-size:20px; }
+.finder-card-actions label { display:flex; align-items:center; gap:6px; min-height:36px; cursor:pointer; color:#4f6683; }
+.finder-card-actions :disabled { opacity:.5; cursor:not-allowed; }
+.finder-result-table { width:100%; min-width:820px; border-collapse:collapse; font-size:13px; line-height:1.5; }
+.finder-table-scroll { max-width:100%; overflow:auto; border:1px solid #dce4ee; border-radius:8px; }
+.finder-result-table th, .finder-result-table td { padding:13px 12px; text-align:left; border-bottom:1px solid #e3e9f1; vertical-align:middle; }
+.finder-result-table thead th { background:#eef3fa; white-space:nowrap; }
+.finder-result-table tbody th { min-width:170px; max-width:220px; font-weight:650; }
+.finder-result-table tbody th button { border:0; background:transparent; color:#2264bb; font-size:14px; font-weight:750; text-align:left; cursor:pointer; padding:0; min-height:36px; }
+.finder-result-table small { display:block; margin-top:5px; font-size:11px; color:#69798e; font-weight:400; }
+.finder-result-table td strong { display:block; min-width:110px; color:#184c95; font-size:15px; }
+.finder-result-table tr.is-selected { background:#eef5ff; }
+.finder-result-table .finder-card-actions { flex-direction:column; gap:0; border:0; background:transparent; padding:0; align-items:flex-start; }
+.finder-compare-tray { position:sticky; z-index:30; bottom:12px; display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin:18px 0 0; padding:14px 18px; border:1px solid #8facd2; border-radius:12px; background:#122c4e; color:white; box-shadow:0 8px 28px #10254030; }
+.finder-compare-tray > div:first-child { font-size:14px; }
+.finder-compare-tray small { display:block; font-size:11px; color:#c3d3e8; margin-top:4px; }
+.finder-compare-names { display:flex; flex:1; flex-wrap:wrap; gap:6px; min-width:160px; }
+.finder-compare-names button { padding:8px 10px; min-height:38px; max-width:240px; border:1px solid #536d90; border-radius:6px; background:#244364; color:white; font-size:12px; cursor:pointer; }
+.finder-compare-names button span { margin-left:8px; }
+.finder-compare-open { min-height:42px; padding:8px 16px; border:0; border-radius:7px; color:#102441; background:#ffcf53; font-weight:750; font-size:13px; cursor:pointer; }
+.finder-compare-open:disabled { background:#6d7b90; color:#e1e7ef; cursor:not-allowed; }
+.finder-compare-clear { min-height:38px; padding:6px 4px; border:0; background:transparent; color:#d3dfef; font-size:12px; cursor:pointer; }
+.finder-detail-dock { position:sticky; top:80px; min-width:0; }
+.detail-docked .complex-detail-panel { width:100%; max-height:calc(100dvh - 94px); border:1px solid #d3deec; border-radius:12px; box-shadow:0 4px 18px #1c355c0c; background:white; }
+.detail-docked .detail-header { padding:18px; gap:12px; background:#f5f8fc; }
+.detail-docked .detail-header h2 { font-family:inherit; font-size:23px; line-height:1.35; }
+.detail-docked .detail-header > div > p:last-child { font-size:12px; line-height:1.6; }
+.detail-jump-nav { display:flex; gap:8px; padding:12px 22px; border-bottom:1px solid #dde5ef; background:white; }
+.detail-jump-nav button { flex:1; min-height:40px; border:1px solid #d7e1ee; border-radius:6px; background:#f4f7fc; color:#264e80; font-weight:700; font-size:13px; cursor:pointer; }
+.detail-area-context { margin:18px 28px 0; color:#4c6582; font-size:12px; }
+[data-detail-section] { scroll-margin-top:150px; }
+.detail-docked .detail-source, .detail-docked .detail-summary, .detail-docked .detail-chart-section,
+.detail-docked .detail-location, .detail-docked .detail-stations, .detail-docked .detail-schools,
+.detail-docked .detail-list-grid, .detail-docked .detail-area-context { margin-left:16px; margin-right:16px; }
+.detail-docked .detail-summary article { padding:14px 10px; min-height:110px; }
+.detail-docked .detail-summary strong { font-family:inherit; font-size:18px; }
+.detail-docked .detail-chart-section { padding:16px 12px; }
+.detail-docked .detail-toolbar, .detail-docked .detail-chart-heading { flex-direction:column; gap:14px; }
+.detail-docked .detail-list-grid, .detail-docked .detail-map-layout { grid-template-columns:1fr; }
+.detail-docked .detail-section-label { display:none; }
+.detail-docked .detail-section-heading-main { min-width:0; }
+.detail-docked .detail-footnote { margin:18px; font-size:11px; line-height:1.7; }
+.finder-docked-loading { padding:24px; border:1px solid #d3deec; background:white; border-radius:12px; font-size:14px; }
+.comparison-backdrop { position:fixed; z-index:150; inset:0; display:grid; place-items:center; padding:24px; background:#0b2038aa; backdrop-filter:blur(4px); }
+.comparison-panel { width:min(1050px,100%); max-height:calc(100dvh - 48px); overflow:auto; border-radius:14px; background:white; box-shadow:0 24px 60px #00142640; }
+.comparison-panel > header { position:sticky; top:0; z-index:4; display:flex; justify-content:space-between; gap:16px; align-items:center; padding:20px 24px; background:#f5f8fc; border-bottom:1px solid #dce4ef; }
+.comparison-panel h2 { margin:5px 0 0; font-size:24px; font-weight:750; }
+.comparison-note { margin:16px 24px; font-size:13px; color:#5c6f87; line-height:1.65; }
+.comparison-scroll { overflow:auto; margin:16px 24px; border:1px solid #dbe3ee; border-radius:8px; }
+.comparison-scroll table { width:100%; min-width:660px; border-collapse:collapse; table-layout:fixed; font-size:14px; }
+.comparison-scroll th, .comparison-scroll td { padding:15px; text-align:left; border-right:1px solid #e0e7f0; border-bottom:1px solid #e0e7f0; overflow-wrap:anywhere; vertical-align:top; }
+.comparison-scroll th:first-child { width:130px; position:sticky; left:0; background:#f3f6fb; z-index:1; }
+.comparison-scroll thead th { background:#eef4fc; color:#163f78; }
+.comparison-scroll thead strong { display:block; font-size:16px; }
+.comparison-scroll thead button { min-height:38px; margin-top:8px; padding:6px 10px; border:1px solid #b9cce6; border-radius:6px; color:#1f579a; background:white; cursor:pointer; font-size:12px; }
+.comparison-scroll tbody tr:first-child td { font-size:18px; font-weight:750; color:#1d61bd; }
+@media (min-width:1280px) {
+  .explorer-layout .finder-workspace.is-inspecting { grid-template-columns:236px minmax(330px,.85fr) minmax(470px,1.15fr); }
+  .is-inspecting .finder-complex-card { grid-template-columns:1fr; }
+  .is-inspecting .finder-card-price { border-left:0; border-top:1px solid #edf1f7; display:grid; grid-template-columns:1fr auto; gap:4px 12px; text-align:left; padding:10px 16px; }
+  .is-inspecting .finder-card-price > strong { grid-row:1/3; grid-column:2; align-self:center; margin:0; font-size:20px; }
+  .is-inspecting .finder-card-price > small, .is-inspecting .finder-card-price > em { grid-column:1; }
+  .is-inspecting .finder-results-heading { flex-wrap:wrap; }
+}
+@media (max-width:1279px) {
+  .explorer-layout .finder-workspace { grid-template-columns:248px minmax(0,1fr); }
+  .explorer-layout .finder-insight-panel { position:static; grid-column:1/-1; max-height:none; display:grid; grid-template-columns:1fr 1fr; gap:18px; overflow:visible; }
+  .explorer-layout .finder-intro { grid-template-columns:1fr; }
+  .explorer-layout .finder-intro-stats { display:none; }
+}
+@media (max-width:820px) {
+  .explorer-layout { padding:0 12px 24px; }
+  .explorer-layout .finder-topbar { min-height:62px; }
+  .finder-header-tools { gap:6px; }
+  .finder-header-tools .finder-data-status { display:none; }
+  .finder-favorites-toggle { padding:6px 9px; font-size:12px; }
+  .explorer-layout .finder-intro { padding:18px; }
+  .explorer-layout .finder-intro h1 { font-size:22px; }
+  .explorer-layout .finder-workspace { grid-template-columns:1fr; }
+  .explorer-layout .finder-filter-panel { display:block; position:static; max-height:none; overflow:visible; }
+  .finder-filter-toggle { display:flex; justify-content:space-between; gap:10px; width:100%; min-height:44px; padding:10px 12px; border:1px solid #d2deec; border-radius:7px; background:#f2f6fc; color:#234f89; font-size:13px; cursor:pointer; }
+  .finder-filter-body { display:none; }
+  .filters-open .finder-filter-body { display:block; }
+  .finder-mobile-apply { display:block; width:100%; min-height:44px; margin-top:14px; border:0; border-radius:7px; background:#246bd0; color:white; font-weight:750; cursor:pointer; }
+  .explorer-layout .finder-results { grid-row:auto; }
+  .explorer-layout .finder-insight-panel { grid-column:auto; display:block; }
+  .explorer-layout .finder-insight-panel > * + * { margin-top:18px; }
+  .explorer-layout .finder-results-heading { flex-direction:row; flex-wrap:wrap; }
+  .explorer-layout .finder-sort { width:auto; margin-left:auto; }
+  .explorer-layout .finder-sort select { width:160px; }
+  .explorer-layout .finder-complex-card { grid-template-columns:minmax(0,1fr) 124px; }
+  .finder-compare-tray { bottom:6px; padding:12px; gap:10px; }
+  .finder-compare-tray > div:first-child { flex:1; }
+  .finder-compare-tray small { display:none; }
+  .finder-compare-names { order:3; flex-basis:100%; }
+  .finder-compare-names button { max-width:none; flex:1; font-size:11px; padding:7px; }
+  .comparison-backdrop { padding:0; }
+  .comparison-panel { width:100%; height:100dvh; max-height:100dvh; border-radius:0; }
+  .comparison-panel > header { padding:16px; }
+  .comparison-note, .comparison-scroll { margin:14px; }
+}
+@media (max-width:540px) {
+  .explorer-layout .finder-card-main { padding:14px; }
+  .explorer-layout .finder-card-main h4 { font-size:16px; }
+  .explorer-layout .finder-card-price { display:flex; flex-direction:column; justify-content:center; align-items:flex-start; gap:6px; border-top:0; border-left:1px solid #e7ecf3; text-align:left; padding:10px; }
+  .explorer-layout .finder-card-price strong { font-size:18px; margin:0; }
+  .finder-view-toolbar { gap:10px; padding:0 12px 12px; }
+  .finder-view-toolbar small { display:none; }
+  .finder-compare-clear { display:none; }
+  .detail-jump-nav { padding:10px 14px; }
+}
