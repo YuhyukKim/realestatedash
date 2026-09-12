@@ -1,0 +1,58 @@
+name: GitHub Pages
+on:
+  push:
+    branches: [github-pages]
+  workflow_dispatch:
+  workflow_call:
+permissions:
+  contents: read
+concurrency:
+  group: pages-publication
+  cancel-in-progress: false
+jobs:
+  build:
+    if: github.ref == 'refs/heads/github-pages'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: github-pages
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Build static site (no server credentials)
+        env:
+          NAVER_MAP_CLIENT_ID: ${{ vars.NAVER_MAP_CLIENT_ID }}
+        run: npm run build:pages
+      - run: npm run test:pages
+      - run: npx tsc --noEmit --incremental false
+      - name: Verify project subpath and public output
+        run: |
+          test -f dist-pages/index.html
+          test -f dist-pages/data/manifest.json
+          test ! -d dist-pages/server
+          grep -q '/realestatedash/assets/' dist-pages/index.html
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist-pages
+  deploy:
+    if: vars.PAGES_PUBLISH_ENABLED == 'true'
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v5
+      - name: Publish verified static artifact
+        id: deployment
+        uses: actions/deploy-pages@v4

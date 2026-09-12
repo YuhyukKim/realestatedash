@@ -9,9 +9,11 @@
     "dev": "vinext dev",
     "build": "vinext build",
     "start": "vinext start",
-    "test": "npm run build && node --test tests/*.test.mjs",
+    "test": "npm run build && node scripts/build-pages.mjs && node --test tests/*.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
-    "db:generate": "drizzle-kit generate"
+    "db:generate": "drizzle-kit generate",
+    "build:pages": "node scripts/build-pages.mjs && vite build --config vite.pages.config.ts",
+    "test:pages": "node --test tests/pages-*.test.mjs"
   },
   "dependencies": {
     "drizzle-orm": "0.45.2",
