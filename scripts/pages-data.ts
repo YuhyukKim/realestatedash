@@ -79,7 +79,7 @@ export function derivePagesData(seed: ReturnType<typeof getComplexSeed>, snapsho
 }
 export async function generatePagesData() {
   const data = derivePagesData(getComplexSeed(),await readSnapshots());
-  const root = "pages/public";
+  const root = "static-site/public";
   await mkdir(root,{recursive:true});
   // Public assets only. Do not copy a working directory, .env, raw API response or server build.
   for (const entry of await readdir("public",{withFileTypes:true})) {

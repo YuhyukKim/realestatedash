@@ -45,5 +45,5 @@ next-env.d.ts
 /work/
 
 # Generated GitHub Pages site (only data/scopes is committed)
-/pages/public/
+/static-site/public/
 /dist-pages/
