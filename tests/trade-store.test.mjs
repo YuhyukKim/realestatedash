@@ -3,7 +3,7 @@ import test, { before, after, afterEach } from "node:test";
 import { randomUUID } from "node:crypto";
 import { createServer } from "vite";
 import { database } from "./helpers/d1.mjs";
-import { collectScope, optionsFromEnv, postImport } from "../scripts/collect-molit.mjs";
+import { collectScope, optionsFromEnv, postImport, verifyStorageReport } from "../scripts/collect-molit.mjs";
 import { sanitizeRecord } from "../lib/molit-records.mjs";
 
 let server, store, runtime, trades, detail, admin, summaries;
@@ -239,6 +239,10 @@ test("collector validates HTTPS origin, explicit districts, feed dates and bound
 });
 
 const xmlItem = "<item><aptNm>마포래미안푸르지오2단지</aptNm><umdNm>아현동</umdNm><dealYear>2026</dealYear><dealMonth>7</dealMonth><dealDay>10</dealDay><dealAmount>100001</dealAmount><excluUseAr>84.9</excluUseAr></item>";
+const commitPayload = (id, count, unmatched = 0) => ({ committed: true, published: true, report: {
+  id, expectedCount: count, storedCount: count, matchedCount: count - unmatched, unmatchedCount: unmatched,
+  missingCount: 0, storageComplete: true, committed: true, abandoned: false, published: true,
+} });
 const envelope = (items, total, page) => "<resultCode>000</resultCode><totalCount>" + total + "</totalCount><pageNo>" + page + "</pageNo>" + items;
 test("later-page upstream failures never start an upload, while complete zero scopes publish", async () => {
   const config = optionsFromEnv(env);
@@ -256,7 +260,7 @@ test("later-page upstream failures never start an upload, while complete zero sc
     if (url.hostname !== "example.test") return new Response(envelope("", 0, 1));
     assert.equal(options.redirect, "error");
     const body = JSON.parse(options.body); actions.push(body);
-    return Response.json(body.action === "commit" ? { committed: true, published: true } : { remaining: false });
+    return Response.json(body.action === "commit" ? commitPayload(body.id, actions[0].expectedCount) : { remaining: false });
   };
   assert.equal((await collectScope(config, scope)).records, 0);
   assert.deepEqual(actions.map(item => item.action), ["start", "commit", "cleanup"]);
@@ -270,7 +274,7 @@ test("collector uploads sanitized chunks and never lets GC failure undo successf
     if (new URL(String(input)).hostname !== "example.test") return new Response(envelope(xmlItem, 1, 1));
     const body = JSON.parse(options.body); actions.push(body);
     if (body.action === "cleanup") return new Response("", { status: 401 });
-    return Response.json(body.action === "commit" ? { committed: true, published: true } : { unmatched: 0 });
+    return Response.json(body.action === "commit" ? commitPayload(body.id, actions[0].expectedCount) : { unmatched: 0 });
   };
   const result = await collectScope(config, scope);
   assert.equal(result.published, true);
@@ -280,4 +284,23 @@ test("collector uploads sanitized chunks and never lets GC failure undo successf
   globalThis.fetch = async () => { calls++; return new Response("", { status: 401 }); };
   await assert.rejects(postImport(config.site, config.token, {}), /HTTP 401/);
   assert.equal(calls, 1);
+});
+
+test("collector rejects incomplete or contradictory persisted counts, even after a successful HTTP response", async () => {
+  const report = commitPayload("run", 3, 1).report;
+  assert.equal(verifyStorageReport(report, 3, "run").unmatchedCount, 1);
+  for (const changed of [undefined, { ...report, storedCount: 2 }, { ...report, matchedCount: 3 },
+    { ...report, id: "different" }, { ...report, committed: false }, { ...report, abandoned: true },
+    { ...report, storageComplete: false }, { ...report, unmatchedCount: -1 }, { ...report, expectedCount: 4 }]) {
+    assert.throws(() => verifyStorageReport(changed, 3, "run"), /counts could not be verified/);
+  }
+  const config = optionsFromEnv(env);
+  const actions = [];
+  globalThis.fetch = async (input, options) => {
+    if (new URL(String(input)).hostname !== "example.test") return new Response(envelope(xmlItem, 1, 1));
+    const body = JSON.parse(options.body); actions.push(body.action);
+    return Response.json(body.action === "commit" ? commitPayload(body.id, 0) : { accepted: 1 });
+  };
+  await assert.rejects(collectScope(config, scope), /counts could not be verified/);
+  assert.deepEqual(actions, ["start", "chunk", "commit"]);
 });

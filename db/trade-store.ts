@@ -77,13 +77,41 @@ export async function appendImport(db: D1Database, id: string, offset: number, i
   if (inserted.meta.changes !== rows.length) throw new ImportError("수집 작업 상태가 변경되었습니다.");
   return { accepted: rows.length, unmatched: rows.filter(row => !row.complexId).length, repeated: false };
 }
+export type ImportStorageReport = {
+  id: string; district: string; month: string; kind: Feed; fetchedAt: string;
+  mappingVersion: string; expectedCount: number; storedCount: number;
+  matchedCount: number; unmatchedCount: number; missingCount: number;
+  storageComplete: boolean; committed: boolean; abandoned: boolean; published: boolean;
+};
+/** One read-only statement measures actual stored rows, not acknowledgements. */
+export async function readImportReport(db: D1Database, id: string): Promise<ImportStorageReport> {
+  const row = await db.prepare(
+    "SELECT r.*, COUNT(o.ordinal) AS stored_count, COUNT(o.complex_id) AS matched_count, " +
+    "MIN(o.ordinal) AS first_ordinal, MAX(o.ordinal) AS last_ordinal, h.run_id AS active_run_id " +
+    "FROM trade_import_runs r LEFT JOIN trade_import_rows o ON o.run_id = r.id " +
+    "LEFT JOIN trade_snapshot_heads h ON h.district = r.district AND h.month = r.month AND h.kind = r.kind " +
+    "WHERE r.id = ? GROUP BY r.id")
+    .bind(id).first<ImportRun & { stored_count: number; matched_count: number; first_ordinal: number | null; last_ordinal: number | null; active_run_id: string | null }>();
+  if (!row) throw new ImportError("수집 작업이 없습니다.", 404);
+  const storedCount = row.stored_count;
+  const storageComplete = !row.abandoned && storedCount === row.expected_count &&
+    (storedCount === 0 || (row.first_ordinal === 0 && row.last_ordinal === storedCount - 1));
+  return {
+    id: row.id, district: row.district, month: row.month, kind: row.kind,
+    fetchedAt: row.fetched_at, mappingVersion: row.mapping_version,
+    expectedCount: row.expected_count, storedCount, matchedCount: row.matched_count,
+    unmatchedCount: storedCount - row.matched_count, missingCount: Math.max(0, row.expected_count - storedCount),
+    storageComplete, committed: !!row.committed, abandoned: !!row.abandoned,
+    published: row.active_run_id === row.id,
+  };
+}
 export async function commitImport(db: D1Database, id: string) {
   const run = await runById(db, id);
   if (run.abandoned || run.mapping_version !== TRADE_MAPPING_VERSION) throw new ImportError("작업 상태 또는 단지 마스터가 변경되었습니다. 새 수집 작업을 시작해 주세요.");
   // Guarded count and publication are in the same atomic batch. Ordinals are
   // unique and range-checked on input, including complete zero-observation feeds.
   await db.batch([
-    db.prepare("UPDATE trade_import_runs SET committed = 1 WHERE id = ? AND abandoned = 0 AND mapping_version = ? AND expected_count = (SELECT COUNT(*) FROM trade_import_rows WHERE run_id = ?)").bind(id, TRADE_MAPPING_VERSION, id),
+    db.prepare("UPDATE trade_import_runs SET committed = 1 WHERE id = ? AND abandoned = 0 AND mapping_version = ? AND expected_count = (SELECT COUNT(*) FROM trade_import_rows WHERE run_id = ?) AND NOT EXISTS (SELECT 1 FROM trade_import_rows WHERE run_id = ? AND (ordinal < 0 OR ordinal >= trade_import_runs.expected_count))").bind(id, TRADE_MAPPING_VERSION, id, id),
     db.prepare("INSERT OR IGNORE INTO trade_import_prices (run_id, complex_id, area, price_manwon, date) " +
       "SELECT run_id, complex_id, area, price_manwon, date FROM (" +
       "SELECT o.*, ROW_NUMBER() OVER (PARTITION BY o.complex_id, o.area ORDER BY o.date DESC, o.price_manwon DESC, o.ordinal) AS position " +
@@ -94,10 +122,10 @@ export async function commitImport(db: D1Database, id: string) {
       "ON CONFLICT(district, month, kind) DO UPDATE SET run_id = excluded.run_id, fetched_at = excluded.fetched_at, record_count = excluded.record_count " +
       "WHERE excluded.fetched_at > trade_snapshot_heads.fetched_at").bind(id, TRADE_MAPPING_VERSION),
   ]);
-  const committed = await runById(db, id);
-  if (!committed.committed || committed.abandoned) throw new ImportError("전체 건수 적재가 끝나지 않았습니다. 기존 자료를 유지합니다.");
+  const report = await readImportReport(db, id);
+  if (!report.committed || !report.storageComplete) throw new ImportError("전체 건수 적재가 끝나지 않았습니다. 기존 자료를 유지합니다.");
   const head = await db.prepare("SELECT * FROM trade_snapshot_heads WHERE district = ? AND month = ? AND kind = ?").bind(run.district, run.month, run.kind).first<SnapshotHead>();
-  return { committed: true, published: head?.run_id === id, recordCount: run.expected_count, fetchedAt: head?.fetched_at ?? null };
+  return { committed: true, published: report.published, recordCount: report.storedCount, fetchedAt: head?.fetched_at ?? null, report };
 }
 
 // Maintenance is separate from publication. A call removes at most 1,000 rows

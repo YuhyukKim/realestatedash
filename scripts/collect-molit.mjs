@@ -87,6 +87,16 @@ export async function postImport(site, token, payload, signal) {
 class FatalImportError extends Error {
   constructor(status) { super("Ingestion rejected (HTTP " + status + "); check configuration and permissions."); }
 }
+export function verifyStorageReport(report, expectedCount, id) {
+  if (!report || report.id !== id || !report.storageComplete || !report.committed || report.abandoned ||
+      !["expectedCount", "storedCount", "matchedCount", "unmatchedCount", "missingCount"].every(
+        key => Number.isSafeInteger(report[key]) && report[key] >= 0) ||
+      report.expectedCount !== expectedCount || report.storedCount !== expectedCount ||
+      report.matchedCount + report.unmatchedCount !== report.storedCount || report.missingCount !== 0) {
+    throw new Error("Stored observation counts could not be verified. Inspect the authenticated status report.");
+  }
+  return report;
+}
 export async function collectScope(config, scope, signal) {
   // Timestamp describes when collection began, so a delayed older run cannot
   // replace a newer observation. Publish only after ALL upstream pages validate.
@@ -96,13 +106,12 @@ export async function collectScope(config, scope, signal) {
   if (records.length > MAX_IMPORT_RECORDS) throw new Error("Scope exceeds safe record limit.");
   const id = randomUUID();
   await postImport(config.site, config.token, { action: "start", id, ...scope, expectedCount: records.length, fetchedAt }, signal);
-  let unmatched = 0;
   for (let offset = 0; offset < records.length; offset += CHUNK_SIZE) {
-    const result = await postImport(config.site, config.token, { action: "chunk", id, offset, records: records.slice(offset, offset + CHUNK_SIZE) }, signal);
-    unmatched += result.unmatched ?? 0;
+    await postImport(config.site, config.token, { action: "chunk", id, offset, records: records.slice(offset, offset + CHUNK_SIZE) }, signal);
   }
   const result = await postImport(config.site, config.token, { action: "commit", id }, signal);
   if (!result.committed) throw new Error("Ingestion did not commit.");
+  const report = verifyStorageReport(result.report, records.length, id);
   let cleanupPending = true;
   // GC cannot turn an already-successful publication into an apparent failure.
   try {
@@ -112,7 +121,8 @@ export async function collectScope(config, scope, signal) {
       if (!cleanup.remaining) { cleanupPending = false; break; }
     }
   } catch { /* Report pending maintenance separately. */ }
-  return { ...scope, id, records: records.length, unmatched, published: !!result.published, cleanupPending };
+  return { ...scope, id, records: records.length, stored: report.storedCount,
+    matched: report.matchedCount, unmatched: report.unmatchedCount, published: report.published, cleanupPending };
 }
 export async function main(env = process.env) {
   const config = optionsFromEnv(env);

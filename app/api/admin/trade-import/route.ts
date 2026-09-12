@@ -1,5 +1,5 @@
 import { getD1OrNull } from "../../../../db";
-import { appendImport, cleanupImport, commitImport, ImportError, startImport } from "../../../../db/trade-store";
+import { appendImport, cleanupImport, commitImport, ImportError, readImportReport, startImport } from "../../../../db/trade-store";
 import { DISTRICT_CODES } from "../../../data";
 import { validRecordMonth } from "../../../../lib/molit-records.mjs";
 
@@ -61,6 +61,7 @@ export async function POST(request: Request) {
       const run = await startImport(db, body);
       return Response.json({ id: run.id, committed: !!run.committed, expectedCount: run.expected_count }, { headers });
     }
+    if (body.action === "status") return Response.json(await readImportReport(db, body.id), { headers });
     if (body.action === "chunk") return Response.json(await appendImport(db, body.id, body.offset, body.records), { headers });
     if (body.action === "cleanup") return Response.json(await cleanupImport(db, body.id), { headers });
     if (body.action === "commit") return Response.json(await commitImport(db, body.id), { headers });
