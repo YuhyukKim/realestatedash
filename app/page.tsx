@@ -1,5 +1,7 @@
 "use client";
 
+import { apiFetch, refreshApiCache } from "./api-client";
+
 import { lazy, Suspense, useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
 import {
   STATION_OPTIONS,
@@ -256,12 +258,14 @@ export default function Home() {
     setUpdatedAt(null);
     setStatusMessage("단지 목록과 저장된 매매 자료를 불러옵니다.");
     if (!masterComplexes.length) setMasterLoadState("loading");
+    await refreshApiCache().catch(() => {}); // Individual reads below report any load error.
+    if (!current()) return;
     const messages: string[] = [];
     let tradesMode: DataMode = "unavailable";
     let savedCount = 0;
 
     async function readSavedSales() {
-      const response = await fetch(`/api/area-summaries?month=${requestMonth}`, { signal, cache: "no-store" });
+      const response = await apiFetch(`/api/area-summaries?month=${requestMonth}`, { signal, cache: "no-store" });
       if (!response.ok) throw new Error("summary unavailable");
       const saved = await response.json();
       if (saved.mode !== "stored") throw new Error("summary unavailable");
@@ -278,7 +282,7 @@ export default function Home() {
     // Independent database reads; collection runs outside visitor requests.
     const masterTask = (async () => {
       try {
-        const response = await fetch("/api/complexes?limit=20000", { signal });
+        const response = await apiFetch("/api/complexes?limit=20000", { signal });
         if (!response.ok) throw new Error("master unavailable");
         const data = (await response.json()) as ComplexesApiResponse;
         if (!data.complexes.length) throw new Error("empty master");
@@ -299,7 +303,7 @@ export default function Home() {
     });
     const tradesTask = (async () => {
       try {
-        const response = await fetch(`/api/trades?month=${requestMonth}`, { signal, cache: "no-store" });
+        const response = await apiFetch(`/api/trades?month=${requestMonth}`, { signal, cache: "no-store" });
         if (!response.ok) throw new Error("trades unavailable");
         const data = (await response.json()) as TradesApiResponse;
         if (!current()) return;

@@ -1,5 +1,7 @@
 "use client";
 
+import { apiFetch } from "./api-client";
+
 import { useEffect, useRef, useState } from "react";
 
 type NaverMapStatus = "loading" | "ready" | "unavailable" | "error";
@@ -161,7 +163,7 @@ export function NaverMap({
     async function renderMap() {
       setStatus("loading");
       try {
-        const response = await fetch("/api/map-config", { cache: "no-store" });
+        const response = await apiFetch("/api/map-config", { cache: "no-store" });
         const config = (await response.json()) as {
           enabled: boolean;
           clientId: string | null;

@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       districts:
-        description: 'Comma-separated districts (e.g. 마포구,영등포구); no implicit all-Seoul run'
+        description: 'Comma-separated Seoul districts (e.g. 마포구,영등포구); explicit scope required'
         required: true
         default: '마포구'
       from:
@@ -17,30 +17,52 @@ on:
         type: choice
         options: [both, sale, rent]
         default: both
-  schedule:
-    - cron: '23 19 * * *'
 permissions:
   contents: read
 concurrency:
-  group: molit-collector
+  group: pages-data-collection
   cancel-in-progress: false
 jobs:
   collect:
-    if: github.event_name == 'workflow_dispatch' || (vars.MOLIT_SCHEDULE_ENABLED == 'true' && vars.MOLIT_DISTRICTS != '')
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 40
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Collect complete scopes and publish authenticated snapshots
+          cache: npm
+      - run: npm ci
+      - run: node scripts/build-pages.mjs && npm run test:pages
+      - name: Collect to validated public snapshots (key is never persisted)
         env:
-          PUBLIC_SITE_URL: ${{ vars.PUBLIC_SITE_URL }}
           MOLIT_API_KEY: ${{ secrets.MOLIT_API_KEY }}
-          DATA_REFRESH_TOKEN: ${{ secrets.DATA_REFRESH_TOKEN }}
-          MOLIT_DISTRICTS: ${{ inputs.districts || vars.MOLIT_DISTRICTS }}
+          MOLIT_DISTRICTS: ${{ inputs.districts }}
           MOLIT_FROM: ${{ inputs.from }}
           MOLIT_TO: ${{ inputs.to }}
           MOLIT_KIND: ${{ inputs.kind || 'both' }}
-        run: node scripts/collect-molit.mjs
+        run: node scripts/collect-pages.mjs
+      - name: Validate complete site before saving any data
+        run: npm run build:pages && npm run test:pages
+      - name: Save only sanitized public snapshots
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- data/scopes
+          if ! git diff --cached --quiet; then
+            git commit -m "data: refresh validated MOLIT snapshots"
+            git push origin HEAD:main
+          fi
+  publish:
+    needs: collect
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    uses: ./.github/workflows/github-pages.yml

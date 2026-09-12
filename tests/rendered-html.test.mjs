@@ -362,7 +362,7 @@ test("builds dashboard results from the apartment master as well as trades", asy
 
   assert.match(pageSource, /공식 서울 아파트 단지 마스터/);
   assert.match(pageSource, /매매가 미확인/);
-  assert.match(pageSource, /fetch\(["']\/api\/complexes\?limit=20000["'], \{ signal \}\)/);
+  assert.match(pageSource, /apiFetch\(["']\/api\/complexes\?limit=20000["'], \{ signal \}\)/);
   assert.match(pageSource, /setMasterComplexes\(data\.complexes/);
   assert.match(pageSource, /mergeMasterWithTrades\(masterComplexes, trades, storedSales, refreshedMonth, refreshedDistricts\)/);
   assert.match(pageSource, /useState<ComplexMasterRecord\[\]>\(\[\]\)/);

@@ -43,3 +43,7 @@ next-env.d.ts
 /.cache/
 /outputs/
 /work/
+
+# Generated GitHub Pages site (only data/scopes is committed)
+/static-site/public/
+/dist-pages/

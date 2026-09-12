@@ -1,5 +1,7 @@
 "use client";
 
+import { apiFetch } from "./api-client";
+
 import { emptyTradeMessage, rentPeriodSupported } from "../lib/trade-coverage.mjs";
 
 import { useEffect, useId, useMemo, useRef, useState } from "react";
@@ -566,7 +568,7 @@ export default function ComplexDetailPanel({
           dong: complex.dong,
           apartment: complex.apartment,
         });
-        const response = await fetch(`/api/places?${params}`, {
+        const response = await apiFetch(`/api/places?${params}`, {
           signal: controller.signal,
         });
         if (!response.ok) throw new Error("생활권 정보를 불러오지 못했습니다.");
@@ -606,7 +608,7 @@ export default function ComplexDetailPanel({
           const params = new URLSearchParams({
             complexId: complex.id, from: range.from, to: range.to,
           });
-          const response = await fetch("/api/complex?" + params, {
+          const response = await apiFetch("/api/complex?" + params, {
             signal: controller.signal, cache: "no-store",
           });
           if (!response.ok) throw new Error("단지 상세 데이터를 불러오지 못했습니다.");
