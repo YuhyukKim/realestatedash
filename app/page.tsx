@@ -364,8 +364,9 @@ export default function Home() {
     const moveInYear = MOVE_IN_YEAR_BANDS.find(band => band.id === selectedMoveInYear)!;
     const price = PRICE_BANDS.find(band => band.id === selectedPriceBand);
     const stationRange = STATION_RANGES.find(range => range.id === selectedStationRange)!;
-    const candidates = filterApartmentCandidates(favoritesOnly
-      ? mergedComplexes.filter(complex => favoriteSet.has(complex.key)) : mergedComplexes, {
+    const searchPool = favoritesOnly
+      ? mergedComplexes.filter(complex => favoriteSet.has(complex.key)) : mergedComplexes;
+    const candidates = filterApartmentCandidates(searchPool, {
       district: selectedDistrict,
       area: selectedArea === "all" ? null : area,
       price,
