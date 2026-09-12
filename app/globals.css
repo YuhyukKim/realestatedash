@@ -4974,3 +4974,10 @@ footer strong {
   .explorer-layout .finder-card-price > strong { grid-column:2; grid-row:1/4; align-self:center; text-align:right; }
   .explorer-layout .finder-card-price > small, .explorer-layout .finder-card-price > span, .explorer-layout .finder-card-price > em { grid-column:1; }
 }
+
+/* Light detail/comparison headers require explicit contrast over legacy theme rules. */
+.detail-docked .detail-header h2 { color:#183c6c; }
+.detail-docked .detail-header > div > p:last-child { color:#566d87; }
+.detail-docked .detail-header .section-kicker { color:#45678e; }
+.detail-docked .detail-close, .comparison-panel .detail-close { color:#183c6c; background:#fff; border-color:#b9cce6; }
+.detail-docked .detail-close:hover, .comparison-panel .detail-close:hover { background:#183c6c; color:white; }
