@@ -1,3 +1,5 @@
+import { COMPLEX_ALIAS_MAP_JSON, REVIEWED_COMPLEX_IDENTITIES, complexIdentityNames } from "../lib/complex-identity.mjs";
+
 export type ComplexSeedRecord = {
   id: string;
   aptSeq?: string | null;
@@ -564,7 +566,12 @@ function buildWhere(filters: ComplexListFilters) {
       .replaceAll("%", "\\%")
       .replaceAll("_", "\\_");
     const query = `%${escaped}%`;
-    values.push(query, query, query);
+    const aliasIds = REVIEWED_COMPLEX_IDENTITIES.filter(group =>
+      group.names.some(name => normalizeComplexName(name).includes(normalizeComplexName(filters.query!))))
+      .map(group => group.canonicalId);
+    clauses[clauses.length - 1] = clauses[clauses.length - 1].slice(0, -1) +
+      " OR c.id IN (SELECT value FROM json_each(?)))";
+    values.push(query, query, query, JSON.stringify(aliasIds));
   }
   if (filters.buildYearMin !== undefined) {
     clauses.push("c.build_year >= ?");
@@ -590,6 +597,42 @@ function buildWhere(filters: ComplexListFilters) {
   };
 }
 
+// Read old ID summaries without moving/deleting any parent or transaction rows.
+// Select each type's latest observation independently; never sum duplicate counts.
+const CANONICAL_PRICE_CTE = `WITH identity_aliases AS (
+  SELECT key AS alias_id, value AS canonical_id FROM json_each(?)
+), price_identity AS (
+  SELECT p.*, COALESCE(i.canonical_id, p.complex_id) AS canonical_id
+  FROM complex_price_summaries p LEFT JOIN identity_aliases i ON i.alias_id = p.complex_id
+), price_ranked AS (
+  SELECT *,
+    ROW_NUMBER() OVER (PARTITION BY canonical_id ORDER BY
+      (latest_sale_price_manwon IS NOT NULL AND latest_sale_date IS NOT NULL) DESC,
+      latest_sale_date DESC, latest_sale_price_manwon DESC, complex_id) AS sale_rank,
+    ROW_NUMBER() OVER (PARTITION BY canonical_id ORDER BY
+      (latest_jeonse_price_manwon IS NOT NULL AND latest_jeonse_date IS NOT NULL) DESC,
+      latest_jeonse_date DESC, latest_jeonse_price_manwon DESC, complex_id) AS jeonse_rank,
+    ROW_NUMBER() OVER (PARTITION BY canonical_id ORDER BY
+      (latest_monthly_rent_manwon IS NOT NULL AND latest_monthly_date IS NOT NULL) DESC,
+      latest_monthly_date DESC, latest_monthly_deposit_manwon DESC,
+      latest_monthly_rent_manwon DESC, complex_id) AS monthly_rank
+  FROM price_identity
+), canonical_prices AS (
+  SELECT canonical_id AS complex_id,
+    MAX(CASE WHEN sale_rank = 1 THEN latest_sale_price_manwon END) AS latest_sale_price_manwon,
+    MAX(CASE WHEN sale_rank = 1 THEN latest_sale_date END) AS latest_sale_date,
+    MAX(CASE WHEN sale_rank = 1 THEN latest_sale_area END) AS latest_sale_area,
+    MAX(CASE WHEN jeonse_rank = 1 THEN latest_jeonse_price_manwon END) AS latest_jeonse_price_manwon,
+    MAX(CASE WHEN jeonse_rank = 1 THEN latest_jeonse_date END) AS latest_jeonse_date,
+    MAX(CASE WHEN jeonse_rank = 1 THEN latest_jeonse_area END) AS latest_jeonse_area,
+    MAX(CASE WHEN monthly_rank = 1 THEN latest_monthly_deposit_manwon END) AS latest_monthly_deposit_manwon,
+    MAX(CASE WHEN monthly_rank = 1 THEN latest_monthly_rent_manwon END) AS latest_monthly_rent_manwon,
+    MAX(CASE WHEN monthly_rank = 1 THEN latest_monthly_date END) AS latest_monthly_date,
+    MAX(CASE WHEN monthly_rank = 1 THEN latest_monthly_area END) AS latest_monthly_area,
+    MAX(sale_count) AS sale_count, MAX(rent_count) AS rent_count
+  FROM price_ranked GROUP BY canonical_id
+) `;
+
 const COMPLEX_SELECT = `SELECT
   c.id, c.apt_seq, c.kapt_code, c.seoul_complex_id, c.name, c.district,
   c.dong, c.road_address, c.jibun_address, c.build_year, c.approval_date,
@@ -599,11 +642,16 @@ const COMPLEX_SELECT = `SELECT
   p.latest_jeonse_price_manwon, p.latest_jeonse_date, p.latest_jeonse_area,
   p.latest_monthly_deposit_manwon, p.latest_monthly_rent_manwon,
   p.latest_monthly_date, p.latest_monthly_area, p.sale_count, p.rent_count,
-  (SELECT GROUP_CONCAT(a.area, '|') FROM complex_areas a WHERE a.complex_id = c.id) AS areas_csv
+  (SELECT GROUP_CONCAT(area, '|') FROM (
+    SELECT DISTINCT a.area FROM complex_areas a
+    WHERE a.complex_id = c.id OR a.complex_id IN (
+      SELECT alias_id FROM identity_aliases WHERE canonical_id = c.id)
+    ORDER BY a.area
+  )) AS areas_csv
 FROM apartment_complexes c
 JOIN apartment_complex_seed_memberships m
   ON m.complex_id = c.id AND m.seed_version = ?
-LEFT JOIN complex_price_summaries p ON p.complex_id = c.id`;
+LEFT JOIN canonical_prices p ON p.complex_id = c.id`;
 
 export async function listComplexesFromD1(
   d1: D1Database,
@@ -613,20 +661,20 @@ export async function listComplexesFromD1(
   const where = buildWhere(filters);
   const count = await d1
     .prepare(
-      `SELECT COUNT(*) AS count
+      `${CANONICAL_PRICE_CTE}SELECT COUNT(*) AS count
        FROM apartment_complexes c
        JOIN apartment_complex_seed_memberships m
          ON m.complex_id = c.id AND m.seed_version = ?
-       LEFT JOIN complex_price_summaries p ON p.complex_id = c.id${where.sql}`,
+       LEFT JOIN canonical_prices p ON p.complex_id = c.id${where.sql}`,
     )
-    .bind(seedVersion, ...where.values)
+    .bind(COMPLEX_ALIAS_MAP_JSON, seedVersion, ...where.values)
     .first<{ count: number }>();
 
   const results = await d1
     .prepare(
-      `${COMPLEX_SELECT}${where.sql} ORDER BY c.district, c.dong, c.name, c.id LIMIT ? OFFSET ?`,
+      `${CANONICAL_PRICE_CTE}${COMPLEX_SELECT}${where.sql} ORDER BY c.district, c.dong, c.name, c.id LIMIT ? OFFSET ?`,
     )
-    .bind(seedVersion, ...where.values, filters.limit, filters.offset)
+    .bind(COMPLEX_ALIAS_MAP_JSON, seedVersion, ...where.values, filters.limit, filters.offset)
     .all<D1ComplexRow>();
 
   return {
@@ -696,7 +744,7 @@ export function listComplexesFromSeed(
     .filter((record) => !filters.dong || record.dong === filters.dong)
     .filter((record) => {
       if (!normalizedQuery) return true;
-      return normalizeComplexName(`${record.name} ${record.address}`).includes(
+      return normalizeComplexName(`${complexIdentityNames(record.id, record.name).join(" ")} ${record.address}`).includes(
         normalizedQuery,
       );
     })

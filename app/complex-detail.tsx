@@ -1,5 +1,7 @@
 "use client";
 
+import { emptyTradeMessage, rentPeriodSupported } from "../lib/trade-coverage.mjs";
+
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 import {
   WORKPLACE_BY_ID,
@@ -12,8 +14,9 @@ import type {
   ComplexTransaction,
 } from "./complex-types";
 import { NaverMap } from "./naver-map";
+import { formatPrice, formatRent } from "./price-format";
 import type { PlacesResponse } from "./place-types";
-import { getNearbyStations, STATION_DISTANCE_NOTE } from "./stations";
+import { getNearbyStations, stationAvailabilityMessage, STATION_DISTANCE_NOTE } from "./stations";
 
 type DetailPeriod = 1 | 3 | 5 | 10 | "all";
 type ChartMetric = "sale" | "jeonse" | "ratio";
@@ -80,20 +83,8 @@ function chunkRanges(
   return ranges;
 }
 
-function formatPrice(price: number) {
-  return Number.isInteger(price) ? `${price}억` : `${price.toFixed(1)}억`;
-}
-
 function formatStationDistance(meters: number) {
   return meters >= 1000 ? `${(meters / 1000).toFixed(1)}km` : `${meters}m`;
-}
-
-function formatRent(transaction: ComplexTransaction) {
-  if (transaction.type === "jeonse") return formatPrice(transaction.price);
-  const deposit = transaction.price
-    ? `${Math.round(transaction.price * 10_000).toLocaleString()}만`
-    : "0";
-  return `${deposit} / ${transaction.monthlyRent.toLocaleString()}만`;
 }
 
 function naverMapSearchUrl(query: string) {
@@ -110,7 +101,7 @@ function median(values: number[]) {
 }
 
 function formatChartValue(metric: ChartMetric, value: number) {
-  return metric === "ratio" ? `${value.toFixed(1)}%` : `${value.toFixed(1)}억`;
+  return metric === "ratio" ? `${value.toFixed(1)}%` : `약 ${formatPrice(value)}`;
 }
 
 function smoothPath(points: { x: number; y: number }[]) {
@@ -123,18 +114,20 @@ function smoothPath(points: { x: number; y: number }[]) {
   }, `M${points[0].x},${points[0].y}`);
 }
 
-function PriceChart({
+export function PriceChart({
   transactions,
   endMonth,
   period,
   buildYear,
   metric,
+  emptyNote,
 }: {
   transactions: ComplexTransaction[];
   endMonth: string;
   period: DetailPeriod;
   buildYear: number | null;
   metric: ChartMetric;
+  emptyNote: string;
 }) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const months = useMemo(() => {
@@ -194,7 +187,7 @@ function PriceChart({
   if (!values.length) {
     return (
       <div className="detail-chart-empty">
-        <strong>선택 면적의 거래 기록이 없습니다.</strong>
+        <strong>{emptyNote}</strong>
         <span>다른 전용면적이나 조회 기간을 선택해보세요.</span>
       </div>
     );
@@ -287,7 +280,7 @@ function PriceChart({
         onPointerMove={(event) => updateActive(event.clientX, event.currentTarget)}
         onPointerLeave={() => setActiveIndex(null)}
       >
-        <desc>월별 실거래 중위값을 선과 거래량으로 표시한 차트입니다.</desc>
+        <desc>월별 실거래 중위값을 선과 거래량으로 표시한 차트입니다. 축은 요약 표시, 금액 중위값은 만원 단위 반올림이며 개별 계약금액은 아래 실거래 목록에서 확인할 수 있습니다.</desc>
         {yTicks.map((tick) => (
           <g key={tick}>
             <line
@@ -346,18 +339,20 @@ function PriceChart({
         )}
         <path d={path} className="chart-line chart-main-line" />
         <text
-          x={Math.min(width - right - 8, maxPoint.x + 7)}
+          x={maxPoint.x > width / 2 ? maxPoint.x - 7 : maxPoint.x + 7}
+          textAnchor={maxPoint.x > width / 2 ? "end" : "start"}
           y={Math.max(top + 10, maxPoint.y - 8)}
           className="chart-extreme-label maximum"
         >
-          최고 {formatChartValue(metric, points[maxPoint.index][metric] as number)}
+          최고 {metric === "ratio" ? "전세가율" : "중위값"} {formatChartValue(metric, points[maxPoint.index][metric] as number)}
         </text>
         <text
-          x={Math.min(width - right - 8, minPoint.x + 7)}
+          x={minPoint.x > width / 2 ? minPoint.x - 7 : minPoint.x + 7}
+          textAnchor={minPoint.x > width / 2 ? "end" : "start"}
           y={Math.min(plotBottom - 4, minPoint.y + 16)}
           className="chart-extreme-label minimum"
         >
-          최저 {formatChartValue(metric, points[minPoint.index][metric] as number)}
+          최저 {metric === "ratio" ? "전세가율" : "중위값"} {formatChartValue(metric, points[minPoint.index][metric] as number)}
         </text>
         {activePoint && (
           <g className="chart-active-layer">
@@ -370,9 +365,9 @@ function PriceChart({
             />
             <circle cx={activePoint.x} cy={activePoint.y} r="4" className="chart-active-dot" />
             <g
-              transform={`translate(${Math.min(width - 172, Math.max(left, activePoint.x - 76))},${Math.max(top + 4, activePoint.y - 72)})`}
+              transform={`translate(${Math.min(width - right - 230, Math.max(left, activePoint.x - 115))},${Math.max(top + 4, activePoint.y - 72)})`}
             >
-              <rect width="154" height="54" rx="8" className="chart-tooltip-card" />
+              <rect width="230" height="54" rx="8" className="chart-tooltip-card" />
               <text x="12" y="19" className="chart-tooltip-month">
                 {activePoint.month.slice(0, 4)}년 {Number(activePoint.month.slice(4))}월
               </text>
@@ -393,16 +388,20 @@ function PriceChart({
   );
 }
 
-function TransactionList({
+export function TransactionList({
   title,
   caption,
   transactions,
   type,
+  emptyNote,
+  complete,
 }: {
   title: string;
   caption: string;
   transactions: ComplexTransaction[];
   type: "sale" | "rent";
+  emptyNote: string;
+  complete: boolean;
 }) {
   const [visibleCount, setVisibleCount] = useState(
     TRANSACTION_LIST_INITIAL_COUNT,
@@ -423,7 +422,7 @@ function TransactionList({
           <h3 id={headingId}>{title}</h3>
           <p>{caption}</p>
         </div>
-        <span>{transactions.length}건</span>
+        <span>{transactions.length || complete ? `${transactions.length}건` : "미확인"}</span>
       </header>
       <div className="detail-transaction-list" id={listId}>
         {transactions.length ? (
@@ -452,7 +451,7 @@ function TransactionList({
             </article>
           ))
         ) : (
-          <div className="detail-list-empty">선택 조건의 최근 거래가 없습니다.</div>
+          <div className="detail-list-empty">{emptyNote}</div>
         )}
       </div>
       {transactions.length > TRANSACTION_LIST_INITIAL_COUNT && (
@@ -509,7 +508,7 @@ export default function ComplexDetailPanel({
   const [selectedArea, setSelectedArea] = useState<number | null>(
     complex.defaultArea === null ? null : Math.round(complex.defaultArea),
   );
-  const [mode, setMode] = useState<ComplexDetailResponse["mode"]>("live");
+  const [mode, setMode] = useState<ComplexDetailResponse["mode"]>("unavailable");
   const [message, setMessage] = useState("실거래 데이터를 불러오고 있습니다.");
   const nearbyStations = getNearbyStations(complex.id);
   const nearbyStationsNote = STATION_DISTANCE_NOTE;
@@ -519,7 +518,8 @@ export default function ComplexDetailPanel({
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [loadProgress, setLoadProgress] = useState({ loaded: 0, total: 1 });
-  const cacheRef = useRef<Record<string, ComplexDetailResponse>>({});
+  const [missing, setMissing] = useState({ sale: true, rent: true });
+  const [fetchedAt, setFetchedAt] = useState<string | null>(null);
   const panelRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -596,51 +596,26 @@ export default function ComplexDetailPanel({
       setError("");
       setMode("unavailable");
       setMessage("");
+      setMissing({ sale: true, rent: true });
+      setFetchedAt(null);
       setTransactionState({ complexId: complex.id, items: [] });
       setLoadProgress({ loaded: 0, total: ranges.length });
       try {
         const payloads: ComplexDetailResponse[] = [];
         for (const [rangeIndex, range] of ranges.entries()) {
-          const key = `${complex.id}:${range.from}-${range.to}`;
-          if (cacheRef.current[key]) {
-            payloads.push(cacheRef.current[key]);
-          } else {
-            const params = new URLSearchParams({
-              district: complex.district,
-              dong: complex.dong,
-              apartment: complex.apartment,
-              from: range.from,
-              to: range.to,
-              asOf: endMonth.replace("-", ""),
-              master: "1",
-              complexId: complex.id,
-              dataVersion: "real-v3-coordinates",
-            });
-            if (complex.basePrice !== null && complex.basePrice > 0) {
-              params.set("basePrice", String(complex.basePrice));
-            }
-            if (complex.defaultArea !== null && complex.defaultArea > 0) {
-              params.set("baseArea", String(complex.defaultArea));
-            }
-            if (complex.referenceDate) {
-              params.set("referenceDate", complex.referenceDate);
-            }
-            if (complex.buildYear) {
-              params.set("buildYear", String(complex.buildYear));
-            }
-
-            const response = await fetch(`/api/complex?${params}`, {
-              signal: controller.signal,
-            });
-            if (!response.ok) throw new Error("단지 상세 데이터를 불러오지 못했습니다.");
-            const payload = (await response.json()) as ComplexDetailResponse;
-            if (payload.mode === "live") cacheRef.current[key] = payload;
-            payloads.push(payload);
-          }
+          const params = new URLSearchParams({
+            complexId: complex.id, from: range.from, to: range.to,
+          });
+          const response = await fetch("/api/complex?" + params, {
+            signal: controller.signal, cache: "no-store",
+          });
+          if (!response.ok) throw new Error("단지 상세 데이터를 불러오지 못했습니다.");
+          const payload = (await response.json()) as ComplexDetailResponse;
+          payloads.push(payload);
 
           if (controller.signal.aborted) return;
           const merged = payloads
-            .flatMap((payload) => payload.mode === "live" || payload.mode === "partial" ? payload.transactions : [])
+            .flatMap((payload) => payload.mode === "stored" || payload.mode === "partial" ? payload.transactions : [])
             .filter(
               (transaction, index, all) =>
                 all.findIndex((candidate) => candidate.id === transaction.id) === index,
@@ -648,16 +623,22 @@ export default function ComplexDetailPanel({
             .sort((a, b) => b.date.localeCompare(a.date));
           setTransactionState({ complexId: complex.id, items: merged });
           setMode(
-            payloads.every((payload) => payload.mode === "live") ? "live"
-              : payloads.some((payload) => payload.mode === "live" || payload.mode === "partial")
+            payloads.every((payload) => payload.mode === "stored") ? "stored"
+              : payloads.some((payload) => payload.mode === "stored" || payload.mode === "partial")
                 ? "partial" : "unavailable",
           );
-          setMessage([...new Set(payloads.filter((payload) => payload.mode !== "live").map((payload) => payload.message))].join(" ") || payloads[0]?.message || "단지 상세 실거래 자료");
+          setMessage([...new Set(payloads.filter((payload) => payload.mode !== "stored").map((payload) => payload.message))].join(" ") || payloads[0]?.message || "단지 상세 실거래 자료");
+          setMissing({
+            sale: payloads.some(item => item.missing.some(scope => scope.kind === "sale")),
+            rent: payloads.some(item => item.missing.some(scope => scope.kind === "rent")),
+          });
+          setFetchedAt(payloads.map(item => item.fetchedAt).filter((value): value is string => !!value).sort().at(-1) ?? null);
           setLoadProgress({ loaded: rangeIndex + 1, total: ranges.length });
         }
       } catch (loadError) {
         if (controller.signal.aborted) return;
         setMode("partial");
+        setMissing({ sale: true, rent: true });
         setError(
           loadError instanceof Error
             ? loadError.message
@@ -710,11 +691,8 @@ export default function ComplexDetailPanel({
   const recentRents = areaTransactions.filter((item) => item.type !== "sale");
   const latestSale = recentSales[0] ?? null;
   const latestJeonse = recentRents.find((item) => item.type === "jeonse") ?? null;
-  const latestSaleSummary =
-    latestSale ??
-    (complex.basePrice !== null && complex.referenceDate
-      ? { price: complex.basePrice, date: complex.referenceDate }
-      : null);
+  const latestSaleSummary = latestSale;
+  const emptyMessage = (kind: "sale" | "rent") => emptyTradeMessage(kind, endMonth, loading, error, missing);
   const jeonseRatio =
     latestSale && latestJeonse
       ? Math.round((latestJeonse.price / latestSale.price) * 100)
@@ -782,9 +760,9 @@ export default function ComplexDetailPanel({
 
         <div className={`detail-source ${mode}`}>
           <span>
-            {mode === "live" ? "LIVE" : mode === "partial" ? "일부 조회" : "NO DATA"}
+            {mode === "stored" ? "저장 자료" : mode === "partial" ? "일부 수집" : "미확인"}
           </span>
-          <p>{message}</p>
+          <p>{message}{fetchedAt ? ` · 최근 수집 ${new Date(fetchedAt).toLocaleString("ko-KR", { timeZone: "Asia/Seoul" })}` : ""}</p>
         </div>
 
         <section className="detail-summary" aria-label="단지 최근 가격 요약">
@@ -793,12 +771,12 @@ export default function ComplexDetailPanel({
             <strong>
               {latestSaleSummary ? formatPrice(latestSaleSummary.price) : "-"}
             </strong>
-            <small>{latestSaleSummary?.date ?? "거래 없음"}</small>
+            <small>{latestSaleSummary?.date ?? emptyMessage("sale")}</small>
           </article>
           <article>
             <span>최근 전세가</span>
             <strong>{latestJeonse ? formatPrice(latestJeonse.price) : "-"}</strong>
-            <small>{latestJeonse?.date ?? "거래 없음"}</small>
+            <small>{latestJeonse?.date ?? emptyMessage("rent")}</small>
           </article>
           <article>
             <span>전세가율</span>
@@ -881,7 +859,7 @@ export default function ComplexDetailPanel({
               ))}
             </div>
           ) : (
-            <p className="detail-station-empty">단지 좌표가 미확인이거나 반경 1.5km 내 확인된 역이 없습니다.</p>
+            <p className="detail-station-empty">{stationAvailabilityMessage(complex.id)}</p>
           )}
           {workplaceAccess.length ? (
             <div className="detail-workplace-access">
@@ -1080,6 +1058,9 @@ export default function ComplexDetailPanel({
                 period={period}
                 buildYear={complex.buildYear}
                 metric={chartMetric}
+                emptyNote={chartMetric === "ratio" && rentPeriodSupported(endMonth) && !loading && !error && !missing.sale && !missing.rent
+                  ? "같은 월의 매매·전세 자료가 함께 있어야 전세가율을 표시합니다."
+                  : emptyMessage(chartMetric === "sale" || (chartMetric === "ratio" && missing.sale) ? "sale" : "rent")}
               />
             </>
           )}
@@ -1089,23 +1070,27 @@ export default function ComplexDetailPanel({
           <TransactionList
             key={`sale:${complex.id}:${effectiveArea ?? "all"}:${period}`}
             title="최근 매매 실거래"
-            caption={`${areaCaption} · 최신 계약순`}
+            caption={`${areaCaption} · 최신 계약순 · 금액 만원 단위`}
             transactions={recentSales}
             type="sale"
+            emptyNote={emptyMessage("sale")}
+            complete={!loading && !error && !missing.sale}
           />
           <TransactionList
             key={`rent:${complex.id}:${effectiveArea ?? "all"}:${period}`}
             title="최근 전세·월세 실거래"
-            caption={`${areaCaption} · 보증금/월세`}
+            caption={`${areaCaption} · 보증금/월세 · 금액 만원 단위`}
             transactions={recentRents}
             type="rent"
+            emptyNote={emptyMessage("rent")}
+            complete={rentPeriodSupported(endMonth) && !loading && !error && !missing.rent}
           />
         </div>
 
         <p className="detail-footnote">
           실거래 신고 자료는 취소·정정될 수 있으며, 동·호수 정보는 개인정보 보호를 위해
           제공되지 않습니다. 매매는 2006년 1월, 전월세는 2011년 1월 이후 자료를
-          단지 준공연도부터 조회합니다.
+          단지 준공연도부터 저장된 범위에서 조회합니다. 새로고침으로 외부 자료를 수집하지 않습니다.
         </p>
       </section>
     </div>

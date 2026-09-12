@@ -6,7 +6,6 @@ import {
   WORKPLACES,
   WORKPLACE_BY_ID,
   getDirectWorkplaceMatch,
-  hasDirectWorkplaceAccess,
   type WorkplaceId,
 } from "./access";
 import {
@@ -16,6 +15,8 @@ import {
   type WorkplaceCommuteEstimate,
 } from "./commute";
 import { isSelectableMonth, seoulMonth } from "./site-config";
+import { periodTradeLabel } from "../lib/trade-coverage.mjs";
+import { formatPrice, formatSummaryPrice } from "./price-format";
 
 const ComplexDetailPanel = lazy(() => import("./complex-detail"));
 import {
@@ -29,18 +30,20 @@ import {
 } from "./complex-master";
 import { SEOUL_DISTRICTS, type Trade } from "./data";
 import { groupTradesByMaster } from "./master-trade-matcher";
-import { getNearbyStations, selectNearbyStation, TRANSIT_COVERAGE, type NearbyStation } from "./stations";
+import { getNearbyStations, stationAvailabilityMessage, type NearbyStation } from "./stations";
+import { filterApartmentCandidates, filterByTransit } from "./apartment-filter";
+import { TransitCoverageNotice } from "./transit-coverage";
 
-import { applyAreaPriceFilter, latestSalesByArea, type AreaSaleSummary } from "./area-sales";
+import { latestSalesByArea, type AreaSaleSummary } from "./area-sales";
 
 type DataMode = "unavailable" | "live" | "partial" | "stored";
 type MasterLoadState = "loading" | "ready" | "error";
 
 type TradesApiResponse = {
-  mode: "unavailable" | "live" | "partial";
+  mode: "unavailable" | "stored" | "partial";
   trades: Trade[];
   completedDistricts?: string[];
-  updatedAt: string;
+  fetchedAt: string | null;
   message: string;
 };
 
@@ -103,10 +106,6 @@ const STATION_RANGES = [
   { id: "800", label: "800m", max: 800 },
   { id: "1000", label: "1km", max: 1000 },
 ] as const;
-
-function formatPrice(price: number) {
-  return Number.isInteger(price) ? `${price}억` : `${price.toFixed(1)}억`;
-}
 
 function formatDate(date: string) {
   const [, month, day] = date.split("-");
@@ -240,9 +239,8 @@ export default function Home() {
   const [selectedComplex, setSelectedComplex] =
     useState<ComplexMasterRecord | null>(null);
 
-  async function loadDashboard(targetMonth: string, refreshLive = false) {
+  async function loadDashboard(targetMonth: string) {
     if (!isSelectableMonth(targetMonth)) return;
-    if (refreshLive && selectedDistrict === "서울 전체") return;
     loadController.current?.abort();
     const controller = new AbortController();
     loadController.current = controller;
@@ -255,7 +253,8 @@ export default function Home() {
     setRefreshedMonth(undefined);
     setRefreshedDistricts([]);
     setMode("unavailable");
-    setStatusMessage(refreshLive ? `${selectedDistrict}의 최신 실거래를 확인합니다.` : "단지 목록과 저장된 매매 자료를 불러옵니다.");
+    setUpdatedAt(null);
+    setStatusMessage("단지 목록과 저장된 매매 자료를 불러옵니다.");
     if (!masterComplexes.length) setMasterLoadState("loading");
     const messages: string[] = [];
     let tradesMode: DataMode = "unavailable";
@@ -276,7 +275,7 @@ export default function Home() {
       }
     }
 
-    // Each source renders independently: slow MOLIT requests must not block the master or saved prices.
+    // Independent database reads; collection runs outside visitor requests.
     const masterTask = (async () => {
       try {
         const response = await fetch("/api/complexes?limit=20000", { signal });
@@ -286,7 +285,6 @@ export default function Home() {
         if (!current()) return;
         setMasterComplexes(data.complexes.map(normalizeComplexRecord));
         setMasterLoadState("ready");
-        if (data.updatedAt) setUpdatedAt(data.updatedAt);
         if (data.message) messages.push(data.message);
       } catch {
         if (!current()) return;
@@ -300,25 +298,18 @@ export default function Home() {
       messages.push("저장된 매매 자료를 불러오지 못했습니다.");
     });
     const tradesTask = (async () => {
-      if (!refreshLive) return;
       try {
-        const response = await fetch(`/api/trades?month=${requestMonth}&district=${encodeURIComponent(selectedDistrict)}`, { signal, cache: "no-store" });
+        const response = await fetch(`/api/trades?month=${requestMonth}`, { signal, cache: "no-store" });
         if (!response.ok) throw new Error("trades unavailable");
         const data = (await response.json()) as TradesApiResponse;
         if (!current()) return;
-        const hasRealResponse = data.mode === "live" || data.mode === "partial";
+        const hasRealResponse = data.mode === "stored" || data.mode === "partial";
         setTrades(hasRealResponse ? data.trades : []);
-        tradesMode = hasRealResponse ? "partial" : "unavailable";
+        tradesMode = data.mode;
         setRefreshedMonth(hasRealResponse ? requestMonth : undefined);
-        setRefreshedDistricts(data.completedDistricts ?? (data.mode === "live" ? [selectedDistrict] : []));
-        if (data.updatedAt) setUpdatedAt(data.updatedAt);
+        setRefreshedDistricts(data.completedDistricts ?? []);
+        setUpdatedAt(data.fetchedAt);
         if (data.message) messages.push(data.message);
-        // Wait for the initial snapshot before re-reading so an older response cannot overwrite the refreshed DB.
-        await savedTask;
-        if (hasRealResponse && current()) {
-          try { await readSavedSales(); }
-          catch { messages.push("저장 자료 갱신 실패: 이번에 조회된 거래와 기존 저장 자료를 유지합니다."); }
-        }
       } catch {
         if (current()) messages.push("선택 월 실거래 조회에 실패했습니다. 미조회 지역은 거래가 없는 지역을 뜻하지 않습니다.");
       }
@@ -349,63 +340,28 @@ export default function Home() {
     [masterComplexes, trades, storedSales, refreshedMonth, refreshedDistricts],
   );
 
+  const transitResults = useMemo(() => {
+    const area = AREA_BANDS.find(band => band.id === selectedArea)!;
+    const moveInYear = MOVE_IN_YEAR_BANDS.find(band => band.id === selectedMoveInYear)!;
+    const price = PRICE_BANDS.find(band => band.id === selectedPriceBand);
+    const stationRange = STATION_RANGES.find(range => range.id === selectedStationRange)!;
+    const candidates = filterApartmentCandidates(mergedComplexes, {
+      district: selectedDistrict,
+      area: selectedArea === "all" ? null : area,
+      price,
+      moveInYear: selectedMoveInYear === "all" ? null : selectedMoveInYear === "unknown" ? "unknown" : moveInYear,
+      keyword: deferredSearch,
+    });
+    return filterByTransit(candidates, {
+      stationKeys: [selectedSubway1, selectedSubway2].filter(Boolean),
+      maxStationMeters: stationRange.max,
+      workplaces: [selectedWorkplace1, selectedWorkplace2].filter((value): value is WorkplaceId => Boolean(value)),
+    });
+  }, [mergedComplexes, selectedDistrict, selectedArea, selectedMoveInYear, selectedPriceBand,
+    selectedStationRange, selectedWorkplace1, selectedWorkplace2, selectedSubway1, selectedSubway2, deferredSearch]);
+
   const complexes = useMemo(() => {
-    const area = AREA_BANDS.find((band) => band.id === selectedArea)!;
-    const moveInYear = MOVE_IN_YEAR_BANDS.find(
-      (band) => band.id === selectedMoveInYear,
-    )!;
-    const priceBand = PRICE_BANDS.find((band) => band.id === selectedPriceBand);
-    const stationRange = STATION_RANGES.find(
-      (range) => range.id === selectedStationRange,
-    )!;
-    const keyword = deferredSearch.trim().toLowerCase();
-    const selectedWorkplaces = [selectedWorkplace1, selectedWorkplace2].filter(
-      (value): value is WorkplaceId => Boolean(value),
-    );
-    const selectedSubways = [selectedSubway1, selectedSubway2].filter(Boolean);
-
-    const filteredComplexes = mergedComplexes
-      .filter(
-        (complex) =>
-          selectedDistrict === "서울 전체" ||
-          complex.record.district === selectedDistrict,
-      )
-      .flatMap((complex) => {
-        const record = applyAreaPriceFilter(complex.record, selectedArea === "all" ? null : area, priceBand);
-        if (!record) return [];
-        const periodTrades = complex.periodTrades.filter((trade) =>
-          selectedArea === "all" || (trade.area >= area.min && trade.area < area.max));
-        return [{ ...complex, record, periodTrades }];
-      })
-      .filter((complex) => {
-        if (selectedMoveInYear === "all") return true;
-        if (selectedMoveInYear === "unknown") {
-          return complex.record.buildYear === null;
-        }
-        return Boolean(
-          complex.record.buildYear &&
-            complex.record.buildYear >= moveInYear.min &&
-            complex.record.buildYear < moveInYear.max,
-        );
-      })
-
-      .flatMap((complex) => {
-        const station = selectNearbyStation(getNearbyStations(complex.record.id), selectedSubways, stationRange.max);
-        if ((selectedSubways.length || selectedStationRange !== "all") && !station) return [];
-        return [{ ...complex, station }];
-      })
-      .filter((complex) =>
-        selectedWorkplaces.every((workplaceId) =>
-          hasDirectWorkplaceAccess(complex.record.id, workplaceId),
-        ),
-      )
-      .filter((complex) => {
-        if (!keyword) return true;
-        return `${complex.record.district} ${complex.record.dong} ${complex.record.name} ${complex.record.address}`
-          .toLowerCase()
-          .includes(keyword);
-      });
-
+    const filteredComplexes = transitResults.matched;
     return filteredComplexes
       .map<RankedComplexResult>((complex) => ({
         ...complex,
@@ -435,20 +391,7 @@ export default function Home() {
         }
         return compareComplexes(left.record, right.record, sortMode);
       });
-  }, [
-    mergedComplexes,
-    selectedDistrict,
-    selectedArea,
-    selectedMoveInYear,
-    selectedPriceBand,
-    selectedStationRange,
-    selectedWorkplace1,
-    selectedWorkplace2,
-    selectedSubway1,
-    selectedSubway2,
-    deferredSearch,
-    sortMode,
-  ]);
+  }, [transitResults, selectedWorkplace1, sortMode]);
 
   const summary = useMemo(() => {
     const prices = complexes
@@ -560,7 +503,7 @@ export default function Home() {
       동수: record.buildingCount ?? "",
       인근역: station?.name ?? "",
       "선택월 거래(건)": refreshedDistricts.includes(record.district) ? periodTrades.length : "",
-      "선택월 조회상태": refreshedDistricts.includes(record.district) ? "조회 완료" : "미조회",
+      "선택월 조회상태": refreshedDistricts.includes(record.district) ? "수집 완료" : "미수집",
       출처: record.source,
     }));
     const sheet = XLSX.utils.json_to_sheet(rows);
@@ -638,7 +581,7 @@ export default function Home() {
           </article>
           <article>
             <span>최근 매매 중위가</span>
-            <strong>{summary.count ? formatPrice(summary.median) : "-"}</strong>
+            <strong>{summary.count ? formatSummaryPrice(summary.median) : "-"}</strong>
             <small>MEDIAN</small>
           </article>
           <article>
@@ -818,7 +761,7 @@ export default function Home() {
 
           <div className="finder-filter-group finder-access-filter">
             <span className="finder-filter-title">인근 지하철역 선택</span>
-            <small className="finder-filter-note">단지·역사 좌표 간 직선거리 · 역 미선택 시 가장 가까운 역, 선택 시 해당 역 기준(2곳은 하나 이상 충족). 반경 1.5km 내 역만 조회합니다. 좌표 확인 {TRANSIT_COVERAGE.geocodedComplexes.toLocaleString()}/{TRANSIT_COVERAGE.totalComplexes.toLocaleString()}개 · 미확인 단지는 역·거리·직장 필터에서 제외됩니다.</small>
+            <small className="finder-filter-note">단지·역사 좌표 간 직선거리 · 역 미선택 시 가장 가까운 역, 선택 시 해당 역 기준(2곳은 하나 이상 충족). 반경 1.5km 내 역만 조회합니다. 직장 2곳은 모두 직통 접근이 가능해야 합니다. 좌표 미확인으로 제외된 단지는 결과 상단에서 따로 확인할 수 있습니다.</small>
             <div className="finder-select-pair">
               <label>
                 <span>지하철 1</span>
@@ -888,12 +831,7 @@ export default function Home() {
             {loading ? "불러오는 중…" : "저장 자료 다시 불러오기"}
             <span aria-hidden="true">→</span>
           </button>
-          <button className="finder-live-button" type="button"
-            onClick={() => void loadDashboard(month, true)}
-            disabled={loading || selectedDistrict === "서울 전체"}>
-            선택 지역 실거래 확인
-          </button>
-          <p className="finder-filter-note">지역을 선택하면 해당 구만 추가 조회합니다. 처음 방문할 때는 공공데이터에 실거래를 요청하지 않습니다.</p>
+          <p className="finder-filter-note">새로고침은 저장 자료만 다시 읽습니다. 공공데이터 수집은 별도의 관리자 작업으로 진행됩니다.</p>
         </aside>
 
         <section className="finder-results" id="finder-results">
@@ -943,9 +881,19 @@ export default function Home() {
               ))}
             </div>
             <small>
-              가격 확인 {summary.count.toLocaleString()}개 · {refreshedDistricts.length ? `확인된 선택월 거래 ${summary.periodTradeCount.toLocaleString()}건` : "선택월 거래 미조회"}
+              가격 확인 {summary.count.toLocaleString()}개 · {periodTradeLabel(selectedDistrict, refreshedDistricts, summary.periodTradeCount)}
             </small>
           </div>
+
+          {(masterLoadState === "ready" || masterComplexes.length > 0) && (
+            <TransitCoverageNotice
+              key={JSON.stringify([selectedDistrict, selectedArea, selectedMoveInYear, selectedPriceBand,
+                selectedStationRange, selectedWorkplace1, selectedWorkplace2, selectedSubway1, selectedSubway2, deferredSearch])}
+              coverage={transitResults.coverage}
+              unverified={transitResults.unverified.map(complex => complex.record)}
+              onSelect={setSelectedComplex}
+            />
+          )}
 
           {masterLoadState === "loading" && !masterComplexes.length ? (
             <div className="finder-empty-state" role="status">
@@ -1006,7 +954,7 @@ export default function Home() {
                               ) : (
                                 <span>세대수 확인 중</span>
                               )}
-                              <span>{refreshedDistricts.includes(record.district) ? `선택월 거래 ${periodTrades.length}건` : "선택월 거래 미조회"}</span>
+                              <span>{refreshedDistricts.includes(record.district) ? `선택월 거래 ${periodTrades.length}건` : "선택월 거래 미수집"}</span>
                             </div>
                             <div className="finder-station-line">
                               <span className="finder-station-icon" aria-hidden="true">M</span>
@@ -1017,7 +965,7 @@ export default function Home() {
                                   <small>직선 {Math.round(complex.station.distanceMeters)}m</small>
                                 </>
                               ) : (
-                                <span>좌표 미확인 또는 1.5km 내 역 없음</span>
+                                <span>{stationAvailabilityMessage(record.id)}</span>
                               )}
                             </div>
                             {(selectedWorkplace1 || selectedWorkplace2) && (
@@ -1099,8 +1047,8 @@ export default function Home() {
           ) : (
             <div className="finder-empty-state">
               <span aria-hidden="true">⌕</span>
-              <h3>조건에 맞는 단지가 없습니다.</h3>
-              <p>지역이나 가격·면적 범위를 넓혀 다시 확인해보세요.</p>
+              <h3>{transitResults.coverage.active ? "확인된 좌표에서 교통 조건을 충족하는 단지가 없습니다." : "조건에 맞는 단지가 없습니다."}</h3>
+              <p>{transitResults.unverified.length ? `좌표 미확인 ${transitResults.unverified.length.toLocaleString()}개는 위 확인 필요 목록에서 별도로 확인하세요.` : "지역이나 가격·면적 범위를 넓혀 다시 확인해보세요."}</p>
               <button type="button" onClick={resetFilters}>전체 조건으로 보기</button>
             </div>
           )}
@@ -1117,11 +1065,11 @@ export default function Home() {
           <div className="finder-key-metrics">
             <article>
               <span>중위가</span>
-              <strong>{summary.count ? formatPrice(summary.median) : "-"}</strong>
+              <strong>{summary.count ? formatSummaryPrice(summary.median) : "-"}</strong>
             </article>
             <article>
               <span>평균가</span>
-              <strong>{summary.count ? formatPrice(summary.average) : "-"}</strong>
+              <strong>{summary.count ? formatSummaryPrice(summary.average) : "-"}</strong>
             </article>
           </div>
 
@@ -1173,7 +1121,8 @@ export default function Home() {
                 day: "numeric",
                 hour: "2-digit",
                 minute: "2-digit",
-              }) : "확인 전"} · 목록 응답 시각 (실거래 수집 완료 시각 아님)
+                timeZone: "Asia/Seoul",
+              }) : "수집 시각 미확인"} · 선택월 자료 중 최근 수집 시각
             </small>
           </section>
         </aside>

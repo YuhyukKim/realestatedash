@@ -4703,3 +4703,80 @@ footer strong {
     scroll-behavior: auto !important; transition: none !important; animation: none !important;
   }
 }
+
+
+/* Full contract amounts must wrap rather than disappear in narrow cards. */
+.finder-card-price,
+.finder-card-price > strong,
+.detail-summary article,
+.transaction-price {
+  min-width: 0;
+}
+.finder-card-price > strong,
+.finder-card-price > em,
+.detail-summary strong,
+.transaction-price strong {
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.45;
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 640px) {
+  .finder-card-price {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+    column-gap: 12px;
+  }
+}
+
+
+/* Coordinate coverage is scoped to the current non-transit search conditions. */
+.finder-transit-coverage {
+  margin: 12px;
+  padding: 16px;
+  border: 1px solid #c6d4e6;
+  background: #f4f7fb;
+  color: #253d5b;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+.finder-transit-coverage h3 { margin: 0 0 6px; font-size: 1rem; }
+.finder-transit-coverage p { margin: 6px 0; }
+.finder-transit-counts { font-variant-numeric: tabular-nums; }
+.finder-unverified { margin-top: 12px; border-top: 1px solid #c6d4e6; }
+.finder-unverified summary {
+  min-height: 44px;
+  padding: 10px 0;
+  cursor: pointer;
+  font-weight: 700;
+}
+.finder-unverified ul { list-style: none; margin: 12px 0; padding: 0; }
+.finder-unverified li + li { margin-top: 8px; }
+.finder-unverified li button {
+  display: grid;
+  gap: 4px;
+  width: 100%;
+  min-height: 44px;
+  padding: 12px;
+  border: 1px solid #d9e1ec;
+  background: #fff;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+.finder-unverified small { color: #725318; font-size: 0.75rem; }
+.finder-unverified-more {
+  min-height: 44px;
+  padding: 8px 16px;
+  border: 1px solid #aebed4;
+  background: #fff;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+.finder-unverified :is(summary, button):focus-visible {
+  outline: 3px solid #2f72d6;
+  outline-offset: 3px;
+}

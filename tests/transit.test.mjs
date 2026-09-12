@@ -42,7 +42,8 @@ test("coordinate transit: radius, selected station, missing data and official co
   const master = await vite.ssrLoadModule("/db/seed.ts");
   const ids = new Set(master.getComplexSeed().map((s) => s.id));
   const snapshot = JSON.parse(await readFile(new URL("../app/transit-coordinates.json", import.meta.url), "utf8"));
-  assert.equal(snapshot.coverage.totalComplexes, ids.size);
+  assert.equal(snapshot.coverage.totalComplexes, master.COMPLEX_CATALOG_COVERAGE.sourceRecords);
+  assert.equal(transit.TRANSIT_COVERAGE.totalComplexes, ids.size);
   assert.equal(Object.keys(snapshot.complexes).length, snapshot.coverage.geocodedComplexes);
   assert.ok(Object.keys(snapshot.complexes).every((id) => ids.has(id)));
   assert.ok(snapshot.coverage.geocodedComplexes < ids.size, "partial coordinate coverage must remain disclosed");

@@ -1,3 +1,4 @@
+import { RETIRED_COMPLEX_IDS } from "../lib/complex-identity.mjs";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
@@ -228,8 +229,8 @@ test("returns the full apartment master including complexes without a recent sal
   assert.ok(Array.isArray(payload.complexes));
   assert.equal(
     payload.complexes.length,
-    rebMeta.mergedRecords,
-    "the unfiltered endpoint must return the exact deduplicated official master",
+    rebMeta.mergedRecords - RETIRED_COMPLEX_IDS.length,
+    "the unfiltered endpoint must return the reviewed canonical official master",
   );
   assert.equal(rebMeta.sourceKaptRecords, kaptMeta.records);
   assert.equal(
@@ -587,22 +588,21 @@ test("client accepts only real trades and sends the canonical ID to history requ
   const panel = await readFile(new URL("../app/complex-detail.tsx", import.meta.url), "utf8");
   assert.ok(!page.includes("sampleTrades"));
   assert.ok(!page.includes('masterMode === "live" ||'));
-  assert.ok(page.includes('data.mode === "live" || data.mode === "partial"'));
+  assert.ok(page.includes('data.mode === "stored" || data.mode === "partial"'));
   assert.ok(page.includes("setTrades(hasRealResponse ? data.trades : [])"));
   assert.ok(panel.includes("complexId: complex.id"));
-  assert.ok(panel.includes('if (payload.mode === "live") cacheRef.current'));
+  assert.ok(panel.includes('payload.mode === "stored" || payload.mode === "partial"'));
+  assert.ok(!panel.includes("cacheRef.current"));
+  assert.ok(panel.includes("emptyTradeMessage"));
 });
 
-test("does not fabricate history for a master complex without an observed trade", async () => {
+test("rejects an unknown complex rather than fabricating history", async () => {
   const response = await render(
     "/api/complex?district=강남구&dong=개포동&apartment=거래없는테스트단지&from=202507&to=202606&asOf=202607&buildYear=1986&master=1",
   );
-  assert.equal(response.status, 200);
-
+  assert.equal(response.status, 404);
   const payload = await response.json();
-  assert.equal(payload.mode, "unavailable");
-  assert.deepEqual(payload.transactions, []);
-  assert.match(payload.message, /예시 가격을 만들지 않습니다|확인되지 않은 가격/);
+  assert.match(payload.message, /단지를 특정할 수 없습니다/);
 });
 
 test("returns location and school context with a successful fallback response", async () => {

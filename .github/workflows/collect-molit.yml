@@ -1,0 +1,46 @@
+name: Collect MOLIT snapshots
+on:
+  workflow_dispatch:
+    inputs:
+      districts:
+        description: 'Comma-separated districts (e.g. 마포구,영등포구); no implicit all-Seoul run'
+        required: true
+        default: '마포구'
+      from:
+        description: 'First month YYYYMM (blank = previous month)'
+        required: false
+      to:
+        description: 'Last month YYYYMM (blank = current Seoul month; max 12 months)'
+        required: false
+      kind:
+        description: 'Feed to collect'
+        type: choice
+        options: [both, sale, rent]
+        default: both
+  schedule:
+    - cron: '23 19 * * *'
+permissions:
+  contents: read
+concurrency:
+  group: molit-collector
+  cancel-in-progress: false
+jobs:
+  collect:
+    if: github.event_name == 'workflow_dispatch' || (vars.MOLIT_SCHEDULE_ENABLED == 'true' && vars.MOLIT_DISTRICTS != '')
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Collect complete scopes and publish authenticated snapshots
+        env:
+          PUBLIC_SITE_URL: ${{ vars.PUBLIC_SITE_URL }}
+          MOLIT_API_KEY: ${{ secrets.MOLIT_API_KEY }}
+          DATA_REFRESH_TOKEN: ${{ secrets.DATA_REFRESH_TOKEN }}
+          MOLIT_DISTRICTS: ${{ inputs.districts || vars.MOLIT_DISTRICTS }}
+          MOLIT_FROM: ${{ inputs.from }}
+          MOLIT_TO: ${{ inputs.to }}
+          MOLIT_KIND: ${{ inputs.kind || 'both' }}
+        run: node scripts/collect-molit.mjs
