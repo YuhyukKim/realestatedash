@@ -155,7 +155,9 @@ test("default coverage keeps unknown rows included and hides the exclusion-only 
 test("page wires scoped counts separately from matched results, statistics and exports", async () => {
   const page = await readFile(new URL("../app/page.tsx", import.meta.url), "utf8");
   const detail = await readFile(new URL("../app/complex-detail.tsx", import.meta.url), "utf8");
-  assert.match(page, /const candidates = filterApartmentCandidates\(mergedComplexes/);
+  assert.match(page, /const searchPool = favoritesOnly/);
+  assert.match(page, /mergedComplexes\.filter\(complex => favoriteSet\.has\(complex\.key\)\) : mergedComplexes/);
+  assert.match(page, /const candidates = filterApartmentCandidates\(searchPool/);
   assert.match(page, /return filterByTransit\(candidates/);
   assert.match(page, /const filteredComplexes = transitResults\.matched/);
   assert.match(page, /coverage=\{transitResults\.coverage\}/);
