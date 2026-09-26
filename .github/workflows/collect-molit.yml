@@ -48,13 +48,15 @@ jobs:
           MOLIT_TO: ${{ inputs.to }}
           MOLIT_KIND: ${{ inputs.kind || 'both' }}
         run: node scripts/collect-pages.mjs
+      - name: Update redevelopment map history index
+        run: node scripts/map-history-index.mjs
       - name: Validate complete site before saving any data
         run: npm run build:pages && npm run test:pages
       - name: Save only sanitized public snapshots
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- data/scopes
+          git add -- data/scopes data/map-history-index.json
           if ! git diff --cached --quiet; then
             git commit -m "data: refresh validated MOLIT snapshots"
             git push origin HEAD:main

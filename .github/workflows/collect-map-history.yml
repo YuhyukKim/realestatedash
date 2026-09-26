@@ -1,0 +1,47 @@
+name: Collect redevelopment map history
+on:
+  workflow_dispatch:
+    inputs:
+      district:
+        description: 'Seoul district to collect'
+        required: true
+        default: '양천구'
+      from:
+        description: 'First month YYYYMM; sale since 200601, rent since 201101'
+        required: true
+        default: '200601'
+      to:
+        description: 'Last month YYYYMM; blank means current month'
+        required: false
+  schedule:
+    - cron: '10 18 * * *'
+permissions:
+  contents: read
+concurrency:
+  group: pages-data-collection
+  cancel-in-progress: false
+jobs:
+  collect:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Prepare checkpoint author
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      - name: Collect official history and checkpoint public data
+        env:
+          MOLIT_API_KEY: ${{ secrets.MOLIT_API_KEY }}
+          MOLIT_DISTRICT: ${{ inputs.district || '양천구' }}
+          MOLIT_FROM: ${{ inputs.from || '200601' }}
+          MOLIT_TO: ${{ inputs.to }}
+        run: node scripts/collect-map-history.mjs
