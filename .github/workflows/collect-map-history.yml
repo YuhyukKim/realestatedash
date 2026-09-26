@@ -3,9 +3,9 @@ on:
   workflow_dispatch:
     inputs:
       district:
-        description: 'Seoul district to collect'
+        description: 'Seoul district, or 재건축전체 for every district on the redevelopment map'
         required: true
-        default: '양천구'
+        default: '재건축전체'
       from:
         description: 'First month YYYYMM; sale since 200601, rent since 201101'
         required: true
@@ -41,7 +41,7 @@ jobs:
       - name: Collect official history and checkpoint public data
         env:
           MOLIT_API_KEY: ${{ secrets.MOLIT_API_KEY }}
-          MOLIT_DISTRICT: ${{ inputs.district || '양천구' }}
+          MOLIT_DISTRICT: ${{ inputs.district || '재건축전체' }}
           MOLIT_FROM: ${{ inputs.from || '200601' }}
           MOLIT_TO: ${{ inputs.to }}
         run: node scripts/collect-map-history.mjs
