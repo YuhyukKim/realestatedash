@@ -14,4 +14,4 @@ jobs:
       - name: Check building endpoints without exposing credentials
         env:
           MOLIT_API_KEY: ${{ secrets.MOLIT_API_KEY }}
-        run: node scripts/probe-register-pagination.mjs
+        run: node scripts/check-filtered-prices.mjs
