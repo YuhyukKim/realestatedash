@@ -4390,7 +4390,7 @@ async function collect(candidate) {
       if (result.prices?.status !== "ready") result.prices = { status, source: SOURCES.price };
       else result.prices.refreshStatus = status;
     }
-    result.prices ??= { status: result.building?.status === "needs_review" ? "needs_review" : "unavailable", source: SOURCES.building };
+    result.prices ??= { status: ["needs_review", "not_authorized", "not_configured", "rate_limited"].includes(result.building?.status) ? result.building.status : buildingBlocked || "unavailable", source: SOURCES.price };
     if ((preferRegister || result.prices?.status !== "ready") && result.building?.status === "ready" && !buildingBlocked) {
       try {
         const prices = await collectRegisterPrices(c, result, year, (ep, pnu) => buildingPages(ep, pnu, process.env.MOLIT_API_KEY, officialTransport));
