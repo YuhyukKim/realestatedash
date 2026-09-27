@@ -4240,7 +4240,7 @@ function registerPriceProfile(building, rows) {
     if (!unit || price === null || price <= 0 || !/^\d{8}$/.test(day)) continue;
     const year2 = day.slice(0, 4), key = unit.dong + "|" + unit.ho, privateRows = unit.rows.filter((x) => x.kind === "\uC804\uC720");
     const record = records[key] ??= { dong: unit.dong, ho: unit.ho, rows: [] };
-    const value = { year: year2, date: year2 + "." + day.slice(4, 6) + "." + day.slice(6, 8), area: privateRows.length ? privateRows.reduce((sum, x) => sum + x.area, 0) : null, price, updatedAt: cleanText(r.crtnDay) };
+    const value = { year: year2, date: year2 + "." + day.slice(4, 6) + "." + day.slice(6, 8), area: privateRows.length ? privateRows.reduce((sum, x) => sum + x.area, 0) : null, areaSource: "building-register", price, updatedAt: cleanText(r.crtnDay) };
     if (!record.rows.some((x) => x.date === value.date && x.price === price)) record.rows.push(value);
     years.add(year2);
     (units[unit.dong] ??= /* @__PURE__ */ new Set()).add(unit.ho);
