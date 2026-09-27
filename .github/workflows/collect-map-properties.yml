@@ -1,0 +1,42 @@
+name: Collect official map building and assessed-price data
+on:
+  workflow_dispatch:
+    inputs:
+      year:
+        description: '공동주택 공시가격 기준연도 (빈 값은 올해)'
+        required: false
+permissions:
+  contents: read
+concurrency:
+  group: pages-data-collection
+  cancel-in-progress: false
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Collect public building and price records
+        env:
+          MOLIT_API_KEY: ${{ secrets.MOLIT_API_KEY }}
+          VWORLD_API_KEY: ${{ secrets.VWORLD_API_KEY }}
+          VWORLD_DOMAIN: ${{ vars.VWORLD_DOMAIN || 'https://seoul-redevelopment-map-yuhyu.whisky88.chatgpt.site' }}
+          PROPERTY_PRICE_YEAR: ${{ inputs.year }}
+        run: node scripts/collect-map-properties.mjs
+      - name: Save sanitized public data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/property
+          if ! git diff --cached --quiet; then
+            git commit -m "Update official map building and assessed-price snapshots"
+            git pull --rebase origin main
+            git push
+          fi
