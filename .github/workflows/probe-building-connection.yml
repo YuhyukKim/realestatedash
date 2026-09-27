@@ -14,4 +14,4 @@ jobs:
       - name: Check small official requests without exposing credentials
         env:
           MOLIT_API_KEY: ${{ secrets.MOLIT_API_KEY }}
-        run: node scripts/probe-building-connection.mjs
+        run: node scripts/probe-building-connection.mjs --prices
