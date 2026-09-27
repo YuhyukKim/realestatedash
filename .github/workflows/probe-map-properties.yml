@@ -1,0 +1,19 @@
+name: Verify official map property access
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check public response schema without printing keys
+        env:
+          MOLIT_API_KEY: ${{ secrets.MOLIT_API_KEY }}
+          VWORLD_API_KEY: ${{ secrets.VWORLD_API_KEY }}
+          VWORLD_DOMAIN: ${{ vars.VWORLD_DOMAIN || 'https://seoul-redevelopment-map-yuhyu.whisky88.chatgpt.site' }}
+        run: node scripts/probe-map-properties.mjs
