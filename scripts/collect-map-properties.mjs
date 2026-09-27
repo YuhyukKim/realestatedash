@@ -4153,7 +4153,7 @@ function parcelParams(pnu) {
 }
 async function buildingPages(endpoint, pnu, key, fetcher = fetch, dates = {}) {
   if (!key) throw Error("not_configured");
-  async function pageData(page) {
+  async function pageData(page, attempt = 0) {
     const url = new URL("https://apis.data.go.kr/1613000/BldRgstHubService/" + endpoint);
     for (const [k, v] of Object.entries({ ...parcelParams(pnu), ...dates, serviceKey: decodeURIComponent(key.trim()), _type: "json", numOfRows: 1e3, pageNo: page })) url.searchParams.set(k, String(v));
     const text = await officialResponseText(url, fetcher);
@@ -4164,7 +4164,15 @@ async function buildingPages(endpoint, pnu, key, fetcher = fetch, dates = {}) {
       doc = new XMLParser({ parseTagValue: false }).parse(text);
     }
     const response = doc.response, code = String(response?.header?.resultCode ?? "");
-    if (!["00", "000", "0"].includes(code)) throw Error(["20", "30", "31"].includes(code) ? "not_authorized" : ["22", "23"].includes(code) ? "rate_limited" : "unavailable");
+    if (code === "23" && attempt < 3) {
+      await new Promise((resolve) => setTimeout(resolve, 2e3 * (attempt + 1)));
+      return pageData(page, attempt + 1);
+    }
+    if (!["00", "000", "0"].includes(code)) {
+      const error = Error(["20", "30", "31"].includes(code) ? "not_authorized" : ["22", "23"].includes(code) ? "rate_limited" : "unavailable");
+      error.apiCode = code;
+      throw error;
+    }
     const total = Number(response.body?.totalCount);
     if (!Number.isInteger(total) || total < 0 || total > 1e5) throw Error("invalid_response");
     const part = array(response.body.items?.item);
@@ -4286,9 +4294,14 @@ function mergePriceYears(previous, next2, year2) {
 
 // scripts/official-api-transport.mjs
 import { spawn } from "node:child_process";
+var nextBuildingRequest = 0;
 function officialTransport(url, options = {}) {
   const target = new URL(url);
-  if (target.protocol === "https:" && target.hostname === "apis.data.go.kr" && target.pathname.startsWith("/1613000/BldRgstHubService/")) return fetch(url, { signal: options.signal || AbortSignal.timeout(45e3) });
+  if (target.protocol === "https:" && target.hostname === "apis.data.go.kr" && target.pathname.startsWith("/1613000/BldRgstHubService/")) {
+    const wait = Math.max(0, nextBuildingRequest - Date.now());
+    nextBuildingRequest = Math.max(Date.now(), nextBuildingRequest) + 600;
+    return new Promise((resolve) => setTimeout(resolve, wait)).then(() => fetch(url, { signal: options.signal || AbortSignal.timeout(45e3) }));
+  }
   return new Promise((resolve, reject) => {
     const child = spawn("curl", ["--ipv4", "--silent", "--max-time", "45", "--config", "-", "--write-out", "\n%{http_code}"], { stdio: ["pipe", "pipe", "ignore"], windowsHide: true });
     let text = "", settled = false;
@@ -4400,7 +4413,8 @@ async function collect(candidate) {
   fs.writeFileSync(file, JSON.stringify(result));
   console.log(JSON.stringify({ projectId: c.id, building: result.building.status, prices: result.prices.status, buildings: Object.keys(result.building.units || {}).length, units: Object.keys(result.building.records || {}).length, priceUnits: Object.keys(result.prices.records || {}).length }));
 }
-var queue = catalog.filter((c) => c.pnu && (!ids.length || ids.includes(String(c.id)))).sort((a, b) => Number(b.id >= 374 && b.id <= 387) - Number(a.id >= 374 && a.id <= 387));
+var priority = (id) => [387, 382, 377].includes(id) ? 2 : id >= 374 && id <= 387 ? 1 : 0;
+var queue = catalog.filter((c) => c.pnu && (!ids.length || ids.includes(String(c.id)))).sort((a, b) => priority(b.id) - priority(a.id));
 var next = 0;
 await Promise.all(Array.from({ length: Math.min(2, queue.length) }, async () => {
   while (next < queue.length) {
