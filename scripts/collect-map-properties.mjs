@@ -1,5 +1,3 @@
-// Generated from seoul-redevelopment-map/scripts/collect-official-buildings.mjs. No credentials included.
-
 // scripts/collect-official-buildings.mjs
 import fs from "node:fs";
 import path from "node:path";
@@ -4133,6 +4131,21 @@ var finite = (v) => v == null || v === "" ? null : Number.isFinite(Number(v)) ? 
 var array = (v) => Array.isArray(v) ? v : v ? [v] : [];
 var normalizeName = (v) => cleanText(v).normalize("NFKC").replace(/아파트|신시가지|[\s()·.\-]/g, "");
 var sortNames = (a, b) => a.localeCompare(b, "ko", { numeric: true });
+async function officialResponseText(url, fetcher = fetch) {
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try {
+      const r = await fetcher(url, { signal: AbortSignal.timeout(45e3) });
+      if (r.status === 403) throw Error("not_authorized");
+      if (r.status === 429) throw Error("rate_limited");
+      if (!r.ok) throw Error("unavailable");
+      return await r.text();
+    } catch (e) {
+      if (["not_authorized", "rate_limited"].includes(e.message)) throw e;
+      if (attempt === 2) throw Error("unavailable");
+      await new Promise((resolve) => setTimeout(resolve, 1e3 * (attempt + 1)));
+    }
+  }
+}
 function parcelParams(pnu) {
   if (!/^11\d{17}$/.test(pnu)) throw Error("invalid_parcel");
   return { sigunguCd: pnu.slice(0, 5), bjdongCd: pnu.slice(5, 10), platGbCd: String(Number(pnu[10]) - 1), bun: pnu.slice(11, 15), ji: pnu.slice(15, 19) };
@@ -4143,9 +4156,7 @@ async function buildingPages(endpoint, pnu, key, fetcher = fetch) {
   do {
     const url = new URL("https://apis.data.go.kr/1613000/BldRgstHubService/" + endpoint);
     for (const [k, v] of Object.entries({ ...parcelParams(pnu), serviceKey: decodeURIComponent(key), _type: "json", numOfRows: 1e3, pageNo: page })) url.searchParams.set(k, String(v));
-    const r = await fetcher(url, { signal: AbortSignal.timeout(25e3) });
-    if (!r.ok) throw Error(r.status === 403 ? "not_authorized" : "unavailable");
-    const text = await r.text();
+    const text = await officialResponseText(url, fetcher);
     let doc;
     try {
       doc = JSON.parse(text);
@@ -4192,9 +4203,10 @@ async function pricePages(pnu, year2, key, domain, fetcher = fetch) {
   do {
     const url = new URL("https://api.vworld.kr/ned/data/getApartHousingPriceAttr");
     for (const [k, v] of Object.entries({ pnu, stdrYear: year2, key, domain, format: "json", numOfRows: 1e3, pageNo: page })) url.searchParams.set(k, String(v));
-    const response = await fetcher(url, { signal: AbortSignal.timeout(25e3) });
-    if (!response.ok) throw Error(response.status === 403 ? "not_authorized" : "unavailable");
-    const data = await response.json();
+    const data = JSON.parse(await officialResponseText(url, fetcher));
+    const code = data.response?.error?.code || data.error?.code;
+    if (["INVALID_KEY", "INCORRECT_KEY", "UNAVAILABLE_KEY"].includes(code)) throw Error("not_authorized");
+    if (code === "OVER_REQUEST_LIMIT") throw Error("rate_limited");
     const section = data.apartHousingPrices;
     if (!section || section.resultCode && String(section.resultCode) !== "00") throw Error("unverified_response");
     total = Number(section.totalCount);
@@ -4227,11 +4239,13 @@ var catalog = JSON.parse(fs.readFileSync(path.join(root, "data/parcel-candidates
 var output = path.join(root, "data/property");
 fs.mkdirSync(output, { recursive: true });
 var year = process.env.PROPERTY_PRICE_YEAR || String((/* @__PURE__ */ new Date()).getUTCFullYear());
+var ids = (process.env.PROPERTY_PROJECT_IDS || "").split(",").map((s) => s.trim()).filter(Boolean);
+if (ids.some((id) => !/^\d+$/.test(id) || !catalog.some((c) => String(c.id) === id && c.pnu))) throw Error("Unknown or unlocated project ID");
 var buildingBlocked = !process.env.MOLIT_API_KEY ? "not_configured" : null;
 var priceBlocked = !process.env.VWORLD_API_KEY ? "not_configured" : null;
 var summary = { checkedAt: (/* @__PURE__ */ new Date()).toISOString(), buildingReady: 0, pricesReady: 0, buildingBlocked, priceBlocked, results: [] };
 for (const c of catalog) {
-  if (!c.pnu) continue;
+  if (!c.pnu || ids.length && !ids.includes(String(c.id))) continue;
   const file = path.join(output, c.id + ".json");
   let old = {};
   try {
@@ -4242,11 +4256,13 @@ for (const c of catalog) {
   const result = { version: 1, id: c.id, pnu: c.pnu, building: old.building, prices: old.prices };
   try {
     if (buildingBlocked) throw Error(buildingBlocked);
-    const titles = await buildingPages("getBrTitleInfo", c.pnu, process.env.MOLIT_API_KEY), expos = await buildingPages("getBrExposInfo", c.pnu, process.env.MOLIT_API_KEY), areas = await buildingPages("getBrExposPubuseAreaInfo", c.pnu, process.env.MOLIT_API_KEY);
+    const titles = await buildingPages("getBrTitleInfo", c.pnu, process.env.MOLIT_API_KEY);
+    if (!titles.some((t) => c.names.map(normalizeName).includes(normalizeName(t.bldNm)))) throw Error("needs_review");
+    const expos = await buildingPages("getBrExposInfo", c.pnu, process.env.MOLIT_API_KEY), areas = await buildingPages("getBrExposPubuseAreaInfo", c.pnu, process.env.MOLIT_API_KEY);
     result.building = buildingProfile(c, titles, expos, areas);
   } catch (e) {
-    const status = ["not_authorized", "not_configured", "needs_review"].includes(e.message) ? e.message : "unavailable";
-    if (status === "not_authorized") buildingBlocked = status;
+    const status = ["not_authorized", "not_configured", "needs_review", "rate_limited"].includes(e.message) ? e.message : "unavailable";
+    if (["not_authorized", "rate_limited"].includes(status)) buildingBlocked = status;
     if (result.building?.status !== "ready") result.building = { status, source: SOURCES.building };
     else result.building.refreshStatus = status;
   }
@@ -4263,6 +4279,7 @@ for (const c of catalog) {
   if (result.prices.status === "ready") summary.pricesReady++;
   summary.results.push({ id: c.id, building: result.building.status, prices: result.prices.status });
   fs.writeFileSync(file, JSON.stringify(result));
+  console.log(JSON.stringify({ projectId: c.id, building: result.building.status, prices: result.prices.status, buildings: Object.keys(result.building.units || {}).length, units: Object.keys(result.building.records || {}).length, priceUnits: Object.keys(result.prices.records || {}).length }));
 }
 summary.buildingBlocked = buildingBlocked;
 summary.priceBlocked = priceBlocked;

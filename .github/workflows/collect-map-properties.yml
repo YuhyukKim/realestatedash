@@ -5,6 +5,9 @@ on:
       year:
         description: '공동주택 공시가격 기준연도 (빈 값은 올해)'
         required: false
+      project_ids:
+        description: '단지 ID를 쉼표로 구분 (빈 값은 전체)'
+        required: false
 permissions:
   contents: read
 concurrency:
@@ -29,6 +32,7 @@ jobs:
           VWORLD_API_KEY: ${{ secrets.VWORLD_API_KEY }}
           VWORLD_DOMAIN: ${{ vars.VWORLD_DOMAIN || 'https://seoul-redevelopment-map-yuhyu.whisky88.chatgpt.site' }}
           PROPERTY_PRICE_YEAR: ${{ inputs.year }}
+          PROPERTY_PROJECT_IDS: ${{ inputs.project_ids }}
         run: node scripts/collect-map-properties.mjs
       - name: Save sanitized public data
         run: |
