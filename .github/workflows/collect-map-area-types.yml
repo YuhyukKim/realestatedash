@@ -32,7 +32,7 @@ jobs:
           if [ ! -d data/market-area-types ]; then exit 0; fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/market-area-types
+          git add data/market-area-types data/property
           if ! git diff --cached --quiet; then
             git commit -m "Update official area type metadata"
             git pull --rebase origin main

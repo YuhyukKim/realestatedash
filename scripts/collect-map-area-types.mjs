@@ -4126,14 +4126,16 @@ var SOURCES = {
   rules: { name: "\uAD6D\uD1A0\uAD50\uD1B5\uBD80 \uD1A0\uC9C0\uC774\uC74C \xB7 \uD1A0\uC9C0\uC774\uC6A9\uACC4\uD68D", url: "https://www.eum.go.kr/" }
 };
 var cleanText = (v) => v == null ? "" : String(v).trim().slice(0, 240);
+var finite = (v) => v == null || v === "" ? null : Number.isFinite(Number(v)) ? Number(v) : null;
 var array = (v) => Array.isArray(v) ? v : v ? [v] : [];
 var normalizeName = (v) => cleanText(v).normalize("NFKC").replace(/아파트|신시가지|[\s()·.\-]/g, "");
+var sortNames = (a, b) => a.localeCompare(b, "ko", { numeric: true });
 var matchedBuildingTitles = (candidate, titles) => titles.filter((r) => candidate.names.map(normalizeName).includes(normalizeName(r.bldNm)) && (!r.mainPurpsCdNm || /공동주택|아파트|연립주택|다세대주택/.test(r.mainPurpsCdNm)));
 async function officialResponseText(url, fetcher = fetch) {
   for (let attempt = 0; attempt < 3; attempt++) {
     try {
       const r = await fetcher(url, { signal: AbortSignal.timeout(45e3) });
-      if (r.status === 403) throw Error("not_authorized");
+      if ([401, 403].includes(r.status)) throw Error("not_authorized");
       if (r.status === 429) throw Error("rate_limited");
       if (!r.ok) throw Error("unavailable");
       return await r.text();
@@ -4152,7 +4154,7 @@ async function buildingPages(endpoint, pnu, key, fetcher = fetch, dates = {}) {
   if (!key) throw Error("not_configured");
   async function pageData(page) {
     const url = new URL("https://apis.data.go.kr/1613000/BldRgstHubService/" + endpoint);
-    for (const [k, v] of Object.entries({ ...parcelParams(pnu), ...dates, serviceKey: decodeURIComponent(key), _type: "json", numOfRows: 1e3, pageNo: page })) url.searchParams.set(k, String(v));
+    for (const [k, v] of Object.entries({ ...parcelParams(pnu), ...dates, serviceKey: decodeURIComponent(key.trim()), _type: "json", numOfRows: 1e3, pageNo: page })) url.searchParams.set(k, String(v));
     const text = await officialResponseText(url, fetcher);
     let doc;
     try {
@@ -4185,6 +4187,26 @@ async function buildingPages(endpoint, pnu, key, fetcher = fetch, dates = {}) {
   if (rows.length !== first.total) throw Error("incomplete_response");
   return rows;
 }
+function buildingProfile(candidate, titles, expos, areas) {
+  const matched = matchedBuildingTitles(candidate, titles);
+  if (!matched.length) throw Error("needs_review");
+  const byDong = new Set(matched.map((r) => cleanText(r.dongNm))), units = {}, records = {};
+  for (const r of expos) {
+    const dong = cleanText(r.dongNm) || "\uB3D9 \uAD6C\uBD84 \uC5C6\uC74C", ho = cleanText(r.hoNm);
+    if (!ho || !byDong.has(cleanText(r.dongNm))) continue;
+    (units[dong] ??= []).push(ho);
+    records[dong + "|" + ho] = { dong, ho, registerId: cleanText(r.mgmBldrgstPk), floor: cleanText(r.flrNo), producedAt: cleanText(r.crtnDay), rows: [] };
+  }
+  for (const r of areas) {
+    const dong = cleanText(r.dongNm) || "\uB3D9 \uAD6C\uBD84 \uC5C6\uC74C", ho = cleanText(r.hoNm), unit = records[dong + "|" + ho];
+    if (!unit) continue;
+    const kind = cleanText(r.exposPubuseGbCdNm), area = finite(r.area);
+    if (!["\uC804\uC720", "\uACF5\uC6A9"].includes(kind) || area === null || area < 0) continue;
+    unit.rows.push({ kind, floor: cleanText(r.flrNoNm || r.flrNo), floorGroup: cleanText(r.flrGbCdNm), purpose: cleanText(r.etcPurps) || cleanText(r.mainPurpsCdNm), area, producedAt: cleanText(r.crtnDay) });
+  }
+  for (const dong of Object.keys(units)) units[dong] = [...new Set(units[dong])].sort(sortNames);
+  return { status: "ready", name: cleanText(matched[0].bldNm), address: cleanText(matched[0].platPlc), source: SOURCES.building, checkedAt: (/* @__PURE__ */ new Date()).toISOString(), units, records, buildings: matched.map((r) => ({ dong: cleanText(r.dongNm) || "\uB3D9 \uAD6C\uBD84 \uC5C6\uC74C", name: cleanText(r.bldNm), address: cleanText(r.newPlatPlc || r.platPlc), purpose: cleanText(r.mainPurpsCdNm), structure: cleanText(r.strctCdNm), approval: cleanText(r.useAprDay), floors: finite(r.grndFlrCnt), basementFloors: finite(r.ugrndFlrCnt), households: finite(r.hhldCnt), coverage: finite(r.bcRat), floorAreaRatio: finite(r.vlRat) })) };
+}
 
 // server/market-area-types.mjs
 function areaTypesFromRegister(rows) {
@@ -4204,9 +4226,10 @@ function areaTypesFromRegister(rows) {
     const purposes = [];
     for (const r of unit.filter((r2) => r2.exposPubuseGbCdNm === "\uACF5\uC6A9")) {
       common++;
-      const purpose = String(r.etcPurps || r.mainPurpsCdNm || "").trim();
+      const purpose = String(r.etcPurps || "").trim() || String(r.mainPurpsCdNm || "").trim();
       purposes.push(purpose);
-      const other = /주차|기계실|전기실|관리사무|경비|노인정|경로당|놀이터|대피|지하실|창고|펌프|주민공동|커뮤니티|부대시설/.test(purpose);
+      if (String(r.flrGbCdNm || "").trim() === "\uC9C0\uD558") continue;
+      const other = /주차|기계실|전기실|관리사무|관리실|관리동|상가|경비|노인정|경로당|놀이터|대피|지하실|창고|펌프|주민공동|커뮤니티|부대시설/.test(purpose);
       const housing = /주거공용|계단|복도|현관|승강기|엘리베이터|벽체|홀/.test(purpose);
       if (housing && !other) residential += Number(r.area);
       else if (!other || housing) ambiguous = true;
@@ -4221,7 +4244,9 @@ function areaTypesFromRegister(rows) {
 
 // scripts/official-api-transport.mjs
 import { spawn } from "node:child_process";
-function officialTransport(url) {
+function officialTransport(url, options = {}) {
+  const target = new URL(url);
+  if (target.protocol === "https:" && target.hostname === "apis.data.go.kr" && target.pathname.startsWith("/1613000/BldRgstHubService/")) return fetch(url, { signal: options.signal || AbortSignal.timeout(45e3) });
   return new Promise((resolve, reject) => {
     const child = spawn("curl", ["--ipv4", "--silent", "--max-time", "45", "--config", "-", "--write-out", "\n%{http_code}"], { stdio: ["pipe", "pipe", "ignore"], windowsHide: true });
     let text = "", settled = false;
@@ -4257,22 +4282,47 @@ var candidates = JSON.parse(fs.readFileSync("data/parcel-candidates.json", "utf8
 var ids = (process.env.MARKET_AREA_PROJECT_IDS || "377,387").split(",").map(Number);
 var parcels = { 387: ["1147010100103290000", "1147010100103300000"], 382: ["1147010100103120000", "1147010100103130000"] };
 fs.mkdirSync("data/market-area-types", { recursive: true });
+fs.mkdirSync("data/property", { recursive: true });
 for (const id of ids) {
-  const c = candidates.find((c2) => c2.id === id);
-  if (!c?.pnu) continue;
-  const all = [], checkedParcels = [];
+  const original = candidates.find((c2) => c2.id === id);
+  if (!original?.pnu) continue;
+  const c = { ...original, names: [...original.names, ...id >= 374 && id <= 387 ? ["\uBAA9\uB3D9\uC2E0\uC2DC\uAC00\uC9C0\uC544\uD30C\uD2B8"] : []] };
+  const all = [], checkedParcels = [], buildings = [], failures = [];
   let failed = false;
   for (const pnu of parcels[id] || [c.pnu]) try {
     const titles = await buildingPages("getBrTitleInfo", pnu, process.env.MOLIT_API_KEY, officialTransport), matched = matchedBuildingTitles(c, titles);
-    if (!matched.length) continue;
+    if (!matched.length) {
+      failures.push({ pnu, status: "needs_review", names: [...new Set(titles.map((t) => t.bldNm))] });
+      continue;
+    }
     const dongs = new Set(matched.map((r) => String(r.dongNm || "").trim()));
     const rows = await buildingPages("getBrExposPubuseAreaInfo", pnu, process.env.MOLIT_API_KEY, officialTransport);
     all.push(...areaTypesFromRegister(rows.filter((r) => dongs.has(String(r.dongNm || "").trim()))));
     checkedParcels.push(pnu);
-  } catch {
+    const expos = await buildingPages("getBrExposInfo", pnu, process.env.MOLIT_API_KEY, officialTransport);
+    buildings.push(buildingProfile(c, titles, expos, rows));
+  } catch (e) {
     failed = true;
+    failures.push({ pnu, status: ["not_authorized", "rate_limited", "needs_review", "incomplete_response"].includes(e.message) ? e.message : "unavailable" });
   }
   const types = [...new Map(all.map((t) => [[t.exclusive, t.supply].join("|"), t])).values()].sort((a, b) => a.exclusive - b.exclusive), result = { version: 1, id, status: types.length ? failed ? "partial" : "ready" : "unavailable", checkedAt: (/* @__PURE__ */ new Date()).toISOString(), parcels: checkedParcels, source: SOURCES.building, types };
   if (types.length) fs.writeFileSync("data/market-area-types/" + id + ".json", JSON.stringify(result));
-  console.log(JSON.stringify({ id, status: result.status, types: types.length, confirmedSupply: types.filter((t) => t.supply != null).length }));
+  if (buildings.length) {
+    const building = { ...buildings[0], units: {}, records: {}, buildings: [] };
+    for (const b of buildings) {
+      for (const [key, value] of Object.entries(b.records)) building.records[key] ??= value;
+      for (const row of b.buildings) if (!building.buildings.some((t) => t.dong === row.dong)) building.buildings.push(row);
+    }
+    for (const unit of Object.values(building.records)) (building.units[unit.dong] ??= []).push(unit.ho);
+    for (const names of Object.values(building.units)) names.sort((a, b) => a.localeCompare(b, "ko", { numeric: true }));
+    const file = "data/property/" + id + ".json";
+    let old = {};
+    try {
+      old = JSON.parse(fs.readFileSync(file, "utf8"));
+      if (old.pnu !== c.pnu) old = {};
+    } catch {
+    }
+    fs.writeFileSync(file, JSON.stringify({ ...old, version: 1, id, pnu: c.pnu, registerParcels: checkedParcels, building }));
+  }
+  console.log(JSON.stringify({ projectId: id, status: result.status, types: types.length, confirmedSupply: types.filter((t) => t.supply != null).length, buildingUnits: buildings.reduce((s, b) => s + Object.keys(b.records).length, 0), failures }));
 }

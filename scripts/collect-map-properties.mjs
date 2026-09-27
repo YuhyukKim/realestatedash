@@ -4136,7 +4136,7 @@ async function officialResponseText(url, fetcher = fetch) {
   for (let attempt = 0; attempt < 3; attempt++) {
     try {
       const r = await fetcher(url, { signal: AbortSignal.timeout(45e3) });
-      if (r.status === 403) throw Error("not_authorized");
+      if ([401, 403].includes(r.status)) throw Error("not_authorized");
       if (r.status === 429) throw Error("rate_limited");
       if (!r.ok) throw Error("unavailable");
       return await r.text();
@@ -4155,7 +4155,7 @@ async function buildingPages(endpoint, pnu, key, fetcher = fetch, dates = {}) {
   if (!key) throw Error("not_configured");
   async function pageData(page) {
     const url = new URL("https://apis.data.go.kr/1613000/BldRgstHubService/" + endpoint);
-    for (const [k, v] of Object.entries({ ...parcelParams(pnu), ...dates, serviceKey: decodeURIComponent(key), _type: "json", numOfRows: 1e3, pageNo: page })) url.searchParams.set(k, String(v));
+    for (const [k, v] of Object.entries({ ...parcelParams(pnu), ...dates, serviceKey: decodeURIComponent(key.trim()), _type: "json", numOfRows: 1e3, pageNo: page })) url.searchParams.set(k, String(v));
     const text = await officialResponseText(url, fetcher);
     let doc;
     try {
@@ -4203,7 +4203,7 @@ function buildingProfile(candidate, titles, expos, areas) {
     if (!unit) continue;
     const kind = cleanText(r.exposPubuseGbCdNm), area = finite(r.area);
     if (!["\uC804\uC720", "\uACF5\uC6A9"].includes(kind) || area === null || area < 0) continue;
-    unit.rows.push({ kind, floor: cleanText(r.flrNoNm || r.flrNo), purpose: cleanText(r.mainPurpsCdNm || r.etcPurps), area, producedAt: cleanText(r.crtnDay) });
+    unit.rows.push({ kind, floor: cleanText(r.flrNoNm || r.flrNo), floorGroup: cleanText(r.flrGbCdNm), purpose: cleanText(r.etcPurps) || cleanText(r.mainPurpsCdNm), area, producedAt: cleanText(r.crtnDay) });
   }
   for (const dong of Object.keys(units)) units[dong] = [...new Set(units[dong])].sort(sortNames);
   return { status: "ready", name: cleanText(matched[0].bldNm), address: cleanText(matched[0].platPlc), source: SOURCES.building, checkedAt: (/* @__PURE__ */ new Date()).toISOString(), units, records, buildings: matched.map((r) => ({ dong: cleanText(r.dongNm) || "\uB3D9 \uAD6C\uBD84 \uC5C6\uC74C", name: cleanText(r.bldNm), address: cleanText(r.newPlatPlc || r.platPlc), purpose: cleanText(r.mainPurpsCdNm), structure: cleanText(r.strctCdNm), approval: cleanText(r.useAprDay), floors: finite(r.grndFlrCnt), basementFloors: finite(r.ugrndFlrCnt), households: finite(r.hhldCnt), coverage: finite(r.bcRat), floorAreaRatio: finite(r.vlRat) })) };
@@ -4265,7 +4265,9 @@ function registerPriceProfile(building, rows, selectedYear) {
 
 // scripts/official-api-transport.mjs
 import { spawn } from "node:child_process";
-function officialTransport(url) {
+function officialTransport(url, options = {}) {
+  const target = new URL(url);
+  if (target.protocol === "https:" && target.hostname === "apis.data.go.kr" && target.pathname.startsWith("/1613000/BldRgstHubService/")) return fetch(url, { signal: options.signal || AbortSignal.timeout(45e3) });
   return new Promise((resolve, reject) => {
     const child = spawn("curl", ["--ipv4", "--silent", "--max-time", "45", "--config", "-", "--write-out", "\n%{http_code}"], { stdio: ["pipe", "pipe", "ignore"], windowsHide: true });
     let text = "", settled = false;
