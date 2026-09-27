@@ -4140,7 +4140,9 @@ async function officialResponseText(url, fetcher = fetch) {
       if ([401, 403].includes(r.status)) throw Error("not_authorized");
       if (r.status === 429) throw Error("rate_limited");
       if (!r.ok) throw Error("unavailable");
-      return await r.text();
+      const text = await r.text();
+      if (!text.trim()) throw Error("empty_response");
+      return text;
     } catch (e) {
       if (["not_authorized", "rate_limited"].includes(e.message)) throw e;
       if (attempt === 2) throw Error("unavailable");
@@ -4156,7 +4158,7 @@ async function buildingPages(endpoint, pnu, key, fetcher = fetch, dates = {}) {
   if (!key) throw Error("not_configured");
   async function pageData(page, attempt = 0) {
     const url = new URL("https://apis.data.go.kr/1613000/BldRgstHubService/" + endpoint);
-    for (const [k, v] of Object.entries({ ...parcelParams(pnu), ...dates, serviceKey: decodeURIComponent(key.trim()), _type: "json", numOfRows: 1e3, pageNo: page })) url.searchParams.set(k, String(v));
+    for (const [k, v] of Object.entries({ serviceKey: decodeURIComponent(key.trim()), ...parcelParams(pnu), ...dates, _type: "json", numOfRows: 1e3, pageNo: page })) url.searchParams.set(k, String(v));
     const text = await officialResponseText(url, fetcher);
     let doc;
     try {
