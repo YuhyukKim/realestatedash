@@ -323,12 +323,19 @@
     "name": "목동신시가지 11단지",
     "lat": 37.511359,
     "lng": 126.858735,
-    "pnu": null,
+    "pnu": "1147010100103250000",
     "names": [
       "목동신시가지 11단지",
-      "목동신시가지 11단지"
+      "목동신시가지11"
     ],
-    "locatorStatus": "needs_review"
+    "locatorStatus": "candidate",
+    "parcelEvidence": {
+      "source": "https://www.data.go.kr/data/15126469/openapi.do",
+      "checkedAt": "2026-09-27",
+      "address": "서울특별시 양천구 신정동 325",
+      "tradeMonth": "2026-09",
+      "note": "공식 실거래 주소로 필지 후보 확인. 건축물명은 건축HUB 조회 시 검증."
+    }
   },
   {
     "id": 385,
