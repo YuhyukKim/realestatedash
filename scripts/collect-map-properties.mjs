@@ -4164,7 +4164,7 @@ async function buildingPages(endpoint, pnu, key, fetcher = fetch, dates = {}) {
       doc = new XMLParser({ parseTagValue: false }).parse(text);
     }
     const response = doc.response, code = String(response?.header?.resultCode ?? "");
-    if (!["00", "000", "0"].includes(code)) throw Error(["20", "30", "31"].includes(code) ? "not_authorized" : "unavailable");
+    if (!["00", "000", "0"].includes(code)) throw Error(["20", "30", "31"].includes(code) ? "not_authorized" : ["22", "23"].includes(code) ? "rate_limited" : "unavailable");
     const total = Number(response.body?.totalCount);
     if (!Number.isInteger(total) || total < 0 || total > 1e5) throw Error("invalid_response");
     const part = array(response.body.items?.item);
@@ -4262,6 +4262,27 @@ function registerPriceProfile(building, rows, selectedYear) {
   for (const record of Object.values(records)) record.rows.sort((a, b) => b.date.localeCompare(a.date));
   return { status: Object.keys(records).length ? "ready" : "empty", address: building.address, units: Object.fromEntries(Object.entries(units).map(([d, hs]) => [d, [...hs].sort(sortNames)])), records, years: [...years].sort().reverse(), source: { name: "\uAD6D\uD1A0\uAD50\uD1B5\uBD80 \uAC74\uCD95HUB \xB7 \uC8FC\uD0DD\uAC00\uACA9\uC815\uBCF4", url: "https://www.data.go.kr/data/15134735/openapi.do" }, checkedAt: (/* @__PURE__ */ new Date()).toISOString() };
 }
+async function collectRegisterPrices(candidate, snapshot, year2, getRows) {
+  const parcels = snapshot.registerParcels?.length ? snapshot.registerParcels : [candidate.pnu];
+  if (parcels.some((p) => !/^11\d{17}$/.test(p) || p.slice(0, 10) !== candidate.pnu.slice(0, 10))) throw Error("needs_review");
+  const rows = [];
+  for (const pnu of [...new Set(parcels)]) rows.push(...await getRows("getBrHsprcInfo", pnu));
+  return registerPriceProfile(snapshot.building, rows, year2 === "all" ? void 0 : year2);
+}
+function mergePriceYears(previous, next2, year2) {
+  if (previous?.status !== "ready" || next2.status !== "ready" || year2 === "all") return next2;
+  const records = {}, units = {};
+  for (const key of /* @__PURE__ */ new Set([...Object.keys(previous.records || {}), ...Object.keys(next2.records || {})])) {
+    const current = next2.records[key], prior = previous.records[key];
+    const rows = [...current?.rows || [], ...(prior?.rows || []).filter((r) => r.year !== year2)].sort((a, b) => b.date.localeCompare(a.date));
+    if (!rows.length) continue;
+    const { dong, ho } = current || prior;
+    records[key] = { dong, ho, rows };
+    (units[dong] ??= []).push(ho);
+  }
+  for (const values of Object.values(units)) values.sort(sortNames);
+  return { ...next2, records, units, years: [...new Set(Object.values(records).flatMap((r) => r.rows.map((r2) => r2.year)))].sort().reverse() };
+}
 
 // scripts/official-api-transport.mjs
 import { spawn } from "node:child_process";
@@ -4304,6 +4325,7 @@ var catalog = JSON.parse(fs.readFileSync(path.join(root, "data/parcel-candidates
 var output = path.join(root, "data/property");
 fs.mkdirSync(output, { recursive: true });
 var year = process.env.PROPERTY_PRICE_YEAR || String((/* @__PURE__ */ new Date()).getUTCFullYear());
+if (year !== "all" && !/^20\d{2}$/.test(year)) throw Error("Invalid assessment year");
 var preferRegister = process.env.PROPERTY_PRICE_SOURCE === "building";
 var ids = (process.env.PROPERTY_PROJECT_IDS || "").split(",").map((s) => s.trim()).filter(Boolean);
 if (ids.some((id) => !/^\d+$/.test(id) || !catalog.some((c) => String(c.id) === id && c.pnu))) throw Error("Unknown or unlocated project ID");
@@ -4311,16 +4333,22 @@ var buildingBlocked = !process.env.MOLIT_API_KEY ? "not_configured" : null;
 var priceBlocked = preferRegister ? "using_building_register" : !process.env.VWORLD_API_KEY ? "not_configured" : null;
 var priceFailures = 0;
 var summary = { checkedAt: (/* @__PURE__ */ new Date()).toISOString(), buildingReady: 0, pricesReady: 0, buildingBlocked, priceBlocked, results: [] };
-async function collect(c) {
-  const file = path.join(output, c.id + ".json");
+async function collect(candidate) {
+  const c = { ...candidate, names: [...candidate.names, ...candidate.id >= 374 && candidate.id <= 387 ? ["\uBAA9\uB3D9\uC2E0\uC2DC\uAC00\uC9C0\uC544\uD30C\uD2B8"] : []] }, file = path.join(output, c.id + ".json");
   let old = {};
   try {
     old = JSON.parse(fs.readFileSync(file, "utf8"));
     if (old.pnu !== c.pnu) old = {};
   } catch {
   }
-  const result = { version: 1, id: c.id, pnu: c.pnu, building: old.building, prices: old.prices };
-  const get = (ep, dates) => buildingPages(ep, c.pnu, process.env.MOLIT_API_KEY, officialTransport, dates);
+  const result = { version: 1, id: c.id, pnu: c.pnu, registerParcels: old.registerParcels || [c.pnu], building: old.building, prices: old.prices };
+  const registerParcels = result.registerParcels.filter((p) => /^11\d{17}$/.test(p) && p.slice(0, 10) === c.pnu.slice(0, 10));
+  const get = async (ep, dates) => {
+    if (!registerParcels.length) throw Error("needs_review");
+    const rows = [];
+    for (const pnu of registerParcels) rows.push(...await buildingPages(ep, pnu, process.env.MOLIT_API_KEY, officialTransport, dates));
+    return rows;
+  };
   let observedBuildings;
   try {
     if (buildingBlocked) throw Error(buildingBlocked);
@@ -4337,7 +4365,7 @@ async function collect(c) {
     if (result.building?.status !== "ready") result.building = { status, source: SOURCES.building, ...observedBuildings ? { observedBuildings } : {} };
     else result.building.refreshStatus = status;
   }
-  if (result.prices?.status !== "ready" || !result.prices.checkedAt?.startsWith(summary.checkedAt.slice(0, 10))) {
+  if (result.prices?.status !== "ready" || result.prices.collectionVersion !== 2 || result.prices.collectedYear !== year || !result.prices.checkedAt?.startsWith(summary.checkedAt.slice(0, 10))) {
     if (!preferRegister) try {
       if (priceBlocked) throw Error(priceBlocked);
       result.prices = priceProfile(c, await pricePages(c.pnu, year, process.env.VWORLD_API_KEY, process.env.VWORLD_DOMAIN || "https://seoul-redevelopment-map-yuhyu.whisky88.chatgpt.site", officialTransport), year);
@@ -4350,11 +4378,19 @@ async function collect(c) {
       else result.prices.refreshStatus = status;
     }
     result.prices ??= { status: result.building?.status === "needs_review" ? "needs_review" : "unavailable", source: SOURCES.building };
-    if (result.prices?.status !== "ready" && result.building?.status === "ready" && !buildingBlocked) {
+    if ((preferRegister || result.prices?.status !== "ready") && result.building?.status === "ready" && !buildingBlocked) {
       try {
-        result.prices = registerPriceProfile(result.building, await get("getBrHsprcInfo", { startDate: year + "0101", endDate: year + "1231" }), year);
+        const prices = await collectRegisterPrices(c, result, year, (ep, pnu) => buildingPages(ep, pnu, process.env.MOLIT_API_KEY, officialTransport));
+        if (prices.status === "ready") {
+          result.prices = { ...mergePriceYears(result.prices, prices, year), collectionVersion: 2, collectedYear: year };
+        } else if (result.prices?.status === "ready") {
+          result.prices.refreshStatus = prices.status;
+        } else result.prices = prices;
       } catch (e) {
-        result.prices.fallbackStatus = ["not_authorized", "needs_review", "rate_limited"].includes(e.message) ? e.message : "unavailable";
+        const status = ["not_authorized", "needs_review", "rate_limited"].includes(e.message) ? e.message : "unavailable";
+        if (["not_authorized", "rate_limited"].includes(status)) buildingBlocked = status;
+        if (result.prices?.status === "ready") result.prices.refreshStatus = status;
+        else result.prices = { status, source: SOURCES.price };
       }
     }
   }
@@ -4364,7 +4400,7 @@ async function collect(c) {
   fs.writeFileSync(file, JSON.stringify(result));
   console.log(JSON.stringify({ projectId: c.id, building: result.building.status, prices: result.prices.status, buildings: Object.keys(result.building.units || {}).length, units: Object.keys(result.building.records || {}).length, priceUnits: Object.keys(result.prices.records || {}).length }));
 }
-var queue = catalog.filter((c) => c.pnu && (!ids.length || ids.includes(String(c.id))));
+var queue = catalog.filter((c) => c.pnu && (!ids.length || ids.includes(String(c.id)))).sort((a, b) => Number(b.id >= 374 && b.id <= 387) - Number(a.id >= 374 && a.id <= 387));
 var next = 0;
 await Promise.all(Array.from({ length: Math.min(2, queue.length) }, async () => {
   while (next < queue.length) {

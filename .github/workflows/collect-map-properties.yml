@@ -36,7 +36,9 @@ jobs:
           PROPERTY_PRICE_SOURCE: building
         run: node scripts/collect-map-properties.mjs
       - name: Save sanitized public data
+        if: always()
         run: |
+          if [ ! -d data/property ]; then exit 0; fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/property
