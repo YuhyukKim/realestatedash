@@ -1,6 +1,7 @@
 // scripts/collect-official-buildings.mjs
 import fs from "node:fs";
 import path from "node:path";
+import { execFileSync } from "node:child_process";
 
 // node_modules/fast-xml-parser/src/util.js
 var nameStartChar = ":A-Za-z_\\u00C0-\\u00D6\\u00D8-\\u00F6\\u00F8-\\u02FF\\u0370-\\u037D\\u037F-\\u1FFF\\u200C-\\u200D\\u2070-\\u218F\\u2C00-\\u2FEF\\u3001-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFFD";
@@ -4416,10 +4417,29 @@ async function collect(candidate) {
 var priority = (id) => [387, 382, 377].includes(id) ? 2 : id >= 374 && id <= 387 ? 1 : 0;
 var queue = catalog.filter((c) => c.pnu && (!ids.length || ids.includes(String(c.id)))).sort((a, b) => priority(b.id) - priority(a.id));
 var next = 0;
+var completed = 0;
+function checkpoint() {
+  if (process.env.PROPERTY_PUBLISH_CHECKPOINTS !== "1") return;
+  try {
+    const git = (...args) => execFileSync("git", args, { stdio: "pipe", timeout: 12e4 });
+    git("config", "user.name", "github-actions[bot]");
+    git("config", "user.email", "41898282+github-actions[bot]@users.noreply.github.com");
+    git("add", "data/property");
+    if (git("diff", "--cached", "--name-only").toString().trim()) {
+      git("commit", "-m", "Checkpoint official property collection");
+      git("pull", "--rebase", "origin", "main");
+      git("push", "origin", "main");
+    }
+    console.log(JSON.stringify({ checkpoint: "published", completed, total: queue.length, buildingReady: summary.buildingReady, pricesReady: summary.pricesReady }));
+  } catch {
+    console.log(JSON.stringify({ checkpoint: "deferred", completed, total: queue.length }));
+  }
+}
 await Promise.all(Array.from({ length: Math.min(2, queue.length) }, async () => {
   while (next < queue.length) {
     const c = queue[next++];
     await collect(c);
+    if (++completed % 10 === 0) checkpoint();
   }
 }));
 summary.buildingBlocked = buildingBlocked;

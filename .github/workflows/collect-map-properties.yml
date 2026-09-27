@@ -34,6 +34,7 @@ jobs:
           PROPERTY_PRICE_YEAR: ${{ inputs.year }}
           PROPERTY_PROJECT_IDS: ${{ inputs.project_ids }}
           PROPERTY_PRICE_SOURCE: building
+          PROPERTY_PUBLISH_CHECKPOINTS: '1'
         run: node scripts/collect-map-properties.mjs
       - name: Save sanitized public data
         if: always()
