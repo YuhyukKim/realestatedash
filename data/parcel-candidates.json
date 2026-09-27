@@ -235,9 +235,16 @@
     "pnu": "1147010200109040000",
     "names": [
       "목동신시가지 4단지",
-      "목동4단지"
+      "목동4단지",
+      "목동신시가지아파트"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "officialIdentity": {
+      "source": "https://www.data.go.kr/data/15134735/openapi.do",
+      "checkedAt": "2026-09-27",
+      "address": "서울특별시 양천구 목동 904번지",
+      "residentialBuildings": "401동~416동"
+    }
   },
   {
     "id": 378,

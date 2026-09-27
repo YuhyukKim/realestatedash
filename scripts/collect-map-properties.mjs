@@ -4131,6 +4131,7 @@ var finite = (v) => v == null || v === "" ? null : Number.isFinite(Number(v)) ? 
 var array = (v) => Array.isArray(v) ? v : v ? [v] : [];
 var normalizeName = (v) => cleanText(v).normalize("NFKC").replace(/아파트|신시가지|[\s()·.\-]/g, "");
 var sortNames = (a, b) => a.localeCompare(b, "ko", { numeric: true });
+var matchedBuildingTitles = (candidate, titles) => titles.filter((r) => candidate.names.map(normalizeName).includes(normalizeName(r.bldNm)) && (!r.mainPurpsCdNm || /공동주택|아파트|연립주택|다세대주택/.test(r.mainPurpsCdNm)));
 async function officialResponseText(url, fetcher = fetch) {
   for (let attempt = 0; attempt < 3; attempt++) {
     try {
@@ -4175,7 +4176,7 @@ async function buildingPages(endpoint, pnu, key, fetcher = fetch) {
   return rows;
 }
 function buildingProfile(candidate, titles, expos, areas) {
-  const names = candidate.names.map(normalizeName), matched = titles.filter((r) => names.includes(normalizeName(r.bldNm)));
+  const matched = matchedBuildingTitles(candidate, titles);
   if (!matched.length) throw Error("needs_review");
   const byDong = new Set(matched.map((r) => cleanText(r.dongNm))), units = {}, records = {};
   for (const r of expos) {
@@ -4204,7 +4205,7 @@ async function pricePages(pnu, year2, key, domain, fetcher = fetch) {
     const url = new URL("https://api.vworld.kr/ned/data/getApartHousingPriceAttr");
     for (const [k, v] of Object.entries({ pnu, stdrYear: year2, key, domain, format: "json", numOfRows: 1e3, pageNo: page })) url.searchParams.set(k, String(v));
     const data = JSON.parse(await officialResponseText(url, fetcher));
-    const code = data.response?.error?.code || data.error?.code;
+    const code = data.apartHousingPrices?.resultCode || data.response?.error?.code || data.error?.code;
     if (["INVALID_KEY", "INCORRECT_KEY", "UNAVAILABLE_KEY"].includes(code)) throw Error("not_authorized");
     if (code === "OVER_REQUEST_LIMIT") throw Error("rate_limited");
     const section = data.apartHousingPrices;
@@ -4232,6 +4233,55 @@ function priceProfile(candidate, rows, year2) {
   for (const dong of Object.keys(units)) units[dong] = [...new Set(units[dong])].sort(sortNames);
   return { status: rows.length ? "ready" : "empty", units, records, years: [String(year2)], source: { name: "\uAD6D\uD1A0\uAD50\uD1B5\uBD80 VWorld \xB7 \uACF5\uB3D9\uC8FC\uD0DD\uAC00\uACA9\uC815\uBCF4", url: "https://www.data.go.kr/data/15124003/openapi.do" }, checkedAt: (/* @__PURE__ */ new Date()).toISOString() };
 }
+function registerPriceProfile(building, rows) {
+  const byId = new Map(Object.values(building.records || {}).filter((r) => r.registerId).map((r) => [r.registerId, r])), units = {}, records = {}, years = /* @__PURE__ */ new Set();
+  for (const r of rows) {
+    const unit = byId.get(cleanText(r.mgmBldrgstPk)), price = finite(r.hsprc), day = cleanText(r.stdDay);
+    if (!unit || price === null || price <= 0 || !/^\d{8}$/.test(day)) continue;
+    const year2 = day.slice(0, 4), key = unit.dong + "|" + unit.ho, privateRows = unit.rows.filter((x) => x.kind === "\uC804\uC720");
+    const record = records[key] ??= { dong: unit.dong, ho: unit.ho, rows: [] };
+    const value = { year: year2, date: year2 + "." + day.slice(4, 6) + "." + day.slice(6, 8), area: privateRows.length ? privateRows.reduce((sum, x) => sum + x.area, 0) : null, price, updatedAt: cleanText(r.crtnDay) };
+    if (!record.rows.some((x) => x.date === value.date && x.price === price)) record.rows.push(value);
+    years.add(year2);
+    (units[unit.dong] ??= /* @__PURE__ */ new Set()).add(unit.ho);
+  }
+  if (rows.length && !Object.keys(records).length) throw Error("needs_review");
+  for (const record of Object.values(records)) record.rows.sort((a, b) => b.date.localeCompare(a.date));
+  return { status: Object.keys(records).length ? "ready" : "empty", address: building.address, units: Object.fromEntries(Object.entries(units).map(([d, hs]) => [d, [...hs].sort(sortNames)])), records, years: [...years].sort().reverse(), source: { name: "\uAD6D\uD1A0\uAD50\uD1B5\uBD80 \uAC74\uCD95HUB \xB7 \uC8FC\uD0DD\uAC00\uACA9\uC815\uBCF4", url: "https://www.data.go.kr/data/15134735/openapi.do" }, checkedAt: (/* @__PURE__ */ new Date()).toISOString() };
+}
+
+// scripts/official-api-transport.mjs
+import { spawn } from "node:child_process";
+function officialTransport(url) {
+  return new Promise((resolve, reject) => {
+    const child = spawn("curl", ["--ipv4", "--silent", "--max-time", "45", "--config", "-", "--write-out", "\n%{http_code}"], { stdio: ["pipe", "pipe", "ignore"], windowsHide: true });
+    let text = "", settled = false;
+    const fail = () => {
+      if (!settled) {
+        settled = true;
+        reject(Error("unavailable"));
+      }
+    };
+    child.on("error", fail);
+    child.stdout.on("data", (chunk) => {
+      text += chunk;
+      if (text.length > 64e6) {
+        child.kill();
+        fail();
+      }
+    });
+    child.on("close", (code) => {
+      if (settled) return;
+      if (code !== 0) return fail();
+      const at = text.lastIndexOf("\n"), status = Number(text.slice(at + 1));
+      if (status < 100 || status > 599) return fail();
+      settled = true;
+      resolve(new Response(text.slice(0, at), { status }));
+    });
+    child.stdin.on("error", fail);
+    child.stdin.end("url = " + JSON.stringify(String(url)) + "\n");
+  });
+}
 
 // scripts/collect-official-buildings.mjs
 var root = process.cwd();
@@ -4243,9 +4293,9 @@ var ids = (process.env.PROPERTY_PROJECT_IDS || "").split(",").map((s) => s.trim(
 if (ids.some((id) => !/^\d+$/.test(id) || !catalog.some((c) => String(c.id) === id && c.pnu))) throw Error("Unknown or unlocated project ID");
 var buildingBlocked = !process.env.MOLIT_API_KEY ? "not_configured" : null;
 var priceBlocked = !process.env.VWORLD_API_KEY ? "not_configured" : null;
+var priceFailures = 0;
 var summary = { checkedAt: (/* @__PURE__ */ new Date()).toISOString(), buildingReady: 0, pricesReady: 0, buildingBlocked, priceBlocked, results: [] };
-for (const c of catalog) {
-  if (!c.pnu || ids.length && !ids.includes(String(c.id))) continue;
+async function collect(c) {
   const file = path.join(output, c.id + ".json");
   let old = {};
   try {
@@ -4254,26 +4304,42 @@ for (const c of catalog) {
   } catch {
   }
   const result = { version: 1, id: c.id, pnu: c.pnu, building: old.building, prices: old.prices };
+  const get = (ep) => buildingPages(ep, c.pnu, process.env.MOLIT_API_KEY, officialTransport);
+  let observedBuildings;
   try {
     if (buildingBlocked) throw Error(buildingBlocked);
-    const titles = await buildingPages("getBrTitleInfo", c.pnu, process.env.MOLIT_API_KEY);
-    if (!titles.some((t) => c.names.map(normalizeName).includes(normalizeName(t.bldNm)))) throw Error("needs_review");
-    const expos = await buildingPages("getBrExposInfo", c.pnu, process.env.MOLIT_API_KEY), areas = await buildingPages("getBrExposPubuseAreaInfo", c.pnu, process.env.MOLIT_API_KEY);
-    result.building = buildingProfile(c, titles, expos, areas);
+    if (result.building?.status !== "ready" || !result.building.checkedAt?.startsWith(summary.checkedAt.slice(0, 10))) {
+      const titles = await get("getBrTitleInfo");
+      observedBuildings = titles.map((t) => ({ name: t.bldNm, dong: t.dongNm, address: t.platPlc, purpose: t.mainPurpsCdNm }));
+      if (!matchedBuildingTitles(c, titles).length) throw Error("needs_review");
+      const expos = await get("getBrExposInfo"), areas = await get("getBrExposPubuseAreaInfo");
+      result.building = buildingProfile(c, titles, expos, areas);
+    }
   } catch (e) {
     const status = ["not_authorized", "not_configured", "needs_review", "rate_limited"].includes(e.message) ? e.message : "unavailable";
     if (["not_authorized", "rate_limited"].includes(status)) buildingBlocked = status;
-    if (result.building?.status !== "ready") result.building = { status, source: SOURCES.building };
+    if (result.building?.status !== "ready") result.building = { status, source: SOURCES.building, ...observedBuildings ? { observedBuildings } : {} };
     else result.building.refreshStatus = status;
   }
-  try {
-    if (priceBlocked) throw Error(priceBlocked);
-    result.prices = priceProfile(c, await pricePages(c.pnu, year, process.env.VWORLD_API_KEY, process.env.VWORLD_DOMAIN || "https://seoul-redevelopment-map-yuhyu.whisky88.chatgpt.site"), year);
-  } catch (e) {
-    const status = ["not_authorized", "not_configured", "needs_review"].includes(e.message) ? e.message : "unavailable";
-    if (status === "not_authorized") priceBlocked = status;
-    if (result.prices?.status !== "ready") result.prices = { status, source: SOURCES.price };
-    else result.prices.refreshStatus = status;
+  if (result.prices?.status !== "ready" || !result.prices.checkedAt?.startsWith(summary.checkedAt.slice(0, 10))) {
+    try {
+      if (priceBlocked) throw Error(priceBlocked);
+      result.prices = priceProfile(c, await pricePages(c.pnu, year, process.env.VWORLD_API_KEY, process.env.VWORLD_DOMAIN || "https://seoul-redevelopment-map-yuhyu.whisky88.chatgpt.site", officialTransport), year);
+      priceFailures = 0;
+    } catch (e) {
+      const status = ["not_authorized", "not_configured", "needs_review", "rate_limited"].includes(e.message) ? e.message : "unavailable";
+      if (["not_authorized", "rate_limited"].includes(status)) priceBlocked = status;
+      else if (status === "unavailable" && ++priceFailures >= 3) priceBlocked = "unavailable";
+      if (result.prices?.status !== "ready") result.prices = { status, source: SOURCES.price };
+      else result.prices.refreshStatus = status;
+    }
+    if (result.prices?.status !== "ready" && result.building?.status === "ready" && !buildingBlocked) {
+      try {
+        result.prices = registerPriceProfile(result.building, await get("getBrHsprcInfo"));
+      } catch (e) {
+        result.prices.fallbackStatus = ["not_authorized", "needs_review", "rate_limited"].includes(e.message) ? e.message : "unavailable";
+      }
+    }
   }
   if (result.building.status === "ready") summary.buildingReady++;
   if (result.prices.status === "ready") summary.pricesReady++;
@@ -4281,6 +4347,14 @@ for (const c of catalog) {
   fs.writeFileSync(file, JSON.stringify(result));
   console.log(JSON.stringify({ projectId: c.id, building: result.building.status, prices: result.prices.status, buildings: Object.keys(result.building.units || {}).length, units: Object.keys(result.building.records || {}).length, priceUnits: Object.keys(result.prices.records || {}).length }));
 }
+var queue = catalog.filter((c) => c.pnu && (!ids.length || ids.includes(String(c.id))));
+var next = 0;
+await Promise.all(Array.from({ length: Math.min(2, queue.length) }, async () => {
+  while (next < queue.length) {
+    const c = queue[next++];
+    await collect(c);
+  }
+}));
 summary.buildingBlocked = buildingBlocked;
 summary.priceBlocked = priceBlocked;
 fs.writeFileSync(path.join(output, "index.json"), JSON.stringify(summary));
