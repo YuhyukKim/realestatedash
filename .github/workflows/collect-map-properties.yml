@@ -33,6 +33,7 @@ jobs:
           VWORLD_DOMAIN: ${{ vars.VWORLD_DOMAIN || 'https://seoul-redevelopment-map-yuhyu.whisky88.chatgpt.site' }}
           PROPERTY_PRICE_YEAR: ${{ inputs.year }}
           PROPERTY_PROJECT_IDS: ${{ inputs.project_ids }}
+          PROPERTY_PRICE_SOURCE: building
         run: node scripts/collect-map-properties.mjs
       - name: Save sanitized public data
         run: |

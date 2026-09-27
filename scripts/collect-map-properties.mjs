@@ -4151,12 +4151,11 @@ function parcelParams(pnu) {
   if (!/^11\d{17}$/.test(pnu)) throw Error("invalid_parcel");
   return { sigunguCd: pnu.slice(0, 5), bjdongCd: pnu.slice(5, 10), platGbCd: String(Number(pnu[10]) - 1), bun: pnu.slice(11, 15), ji: pnu.slice(15, 19) };
 }
-async function buildingPages(endpoint, pnu, key, fetcher = fetch) {
+async function buildingPages(endpoint, pnu, key, fetcher = fetch, dates = {}) {
   if (!key) throw Error("not_configured");
-  let rows = [], page = 1, total = null;
-  do {
+  async function pageData(page) {
     const url = new URL("https://apis.data.go.kr/1613000/BldRgstHubService/" + endpoint);
-    for (const [k, v] of Object.entries({ ...parcelParams(pnu), serviceKey: decodeURIComponent(key), _type: "json", numOfRows: 1e3, pageNo: page })) url.searchParams.set(k, String(v));
+    for (const [k, v] of Object.entries({ ...parcelParams(pnu), ...dates, serviceKey: decodeURIComponent(key), _type: "json", numOfRows: 1e3, pageNo: page })) url.searchParams.set(k, String(v));
     const text = await officialResponseText(url, fetcher);
     let doc;
     try {
@@ -4166,13 +4165,27 @@ async function buildingPages(endpoint, pnu, key, fetcher = fetch) {
     }
     const response = doc.response, code = String(response?.header?.resultCode ?? "");
     if (!["00", "000", "0"].includes(code)) throw Error(["20", "30", "31"].includes(code) ? "not_authorized" : "unavailable");
-    total = Number(response.body?.totalCount);
-    if (!Number.isFinite(total) || total > 1e5) throw Error("invalid_response");
+    const total = Number(response.body?.totalCount);
+    if (!Number.isInteger(total) || total < 0 || total > 1e5) throw Error("invalid_response");
     const part = array(response.body.items?.item);
-    rows.push(...part);
-    if (rows.length < total && !part.length) throw Error("incomplete_response");
-    page++;
-  } while (rows.length < total);
+    return { total, part, size: Number(response.body?.numOfRows) || part.length };
+  }
+  const first = await pageData(1);
+  if (first.total === 0) return [];
+  if (!first.part.length || first.size <= 0) throw Error("incomplete_response");
+  const pages = Math.ceil(first.total / first.size);
+  if (pages > 1e3) throw Error("invalid_response");
+  const chunks = [first.part];
+  let next2 = 2;
+  await Promise.all(Array.from({ length: Math.min(3, pages - 1) }, async () => {
+    while (next2 <= pages) {
+      const page = next2++, data = await pageData(page);
+      if (data.total !== first.total || !data.part.length) throw Error("incomplete_response");
+      chunks[page - 1] = data.part;
+    }
+  }));
+  const rows = chunks.flat();
+  if (rows.length !== first.total) throw Error("incomplete_response");
   return rows;
 }
 function buildingProfile(candidate, titles, expos, areas) {
@@ -4233,11 +4246,11 @@ function priceProfile(candidate, rows, year2) {
   for (const dong of Object.keys(units)) units[dong] = [...new Set(units[dong])].sort(sortNames);
   return { status: rows.length ? "ready" : "empty", units, records, years: [String(year2)], source: { name: "\uAD6D\uD1A0\uAD50\uD1B5\uBD80 VWorld \xB7 \uACF5\uB3D9\uC8FC\uD0DD\uAC00\uACA9\uC815\uBCF4", url: "https://www.data.go.kr/data/15124003/openapi.do" }, checkedAt: (/* @__PURE__ */ new Date()).toISOString() };
 }
-function registerPriceProfile(building, rows) {
+function registerPriceProfile(building, rows, selectedYear) {
   const byId = new Map(Object.values(building.records || {}).filter((r) => r.registerId).map((r) => [r.registerId, r])), units = {}, records = {}, years = /* @__PURE__ */ new Set();
   for (const r of rows) {
     const unit = byId.get(cleanText(r.mgmBldrgstPk)), price = finite(r.hsprc), day = cleanText(r.stdDay);
-    if (!unit || price === null || price <= 0 || !/^\d{8}$/.test(day)) continue;
+    if (!unit || price === null || price <= 0 || !/^\d{8}$/.test(day) || selectedYear && day.slice(0, 4) !== String(selectedYear)) continue;
     const year2 = day.slice(0, 4), key = unit.dong + "|" + unit.ho, privateRows = unit.rows.filter((x) => x.kind === "\uC804\uC720");
     const record = records[key] ??= { dong: unit.dong, ho: unit.ho, rows: [] };
     const value = { year: year2, date: year2 + "." + day.slice(4, 6) + "." + day.slice(6, 8), area: privateRows.length ? privateRows.reduce((sum, x) => sum + x.area, 0) : null, areaSource: "building-register", price, updatedAt: cleanText(r.crtnDay) };
@@ -4289,10 +4302,11 @@ var catalog = JSON.parse(fs.readFileSync(path.join(root, "data/parcel-candidates
 var output = path.join(root, "data/property");
 fs.mkdirSync(output, { recursive: true });
 var year = process.env.PROPERTY_PRICE_YEAR || String((/* @__PURE__ */ new Date()).getUTCFullYear());
+var preferRegister = process.env.PROPERTY_PRICE_SOURCE === "building";
 var ids = (process.env.PROPERTY_PROJECT_IDS || "").split(",").map((s) => s.trim()).filter(Boolean);
 if (ids.some((id) => !/^\d+$/.test(id) || !catalog.some((c) => String(c.id) === id && c.pnu))) throw Error("Unknown or unlocated project ID");
 var buildingBlocked = !process.env.MOLIT_API_KEY ? "not_configured" : null;
-var priceBlocked = !process.env.VWORLD_API_KEY ? "not_configured" : null;
+var priceBlocked = preferRegister ? "using_building_register" : !process.env.VWORLD_API_KEY ? "not_configured" : null;
 var priceFailures = 0;
 var summary = { checkedAt: (/* @__PURE__ */ new Date()).toISOString(), buildingReady: 0, pricesReady: 0, buildingBlocked, priceBlocked, results: [] };
 async function collect(c) {
@@ -4304,7 +4318,7 @@ async function collect(c) {
   } catch {
   }
   const result = { version: 1, id: c.id, pnu: c.pnu, building: old.building, prices: old.prices };
-  const get = (ep) => buildingPages(ep, c.pnu, process.env.MOLIT_API_KEY, officialTransport);
+  const get = (ep, dates) => buildingPages(ep, c.pnu, process.env.MOLIT_API_KEY, officialTransport, dates);
   let observedBuildings;
   try {
     if (buildingBlocked) throw Error(buildingBlocked);
@@ -4322,7 +4336,7 @@ async function collect(c) {
     else result.building.refreshStatus = status;
   }
   if (result.prices?.status !== "ready" || !result.prices.checkedAt?.startsWith(summary.checkedAt.slice(0, 10))) {
-    try {
+    if (!preferRegister) try {
       if (priceBlocked) throw Error(priceBlocked);
       result.prices = priceProfile(c, await pricePages(c.pnu, year, process.env.VWORLD_API_KEY, process.env.VWORLD_DOMAIN || "https://seoul-redevelopment-map-yuhyu.whisky88.chatgpt.site", officialTransport), year);
       priceFailures = 0;
@@ -4333,9 +4347,10 @@ async function collect(c) {
       if (result.prices?.status !== "ready") result.prices = { status, source: SOURCES.price };
       else result.prices.refreshStatus = status;
     }
+    result.prices ??= { status: result.building?.status === "needs_review" ? "needs_review" : "unavailable", source: SOURCES.building };
     if (result.prices?.status !== "ready" && result.building?.status === "ready" && !buildingBlocked) {
       try {
-        result.prices = registerPriceProfile(result.building, await get("getBrHsprcInfo"));
+        result.prices = registerPriceProfile(result.building, await get("getBrHsprcInfo", { startDate: year + "0101", endDate: year + "1231" }), year);
       } catch (e) {
         result.prices.fallbackStatus = ["not_authorized", "needs_review", "rate_limited"].includes(e.message) ? e.message : "unavailable";
       }
