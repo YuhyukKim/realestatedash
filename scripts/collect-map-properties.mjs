@@ -4348,6 +4348,7 @@ if (ids.some((id) => !/^\d+$/.test(id) || !catalog.some((c) => String(c.id) === 
 var buildingBlocked = !process.env.MOLIT_API_KEY ? "not_configured" : null;
 var priceBlocked = preferRegister ? "using_building_register" : !process.env.VWORLD_API_KEY ? "not_configured" : null;
 var priceFailures = 0;
+var connectionFailures = 0;
 var summary = { checkedAt: (/* @__PURE__ */ new Date()).toISOString(), buildingReady: 0, pricesReady: 0, buildingBlocked, priceBlocked, results: [] };
 async function collect(candidate) {
   const c = { ...candidate, names: [...candidate.names, ...candidate.id >= 374 && candidate.id <= 387 ? ["\uBAA9\uB3D9\uC2E0\uC2DC\uAC00\uC9C0\uC544\uD30C\uD2B8"] : []] }, file = path.join(output, c.id + ".json");
@@ -4358,6 +4359,7 @@ async function collect(candidate) {
   } catch {
   }
   const result = { version: 1, id: c.id, pnu: c.pnu, registerParcels: old.registerParcels || [c.pnu], building: old.building, prices: old.prices };
+  let connectionFailed = false;
   const registerParcels = result.registerParcels.filter((p) => /^11\d{17}$/.test(p) && p.slice(0, 10) === c.pnu.slice(0, 10));
   const get = async (ep, dates) => {
     if (!registerParcels.length) throw Error("needs_review");
@@ -4377,6 +4379,7 @@ async function collect(candidate) {
     }
   } catch (e) {
     const status = ["not_authorized", "not_configured", "needs_review", "rate_limited"].includes(e.message) ? e.message : "unavailable";
+    if (status === "unavailable") connectionFailed = true;
     if (["not_authorized", "rate_limited"].includes(status)) buildingBlocked = status;
     if (result.building?.status !== "ready") result.building = { status, source: SOURCES.building, ...observedBuildings ? { observedBuildings } : {} };
     else result.building.refreshStatus = status;
@@ -4404,6 +4407,7 @@ async function collect(candidate) {
         } else result.prices = prices;
       } catch (e) {
         const status = ["not_authorized", "needs_review", "rate_limited"].includes(e.message) ? e.message : "unavailable";
+        if (status === "unavailable") connectionFailed = true;
         if (["not_authorized", "rate_limited"].includes(status)) buildingBlocked = status;
         if (result.prices?.status === "ready") result.prices.refreshStatus = status;
         else result.prices = { status, source: SOURCES.price };
@@ -4415,6 +4419,8 @@ async function collect(candidate) {
   summary.results.push({ id: c.id, building: result.building.status, prices: result.prices.status });
   fs.writeFileSync(file, JSON.stringify(result));
   console.log(JSON.stringify({ projectId: c.id, building: result.building.status, prices: result.prices.status, buildings: Object.keys(result.building.units || {}).length, units: Object.keys(result.building.records || {}).length, priceUnits: Object.keys(result.prices.records || {}).length }));
+  connectionFailures = connectionFailed ? connectionFailures + 1 : 0;
+  if (buildingBlocked || connectionFailures >= 3) summary.stopReason = buildingBlocked || "upstream_unavailable";
 }
 var priority = (id) => [387, 382, 377].includes(id) ? 2 : id >= 374 && id <= 387 ? 1 : 0;
 var queue = catalog.filter((c) => c.pnu && (!ids.length || ids.includes(String(c.id)))).sort((a, b) => priority(b.id) - priority(a.id));
@@ -4439,12 +4445,20 @@ function checkpoint() {
 }
 await Promise.all(Array.from({ length: Math.min(2, queue.length) }, async () => {
   while (next < queue.length) {
+    if (summary.stopReason) break;
     const c = queue[next++];
     await collect(c);
     if (++completed % 10 === 0) checkpoint();
   }
 }));
+summary.requested = queue.length;
+summary.processed = completed;
+summary.pending = queue.filter((c) => !summary.results.some((r) => r.id === c.id)).map((c) => c.id);
 summary.buildingBlocked = buildingBlocked;
 summary.priceBlocked = priceBlocked;
 fs.writeFileSync(path.join(output, "index.json"), JSON.stringify(summary));
 console.log(JSON.stringify({ buildingReady: summary.buildingReady, pricesReady: summary.pricesReady, buildingBlocked, priceBlocked }));
+if (summary.stopReason) {
+  console.log(JSON.stringify({ collection: "interrupted", reason: summary.stopReason, pending: summary.pending.length }));
+  process.exitCode = 1;
+}
