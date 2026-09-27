@@ -4237,7 +4237,16 @@ for (const first of [true, false]) {
   await new Promise((resolve) => setTimeout(resolve, 2e3));
 }
 try {
-  const rows = await buildingPages("getBrTitleInfo", "1147010200109040000", key, officialTransport);
+  const rows = await buildingPages("getBrTitleInfo", "1147010200109040000", key, async (url, options) => {
+    const r = await officialTransport(url, options), text = await r.clone().text();
+    let b;
+    try {
+      b = JSON.parse(text);
+    } catch {
+    }
+    console.log(JSON.stringify({ probe: "collector-response", params: Object.fromEntries([...url.searchParams].filter(([k]) => k !== "serviceKey")), http: r.status, type: r.headers.get("content-type"), bytes: text.length, keys: b ? Object.keys(b) : null, code: b?.response?.header?.resultCode, xmlCode: text.match(/<returnReasonCode>([^<]*)/)?.[1] }));
+    return r;
+  });
   console.log(JSON.stringify({ probe: "collector-pages", rows: rows.length }));
 } catch (e) {
   console.log(JSON.stringify({ probe: "collector-pages", error: e.message, code: e.apiCode }));
