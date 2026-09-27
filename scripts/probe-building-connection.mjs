@@ -19,8 +19,8 @@ async function probe(endpoint,size,transport){
   console.log(JSON.stringify({probe:endpoint,size,transport,ms:Date.now()-start,http:status,code:String(h?.resultCode??h?.returnReasonCode??''),total:body?.totalCount,json:!!b,sample:rows.slice(0,8).map(r=>Object.fromEntries(fields.filter(k=>r[k]!=null).map(k=>[k,r[k]])))}));
  }catch(e){console.log(JSON.stringify({probe:endpoint,size,transport,ms:Date.now()-start,error:e.name}));}
 }
-if(process.argv.includes('--prices')){
- await probe('getBrHsprcInfo',1,'fetch');
- await new Promise(resolve=>setTimeout(resolve,2500));
- await probe('getBrTitleInfo',1,'fetch');
+ if(process.argv.includes('--prices')){
+ for(const [endpoint,size] of [['getBrTitleInfo',1000],['getBrHsprcInfo',1000],['getBrHsprcInfo',100]]){
+  await probe(endpoint,size,'fetch');await new Promise(resolve=>setTimeout(resolve,2500));
+ }
 }else for(const [endpoint,size,transport] of [['getBrTitleInfo',10,'fetch'],['getBrTitleInfo',10,'curl'],['getBrExposPubuseAreaInfo',20,'fetch']])await probe(endpoint,size,transport);
