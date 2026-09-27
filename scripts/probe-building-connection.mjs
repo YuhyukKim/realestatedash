@@ -5,7 +5,7 @@ if(!key)process.exit(1);
 const fields=['bldNm','dongNm','hoNm','platPlc','exposPubuseGbCdNm','mainPurpsCdNm','etcPurps','area','flrGbCdNm','flrNoNm','stdDay','hsprc'];
 async function probe(endpoint,size,transport,pnu='1147010200109040000'){
  const url=new URL('https://apis.data.go.kr/1613000/BldRgstHubService/'+endpoint);
- for(const [k,v] of Object.entries({serviceKey:key,sigunguCd:pnu.slice(0,5),bjdongCd:pnu.slice(5,10),platGbCd:'0',bun:pnu.slice(11,15),ji:pnu.slice(15),numOfRows:size,pageNo:1,_type:'json'}))url.searchParams.set(k,String(v));
+ for(const [k,v] of Object.entries({serviceKey:key,sigunguCd:pnu.slice(0,5),bjdongCd:pnu.slice(5,10),platGbCd:'0',bun:pnu.slice(11,15),ji:pnu.slice(15),...(endpoint==='getBrHsprcInfo'?{startDate:'20260101',endDate:'20261231'}:{}),numOfRows:size,pageNo:1,_type:'json'}))url.searchParams.set(k,String(v));
  const start=Date.now();
  try{
   let text,status;
