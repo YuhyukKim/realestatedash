@@ -4220,6 +4220,41 @@ function buildingProfile(candidate, titles, expos, areas) {
   return { status: "ready", name: cleanText(matched[0].bldNm), address: cleanText(matched[0].platPlc), source: SOURCES.building, checkedAt: (/* @__PURE__ */ new Date()).toISOString(), units, records, buildings: matched.map((r) => ({ dong: cleanText(r.dongNm) || "\uB3D9 \uAD6C\uBD84 \uC5C6\uC74C", name: cleanText(r.bldNm), address: cleanText(r.newPlatPlc || r.platPlc), purpose: cleanText(r.mainPurpsCdNm), structure: cleanText(r.strctCdNm), approval: cleanText(r.useAprDay), floors: finite(r.grndFlrCnt), basementFloors: finite(r.ugrndFlrCnt), households: finite(r.hhldCnt), coverage: finite(r.bcRat), floorAreaRatio: finite(r.vlRat) })) };
 }
 
+// server/register-buildings.mjs
+function registerCandidates(candidate, previous = {}) {
+  const entries = candidate.registerCandidates?.length ? candidate.registerCandidates : (previous.registerParcels || [candidate.pnu]).map((pnu) => ({ pnu, names: candidate.names }));
+  return entries.map((p) => {
+    if (!/^11\d{17}$/.test(p.pnu) || p.pnu.slice(0, 5) !== candidate.pnu.slice(0, 5)) throw Error("needs_review");
+    return { ...candidate, pnu: p.pnu, names: [.../* @__PURE__ */ new Set([...p.names, ...candidate.id >= 374 && candidate.id <= 387 ? ["\uBAA9\uB3D9\uC2E0\uC2DC\uAC00\uC9C0\uC544\uD30C\uD2B8"] : []])] };
+  });
+}
+async function collectBuildingParcels(candidate, previous, getRows) {
+  const parcels = registerCandidates(candidate, previous), profiles = [];
+  for (const parcel of parcels) {
+    const titles = await getRows("getBrTitleInfo", parcel.pnu);
+    if (!matchedBuildingTitles(parcel, titles).length) {
+      const e = Error("needs_review");
+      e.observedBuildings = titles.map((t) => ({ name: t.bldNm, dong: t.dongNm, address: t.platPlc, purpose: t.mainPurpsCdNm }));
+      throw e;
+    }
+    const expos = await getRows("getBrExposInfo", parcel.pnu), areas = await getRows("getBrExposPubuseAreaInfo", parcel.pnu);
+    const profile = buildingProfile(parcel, titles, expos, areas);
+    if (!Object.keys(profile.records).length || Object.values(profile.records).some((r) => !r.registerId || !r.rows.some((row) => row.kind === "\uC804\uC720"))) throw Error("incomplete_response");
+    profiles.push(profile);
+  }
+  const building = { ...profiles[0], units: {}, records: {}, buildings: [] };
+  for (const p of profiles) {
+    for (const [key, record] of Object.entries(p.records)) {
+      if (building.records[key] && building.records[key].registerId !== record.registerId) throw Error("needs_review");
+      building.records[key] ??= record;
+    }
+    for (const row of p.buildings) if (!building.buildings.some((r) => r.dong === row.dong && r.address === row.address)) building.buildings.push(row);
+  }
+  for (const unit of Object.values(building.records)) (building.units[unit.dong] ??= []).push(unit.ho);
+  for (const units of Object.values(building.units)) units.sort((a, b) => a.localeCompare(b, "ko", { numeric: true }));
+  return { building, registerParcels: parcels.map((p) => p.pnu) };
+}
+
 // server/official-prices.mjs
 async function pricePages(pnu, year2, key, domain, fetcher = fetch) {
   if (!key) throw Error("not_configured");
@@ -4275,7 +4310,7 @@ function registerPriceProfile(building, rows, selectedYear) {
 }
 async function collectRegisterPrices(candidate, snapshot, year2, getRows) {
   const parcels = snapshot.registerParcels?.length ? snapshot.registerParcels : [candidate.pnu];
-  if (parcels.some((p) => !/^11\d{17}$/.test(p) || p.slice(0, 10) !== candidate.pnu.slice(0, 10))) throw Error("needs_review");
+  if (parcels.some((p) => !/^11\d{17}$/.test(p) || p.slice(0, 10) !== candidate.pnu.slice(0, 10) && !candidate.registerCandidates?.some((c) => c.pnu === p && p.slice(0, 5) === candidate.pnu.slice(0, 5)))) throw Error("needs_review");
   const rows = [];
   for (const pnu of [...new Set(parcels)]) rows.push(...await getRows("getBrHsprcInfo", pnu));
   return registerPriceProfile(snapshot.building, rows, year2 === "all" ? void 0 : year2);
@@ -4298,12 +4333,24 @@ function mergePriceYears(previous, next2, year2) {
 // scripts/official-api-transport.mjs
 import { spawn } from "node:child_process";
 var nextBuildingRequest = 0;
+var transportStats = { attempts: 0, networkErrors: 0, http: {} };
 function officialTransport(url, options = {}) {
   const target = new URL(url);
   if (target.protocol === "https:" && target.hostname === "apis.data.go.kr" && target.pathname.startsWith("/1613000/BldRgstHubService/")) {
     const wait = Math.max(0, nextBuildingRequest - Date.now());
     nextBuildingRequest = Math.max(Date.now(), nextBuildingRequest) + 600;
-    return new Promise((resolve) => setTimeout(resolve, wait)).then(() => fetch(url, { signal: options.signal || AbortSignal.timeout(45e3) }));
+    return new Promise((resolve) => setTimeout(resolve, wait)).then(async () => {
+      if (transportStats.attempts >= 9e3) throw Error("rate_limited");
+      transportStats.attempts++;
+      try {
+        const response = await fetch(url, { signal: options.signal || AbortSignal.timeout(45e3) });
+        transportStats.http[response.status] = (transportStats.http[response.status] || 0) + 1;
+        return response;
+      } catch (e) {
+        transportStats.networkErrors++;
+        throw e;
+      }
+    });
   }
   return new Promise((resolve, reject) => {
     const child = spawn("curl", ["--ipv4", "--silent", "--max-time", "45", "--config", "-", "--write-out", "\n%{http_code}"], { stdio: ["pipe", "pipe", "ignore"], windowsHide: true });
@@ -4343,13 +4390,14 @@ fs.mkdirSync(output, { recursive: true });
 var year = process.env.PROPERTY_PRICE_YEAR || String((/* @__PURE__ */ new Date()).getUTCFullYear());
 if (year !== "all" && !/^20\d{2}$/.test(year)) throw Error("Invalid assessment year");
 var preferRegister = process.env.PROPERTY_PRICE_SOURCE === "building";
+var reuseDays = Number(process.env.PROPERTY_BUILDING_REUSE_DAYS ?? 7);
 var ids = (process.env.PROPERTY_PROJECT_IDS || "").split(",").map((s) => s.trim()).filter(Boolean);
 if (ids.some((id) => !/^\d+$/.test(id) || !catalog.some((c) => String(c.id) === id && c.pnu))) throw Error("Unknown or unlocated project ID");
 var buildingBlocked = !process.env.MOLIT_API_KEY ? "not_configured" : null;
 var priceBlocked = preferRegister ? "using_building_register" : !process.env.VWORLD_API_KEY ? "not_configured" : null;
 var priceFailures = 0;
 var connectionFailures = 0;
-var summary = { checkedAt: (/* @__PURE__ */ new Date()).toISOString(), buildingReady: 0, pricesReady: 0, buildingBlocked, priceBlocked, results: [] };
+var summary = { checkedAt: (/* @__PURE__ */ new Date()).toISOString(), catalogTotal: catalog.length, unlocated: catalog.filter((c) => !c.pnu).map((c) => c.id), buildingReady: 0, pricesReady: 0, buildingBlocked, priceBlocked, results: [] };
 async function collect(candidate) {
   const c = { ...candidate, names: [...candidate.names, ...candidate.id >= 374 && candidate.id <= 387 ? ["\uBAA9\uB3D9\uC2E0\uC2DC\uAC00\uC9C0\uC544\uD30C\uD2B8"] : []] }, file = path.join(output, c.id + ".json");
   let old = {};
@@ -4360,28 +4408,15 @@ async function collect(candidate) {
   }
   const result = { version: 1, id: c.id, pnu: c.pnu, registerParcels: old.registerParcels || [c.pnu], building: old.building, prices: old.prices };
   let connectionFailed = false;
-  const registerParcels = result.registerParcels.filter((p) => /^11\d{17}$/.test(p) && p.slice(0, 10) === c.pnu.slice(0, 10));
-  const get = async (ep, dates) => {
-    if (!registerParcels.length) throw Error("needs_review");
-    const rows = [];
-    for (const pnu of registerParcels) rows.push(...await buildingPages(ep, pnu, process.env.MOLIT_API_KEY, officialTransport, dates));
-    return rows;
-  };
-  let observedBuildings;
+  const buildingFresh = result.building?.status === "ready" && Date.now() - Date.parse(result.building.checkedAt) < reuseDays * 864e5 && (!c.registerCandidates?.length || c.registerCandidates.every((p) => result.registerParcels.includes(p.pnu)));
   try {
     if (buildingBlocked) throw Error(buildingBlocked);
-    if (result.building?.status !== "ready" || !result.building.checkedAt?.startsWith(summary.checkedAt.slice(0, 10))) {
-      const titles = await get("getBrTitleInfo");
-      observedBuildings = titles.map((t) => ({ name: t.bldNm, dong: t.dongNm, address: t.platPlc, purpose: t.mainPurpsCdNm }));
-      if (!matchedBuildingTitles(c, titles).length) throw Error("needs_review");
-      const expos = await get("getBrExposInfo"), areas = await get("getBrExposPubuseAreaInfo");
-      result.building = buildingProfile(c, titles, expos, areas);
-    }
+    if (!buildingFresh) Object.assign(result, await collectBuildingParcels(c, result, (ep, pnu) => buildingPages(ep, pnu, process.env.MOLIT_API_KEY, officialTransport)));
   } catch (e) {
     const status = ["not_authorized", "not_configured", "needs_review", "rate_limited"].includes(e.message) ? e.message : "unavailable";
     if (status === "unavailable") connectionFailed = true;
     if (["not_authorized", "rate_limited"].includes(status)) buildingBlocked = status;
-    if (result.building?.status !== "ready") result.building = { status, source: SOURCES.building, ...observedBuildings ? { observedBuildings } : {} };
+    if (result.building?.status !== "ready") result.building = { status, source: SOURCES.building, ...e.observedBuildings ? { observedBuildings: e.observedBuildings } : {} };
     else result.building.refreshStatus = status;
   }
   if (result.prices?.status !== "ready" || result.prices.collectionVersion !== 2 || result.prices.collectedYear !== year || !result.prices.checkedAt?.startsWith(summary.checkedAt.slice(0, 10))) {
@@ -4416,11 +4451,11 @@ async function collect(candidate) {
   }
   if (result.building.status === "ready") summary.buildingReady++;
   if (result.prices.status === "ready") summary.pricesReady++;
-  summary.results.push({ id: c.id, building: result.building.status, prices: result.prices.status });
+  summary.results.push({ id: c.id, building: result.building.status, prices: result.prices.status, buildingRefresh: result.building.refreshStatus, priceRefresh: result.prices.refreshStatus });
   fs.writeFileSync(file, JSON.stringify(result));
   console.log(JSON.stringify({ projectId: c.id, building: result.building.status, prices: result.prices.status, buildings: Object.keys(result.building.units || {}).length, units: Object.keys(result.building.records || {}).length, priceUnits: Object.keys(result.prices.records || {}).length }));
   connectionFailures = connectionFailed ? connectionFailures + 1 : 0;
-  if (buildingBlocked || connectionFailures >= 3) summary.stopReason = buildingBlocked || "upstream_unavailable";
+  if (buildingBlocked) summary.stopReason = buildingBlocked;
 }
 var priority = (id) => [387, 382, 377].includes(id) ? 2 : id >= 374 && id <= 387 ? 1 : 0;
 var queue = catalog.filter((c) => c.pnu && (!ids.length || ids.includes(String(c.id)))).sort((a, b) => priority(b.id) - priority(a.id));
@@ -4429,6 +4464,7 @@ var completed = 0;
 function checkpoint() {
   if (process.env.PROPERTY_PUBLISH_CHECKPOINTS !== "1") return;
   try {
+    saveSummary();
     const git = (...args) => execFileSync("git", args, { stdio: "pipe", timeout: 12e4 });
     git("config", "user.name", "github-actions[bot]");
     git("config", "user.email", "41898282+github-actions[bot]@users.noreply.github.com");
@@ -4443,21 +4479,25 @@ function checkpoint() {
     console.log(JSON.stringify({ checkpoint: "deferred", completed, total: queue.length }));
   }
 }
+function saveSummary() {
+  summary.requested = queue.length;
+  summary.processed = completed;
+  summary.pending = queue.filter((c) => !summary.results.some((r) => r.id === c.id)).map((c) => c.id);
+  summary.buildingBlocked = buildingBlocked;
+  summary.priceBlocked = priceBlocked;
+  summary.requests = transportStats;
+  fs.writeFileSync(path.join(output, "index.json"), JSON.stringify(summary));
+}
 await Promise.all(Array.from({ length: Math.min(2, queue.length) }, async () => {
   while (next < queue.length) {
     if (summary.stopReason) break;
     const c = queue[next++];
     await collect(c);
-    if (++completed % 10 === 0) checkpoint();
+    if (++completed % 5 === 0) checkpoint();
   }
 }));
-summary.requested = queue.length;
-summary.processed = completed;
-summary.pending = queue.filter((c) => !summary.results.some((r) => r.id === c.id)).map((c) => c.id);
-summary.buildingBlocked = buildingBlocked;
-summary.priceBlocked = priceBlocked;
-fs.writeFileSync(path.join(output, "index.json"), JSON.stringify(summary));
-console.log(JSON.stringify({ buildingReady: summary.buildingReady, pricesReady: summary.pricesReady, buildingBlocked, priceBlocked }));
+saveSummary();
+console.log(JSON.stringify({ buildingReady: summary.buildingReady, pricesReady: summary.pricesReady, buildingBlocked, priceBlocked, requests: transportStats }));
 if (summary.stopReason) {
   console.log(JSON.stringify({ collection: "interrupted", reason: summary.stopReason, pending: summary.pending.length }));
   process.exitCode = 1;
