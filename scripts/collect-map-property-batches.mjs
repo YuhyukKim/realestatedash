@@ -5,14 +5,14 @@ import { spawnSync } from "node:child_process";
 // server/property-batch-policy.mjs
 function propertyBatchContinuation(summary) {
   if (!summary.requestBudgetReached) return null;
-  if ((summary.apiErrors || []).some((e) => ["20", "22", "23", "30", "31"].includes(String(e.code)))) return null;
+  if ((summary.apiErrors || []).some((e) => ["20", "22", "23", "30", "31", "HTTP_401", "HTTP_403", "HTTP_429"].includes(String(e.code)))) return null;
   const retry = (summary.results || []).filter((r) => [r.building, r.prices, r.buildingRefresh, r.priceRefresh].includes("rate_limited")).map((r) => String(r.id));
   return [.../* @__PURE__ */ new Set([...(summary.pending || []).map(String), ...retry])];
 }
 
 // scripts/run-property-batches.mjs
 var catalog = JSON.parse(fs.readFileSync("data/parcel-candidates.json", "utf8"));
-var input = (process.env.PROPERTY_PROJECT_IDS || "").split(",").filter(Boolean);
+var input = (process.env.PROPERTY_PROJECT_IDS || "").split(",").map((s) => s.trim()).filter(Boolean);
 var scope = catalog.filter((c) => c.pnu && (!input.length || input.includes(String(c.id)))).map((c) => c.id);
 var script = fs.existsSync("scripts/collect-map-properties.mjs") ? "scripts/collect-map-properties.mjs" : "scripts/collect-official-buildings.mjs";
 var file = "data/property/collection-run.json";

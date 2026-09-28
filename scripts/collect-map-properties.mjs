@@ -4159,8 +4159,11 @@ async function officialResponseText(url, fetcher = fetch) {
   for (let attempt = 0; attempt < 3; attempt++) {
     try {
       const r = await fetcher(url, { signal: AbortSignal.timeout(45e3) });
-      if ([401, 403].includes(r.status)) throw Error("not_authorized");
-      if (r.status === 429) throw Error("rate_limited");
+      if ([401, 403, 429].includes(r.status)) {
+        const error = Error(r.status === 429 ? "rate_limited" : "not_authorized");
+        error.apiCode = "HTTP_" + r.status;
+        throw error;
+      }
       if (!r.ok) throw Error("unavailable");
       const text = await r.text();
       if (!text.trim()) throw Error("empty_response");
@@ -4209,14 +4212,19 @@ async function buildingPages(endpoint, pnu, key, fetcher = fetch, dates = {}) {
   const pages = Math.ceil(first.total / first.size);
   if (pages > 5e3) throw Error("invalid_response");
   const chunks = [first.part];
-  let next2 = 2;
+  let next2 = 2, failure;
   await Promise.all(Array.from({ length: Math.min(3, pages - 1) }, async () => {
-    while (next2 <= pages) {
-      const page = next2++, data = await pageData(page);
-      if (data.total !== first.total || !data.part.length) throw Error("incomplete_response");
-      chunks[page - 1] = data.part;
+    while (next2 <= pages && !failure) {
+      try {
+        const page = next2++, data = await pageData(page);
+        if (data.total !== first.total || !data.part.length) throw Error("incomplete_response");
+        chunks[page - 1] = data.part;
+      } catch (error) {
+        failure ??= error;
+      }
     }
   }));
+  if (failure) throw failure;
   const rows = chunks.flat();
   if (rows.length !== first.total) throw Error("incomplete_response");
   return rows;
