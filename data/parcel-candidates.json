@@ -579,7 +579,9 @@
           "주공아파트 5단지",
           "잠실주공5단지",
           "주공아파트5단지",
-          "주공아파트 507동"
+          "주공아파트 507동",
+          "잠실아파트",
+          "잠실주공아파트"
         ],
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
@@ -592,7 +594,20 @@
           "households": 3930,
           "address": "서울특별시 송파구 잠실동 27",
           "source": "https://www.data.go.kr/data/15106861/fileData.do"
-        }
+        },
+        "additionalAliasSources": [
+          {
+            "url": "https://www.data.go.kr/data/15134735/openapi.do",
+            "endpoint": "getBrTitleInfo",
+            "pnu": "1171010100100270000",
+            "checkedAt": "2026-09-28",
+            "names": [
+              "잠실아파트",
+              "잠실주공아파트"
+            ],
+            "note": "표제부의 실제 동 번호 접미사를 제외한 이름; 501~530동의 동일 필지 확인"
+          }
+        ]
       }
     ],
     "registerCandidateSource": {
@@ -645,6 +660,22 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": false,
+          "coversWholeParcel": true,
+          "complexIds": [
+            "11710100050192",
+            "11710100002370"
+          ],
+          "reviewedPriceNames": [
+            "장미2",
+            "장미3"
+          ],
+          "residentialBuildings": 12,
+          "households": 1422,
+          "address": "서울특별시 송파구 신천동 11",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -4720,6 +4751,24 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": false,
+          "coversWholeParcel": true,
+          "complexIds": [
+            "11350100050244",
+            "11350100002611",
+            "11350100002612"
+          ],
+          "reviewedPriceNames": [
+            "삼호3",
+            "미륭",
+            "미성"
+          ],
+          "residentialBuildings": 32,
+          "households": 3930,
+          "address": "서울특별시 노원구 월계동 13",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -7492,8 +7541,21 @@
         "pnu": "1156012500100200000",
         "names": [
           "양평신동아아파트",
-          "양평동신동아아파트"
-        ]
+          "양평동신동아아파트",
+          "신동아"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11560100001025",
+          "residentialBuildings": 4,
+          "households": 495,
+          "address": "서울특별시 영등포구 양평동1가 20",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+        }
       }
     ],
     "registerCandidateSource": {

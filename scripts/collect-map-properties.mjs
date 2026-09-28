@@ -4134,10 +4134,12 @@ var normalizeName = (v) => cleanText(v).normalize("NFKC").replace(/아파트|신
 var sortNames = (a, b) => a.localeCompare(b, "ko", { numeric: true });
 function matchedBuildingTitles(candidate, titles) {
   const names = new Set(candidate.names.map(normalizeName));
-  if (candidate.registerIdentity?.singleComplex) for (const name of [...names]) {
+  const verifiedParcel = candidate.registerIdentity?.singleComplex || candidate.registerIdentity?.coversWholeParcel;
+  if (verifiedParcel) for (const name of [...names]) {
     if (/[가-힣].*?(?:제)?\d+동$/.test(name)) names.add(name.replace(/(?:제)?\d+동$/, ""));
   }
-  const residential = titles.filter((r) => !r.mainPurpsCdNm || /공동주택|아파트|연립주택|다세대주택/.test(r.mainPurpsCdNm));
+  const ancillary = /관리사무실|경비실|보일러실|변전실|노인정|독서실|기계실|중앙공급실|공중변소|체육관/;
+  const residential = titles.filter((r) => (!r.mainPurpsCdNm || /공동주택|아파트|연립주택|다세대주택/.test(r.mainPurpsCdNm)) && !ancillary.test(cleanText(r.dongNm)));
   const named = (r) => {
     const name = normalizeName(r.bldNm);
     if (!name) return false;
@@ -4147,7 +4149,7 @@ function matchedBuildingTitles(candidate, titles) {
     return [dong + "\uB3D9", "\uC81C" + dong + "\uB3D9", dong].some((suffix) => name.endsWith(suffix) && names.has(name.slice(0, -suffix.length)));
   };
   const identity = candidate.registerIdentity;
-  const allowBlank = identity?.singleComplex && residential.length === identity.residentialBuildings && residential.every((r) => !cleanText(r.bldNm) || named(r));
+  const allowBlank = verifiedParcel && residential.length === identity.residentialBuildings && residential.every((r) => !cleanText(r.bldNm) || named(r));
   return residential.filter((r) => named(r) || allowBlank && !cleanText(r.bldNm));
 }
 async function officialResponseText(url, fetcher = fetch) {
@@ -4250,7 +4252,7 @@ async function collectBuildingParcels(candidate, previous, getRows) {
   for (const parcel of parcels) {
     const titles = await getRows("getBrTitleInfo", parcel.pnu);
     const matched = matchedBuildingTitles(parcel, titles);
-    if (!matched.length || parcel.registerIdentity?.singleComplex && matched.length < parcel.registerIdentity.residentialBuildings) {
+    if (!matched.length || (parcel.registerIdentity?.singleComplex || parcel.registerIdentity?.coversWholeParcel) && matched.length < parcel.registerIdentity.residentialBuildings) {
       const e = Error("needs_review");
       e.observedBuildings = titles.map((t) => ({ name: t.bldNm, dong: t.dongNm, address: t.platPlc, purpose: t.mainPurpsCdNm }));
       throw e;
