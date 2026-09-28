@@ -4311,6 +4311,13 @@ function registerPriceProfile(building, rows, selectedYear) {
 async function collectRegisterPrices(candidate, snapshot, year2, getRows) {
   const parcels = snapshot.registerParcels?.length ? snapshot.registerParcels : [candidate.pnu];
   if (parcels.some((p) => !/^11\d{17}$/.test(p) || p.slice(0, 10) !== candidate.pnu.slice(0, 10) && !candidate.registerCandidates?.some((c) => c.pnu === p && p.slice(0, 5) === candidate.pnu.slice(0, 5)))) throw Error("needs_review");
+  if (year2 !== "all") {
+    const recent = [];
+    for (const pnu of [...new Set(parcels)]) recent.push(...await getRows("getBrHsprcInfo", pnu, { startDate: String(Number(year2) - 1) + "0101", endDate: year2 + "1231" }));
+    const expected = Object.values(snapshot.building.records || {}).map((r) => cleanText(r.registerId));
+    const found = new Set(recent.filter((r) => cleanText(r.stdDay).startsWith(year2) && finite(r.hsprc) > 0).map((r) => cleanText(r.mgmBldrgstPk)));
+    if (expected.length && expected.every((id) => id && found.has(id))) return registerPriceProfile(snapshot.building, recent, year2);
+  }
   const rows = [];
   for (const pnu of [...new Set(parcels)]) rows.push(...await getRows("getBrHsprcInfo", pnu));
   return registerPriceProfile(snapshot.building, rows, year2 === "all" ? void 0 : year2);
@@ -4434,7 +4441,7 @@ async function collect(candidate) {
     result.prices ??= { status: ["needs_review", "not_authorized", "not_configured", "rate_limited"].includes(result.building?.status) ? result.building.status : buildingBlocked || "unavailable", source: SOURCES.price };
     if ((preferRegister || result.prices?.status !== "ready") && result.building?.status === "ready" && !buildingBlocked) {
       try {
-        const prices = await collectRegisterPrices(c, result, year, (ep, pnu) => buildingPages(ep, pnu, process.env.MOLIT_API_KEY, officialTransport));
+        const prices = await collectRegisterPrices(c, result, year, (ep, pnu, dates) => buildingPages(ep, pnu, process.env.MOLIT_API_KEY, officialTransport, dates));
         if (prices.status === "ready") {
           result.prices = { ...mergePriceYears(result.prices, prices, year), collectionVersion: 2, collectedYear: year };
         } else if (result.prices?.status === "ready") {
