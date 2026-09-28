@@ -10,7 +10,8 @@ for(const id of [366,667,1320]){
   url.search=new URLSearchParams(params);
   try{const r=await fetch(url,{signal:AbortSignal.timeout(30000)}),d=await r.json(),body=d.response?.body,item=body?.items?.item,rows=Array.isArray(item)?item:item?[item]:[];
    console.log(JSON.stringify({probe:'related-parcels',id,endpoint,http:r.status,code:d.response?.header?.resultCode,total:body?.totalCount,rows:rows.map(x=>endpoint==='getBrTitleInfo'?{name:x.bldNm,dong:x.dongNm,bun:x.bun,ji:x.ji,purpose:x.mainPurpsCdNm}:{name:x.bldNm,bun:x.bun,ji:x.ji,attached:[x.atchSigunguCd,x.atchBjdongCd,x.atchPlatGbCd,x.atchBun,x.atchJi]})}));
-  }catch(e){console.log(JSON.stringify({probe:'related-parcels',id,endpoint,error:e.name}));}
+  }catch(e){console.log(JSON.stringify({probe:'related-parcels',id,endpoint,error:e.name,causeCode:e.cause?.code}));}
   await new Promise(r=>setTimeout(r,2000));
  }
 }
+
