@@ -4149,8 +4149,11 @@ function matchedBuildingTitles(candidate, titles) {
     return [dong + "\uB3D9", "\uC81C" + dong + "\uB3D9", dong].some((suffix) => name.endsWith(suffix) && names.has(name.slice(0, -suffix.length)));
   };
   const identity = candidate.registerIdentity;
-  const allowBlank = verifiedParcel && residential.length === identity.residentialBuildings && residential.every((r) => !cleanText(r.bldNm) || named(r));
-  return residential.filter((r) => named(r) || allowBlank && !cleanText(r.bldNm));
+  const numbered = residential.filter((r) => /^(?:제)?\d+동?$/.test(cleanText(r.dongNm)));
+  const housing = verifiedParcel && numbered.length === identity.residentialBuildings ? numbered : residential;
+  const allowBlank = verifiedParcel && housing.length === identity.residentialBuildings && housing.every((r) => !cleanText(r.bldNm) || named(r));
+  const approvedBlank = new Set(allowBlank ? housing : []);
+  return residential.filter((r) => named(r) || approvedBlank.has(r) && !cleanText(r.bldNm));
 }
 async function officialResponseText(url, fetcher = fetch) {
   for (let attempt = 0; attempt < 3; attempt++) {
@@ -4225,8 +4228,10 @@ function buildingProfile(candidate, titles, expos, areas) {
   for (const r of expos) {
     const dong = cleanText(r.dongNm) || "\uB3D9 \uAD6C\uBD84 \uC5C6\uC74C", ho = cleanText(r.hoNm);
     if (!ho || !byDong.has(cleanText(r.dongNm))) continue;
+    const key = dong + "|" + ho, registerId = cleanText(r.mgmBldrgstPk);
+    if (records[key] && records[key].registerId !== registerId) throw Error("needs_review");
     (units[dong] ??= []).push(ho);
-    records[dong + "|" + ho] = { dong, ho, registerId: cleanText(r.mgmBldrgstPk), floor: cleanText(r.flrNo), producedAt: cleanText(r.crtnDay), rows: [] };
+    records[key] = { dong, ho, registerId, floor: cleanText(r.flrNo), producedAt: cleanText(r.crtnDay), rows: [] };
   }
   for (const r of areas) {
     const dong = cleanText(r.dongNm) || "\uB3D9 \uAD6C\uBD84 \uC5C6\uC74C", ho = cleanText(r.hoNm), unit = records[dong + "|" + ho];
@@ -4262,13 +4267,25 @@ async function collectBuildingParcels(candidate, previous, getRows) {
     if (!Object.keys(profile.records).length || Object.values(profile.records).some((r) => !r.registerId || !r.rows.some((row) => row.kind === "\uC804\uC720"))) throw Error("incomplete_response");
     profiles.push(profile);
   }
+  const byLabel = /* @__PURE__ */ new Map(), qualify = /* @__PURE__ */ new Set();
+  for (const p of profiles) for (const [key, r] of Object.entries(p.records)) {
+    if (byLabel.has(key) && byLabel.get(key) !== r.registerId) qualify.add(r.dong);
+    byLabel.set(key, r.registerId);
+  }
   const building = { ...profiles[0], units: {}, records: {}, buildings: [] };
-  for (const p of profiles) {
+  for (const [index, p] of profiles.entries()) {
+    const parcel = parcels[index];
+    const prefix = (p.address || parcel.pnu).replace(/^서울특별시 \S+ /, "").replace(/번지$/, "");
     for (const [key, record] of Object.entries(p.records)) {
-      if (building.records[key] && building.records[key].registerId !== record.registerId) throw Error("needs_review");
-      building.records[key] ??= record;
+      const unit = qualify.has(record.dong) ? { ...record, dong: prefix + " \xB7 " + record.dong, registerDong: record.dong, registerPnu: parcel.pnu } : record;
+      const target = unit.dong + "|" + unit.ho;
+      if (building.records[target] && building.records[target].registerId !== unit.registerId) throw Error("needs_review");
+      building.records[target] ??= unit;
     }
-    for (const row of p.buildings) if (!building.buildings.some((r) => r.dong === row.dong && r.address === row.address)) building.buildings.push(row);
+    for (const row of p.buildings) {
+      const entry = qualify.has(row.dong) ? { ...row, dong: prefix + " \xB7 " + row.dong } : row;
+      if (!building.buildings.some((r) => r.dong === entry.dong && r.address === entry.address)) building.buildings.push(entry);
+    }
   }
   for (const unit of Object.values(building.records)) (building.units[unit.dong] ??= []).push(unit.ho);
   for (const units of Object.values(building.units)) units.sort((a, b) => a.localeCompare(b, "ko", { numeric: true }));
