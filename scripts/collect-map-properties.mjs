@@ -4467,6 +4467,7 @@ async function collect(candidate) {
     if (buildingBlocked) throw Error(buildingBlocked);
     if (!buildingFresh) Object.assign(result, await collectBuildingParcels(c, result, (ep, pnu) => buildingPages(ep, pnu, process.env.MOLIT_API_KEY, officialTransport)));
   } catch (e) {
+    if (e.apiCode) (summary.apiErrors ??= []).push({ id: c.id, code: e.apiCode });
     const status = ["not_authorized", "not_configured", "needs_review", "rate_limited"].includes(e.message) ? e.message : "unavailable";
     if (status === "unavailable") connectionFailed = true;
     if (["not_authorized", "rate_limited"].includes(status)) buildingBlocked = status;
@@ -4479,6 +4480,7 @@ async function collect(candidate) {
       result.prices = priceProfile(c, await pricePages(c.pnu, year, process.env.VWORLD_API_KEY, process.env.VWORLD_DOMAIN || "https://seoul-redevelopment-map-yuhyu.whisky88.chatgpt.site", officialTransport), year);
       priceFailures = 0;
     } catch (e) {
+      if (e.apiCode) (summary.apiErrors ??= []).push({ id: c.id, code: e.apiCode });
       const status = ["not_authorized", "not_configured", "needs_review", "rate_limited"].includes(e.message) ? e.message : "unavailable";
       if (["not_authorized", "rate_limited"].includes(status)) priceBlocked = status;
       else if (status === "unavailable" && ++priceFailures >= 3) priceBlocked = "unavailable";
@@ -4496,6 +4498,7 @@ async function collect(candidate) {
           result.prices.refreshStatus = prices.status;
         } else result.prices = prices;
       } catch (e) {
+        if (e.apiCode) (summary.apiErrors ??= []).push({ id: c.id, code: e.apiCode });
         const status = ["not_authorized", "needs_review", "rate_limited"].includes(e.message) ? e.message : "unavailable";
         if (status === "unavailable") connectionFailed = true;
         if (["not_authorized", "rate_limited"].includes(status)) buildingBlocked = status;
@@ -4541,6 +4544,7 @@ function saveSummary() {
   summary.buildingBlocked = buildingBlocked;
   summary.priceBlocked = priceBlocked;
   summary.requests = transportStats;
+  summary.requestBudgetReached = transportStats.attempts >= 9e3;
   fs.writeFileSync(path.join(output, "index.json"), JSON.stringify(summary));
 }
 await Promise.all(Array.from({ length: Math.min(2, queue.length) }, async () => {
