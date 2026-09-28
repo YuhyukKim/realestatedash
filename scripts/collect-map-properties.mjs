@@ -4196,7 +4196,7 @@ async function buildingPages(endpoint, pnu, key, fetcher = fetch, dates = {}) {
       throw error;
     }
     const total = Number(response.body?.totalCount);
-    if (!Number.isInteger(total) || total < 0 || total > 1e5) throw Error("invalid_response");
+    if (!Number.isInteger(total) || total < 0 || total > 5e5) throw Error("invalid_response");
     const part = array(response.body.items?.item);
     return { total, part, size: Number(response.body?.numOfRows) || part.length };
   }
@@ -4204,7 +4204,7 @@ async function buildingPages(endpoint, pnu, key, fetcher = fetch, dates = {}) {
   if (first.total === 0) return [];
   if (!first.part.length || first.size <= 0) throw Error("incomplete_response");
   const pages = Math.ceil(first.total / first.size);
-  if (pages > 1e3) throw Error("invalid_response");
+  if (pages > 5e3) throw Error("invalid_response");
   const chunks = [first.part];
   let next2 = 2;
   await Promise.all(Array.from({ length: Math.min(3, pages - 1) }, async () => {
@@ -4469,6 +4469,7 @@ async function collect(candidate) {
       else result.prices.refreshStatus = status;
     }
     result.prices ??= { status: ["needs_review", "not_authorized", "not_configured", "rate_limited"].includes(result.building?.status) ? result.building.status : buildingBlocked || "unavailable", source: SOURCES.price };
+    if (preferRegister && result.building?.status !== "ready" && result.prices.status !== "ready") result.prices = { ...result.prices, status: result.building.status };
     if ((preferRegister || result.prices?.status !== "ready") && result.building?.status === "ready" && !buildingBlocked) {
       try {
         const prices = await collectRegisterPrices(c, result, year, (ep, pnu, dates) => buildingPages(ep, pnu, process.env.MOLIT_API_KEY, officialTransport, dates));
