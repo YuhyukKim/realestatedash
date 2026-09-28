@@ -4315,7 +4315,7 @@ async function collectRegisterPrices(candidate, snapshot, year2, getRows) {
     const recent = [];
     for (const pnu of [...new Set(parcels)]) recent.push(...await getRows("getBrHsprcInfo", pnu, { startDate: String(Number(year2) - 1) + "0101", endDate: year2 + "1231" }));
     const expected = Object.values(snapshot.building.records || {}).map((r) => cleanText(r.registerId));
-    const found = new Set(recent.filter((r) => cleanText(r.stdDay).startsWith(year2) && finite(r.hsprc) > 0).map((r) => cleanText(r.mgmBldrgstPk)));
+    const found = new Set(recent.filter((r) => /^\d{8}$/.test(cleanText(r.stdDay)) && cleanText(r.stdDay).startsWith(year2) && finite(r.hsprc) > 0).map((r) => cleanText(r.mgmBldrgstPk)));
     if (expected.length && expected.every((id) => id && found.has(id))) return registerPriceProfile(snapshot.building, recent, year2);
   }
   const rows = [];
