@@ -1417,12 +1417,25 @@
     "name": "금강하이츠빌라",
     "lat": 37.608398,
     "lng": 126.976092,
-    "pnu": null,
+    "pnu": "1111018300100640003",
     "names": [
       "금강하이츠빌라",
       "금강하이츠빌라"
     ],
-    "locatorStatus": "needs_review"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1111018300100640003",
+        "names": [
+          "금강하이츠빌라"
+        ]
+      }
+    ],
+    "registerCandidateSource": {
+      "type": "official-kapt-address",
+      "url": "https://www.data.go.kr/data/15073271/fileData.do",
+      "sourceAsOf": "2026-08-14"
+    }
   },
   {
     "id": 674,
@@ -2078,12 +2091,26 @@
     "name": "오티에르 반포",
     "lat": 37.509097,
     "lng": 127.013492,
-    "pnu": null,
+    "pnu": "1165010600100590010",
     "names": [
       "오티에르 반포",
       "오티에르 반포"
     ],
-    "locatorStatus": "needs_review"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1165010600100590010",
+        "names": [
+          "오티에르반포",
+          "오티에르 반포"
+        ]
+      }
+    ],
+    "registerCandidateSource": {
+      "type": "official-kapt-address",
+      "url": "https://www.data.go.kr/data/15073271/fileData.do",
+      "sourceAsOf": "2026-08-14"
+    }
   },
   {
     "id": 845,
@@ -3980,12 +4007,25 @@
     "name": "잠실래미안아이파크",
     "lat": 37.518055,
     "lng": 127.109661,
-    "pnu": null,
+    "pnu": "1171010200100200004",
     "names": [
       "잠실래미안아이파크",
       "잠실래미안아이파크"
     ],
-    "locatorStatus": "needs_review"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1171010200100200004",
+        "names": [
+          "잠실래미안아이파크"
+        ]
+      }
+    ],
+    "registerCandidateSource": {
+      "type": "official-kapt-address",
+      "url": "https://www.data.go.kr/data/15073271/fileData.do",
+      "sourceAsOf": "2026-08-14"
+    }
   },
   {
     "id": 1326,
@@ -5066,12 +5106,31 @@
     "name": "양재우성",
     "lat": null,
     "lng": null,
-    "pnu": null,
+    "pnu": "1165010200101540002",
     "names": [
       "양재우성",
       "양재우성"
     ],
-    "locatorStatus": "needs_review"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1165010200101540002",
+        "names": [
+          "양재우성"
+        ]
+      },
+      {
+        "pnu": "1165010200101370001",
+        "names": [
+          "양재우성"
+        ]
+      }
+    ],
+    "registerCandidateSource": {
+      "type": "official-kapt-address",
+      "url": "https://www.data.go.kr/data/15073271/fileData.do",
+      "sourceAsOf": "2026-08-14"
+    }
   },
   {
     "id": 1728,
@@ -5693,11 +5752,24 @@
     "name": "청량리신현대",
     "lat": null,
     "lng": null,
-    "pnu": null,
+    "pnu": "1123010800100650000",
     "names": [
       "청량리신현대",
       "청량리신현대"
     ],
-    "locatorStatus": "needs_review"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1123010800100650000",
+        "names": [
+          "청량리신현대"
+        ]
+      }
+    ],
+    "registerCandidateSource": {
+      "type": "official-kapt-address",
+      "url": "https://www.data.go.kr/data/15073271/fileData.do",
+      "sourceAsOf": "2026-08-14"
+    }
   }
 ]
