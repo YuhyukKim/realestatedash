@@ -1,0 +1,2631 @@
+{
+  "checkedAt": "2026-09-28T09:13:28.926Z",
+  "total": 262,
+  "located": 223,
+  "buildingReady": 200,
+  "pricesReady": 193,
+  "buildingUnits": 190762,
+  "priceUnits": 187116,
+  "projects": [
+    {
+      "id": 358,
+      "name": "압구정1구역(미성1·2차)",
+      "pnu": "1168011000103970000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 1233,
+      "buildingCheckedAt": "2026-09-28T04:21:40.389Z",
+      "pricesUnits": 1233,
+      "pricesCheckedAt": "2026-09-28T09:12:13.688Z"
+    },
+    {
+      "id": 359,
+      "name": "압구정2구역(신현대9·11·12차)",
+      "pnu": "1168011000104330000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 1924,
+      "buildingCheckedAt": "2026-09-28T04:20:04.337Z",
+      "pricesUnits": 1924,
+      "pricesCheckedAt": "2026-09-28T09:12:13.953Z"
+    },
+    {
+      "id": 360,
+      "name": "압구정3구역(현대1~7·10·13·14차)",
+      "pnu": "1168011000104360000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 3896,
+      "buildingCheckedAt": "2026-09-28T04:23:19.625Z",
+      "pricesUnits": 3896,
+      "pricesCheckedAt": "2026-09-28T09:12:14.398Z"
+    },
+    {
+      "id": 361,
+      "name": "압구정4구역(현대8·한양3·4·6차)",
+      "pnu": "1168011000104810000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 1341,
+      "buildingCheckedAt": "2026-09-28T04:24:54.436Z",
+      "pricesUnits": 1340,
+      "pricesCheckedAt": "2026-09-28T09:12:14.759Z"
+    },
+    {
+      "id": 362,
+      "name": "압구정5구역(한양1·2차)",
+      "pnu": "1168011000104900000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 1232,
+      "buildingCheckedAt": "2026-09-28T04:33:00.078Z",
+      "pricesUnits": 1232,
+      "pricesCheckedAt": "2026-09-28T09:12:14.967Z"
+    },
+    {
+      "id": 363,
+      "name": "압구정6구역(한양5·7·8차)",
+      "pnu": "1168011000105130000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 672,
+      "buildingCheckedAt": "2026-09-28T04:33:29.756Z",
+      "pricesUnits": 672,
+      "pricesCheckedAt": "2026-09-28T09:12:15.115Z"
+    },
+    {
+      "id": 364,
+      "name": "잠실주공5단지",
+      "pnu": "1171010100100270000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 3930,
+      "buildingCheckedAt": "2026-09-28T08:49:55.984Z",
+      "pricesUnits": 3930,
+      "pricesCheckedAt": "2026-09-28T09:12:15.432Z"
+    },
+    {
+      "id": 365,
+      "name": "잠실 장미1·2·3차",
+      "pnu": "1171010200100070000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 4346,
+      "buildingCheckedAt": "2026-09-28T08:49:57.082Z",
+      "pricesUnits": 3522,
+      "pricesCheckedAt": "2026-09-28T09:12:15.999Z"
+    },
+    {
+      "id": 366,
+      "name": "잠실 우성1·2·3차",
+      "pnu": "1171010100101010001",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 1842,
+      "buildingCheckedAt": "2026-09-28T09:12:16.424Z",
+      "pricesUnits": 1842,
+      "pricesCheckedAt": "2026-09-28T09:12:16.949Z"
+    },
+    {
+      "id": 367,
+      "name": "대치 은마",
+      "pnu": "1168010600103160000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 4424,
+      "buildingCheckedAt": "2026-09-28T04:40:34.397Z",
+      "pricesUnits": 4424,
+      "pricesCheckedAt": "2026-09-28T09:12:18.243Z"
+    },
+    {
+      "id": 368,
+      "name": "여의도 시범",
+      "pnu": "1156011000100500000",
+      "building": "needs_review",
+      "prices": "needs_review"
+    },
+    {
+      "id": 369,
+      "name": "여의도 한양",
+      "pnu": "1156011000100420000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 588,
+      "buildingCheckedAt": "2026-09-28T04:41:50.376Z",
+      "pricesUnits": 588,
+      "pricesCheckedAt": "2026-09-28T09:12:19.386Z"
+    },
+    {
+      "id": 370,
+      "name": "여의도 대교",
+      "pnu": "1156011000100410000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 576,
+      "buildingCheckedAt": "2026-09-28T04:43:00.205Z",
+      "pricesUnits": 576,
+      "pricesCheckedAt": "2026-09-28T09:12:19.669Z"
+    },
+    {
+      "id": 371,
+      "name": "여의도 공작",
+      "pnu": "1156011000100210002",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 373,
+      "buildingCheckedAt": "2026-09-28T04:43:54.213Z",
+      "pricesUnits": 373,
+      "pricesCheckedAt": "2026-09-28T09:12:19.860Z"
+    },
+    {
+      "id": 372,
+      "name": "신반포2차",
+      "pnu": "1165010600100730000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 1572,
+      "buildingCheckedAt": "2026-09-28T04:46:29.195Z",
+      "pricesUnits": 1570,
+      "pricesCheckedAt": "2026-09-28T09:12:20.288Z"
+    },
+    {
+      "id": 373,
+      "name": "신반포19·25차",
+      "pnu": "1165010600100610002",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 411,
+      "buildingCheckedAt": "2026-09-28T04:44:32.491Z",
+      "pricesUnits": 409,
+      "pricesCheckedAt": "2026-09-28T09:12:20.763Z"
+    },
+    {
+      "id": 374,
+      "name": "목동신시가지 1단지",
+      "pnu": "1147010200109010000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 1882,
+      "buildingCheckedAt": "2026-09-28T02:17:53.295Z",
+      "pricesUnits": 1882,
+      "pricesCheckedAt": "2026-09-28T09:12:21.167Z"
+    },
+    {
+      "id": 375,
+      "name": "목동신시가지 2단지",
+      "pnu": "1147010200109020000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 1701,
+      "buildingCheckedAt": "2026-09-28T02:19:19.071Z",
+      "pricesUnits": 1640,
+      "pricesCheckedAt": "2026-09-28T09:12:21.829Z"
+    },
+    {
+      "id": 376,
+      "name": "목동신시가지 3단지",
+      "pnu": "1147010200109030000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 1588,
+      "buildingCheckedAt": "2026-09-28T02:22:04.545Z",
+      "pricesUnits": 1588,
+      "pricesCheckedAt": "2026-09-28T09:12:22.460Z"
+    },
+    {
+      "id": 377,
+      "name": "목동신시가지 4단지",
+      "pnu": "1147010200109040000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 1382,
+      "buildingCheckedAt": "2026-09-28T01:57:40.348Z",
+      "pricesUnits": 1382,
+      "pricesCheckedAt": "2026-09-28T09:12:23.021Z"
+    },
+    {
+      "id": 378,
+      "name": "목동신시가지 5단지",
+      "pnu": "1147010200109120000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 1848,
+      "buildingCheckedAt": "2026-09-28T02:27:00.455Z",
+      "pricesUnits": 1848,
+      "pricesCheckedAt": "2026-09-28T09:12:23.726Z"
+    },
+    {
+      "id": 379,
+      "name": "목동신시가지 6단지",
+      "pnu": "1147010200109110000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 1368,
+      "buildingCheckedAt": "2026-09-28T02:28:01.138Z",
+      "pricesUnits": 1362,
+      "pricesCheckedAt": "2026-09-28T09:12:24.391Z"
+    },
+    {
+      "id": 380,
+      "name": "목동신시가지 7단지",
+      "pnu": "1147010200109250000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 2550,
+      "buildingCheckedAt": "2026-09-28T02:33:31.361Z",
+      "pricesUnits": 2550,
+      "pricesCheckedAt": "2026-09-28T09:12:25.070Z"
+    },
+    {
+      "id": 381,
+      "name": "목동신시가지 8단지",
+      "pnu": "1147010100103140000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 1352,
+      "buildingCheckedAt": "2026-09-28T02:36:42.882Z",
+      "pricesUnits": 1352,
+      "pricesCheckedAt": "2026-09-28T09:12:25.756Z"
+    },
+    {
+      "id": 382,
+      "name": "목동신시가지 9단지",
+      "pnu": "1147010100103130000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 2030,
+      "buildingCheckedAt": "2026-09-27T05:35:34.662Z",
+      "pricesUnits": 2030,
+      "pricesCheckedAt": "2026-09-28T09:12:26.410Z"
+    },
+    {
+      "id": 383,
+      "name": "목동신시가지 10단지",
+      "pnu": "1147010100103110000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 2160,
+      "buildingCheckedAt": "2026-09-28T02:39:45.371Z",
+      "pricesUnits": 2160,
+      "pricesCheckedAt": "2026-09-28T09:12:27.221Z"
+    },
+    {
+      "id": 384,
+      "name": "목동신시가지 11단지",
+      "pnu": "1147010100103250000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 1595,
+      "buildingCheckedAt": "2026-09-28T02:40:25.236Z",
+      "pricesUnits": 1595,
+      "pricesCheckedAt": "2026-09-28T09:12:27.938Z"
+    },
+    {
+      "id": 385,
+      "name": "목동신시가지 12단지",
+      "pnu": "1147010100103260000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 1862,
+      "buildingCheckedAt": "2026-09-28T02:44:43.720Z",
+      "pricesUnits": 1860,
+      "pricesCheckedAt": "2026-09-28T09:12:28.588Z"
+    },
+    {
+      "id": 386,
+      "name": "목동신시가지 13단지",
+      "pnu": "1147010100103270000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 2280,
+      "buildingCheckedAt": "2026-09-28T02:46:26.193Z",
+      "pricesUnits": 2280,
+      "pricesCheckedAt": "2026-09-28T09:12:29.335Z"
+    },
+    {
+      "id": 387,
+      "name": "목동신시가지 14단지",
+      "pnu": "1147010100103300000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 3100,
+      "buildingCheckedAt": "2026-09-27T05:35:12.096Z",
+      "pricesUnits": 3100,
+      "pricesCheckedAt": "2026-09-28T09:12:30.418Z"
+    },
+    {
+      "id": 402,
+      "name": "신향빌라",
+      "pnu": "1121510100100180024",
+      "building": "ready",
+      "prices": "empty",
+      "buildingUnits": 157,
+      "buildingCheckedAt": "2026-09-28T02:52:53.716Z"
+    },
+    {
+      "id": 417,
+      "name": "유원제일2차아파트",
+      "pnu": "1156011500100070002",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 410,
+      "buildingCheckedAt": "2026-09-28T02:53:15.325Z",
+      "pricesUnits": 410,
+      "pricesCheckedAt": "2026-09-28T09:12:31.067Z"
+    },
+    {
+      "id": 457,
+      "name": "올림픽선수기자촌",
+      "pnu": "1171011100100890001",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 5541,
+      "buildingCheckedAt": "2026-09-28T03:05:25.516Z",
+      "pricesUnits": 5540,
+      "pricesCheckedAt": "2026-09-28T09:12:32.304Z"
+    },
+    {
+      "id": 472,
+      "name": "미성동 건영아파트",
+      "pnu": "1162010200107460043",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 492,
+      "buildingCheckedAt": "2026-09-28T04:52:26.460Z",
+      "pricesUnits": 492,
+      "pricesCheckedAt": "2026-09-28T09:12:33.465Z"
+    },
+    {
+      "id": 473,
+      "name": "삼환가락",
+      "pnu": "1171010700101760000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 648,
+      "buildingCheckedAt": "2026-09-28T03:02:24.995Z",
+      "pricesUnits": 648,
+      "pricesCheckedAt": "2026-09-28T09:12:33.723Z"
+    },
+    {
+      "id": 475,
+      "name": "보광아파트",
+      "pnu": "1153010200104400000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 340,
+      "buildingCheckedAt": "2026-09-28T03:03:15.585Z",
+      "pricesUnits": 340,
+      "pricesCheckedAt": "2026-09-28T09:12:33.885Z"
+    },
+    {
+      "id": 484,
+      "name": "신동아아파트",
+      "pnu": "1117013300102410021",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 1326,
+      "buildingCheckedAt": "2026-09-28T03:05:14.557Z",
+      "pricesUnits": 1326,
+      "pricesCheckedAt": "2026-09-28T09:12:34.152Z"
+    },
+    {
+      "id": 492,
+      "name": "올림픽훼미리타운",
+      "pnu": "1171010800101500000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 4494,
+      "buildingCheckedAt": "2026-09-28T05:00:27.807Z",
+      "pricesUnits": 4494,
+      "pricesCheckedAt": "2026-09-28T09:12:35.242Z"
+    },
+    {
+      "id": 497,
+      "name": "개포 통합(경남,우성3차,현대1차 아파트)",
+      "pnu": "1168010300106530000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 1499,
+      "buildingCheckedAt": "2026-09-28T08:50:07.796Z",
+      "pricesUnits": 1499,
+      "pricesCheckedAt": "2026-09-28T09:12:36.353Z"
+    },
+    {
+      "id": 503,
+      "name": "대치쌍용1차",
+      "pnu": "1168010600100660000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 630,
+      "buildingCheckedAt": "2026-09-28T04:56:51.015Z",
+      "pricesUnits": 630,
+      "pricesCheckedAt": "2026-09-28T09:12:36.707Z"
+    },
+    {
+      "id": 504,
+      "name": "삼호가든5차",
+      "pnu": "1165010700100300001",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 168,
+      "buildingCheckedAt": "2026-09-28T04:57:48.842Z",
+      "pricesUnits": 167,
+      "pricesCheckedAt": "2026-09-28T09:12:36.850Z"
+    },
+    {
+      "id": 507,
+      "name": "방배5",
+      "pnu": null,
+      "building": "address_review",
+      "prices": "address_review"
+    },
+    {
+      "id": 510,
+      "name": "안암1",
+      "pnu": null,
+      "building": "address_review",
+      "prices": "address_review"
+    },
+    {
+      "id": 511,
+      "name": "여의도목화아파트",
+      "pnu": "1156011000100300000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 312,
+      "buildingCheckedAt": "2026-09-28T04:59:06.074Z",
+      "pricesUnits": 312,
+      "pricesCheckedAt": "2026-09-28T09:12:36.928Z"
+    },
+    {
+      "id": 515,
+      "name": "한강맨션아파트",
+      "pnu": "1117012900103000023",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 718,
+      "buildingCheckedAt": "2026-09-28T09:12:36.988Z",
+      "pricesUnits": 660,
+      "pricesCheckedAt": "2026-09-28T09:12:37.235Z"
+    },
+    {
+      "id": 530,
+      "name": "도곡삼익",
+      "pnu": "1168011800108690000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 247,
+      "buildingCheckedAt": "2026-09-28T04:59:53.330Z",
+      "pricesUnits": 247,
+      "pricesCheckedAt": "2026-09-28T09:12:37.393Z"
+    },
+    {
+      "id": 531,
+      "name": "신월시영",
+      "pnu": "1147010300109870001",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 2256,
+      "buildingCheckedAt": "2026-09-28T03:13:53.513Z",
+      "pricesUnits": 2256,
+      "pricesCheckedAt": "2026-09-28T09:12:37.837Z"
+    },
+    {
+      "id": 532,
+      "name": "광장극동",
+      "pnu": "1121510400102180001",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 896,
+      "buildingCheckedAt": "2026-09-28T03:17:46.689Z",
+      "pricesUnits": 896,
+      "pricesCheckedAt": "2026-09-28T09:12:38.503Z"
+    },
+    {
+      "id": 540,
+      "name": "신길13",
+      "pnu": null,
+      "building": "address_review",
+      "prices": "address_review"
+    },
+    {
+      "id": 542,
+      "name": "방화5",
+      "pnu": null,
+      "building": "address_review",
+      "prices": "address_review"
+    },
+    {
+      "id": 549,
+      "name": "미아9-2",
+      "pnu": null,
+      "building": "address_review",
+      "prices": "address_review"
+    },
+    {
+      "id": 550,
+      "name": "공덕1",
+      "pnu": null,
+      "building": "address_review",
+      "prices": "address_review"
+    },
+    {
+      "id": 551,
+      "name": "새절역 두산위브 트레지움",
+      "pnu": "1138010900101700012",
+      "building": "needs_review",
+      "prices": "needs_review"
+    },
+    {
+      "id": 552,
+      "name": "응봉1",
+      "pnu": null,
+      "building": "address_review",
+      "prices": "address_review"
+    },
+    {
+      "id": 559,
+      "name": "방배삼익",
+      "pnu": "1165010100110180001",
+      "building": "needs_review",
+      "prices": "unavailable"
+    },
+    {
+      "id": 606,
+      "name": "우신빌라",
+      "pnu": "1153010900102130027",
+      "building": "ready",
+      "prices": "empty",
+      "buildingUnits": 762,
+      "buildingCheckedAt": "2026-09-28T09:12:38.737Z"
+    },
+    {
+      "id": 607,
+      "name": "미아4-1",
+      "pnu": null,
+      "building": "address_review",
+      "prices": "address_review"
+    },
+    {
+      "id": 633,
+      "name": "자양한양아파트",
+      "pnu": "1121510500106950000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 444,
+      "buildingCheckedAt": "2026-09-28T03:18:12.769Z",
+      "pricesUnits": 443,
+      "pricesCheckedAt": "2026-09-28T09:12:38.871Z"
+    },
+    {
+      "id": 634,
+      "name": "신안빌라",
+      "pnu": "1150010500103270053",
+      "building": "ready",
+      "prices": "empty",
+      "buildingUnits": 234,
+      "buildingCheckedAt": "2026-09-28T03:45:25.113Z"
+    },
+    {
+      "id": 635,
+      "name": "장안현대",
+      "pnu": "1123010600100950001",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 468,
+      "buildingCheckedAt": "2026-09-28T05:00:50.979Z",
+      "pricesUnits": 456,
+      "pricesCheckedAt": "2026-09-28T09:12:39.053Z"
+    },
+    {
+      "id": 636,
+      "name": "청담르엘",
+      "pnu": "1168010400101340018",
+      "building": "needs_review",
+      "prices": "needs_review"
+    },
+    {
+      "id": 637,
+      "name": "가락미륭",
+      "pnu": "1171010700101380000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 435,
+      "buildingCheckedAt": "2026-09-28T05:03:28.397Z",
+      "pricesUnits": 435,
+      "pricesCheckedAt": "2026-09-28T09:12:39.215Z"
+    },
+    {
+      "id": 638,
+      "name": "삼익맨션",
+      "pnu": "1174010100102700000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 768,
+      "buildingCheckedAt": "2026-09-28T03:46:07.782Z",
+      "pricesUnits": 768,
+      "pricesCheckedAt": "2026-09-28T09:12:39.488Z"
+    },
+    {
+      "id": 647,
+      "name": "대치미도아파트",
+      "pnu": "1168010600105110000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 1315,
+      "buildingCheckedAt": "2026-09-28T05:08:05.589Z",
+      "pricesUnits": 1315,
+      "pricesCheckedAt": "2026-09-28T09:12:39.842Z"
+    },
+    {
+      "id": 655,
+      "name": "방배15",
+      "pnu": null,
+      "building": "address_review",
+      "prices": "address_review"
+    },
+    {
+      "id": 667,
+      "name": "방학신동아1차",
+      "pnu": "1132010600102720000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 3169,
+      "buildingCheckedAt": "2026-09-28T09:12:40.306Z",
+      "pricesUnits": 3169,
+      "pricesCheckedAt": "2026-09-28T09:12:41.433Z"
+    },
+    {
+      "id": 668,
+      "name": "금강하이츠빌라",
+      "pnu": "1111018300100640003",
+      "building": "ready",
+      "prices": "empty",
+      "buildingUnits": 252,
+      "buildingCheckedAt": "2026-09-28T05:04:46.919Z"
+    },
+    {
+      "id": 674,
+      "name": "방화6",
+      "pnu": null,
+      "building": "address_review",
+      "prices": "address_review"
+    },
+    {
+      "id": 675,
+      "name": "도곡개포한신",
+      "pnu": "1168011800104640000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 620,
+      "buildingCheckedAt": "2026-09-28T05:06:21.176Z",
+      "pricesUnits": 620,
+      "pricesCheckedAt": "2026-09-28T09:12:42.119Z"
+    },
+    {
+      "id": 697,
+      "name": "방배13",
+      "pnu": null,
+      "building": "address_review",
+      "prices": "address_review"
+    },
+    {
+      "id": 698,
+      "name": "방배7",
+      "pnu": null,
+      "building": "address_review",
+      "prices": "address_review"
+    },
+    {
+      "id": 699,
+      "name": "북가좌6",
+      "pnu": null,
+      "building": "address_review",
+      "prices": "address_review"
+    },
+    {
+      "id": 701,
+      "name": "오류동 현대연립",
+      "pnu": null,
+      "building": "address_review",
+      "prices": "address_review"
+    },
+    {
+      "id": 702,
+      "name": "문래동진주아파트",
+      "pnu": "1156012300100220000",
+      "building": "needs_review",
+      "prices": "needs_review"
+    },
+    {
+      "id": 705,
+      "name": "도곡우성",
+      "pnu": "1168011800109340022",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 390,
+      "buildingCheckedAt": "2026-09-28T05:07:34.282Z",
+      "pricesUnits": 390,
+      "pricesCheckedAt": "2026-09-28T09:12:42.326Z"
+    },
+    {
+      "id": 706,
+      "name": "문래동남성아파트",
+      "pnu": "1156012000100350000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 390,
+      "buildingCheckedAt": "2026-09-28T05:08:23.341Z",
+      "pricesUnits": 390,
+      "pricesCheckedAt": "2026-09-28T09:12:42.505Z"
+    },
+    {
+      "id": 712,
+      "name": "방배삼호",
+      "pnu": "1165010100107590002",
+      "building": "needs_review",
+      "prices": "needs_review"
+    },
+    {
+      "id": 722,
+      "name": "삼환도봉아파트",
+      "pnu": "1132010800100870000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 660,
+      "buildingCheckedAt": "2026-09-28T03:20:29.592Z",
+      "pricesUnits": 660,
+      "pricesCheckedAt": "2026-09-28T09:12:42.720Z"
+    },
+    {
+      "id": 723,
+      "name": "쌍문한양1차아파트",
+      "pnu": "1132010500103880033",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 859,
+      "buildingCheckedAt": "2026-09-28T05:09:11.386Z",
+      "pricesUnits": 824,
+      "pricesCheckedAt": "2026-09-28T09:12:43.030Z"
+    },
+    {
+      "id": 746,
+      "name": "가락프라자",
+      "pnu": "1171010700101990000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 672,
+      "buildingCheckedAt": "2026-09-28T03:21:11.541Z",
+      "pricesUnits": 672,
+      "pricesCheckedAt": "2026-09-28T09:12:43.280Z"
+    },
+    {
+      "id": 747,
+      "name": "논현동현",
+      "pnu": "1168010800101050000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 548,
+      "buildingCheckedAt": "2026-09-28T05:10:53.384Z",
+      "pricesUnits": 548,
+      "pricesCheckedAt": "2026-09-28T09:12:43.484Z"
+    },
+    {
+      "id": 748,
+      "name": "중화동 우성타운",
+      "pnu": "1126010300101950002",
+      "building": "ready",
+      "prices": "empty",
+      "buildingUnits": 96,
+      "buildingCheckedAt": "2026-09-28T05:11:35.510Z"
+    },
+    {
+      "id": 749,
+      "name": "가락삼익맨숀",
+      "pnu": "1171010400101660000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 936,
+      "buildingCheckedAt": "2026-09-28T03:22:37.958Z",
+      "pricesUnits": 936,
+      "pricesCheckedAt": "2026-09-28T09:12:43.759Z"
+    },
+    {
+      "id": 751,
+      "name": "미아4",
+      "pnu": null,
+      "building": "address_review",
+      "prices": "address_review"
+    },
+    {
+      "id": 770,
+      "name": "래미안 원페를라",
+      "pnu": "1165010100108180014",
+      "building": "needs_review",
+      "prices": "needs_review"
+    },
+    {
+      "id": 771,
+      "name": "자양7",
+      "pnu": null,
+      "building": "address_review",
+      "prices": "address_review"
+    },
+    {
+      "id": 772,
+      "name": "불광1",
+      "pnu": null,
+      "building": "address_review",
+      "prices": "address_review"
+    },
+    {
+      "id": 782,
+      "name": "망우1(염광아파트)",
+      "pnu": "1126010500101780084",
+      "building": "needs_review",
+      "prices": "unavailable"
+    },
+    {
+      "id": 788,
+      "name": "성산시영아파트",
+      "pnu": "1144012500104500000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 3710,
+      "buildingCheckedAt": "2026-09-28T03:25:02.990Z",
+      "pricesUnits": 3710,
+      "pricesCheckedAt": "2026-09-28T09:12:44.664Z"
+    },
+    {
+      "id": 792,
+      "name": "개포주공6,7단지",
+      "pnu": "1168010300101850000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 1960,
+      "buildingCheckedAt": "2026-09-28T05:14:09.025Z",
+      "pricesUnits": 1960,
+      "pricesCheckedAt": "2026-09-28T09:12:45.811Z"
+    },
+    {
+      "id": 796,
+      "name": "일원가람",
+      "pnu": "1168011400107350000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 496,
+      "buildingCheckedAt": "2026-09-28T05:14:04.963Z",
+      "pricesUnits": 496,
+      "pricesCheckedAt": "2026-09-28T09:12:46.242Z"
+    },
+    {
+      "id": 806,
+      "name": "여의도삼익아파트",
+      "pnu": "1156011000100510000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 360,
+      "buildingCheckedAt": "2026-09-28T05:14:42.122Z",
+      "pricesUnits": 360,
+      "pricesCheckedAt": "2026-09-28T09:12:46.389Z"
+    },
+    {
+      "id": 807,
+      "name": "여의도은하아파트",
+      "pnu": "1156011000100520000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 360,
+      "buildingCheckedAt": "2026-09-28T05:15:27.316Z",
+      "pricesUnits": 360,
+      "pricesCheckedAt": "2026-09-28T09:12:46.546Z"
+    },
+    {
+      "id": 814,
+      "name": "여의도삼부아파트",
+      "pnu": "1156011000100300002",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 871,
+      "buildingCheckedAt": "2026-09-28T09:12:46.697Z",
+      "pricesUnits": 866,
+      "pricesCheckedAt": "2026-09-28T09:12:47.075Z"
+    },
+    {
+      "id": 824,
+      "name": "삼익파크",
+      "pnu": "1174010500100530000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 1092,
+      "buildingCheckedAt": "2026-09-28T09:12:47.395Z",
+      "pricesUnits": 1092,
+      "pricesCheckedAt": "2026-09-28T09:12:47.777Z"
+    },
+    {
+      "id": 825,
+      "name": "유원제일1차아파트",
+      "pnu": "1156011400100910000",
+      "building": "needs_review",
+      "prices": "needs_review"
+    },
+    {
+      "id": 836,
+      "name": "반포 래미안 트리니원",
+      "pnu": null,
+      "building": "address_review",
+      "prices": "address_review"
+    },
+    {
+      "id": 837,
+      "name": "신반포27차",
+      "pnu": "1165010600100560002",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 156,
+      "buildingCheckedAt": "2026-09-28T05:15:59.079Z",
+      "pricesUnits": 156,
+      "pricesCheckedAt": "2026-09-28T09:12:48.008Z"
+    },
+    {
+      "id": 838,
+      "name": "오티에르 반포",
+      "pnu": "1165010600100590010",
+      "building": "needs_review",
+      "prices": "needs_review"
+    },
+    {
+      "id": 845,
+      "name": "강변강서아파트",
+      "pnu": "1117012900101930005",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 35,
+      "buildingCheckedAt": "2026-09-28T03:24:35.776Z",
+      "pricesUnits": 33,
+      "pricesCheckedAt": "2026-09-28T09:12:48.044Z"
+    },
+    {
+      "id": 846,
+      "name": "상계주공5단지",
+      "pnu": "1135010500107210000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 840,
+      "buildingCheckedAt": "2026-09-28T05:16:13.753Z",
+      "pricesUnits": 840,
+      "pricesCheckedAt": "2026-09-28T09:12:48.184Z"
+    },
+    {
+      "id": 851,
+      "name": "신정4",
+      "pnu": null,
+      "building": "address_review",
+      "prices": "address_review"
+    },
+    {
+      "id": 875,
+      "name": "여의도진주아파트",
+      "pnu": "1156011000100540000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 376,
+      "buildingCheckedAt": "2026-09-28T09:12:48.402Z",
+      "pricesUnits": 376,
+      "pricesCheckedAt": "2026-09-28T09:12:48.562Z"
+    },
+    {
+      "id": 879,
+      "name": "여의도수정아파트",
+      "pnu": "1156011000100320000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 329,
+      "buildingCheckedAt": "2026-09-28T05:16:24.936Z",
+      "pricesUnits": 329,
+      "pricesCheckedAt": "2026-09-28T09:12:48.696Z"
+    },
+    {
+      "id": 880,
+      "name": "방배임광3차",
+      "pnu": "1165010100110110001",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 316,
+      "buildingCheckedAt": "2026-09-28T09:12:48.802Z",
+      "pricesUnits": 316,
+      "pricesCheckedAt": "2026-09-28T09:12:48.933Z"
+    },
+    {
+      "id": 881,
+      "name": "창동상아1차아파트",
+      "pnu": "1132010700102990000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 694,
+      "buildingCheckedAt": "2026-09-28T08:50:12.291Z",
+      "pricesUnits": 694,
+      "pricesCheckedAt": "2026-09-28T09:12:49.138Z"
+    },
+    {
+      "id": 890,
+      "name": "당산현대3차",
+      "pnu": "1156011400100880000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 510,
+      "buildingCheckedAt": "2026-09-28T08:50:12.499Z",
+      "pricesUnits": 508,
+      "pricesCheckedAt": "2026-09-28T09:12:49.337Z"
+    },
+    {
+      "id": 891,
+      "name": "대림우성",
+      "pnu": "1156013300107620001",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 435,
+      "buildingCheckedAt": "2026-09-28T08:50:12.649Z",
+      "pricesUnits": 435,
+      "pricesCheckedAt": "2026-09-28T09:12:49.582Z"
+    },
+    {
+      "id": 892,
+      "name": "문래두산위브",
+      "pnu": "1156012300100140000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 383,
+      "buildingCheckedAt": "2026-09-28T03:25:19.870Z",
+      "pricesUnits": 383,
+      "pricesCheckedAt": "2026-09-28T09:12:49.746Z"
+    },
+    {
+      "id": 893,
+      "name": "마장세림아파트",
+      "pnu": "1120010500107840000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 811,
+      "buildingCheckedAt": "2026-09-28T03:26:23.854Z",
+      "pricesUnits": 811,
+      "pricesCheckedAt": "2026-09-28T09:12:50.022Z"
+    },
+    {
+      "id": 894,
+      "name": "잠원한강",
+      "pnu": "1165010600100490008",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 450,
+      "buildingCheckedAt": "2026-09-28T03:27:57.678Z",
+      "pricesUnits": 450,
+      "pricesCheckedAt": "2026-09-28T09:12:50.250Z"
+    },
+    {
+      "id": 896,
+      "name": "도화우성",
+      "pnu": "1144010400100830000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 1240,
+      "buildingCheckedAt": "2026-09-28T08:50:13.156Z",
+      "pricesUnits": 1222,
+      "pricesCheckedAt": "2026-09-28T09:12:50.528Z"
+    },
+    {
+      "id": 897,
+      "name": "고척동 산업인아파트",
+      "pnu": "1153010600100570009",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 342,
+      "buildingCheckedAt": "2026-09-28T08:50:13.480Z",
+      "pricesUnits": 330,
+      "pricesCheckedAt": "2026-09-28T09:12:50.788Z"
+    },
+    {
+      "id": 898,
+      "name": "상일동빌라",
+      "pnu": null,
+      "building": "address_review",
+      "prices": "address_review"
+    },
+    {
+      "id": 899,
+      "name": "성내현대",
+      "pnu": "1174010800100300002",
+      "building": "needs_review",
+      "prices": "needs_review"
+    },
+    {
+      "id": 901,
+      "name": "일원청솔",
+      "pnu": "1168011400107390000",
+      "building": "ready",
+      "prices": "empty",
+      "buildingUnits": 291,
+      "buildingCheckedAt": "2026-09-28T08:50:13.721Z"
+    },
+    {
+      "id": 902,
+      "name": "일원한솔",
+      "pnu": "1168011400107310000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 570,
+      "buildingCheckedAt": "2026-09-28T08:50:13.899Z",
+      "pricesUnits": 570,
+      "pricesCheckedAt": "2026-09-28T09:12:50.967Z"
+    },
+    {
+      "id": 903,
+      "name": "명일우성",
+      "pnu": "1174010100100420000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 572,
+      "buildingCheckedAt": "2026-09-28T08:50:14.277Z",
+      "pricesUnits": 572,
+      "pricesCheckedAt": "2026-09-28T09:12:51.188Z"
+    },
+    {
+      "id": 904,
+      "name": "개포우성1,2차",
+      "pnu": "1168010600105030000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 1139,
+      "buildingCheckedAt": "2026-09-28T08:50:14.767Z",
+      "pricesUnits": 1139,
+      "pricesCheckedAt": "2026-09-28T09:12:51.527Z"
+    },
+    {
+      "id": 905,
+      "name": "상록수아파트",
+      "pnu": "1168011400107340000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 740,
+      "buildingCheckedAt": "2026-09-28T08:50:15.324Z",
+      "pricesUnits": 740,
+      "pricesCheckedAt": "2026-09-28T09:12:51.856Z"
+    },
+    {
+      "id": 906,
+      "name": "대치선경",
+      "pnu": "1168010600105060000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 1034,
+      "buildingCheckedAt": "2026-09-28T08:50:15.696Z",
+      "pricesUnits": 1034,
+      "pricesCheckedAt": "2026-09-28T09:12:52.246Z"
+    },
+    {
+      "id": 908,
+      "name": "신길우성3차",
+      "pnu": "1156013200146560000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 477,
+      "buildingCheckedAt": "2026-09-28T08:50:16.331Z",
+      "pricesUnits": 477,
+      "pricesCheckedAt": "2026-09-28T09:12:52.499Z"
+    },
+    {
+      "id": 918,
+      "name": "방배신동아",
+      "pnu": "1165010100109880001",
+      "building": "needs_review",
+      "prices": "unavailable"
+    },
+    {
+      "id": 919,
+      "name": "대치우성1차(통합재건축)",
+      "pnu": "1168010600100630000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 476,
+      "buildingCheckedAt": "2026-09-28T08:50:16.491Z",
+      "pricesUnits": 476,
+      "pricesCheckedAt": "2026-09-28T09:12:52.654Z"
+    },
+    {
+      "id": 949,
+      "name": "월계동신아파트",
+      "pnu": "1135010200201900000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 864,
+      "buildingCheckedAt": "2026-09-28T03:29:20.764Z",
+      "pricesUnits": 864,
+      "pricesCheckedAt": "2026-09-28T09:12:52.892Z"
+    },
+    {
+      "id": 950,
+      "name": "수정아파트",
+      "pnu": "1147010100107330031",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 220,
+      "buildingCheckedAt": "2026-09-28T03:29:01.545Z",
+      "pricesUnits": 220,
+      "pricesCheckedAt": "2026-09-28T09:12:53.136Z"
+    },
+    {
+      "id": 951,
+      "name": "가락극동",
+      "pnu": "1171010700101920000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 605,
+      "buildingCheckedAt": "2026-09-28T03:30:17.753Z",
+      "pricesUnits": 555,
+      "pricesCheckedAt": "2026-09-28T09:12:53.296Z"
+    },
+    {
+      "id": 952,
+      "name": "가락1차현대",
+      "pnu": "1171010800100030000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 549,
+      "buildingCheckedAt": "2026-09-28T08:50:16.989Z",
+      "pricesUnits": 514,
+      "pricesCheckedAt": "2026-09-28T09:12:53.486Z"
+    },
+    {
+      "id": 982,
+      "name": "상계한신3차",
+      "pnu": "1135010500104580000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 348,
+      "buildingCheckedAt": "2026-09-28T08:50:17.129Z",
+      "pricesUnits": 348,
+      "pricesCheckedAt": "2026-09-28T09:12:53.623Z"
+    },
+    {
+      "id": 983,
+      "name": "태릉우성",
+      "pnu": "1135010300107380000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 432,
+      "buildingCheckedAt": "2026-09-28T08:50:17.245Z",
+      "pricesUnits": 432,
+      "pricesCheckedAt": "2026-09-28T09:12:53.739Z"
+    },
+    {
+      "id": 984,
+      "name": "월계삼호4차",
+      "pnu": "1135010200100120000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 910,
+      "buildingCheckedAt": "2026-09-28T08:50:17.415Z",
+      "pricesUnits": 910,
+      "pricesCheckedAt": "2026-09-28T09:12:54.025Z"
+    },
+    {
+      "id": 985,
+      "name": "월계시영(미륭,미성,삼호3)",
+      "pnu": "1135010200100130000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 3930,
+      "buildingCheckedAt": "2026-09-28T08:50:17.985Z",
+      "pricesUnits": 3930,
+      "pricesCheckedAt": "2026-09-28T09:12:55.003Z"
+    },
+    {
+      "id": 993,
+      "name": "대치우성1·쌍용2",
+      "pnu": "1168010600100650000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 840,
+      "buildingCheckedAt": "2026-09-28T08:50:19.231Z",
+      "pricesUnits": 840,
+      "pricesCheckedAt": "2026-09-28T09:12:55.962Z"
+    },
+    {
+      "id": 995,
+      "name": "가락상아1차",
+      "pnu": "1171011200101660000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 226,
+      "buildingCheckedAt": "2026-09-28T08:50:19.578Z",
+      "pricesUnits": 226,
+      "pricesCheckedAt": "2026-09-28T09:12:56.143Z"
+    },
+    {
+      "id": 996,
+      "name": "여의도광장아파트 28번지",
+      "pnu": "1156011000100280000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 576,
+      "buildingCheckedAt": "2026-09-28T08:50:19.669Z",
+      "pricesUnits": 576,
+      "pricesCheckedAt": "2026-09-28T09:12:56.267Z"
+    },
+    {
+      "id": 1027,
+      "name": "신길10",
+      "pnu": null,
+      "building": "address_review",
+      "prices": "address_review"
+    },
+    {
+      "id": 1040,
+      "name": "신길우성4차",
+      "pnu": "1156013200101700007",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 476,
+      "buildingCheckedAt": "2026-09-28T08:50:19.839Z",
+      "pricesUnits": 476,
+      "pricesCheckedAt": "2026-09-28T09:12:56.435Z"
+    },
+    {
+      "id": 1041,
+      "name": "염창우성1,2삼천리",
+      "pnu": "1150010100100660009",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 602,
+      "buildingCheckedAt": "2026-09-28T09:12:56.563Z",
+      "pricesUnits": 590,
+      "pricesCheckedAt": "2026-09-28T09:12:56.746Z"
+    },
+    {
+      "id": 1042,
+      "name": "구기현대궁전빌라",
+      "pnu": null,
+      "building": "address_review",
+      "prices": "address_review"
+    },
+    {
+      "id": 1051,
+      "name": "시흥동현대아파트",
+      "pnu": "1154510300102200002",
+      "building": "needs_review",
+      "prices": "needs_review"
+    },
+    {
+      "id": 1052,
+      "name": "청량리 미주아파트",
+      "pnu": "1123010700102350011",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 1089,
+      "buildingCheckedAt": "2026-09-28T09:12:57.039Z",
+      "pricesUnits": 1089,
+      "pricesCheckedAt": "2026-09-28T09:12:57.466Z"
+    },
+    {
+      "id": 1053,
+      "name": "개봉3",
+      "pnu": null,
+      "building": "address_review",
+      "prices": "address_review"
+    },
+    {
+      "id": 1054,
+      "name": "성수1",
+      "pnu": null,
+      "building": "address_review",
+      "prices": "address_review"
+    },
+    {
+      "id": 1056,
+      "name": "신반포16차",
+      "pnu": "1165010600100550012",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 396,
+      "buildingCheckedAt": "2026-09-28T08:50:20.028Z",
+      "pricesUnits": 396,
+      "pricesCheckedAt": "2026-09-28T09:12:57.766Z"
+    },
+    {
+      "id": 1057,
+      "name": "신반포12차",
+      "pnu": "1165010600100500005",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 324,
+      "buildingCheckedAt": "2026-09-28T08:50:20.166Z",
+      "pricesUnits": 323,
+      "pricesCheckedAt": "2026-09-28T09:12:57.899Z"
+    },
+    {
+      "id": 1058,
+      "name": "여의도미성아파트",
+      "pnu": "1156011000100370002",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 577,
+      "buildingCheckedAt": "2026-09-28T09:12:58.004Z",
+      "pricesUnits": 577,
+      "pricesCheckedAt": "2026-09-28T09:12:58.262Z"
+    },
+    {
+      "id": 1059,
+      "name": "방배신삼호",
+      "pnu": "1165010100107250000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 481,
+      "buildingCheckedAt": "2026-09-28T08:50:20.338Z",
+      "pricesUnits": 481,
+      "pricesCheckedAt": "2026-09-28T09:12:58.519Z"
+    },
+    {
+      "id": 1060,
+      "name": "여의도광장아파트 38-1번지",
+      "pnu": "1156011000100380001",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 168,
+      "buildingCheckedAt": "2026-09-28T08:50:20.459Z",
+      "pricesUnits": 168,
+      "pricesCheckedAt": "2026-09-28T09:12:58.627Z"
+    },
+    {
+      "id": 1064,
+      "name": "시흥무지개아파트",
+      "pnu": "1154510300101090001",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 640,
+      "buildingCheckedAt": "2026-09-28T03:32:27.832Z",
+      "pricesUnits": 639,
+      "pricesCheckedAt": "2026-09-28T09:12:58.780Z"
+    },
+    {
+      "id": 1065,
+      "name": "강남원효성빌라",
+      "pnu": "1165010700105900025",
+      "building": "needs_review",
+      "prices": "needs_review"
+    },
+    {
+      "id": 1066,
+      "name": "여의도 삼익",
+      "pnu": "1156011000100510000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 360,
+      "buildingCheckedAt": "2026-09-28T08:50:20.677Z",
+      "pricesUnits": 360,
+      "pricesCheckedAt": "2026-09-28T09:12:58.966Z"
+    },
+    {
+      "id": 1081,
+      "name": "장미아파트",
+      "pnu": "1120011400106560421",
+      "building": "needs_review",
+      "prices": "unavailable"
+    },
+    {
+      "id": 1082,
+      "name": "신길동우성2차·우창아파트",
+      "pnu": "1156013200145180000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 939,
+      "buildingCheckedAt": "2026-09-28T08:50:20.895Z",
+      "pricesUnits": 938,
+      "pricesCheckedAt": "2026-09-28T09:12:59.202Z"
+    },
+    {
+      "id": 1083,
+      "name": "문래동국화아파트",
+      "pnu": "1156012100100760001",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 270,
+      "buildingCheckedAt": "2026-09-28T03:32:59.315Z",
+      "pricesUnits": 270,
+      "pricesCheckedAt": "2026-09-28T09:12:59.513Z"
+    },
+    {
+      "id": 1097,
+      "name": "왕궁아파트",
+      "pnu": "1117012900103000011",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 250,
+      "buildingCheckedAt": "2026-09-28T03:33:34.121Z",
+      "pricesUnits": 250,
+      "pricesCheckedAt": "2026-09-28T09:12:59.610Z"
+    },
+    {
+      "id": 1107,
+      "name": "뉴서울개나리열망연립",
+      "pnu": "1162010200107390000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 120,
+      "buildingCheckedAt": "2026-09-28T03:34:05.348Z",
+      "pricesUnits": 120,
+      "pricesCheckedAt": "2026-09-28T09:12:59.665Z"
+    },
+    {
+      "id": 1108,
+      "name": "가락우성1차",
+      "pnu": "1171010700100960001",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 839,
+      "buildingCheckedAt": "2026-09-28T08:50:21.368Z",
+      "pricesUnits": 839,
+      "pricesCheckedAt": "2026-09-28T09:12:59.854Z"
+    },
+    {
+      "id": 1111,
+      "name": "신림미성아파트",
+      "pnu": "1162010200116560000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 280,
+      "buildingCheckedAt": "2026-09-28T08:50:21.581Z",
+      "pricesUnits": 280,
+      "pricesCheckedAt": "2026-09-28T09:13:00.071Z"
+    },
+    {
+      "id": 1112,
+      "name": "한효아파트",
+      "pnu": "1153010600100520332",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 290,
+      "buildingCheckedAt": "2026-09-28T03:34:51.510Z",
+      "pricesUnits": 290,
+      "pricesCheckedAt": "2026-09-28T09:13:00.167Z"
+    },
+    {
+      "id": 1113,
+      "name": "잠실우성4차",
+      "pnu": "1171010100103200000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 606,
+      "buildingCheckedAt": "2026-09-28T08:50:21.756Z",
+      "pricesUnits": 555,
+      "pricesCheckedAt": "2026-09-28T09:13:00.320Z"
+    },
+    {
+      "id": 1127,
+      "name": "반포주공1단지(1,2,4주구)",
+      "pnu": null,
+      "building": "address_review",
+      "prices": "address_review"
+    },
+    {
+      "id": 1136,
+      "name": "일원개포한신",
+      "pnu": "1168011400106150001",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 364,
+      "buildingCheckedAt": "2026-09-28T08:50:21.942Z",
+      "pricesUnits": 364,
+      "pricesCheckedAt": "2026-09-28T09:13:00.531Z"
+    },
+    {
+      "id": 1171,
+      "name": "대림가락",
+      "pnu": "1171011100102170000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 480,
+      "buildingCheckedAt": "2026-09-28T03:36:08.924Z",
+      "pricesUnits": 480,
+      "pricesCheckedAt": "2026-09-28T09:13:00.666Z"
+    },
+    {
+      "id": 1172,
+      "name": "송파미성",
+      "pnu": "1171010400101610000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 378,
+      "buildingCheckedAt": "2026-09-28T03:36:09.512Z",
+      "pricesUnits": 378,
+      "pricesCheckedAt": "2026-09-28T09:13:00.795Z"
+    },
+    {
+      "id": 1179,
+      "name": "상계보람",
+      "pnu": "1135010500106850000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 3315,
+      "buildingCheckedAt": "2026-09-28T03:40:11.713Z",
+      "pricesUnits": 3315,
+      "pricesCheckedAt": "2026-09-28T09:13:01.537Z"
+    },
+    {
+      "id": 1180,
+      "name": "반포미도1차",
+      "pnu": "1165010700100600004",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 1260,
+      "buildingCheckedAt": "2026-09-28T03:39:23.399Z",
+      "pricesUnits": 1260,
+      "pricesCheckedAt": "2026-09-28T09:13:02.564Z"
+    },
+    {
+      "id": 1190,
+      "name": "e편한세상 강동 프레스티지원",
+      "pnu": "1174010900104230076",
+      "building": "needs_review",
+      "prices": "needs_review"
+    },
+    {
+      "id": 1206,
+      "name": "구로우성아파트",
+      "pnu": "1153010200100230000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 344,
+      "buildingCheckedAt": "2026-09-28T03:40:35.924Z",
+      "pricesUnits": 344,
+      "pricesCheckedAt": "2026-09-28T09:13:02.898Z"
+    },
+    {
+      "id": 1207,
+      "name": "신반포4차",
+      "pnu": "1165010600100700000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 1212,
+      "buildingCheckedAt": "2026-09-28T08:50:23.504Z",
+      "pricesUnits": 1209,
+      "pricesCheckedAt": "2026-09-28T09:13:03.208Z"
+    },
+    {
+      "id": 1208,
+      "name": "신반포22차",
+      "pnu": "1165010600100650033",
+      "building": "needs_review",
+      "prices": "unavailable"
+    },
+    {
+      "id": 1209,
+      "name": "신반포7차",
+      "pnu": "1165010600100650032",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 320,
+      "buildingCheckedAt": "2026-09-28T08:50:23.803Z",
+      "pricesUnits": 320,
+      "pricesCheckedAt": "2026-09-28T09:13:03.585Z"
+    },
+    {
+      "id": 1224,
+      "name": "제기1(경동미주아파트)",
+      "pnu": "1123010300108920068",
+      "building": "needs_review",
+      "prices": "unavailable"
+    },
+    {
+      "id": 1225,
+      "name": "산호아파트",
+      "pnu": "1117011800101180016",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 554,
+      "buildingCheckedAt": "2026-09-28T09:13:03.714Z",
+      "pricesUnits": 554,
+      "pricesCheckedAt": "2026-09-28T09:13:03.854Z"
+    },
+    {
+      "id": 1231,
+      "name": "풍납미성",
+      "pnu": "1171010300102190000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 327,
+      "buildingCheckedAt": "2026-09-28T08:50:23.989Z",
+      "pricesUnits": 275,
+      "pricesCheckedAt": "2026-09-28T09:13:03.991Z"
+    },
+    {
+      "id": 1233,
+      "name": "가락우창",
+      "pnu": "1171011200101640000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 264,
+      "buildingCheckedAt": "2026-09-28T03:41:13.270Z",
+      "pricesUnits": 264,
+      "pricesCheckedAt": "2026-09-28T09:13:04.071Z"
+    },
+    {
+      "id": 1234,
+      "name": "송파한양1차",
+      "pnu": "1171010400101190000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 576,
+      "buildingCheckedAt": "2026-09-28T03:42:15.012Z",
+      "pricesUnits": 576,
+      "pricesCheckedAt": "2026-09-28T09:13:04.192Z"
+    },
+    {
+      "id": 1243,
+      "name": "방화3",
+      "pnu": null,
+      "building": "address_review",
+      "prices": "address_review"
+    },
+    {
+      "id": 1244,
+      "name": "이촌1",
+      "pnu": null,
+      "building": "address_review",
+      "prices": "address_review"
+    },
+    {
+      "id": 1269,
+      "name": "한강삼익아파트",
+      "pnu": "1117012900103000301",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 252,
+      "buildingCheckedAt": "2026-09-28T03:43:04.146Z",
+      "pricesUnits": 252,
+      "pricesCheckedAt": "2026-09-28T09:13:04.323Z"
+    },
+    {
+      "id": 1292,
+      "name": "등촌1",
+      "pnu": null,
+      "building": "address_review",
+      "prices": "address_review"
+    },
+    {
+      "id": 1307,
+      "name": "대흥,성원,동진빌라",
+      "pnu": null,
+      "building": "address_review",
+      "prices": "address_review"
+    },
+    {
+      "id": 1320,
+      "name": "삼익그린2차",
+      "pnu": "1174010100100150000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 2400,
+      "buildingCheckedAt": "2026-09-28T09:13:04.501Z",
+      "pricesUnits": 2400,
+      "pricesCheckedAt": "2026-09-28T09:13:05.632Z"
+    },
+    {
+      "id": 1321,
+      "name": "길훈아파트",
+      "pnu": "1153010800101500042",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 198,
+      "buildingCheckedAt": "2026-09-28T03:43:08.932Z",
+      "pricesUnits": 198,
+      "pricesCheckedAt": "2026-09-28T09:13:06.256Z"
+    },
+    {
+      "id": 1322,
+      "name": "오금현대",
+      "pnu": "1171011200100430000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 1316,
+      "buildingCheckedAt": "2026-09-28T08:50:24.382Z",
+      "pricesUnits": 1316,
+      "pricesCheckedAt": "2026-09-28T09:13:06.505Z"
+    },
+    {
+      "id": 1323,
+      "name": "서초신동아",
+      "pnu": null,
+      "building": "address_review",
+      "prices": "address_review"
+    },
+    {
+      "id": 1324,
+      "name": "잠실래미안아이파크",
+      "pnu": "1171010200100200004",
+      "building": "needs_review",
+      "prices": "needs_review"
+    },
+    {
+      "id": 1326,
+      "name": "신반포궁전",
+      "pnu": "1165010700100650001",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 108,
+      "buildingCheckedAt": "2026-09-28T03:43:30.717Z",
+      "pricesUnits": 108,
+      "pricesCheckedAt": "2026-09-28T09:13:06.752Z"
+    },
+    {
+      "id": 1332,
+      "name": "개포우성6차",
+      "pnu": "1168010300106580001",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 270,
+      "buildingCheckedAt": "2026-09-28T08:50:24.773Z",
+      "pricesUnits": 270,
+      "pricesCheckedAt": "2026-09-28T09:13:06.803Z"
+    },
+    {
+      "id": 1339,
+      "name": "청화아파트",
+      "pnu": "1117013000100220002",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 578,
+      "buildingCheckedAt": "2026-09-28T08:50:24.878Z",
+      "pricesUnits": 578,
+      "pricesCheckedAt": "2026-09-28T09:13:06.934Z"
+    },
+    {
+      "id": 1346,
+      "name": "한양2차",
+      "pnu": "1171010400101510000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 744,
+      "buildingCheckedAt": "2026-09-28T08:50:25.192Z",
+      "pricesUnits": 744,
+      "pricesCheckedAt": "2026-09-28T09:13:07.240Z"
+    },
+    {
+      "id": 1382,
+      "name": "중곡아파트",
+      "pnu": "1121510100101900026",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 123,
+      "buildingCheckedAt": "2026-09-28T08:50:25.570Z",
+      "pricesUnits": 120,
+      "pricesCheckedAt": "2026-09-28T09:13:07.373Z"
+    },
+    {
+      "id": 1414,
+      "name": "명일 신동아",
+      "pnu": "1174010100100440000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 570,
+      "buildingCheckedAt": "2026-09-28T08:50:25.749Z",
+      "pricesUnits": 570,
+      "pricesCheckedAt": "2026-09-28T09:13:07.486Z"
+    },
+    {
+      "id": 1423,
+      "name": "상계주공6단지",
+      "pnu": "1135010500107200000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 2646,
+      "buildingCheckedAt": "2026-09-28T09:13:07.952Z",
+      "pricesUnits": 2646,
+      "pricesCheckedAt": "2026-09-28T09:13:08.684Z"
+    },
+    {
+      "id": 1460,
+      "name": "명일한양",
+      "pnu": "1174010100100540000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 540,
+      "buildingCheckedAt": "2026-09-28T08:50:26.071Z",
+      "pricesUnits": 540,
+      "pricesCheckedAt": "2026-09-28T09:13:09.277Z"
+    },
+    {
+      "id": 1466,
+      "name": "봉천1-1",
+      "pnu": null,
+      "building": "address_review",
+      "prices": "address_review"
+    },
+    {
+      "id": 1467,
+      "name": "사당5",
+      "pnu": null,
+      "building": "address_review",
+      "prices": "address_review"
+    },
+    {
+      "id": 1468,
+      "name": "방배14",
+      "pnu": null,
+      "building": "address_review",
+      "prices": "address_review"
+    },
+    {
+      "id": 1513,
+      "name": "중산시범아파트",
+      "pnu": "1117012900102090023",
+      "building": "needs_review",
+      "prices": "unavailable"
+    },
+    {
+      "id": 1527,
+      "name": "고덕주공9",
+      "pnu": "1174010100102570000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 1320,
+      "buildingCheckedAt": "2026-09-28T08:50:26.510Z",
+      "pricesUnits": 1320,
+      "pricesCheckedAt": "2026-09-28T09:13:09.748Z"
+    },
+    {
+      "id": 1528,
+      "name": "개포현대2차",
+      "pnu": "1168010300106540000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 558,
+      "buildingCheckedAt": "2026-09-28T08:50:27.078Z",
+      "pricesUnits": 557,
+      "pricesCheckedAt": "2026-09-28T09:13:10.075Z"
+    },
+    {
+      "id": 1548,
+      "name": "한남하이츠",
+      "pnu": "1120011300102200001",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 535,
+      "buildingCheckedAt": "2026-09-28T08:50:27.372Z",
+      "pricesUnits": 535,
+      "pricesCheckedAt": "2026-09-28T09:13:10.244Z"
+    },
+    {
+      "id": 1549,
+      "name": "천호우성아파트",
+      "pnu": "1174010900100190001",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 479,
+      "buildingCheckedAt": "2026-09-28T08:50:27.533Z",
+      "pricesUnits": 479,
+      "pricesCheckedAt": "2026-09-28T09:13:10.404Z"
+    },
+    {
+      "id": 1554,
+      "name": "고덕 현대",
+      "pnu": "1174010100100560000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 524,
+      "buildingCheckedAt": "2026-09-28T08:50:27.675Z",
+      "pricesUnits": 524,
+      "pricesCheckedAt": "2026-09-28T09:13:10.574Z"
+    },
+    {
+      "id": 1556,
+      "name": "서초진흥아파트",
+      "pnu": "1165010800113150000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 615,
+      "buildingCheckedAt": "2026-09-28T08:50:27.873Z",
+      "pricesUnits": 613,
+      "pricesCheckedAt": "2026-09-28T09:13:10.782Z"
+    },
+    {
+      "id": 1573,
+      "name": "불광미성",
+      "pnu": "1138010300102480000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 1444,
+      "buildingCheckedAt": "2026-09-28T08:50:28.159Z",
+      "pricesUnits": 1340,
+      "pricesCheckedAt": "2026-09-28T09:13:11.141Z"
+    },
+    {
+      "id": 1582,
+      "name": "홍제3",
+      "pnu": null,
+      "building": "address_review",
+      "prices": "address_review"
+    },
+    {
+      "id": 1590,
+      "name": "번동주공1단지",
+      "pnu": "1130510200102420000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 1430,
+      "buildingCheckedAt": "2026-09-28T08:50:28.615Z",
+      "pricesUnits": 1429,
+      "pricesCheckedAt": "2026-09-28T09:13:11.660Z"
+    },
+    {
+      "id": 1593,
+      "name": "구로주공",
+      "pnu": "1153010200106850222",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 1400,
+      "buildingCheckedAt": "2026-09-28T08:50:29.075Z",
+      "pricesUnits": 1400,
+      "pricesCheckedAt": "2026-09-28T09:13:12.139Z"
+    },
+    {
+      "id": 1594,
+      "name": "하계장미",
+      "pnu": "1135010400102730000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 1880,
+      "buildingCheckedAt": "2026-09-28T08:50:29.592Z",
+      "pricesUnits": 1880,
+      "pricesCheckedAt": "2026-09-28T09:13:12.787Z"
+    },
+    {
+      "id": 1596,
+      "name": "오티에르 신반포",
+      "pnu": "1165010600100490017",
+      "building": "needs_review",
+      "prices": "needs_review"
+    },
+    {
+      "id": 1607,
+      "name": "개포우성4차",
+      "pnu": "1168011800104650000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 416,
+      "buildingCheckedAt": "2026-09-28T08:50:30.070Z",
+      "pricesUnits": 416,
+      "pricesCheckedAt": "2026-09-28T09:13:13.196Z"
+    },
+    {
+      "id": 1608,
+      "name": "개포우성7차",
+      "pnu": "1168011400106150000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 802,
+      "buildingCheckedAt": "2026-09-28T08:50:30.249Z",
+      "pricesUnits": 802,
+      "pricesCheckedAt": "2026-09-28T09:13:13.462Z"
+    },
+    {
+      "id": 1630,
+      "name": "풍납극동",
+      "pnu": "1171010300103910000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 415,
+      "buildingCheckedAt": "2026-09-28T09:13:13.627Z",
+      "pricesUnits": 413,
+      "pricesCheckedAt": "2026-09-28T09:13:13.784Z"
+    },
+    {
+      "id": 1646,
+      "name": "양평동신동아아파트",
+      "pnu": "1156012500100200000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 495,
+      "buildingCheckedAt": "2026-09-28T08:50:30.463Z",
+      "pricesUnits": 495,
+      "pricesCheckedAt": "2026-09-28T09:13:13.927Z"
+    },
+    {
+      "id": 1648,
+      "name": "서울가든빌라",
+      "pnu": "1153010800100970004",
+      "building": "ready",
+      "prices": "empty",
+      "buildingUnits": 339,
+      "buildingCheckedAt": "2026-09-28T09:13:14.051Z"
+    },
+    {
+      "id": 1659,
+      "name": "신반포20차",
+      "pnu": "1165010600100600078",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 112,
+      "buildingCheckedAt": "2026-09-28T08:50:30.611Z",
+      "pricesUnits": 112,
+      "pricesCheckedAt": "2026-09-28T09:13:14.110Z"
+    },
+    {
+      "id": 1660,
+      "name": "개포주공5단지",
+      "pnu": "1168010300101870000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 940,
+      "buildingCheckedAt": "2026-09-28T08:50:30.728Z",
+      "pricesUnits": 940,
+      "pricesCheckedAt": "2026-09-28T09:13:14.346Z"
+    },
+    {
+      "id": 1664,
+      "name": "홍은5",
+      "pnu": null,
+      "building": "address_review",
+      "prices": "address_review"
+    },
+    {
+      "id": 1668,
+      "name": "후암1",
+      "pnu": null,
+      "building": "address_review",
+      "prices": "address_review"
+    },
+    {
+      "id": 1669,
+      "name": "월계동(재해관리구역)",
+      "pnu": null,
+      "building": "address_review",
+      "prices": "address_review"
+    },
+    {
+      "id": 1672,
+      "name": "잠실르엘",
+      "pnu": "1171010200100170006",
+      "building": "needs_review",
+      "prices": "needs_review"
+    },
+    {
+      "id": 1673,
+      "name": "한양3차",
+      "pnu": "1171011100102250000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 252,
+      "buildingCheckedAt": "2026-09-28T08:50:31.014Z",
+      "pricesUnits": 252,
+      "pricesCheckedAt": "2026-09-28T09:13:14.560Z"
+    },
+    {
+      "id": 1674,
+      "name": "역삼동(758,은하수,760)",
+      "pnu": null,
+      "building": "address_review",
+      "prices": "address_review"
+    },
+    {
+      "id": 1675,
+      "name": "도곡삼호",
+      "pnu": "1168011800105410000",
+      "building": "needs_review",
+      "prices": "unavailable"
+    },
+    {
+      "id": 1676,
+      "name": "대치쌍용2차(통합재건축)",
+      "pnu": "1168010600100650000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 364,
+      "buildingCheckedAt": "2026-09-28T08:50:31.102Z",
+      "pricesUnits": 364,
+      "pricesCheckedAt": "2026-09-28T09:13:14.668Z"
+    },
+    {
+      "id": 1677,
+      "name": "신길동삼성아파트",
+      "pnu": "1156013200147590000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 384,
+      "buildingCheckedAt": "2026-09-28T08:50:31.215Z",
+      "pricesUnits": 384,
+      "pricesCheckedAt": "2026-09-28T09:13:14.791Z"
+    },
+    {
+      "id": 1717,
+      "name": "반포미도2차",
+      "pnu": "1165010700100600005",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 435,
+      "buildingCheckedAt": "2026-09-28T08:50:31.345Z",
+      "pricesUnits": 435,
+      "pricesCheckedAt": "2026-09-28T09:13:14.944Z"
+    },
+    {
+      "id": 1718,
+      "name": "서초현대",
+      "pnu": "1165010800116480002",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 317,
+      "buildingCheckedAt": "2026-09-28T08:50:31.506Z",
+      "pricesUnits": 299,
+      "pricesCheckedAt": "2026-09-28T09:13:15.093Z"
+    },
+    {
+      "id": 1719,
+      "name": "대우효령",
+      "pnu": "1165010100110380000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 364,
+      "buildingCheckedAt": "2026-09-28T08:50:31.605Z",
+      "pricesUnits": 364,
+      "pricesCheckedAt": "2026-09-28T09:13:15.227Z"
+    },
+    {
+      "id": 1720,
+      "name": "용산반도",
+      "pnu": "1117012900103010170",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 197,
+      "buildingCheckedAt": "2026-09-28T09:13:15.360Z",
+      "pricesUnits": 192,
+      "pricesCheckedAt": "2026-09-28T09:13:15.407Z"
+    },
+    {
+      "id": 1721,
+      "name": "도곡한신대림",
+      "pnu": null,
+      "building": "address_review",
+      "prices": "address_review"
+    },
+    {
+      "id": 1722,
+      "name": "남산대림",
+      "pnu": "1117013000107290000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 400,
+      "buildingCheckedAt": "2026-09-28T08:50:31.712Z",
+      "pricesUnits": 400,
+      "pricesCheckedAt": "2026-09-28T09:13:15.491Z"
+    },
+    {
+      "id": 1723,
+      "name": "상계주공2",
+      "pnu": "1135010500107400000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 1931,
+      "buildingCheckedAt": "2026-09-28T08:50:31.919Z",
+      "pricesUnits": 1931,
+      "pricesCheckedAt": "2026-09-28T09:13:15.845Z"
+    },
+    {
+      "id": 1724,
+      "name": "시흥성지",
+      "pnu": "1154510300201730008",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 233,
+      "buildingCheckedAt": "2026-09-28T09:13:16.239Z",
+      "pricesUnits": 233,
+      "pricesCheckedAt": "2026-09-28T09:13:16.348Z"
+    },
+    {
+      "id": 1725,
+      "name": "상계한신1",
+      "pnu": "1135010500101350000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 421,
+      "buildingCheckedAt": "2026-09-28T08:50:32.394Z",
+      "pricesUnits": 420,
+      "pricesCheckedAt": "2026-09-28T09:13:16.470Z"
+    },
+    {
+      "id": 1726,
+      "name": "상계한신2",
+      "pnu": "1135010500104510000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 471,
+      "buildingCheckedAt": "2026-09-28T08:50:32.528Z",
+      "pricesUnits": 471,
+      "pricesCheckedAt": "2026-09-28T09:13:16.621Z"
+    },
+    {
+      "id": 1727,
+      "name": "양재우성",
+      "pnu": "1165010200101540002",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 848,
+      "buildingCheckedAt": "2026-09-28T08:50:32.719Z",
+      "pricesUnits": 848,
+      "pricesCheckedAt": "2026-09-28T09:13:16.873Z"
+    },
+    {
+      "id": 1728,
+      "name": "당산한양",
+      "pnu": "1156011300100020006",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 338,
+      "buildingCheckedAt": "2026-09-28T08:50:32.957Z",
+      "pricesUnits": 338,
+      "pricesCheckedAt": "2026-09-28T09:13:17.078Z"
+    },
+    {
+      "id": 1729,
+      "name": "한신동성",
+      "pnu": "1135010400102560005",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 498,
+      "buildingCheckedAt": "2026-09-28T08:50:33.080Z",
+      "pricesUnits": 498,
+      "pricesCheckedAt": "2026-09-28T09:13:17.209Z"
+    },
+    {
+      "id": 1730,
+      "name": "상계주공3",
+      "pnu": "1135010500107300002",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 2213,
+      "buildingCheckedAt": "2026-09-28T09:13:17.679Z",
+      "pricesUnits": 2213,
+      "pricesCheckedAt": "2026-09-28T09:13:18.320Z"
+    },
+    {
+      "id": 1731,
+      "name": "상계한양",
+      "pnu": "1135010500107570000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 492,
+      "buildingCheckedAt": "2026-09-28T08:50:33.235Z",
+      "pricesUnits": 492,
+      "pricesCheckedAt": "2026-09-28T09:13:18.909Z"
+    },
+    {
+      "id": 1732,
+      "name": "창동주공4단지",
+      "pnu": "1132010700103730000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 1710,
+      "buildingCheckedAt": "2026-09-28T09:13:19.110Z",
+      "pricesUnits": 1710,
+      "pricesCheckedAt": "2026-09-28T09:13:19.744Z"
+    },
+    {
+      "id": 1733,
+      "name": "창동동아",
+      "pnu": "1132010700100260000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 645,
+      "buildingCheckedAt": "2026-09-28T08:50:33.391Z",
+      "pricesUnits": 600,
+      "pricesCheckedAt": "2026-09-28T09:13:20.244Z"
+    },
+    {
+      "id": 1734,
+      "name": "하계미성",
+      "pnu": "1135010400102800000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 685,
+      "buildingCheckedAt": "2026-09-28T08:50:33.620Z",
+      "pricesUnits": 685,
+      "pricesCheckedAt": "2026-09-28T09:13:20.463Z"
+    },
+    {
+      "id": 1735,
+      "name": "중계그린",
+      "pnu": "1135010600105020001",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 3481,
+      "buildingCheckedAt": "2026-09-28T09:13:20.893Z",
+      "pricesUnits": 3481,
+      "pricesCheckedAt": "2026-09-28T09:13:22.213Z"
+    },
+    {
+      "id": 1736,
+      "name": "중계주공4",
+      "pnu": "1135010600103580002",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 690,
+      "buildingCheckedAt": "2026-09-28T08:50:33.829Z",
+      "pricesUnits": 690,
+      "pricesCheckedAt": "2026-09-28T09:13:23.083Z"
+    },
+    {
+      "id": 1737,
+      "name": "오금대림",
+      "pnu": "1171011200100020000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 749,
+      "buildingCheckedAt": "2026-09-28T09:13:23.304Z",
+      "pricesUnits": 749,
+      "pricesCheckedAt": "2026-09-28T09:13:23.564Z"
+    },
+    {
+      "id": 1738,
+      "name": "중계주공8",
+      "pnu": "1135010600103620001",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 696,
+      "buildingCheckedAt": "2026-09-28T08:50:34.026Z",
+      "pricesUnits": 696,
+      "pricesCheckedAt": "2026-09-28T09:13:23.829Z"
+    },
+    {
+      "id": 1739,
+      "name": "신도림미성",
+      "pnu": "1153010100102900000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 824,
+      "buildingCheckedAt": "2026-09-28T08:50:34.283Z",
+      "pricesUnits": 824,
+      "pricesCheckedAt": "2026-09-28T09:13:24.184Z"
+    },
+    {
+      "id": 1740,
+      "name": "DMC한양",
+      "pnu": "1141011900104310000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 741,
+      "buildingCheckedAt": "2026-09-28T08:50:34.621Z",
+      "pricesUnits": 660,
+      "pricesCheckedAt": "2026-09-28T09:13:24.467Z"
+    },
+    {
+      "id": 1741,
+      "name": "마포현대",
+      "pnu": "1144010200101880108",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 480,
+      "buildingCheckedAt": "2026-09-28T08:50:34.844Z",
+      "pricesUnits": 480,
+      "pricesCheckedAt": "2026-09-28T09:13:24.697Z"
+    },
+    {
+      "id": 1742,
+      "name": "성수동아",
+      "pnu": "1120011400106560320",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 390,
+      "buildingCheckedAt": "2026-09-28T08:50:35.032Z",
+      "pricesUnits": 390,
+      "pricesCheckedAt": "2026-09-28T09:13:24.873Z"
+    },
+    {
+      "id": 1743,
+      "name": "신대방우성1차",
+      "pnu": "1159010900105650000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 1335,
+      "buildingCheckedAt": "2026-09-28T08:50:35.644Z",
+      "pricesUnits": 1335,
+      "pricesCheckedAt": "2026-09-28T09:13:25.204Z"
+    },
+    {
+      "id": 1744,
+      "name": "명수대현대",
+      "pnu": "1159010500100100000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 660,
+      "buildingCheckedAt": "2026-09-28T08:50:36.098Z",
+      "pricesUnits": 660,
+      "pricesCheckedAt": "2026-09-28T09:13:25.556Z"
+    },
+    {
+      "id": 1745,
+      "name": "수서신동아",
+      "pnu": "1168011500107360000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 1163,
+      "buildingCheckedAt": "2026-09-28T08:50:36.387Z",
+      "pricesUnits": 1162,
+      "pricesCheckedAt": "2026-09-28T09:13:25.892Z"
+    },
+    {
+      "id": 1746,
+      "name": "수서한아름",
+      "pnu": "1168011500107120000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 498,
+      "buildingCheckedAt": "2026-09-28T08:50:36.930Z",
+      "pricesUnits": 498,
+      "pricesCheckedAt": "2026-09-28T09:13:26.236Z"
+    },
+    {
+      "id": 1747,
+      "name": "상계주공1",
+      "pnu": "1135010500107650000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 816,
+      "buildingCheckedAt": "2026-09-28T08:50:37.332Z",
+      "pricesUnits": 816,
+      "pricesCheckedAt": "2026-09-28T09:13:26.453Z"
+    },
+    {
+      "id": 1748,
+      "name": "상계주공10",
+      "pnu": "1135010500106660000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 2654,
+      "buildingCheckedAt": "2026-09-28T08:50:37.829Z",
+      "pricesUnits": 2654,
+      "pricesCheckedAt": "2026-09-28T09:13:27.065Z"
+    },
+    {
+      "id": 1749,
+      "name": "응암우성",
+      "pnu": "1138010700106940001",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 292,
+      "buildingCheckedAt": "2026-09-28T08:50:38.717Z",
+      "pricesUnits": 292,
+      "pricesCheckedAt": "2026-09-28T09:13:27.598Z"
+    },
+    {
+      "id": 1750,
+      "name": "신사미성",
+      "pnu": "1138010900101400001",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 570,
+      "buildingCheckedAt": "2026-09-28T08:50:38.859Z",
+      "pricesUnits": 570,
+      "pricesCheckedAt": "2026-09-28T09:13:27.792Z"
+    },
+    {
+      "id": 1751,
+      "name": "자양우성3",
+      "pnu": "1121510500105160000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 464,
+      "buildingCheckedAt": "2026-09-28T08:50:39.097Z",
+      "pricesUnits": 464,
+      "pricesCheckedAt": "2026-09-28T09:13:27.983Z"
+    },
+    {
+      "id": 1752,
+      "name": "청량리신현대",
+      "pnu": "1123010800100650000",
+      "building": "ready",
+      "prices": "ready",
+      "buildingUnits": 736,
+      "buildingCheckedAt": "2026-09-28T03:47:01.113Z",
+      "pricesUnits": 736,
+      "pricesCheckedAt": "2026-09-28T09:13:28.201Z"
+    }
+  ]
+}

@@ -4133,6 +4133,13 @@ var array = (v) => Array.isArray(v) ? v : v ? [v] : [];
 var normalizeName = (v) => cleanText(v).normalize("NFKC").replace(/아파트|신시가지|[\s()·.\-]/g, "");
 var sortNames = (a, b) => a.localeCompare(b, "ko", { numeric: true });
 function matchedBuildingTitles(candidate, titles) {
+  const reviewed = candidate.registerIdentity?.reviewedTitleIds;
+  if (reviewed) {
+    if (!reviewed.length || new Set(reviewed).size !== reviewed.length) throw Error("needs_review");
+    const found = titles.filter((r) => reviewed.includes(cleanText(r.mgmBldrgstPk)));
+    if (found.length !== reviewed.length) throw Error("needs_review");
+    return found;
+  }
   const names = new Set(candidate.names.map(normalizeName));
   const verifiedParcel = candidate.registerIdentity?.singleComplex || candidate.registerIdentity?.coversWholeParcel;
   if (verifiedParcel) for (const name of [...names]) {
@@ -4233,23 +4240,41 @@ function buildingProfile(candidate, titles, expos, areas) {
   const matched = matchedBuildingTitles(candidate, titles);
   if (!matched.length) throw Error("needs_review");
   const byDong = new Set(matched.map((r) => cleanText(r.dongNm))), units = {}, records = {};
-  for (const r of expos) {
-    const dong = cleanText(r.dongNm) || "\uB3D9 \uAD6C\uBD84 \uC5C6\uC74C", ho = cleanText(r.hoNm);
-    if (!ho || !byDong.has(cleanText(r.dongNm))) continue;
+  const selected = expos.filter((r) => cleanText(r.hoNm) && byDong.has(cleanText(r.dongNm))), seen = /* @__PURE__ */ new Map(), qualified = /* @__PURE__ */ new Set();
+  const namedTitle = (r) => cleanText(r.bldNm) && matched.some((t) => cleanText(t.dongNm) === cleanText(r.dongNm) && cleanText(t.bldNm) === cleanText(r.bldNm));
+  for (const r of selected) {
+    const key = cleanText(r.dongNm) + "|" + cleanText(r.hoNm), prior = seen.get(key);
+    if (prior && cleanText(prior.mgmBldrgstPk) !== cleanText(r.mgmBldrgstPk)) {
+      if (!namedTitle(prior) || !namedTitle(r) || cleanText(prior.bldNm) === cleanText(r.bldNm)) throw Error("needs_review");
+      qualified.add(cleanText(r.dongNm));
+    }
+    seen.set(key, r);
+  }
+  const dongLabel = (r) => (qualified.has(cleanText(r.dongNm)) ? cleanText(r.bldNm) + " \xB7 " : "") + (cleanText(r.dongNm) || "\uB3D9 \uAD6C\uBD84 \uC5C6\uC74C");
+  for (const r of selected) {
+    if (qualified.has(cleanText(r.dongNm)) && !namedTitle(r)) throw Error("needs_review");
+    const dong = dongLabel(r), ho = cleanText(r.hoNm);
     const key = dong + "|" + ho, registerId = cleanText(r.mgmBldrgstPk);
     if (records[key] && records[key].registerId !== registerId) throw Error("needs_review");
-    (units[dong] ??= []).push(ho);
-    records[key] = { dong, ho, registerId, floor: cleanText(r.flrNo), producedAt: cleanText(r.crtnDay), rows: [] };
+    records[key] = { dong, ho, registerId, ...qualified.has(cleanText(r.dongNm)) ? { registerDong: cleanText(r.dongNm), registerName: cleanText(r.bldNm) } : {}, floor: cleanText(r.flrNo), producedAt: cleanText(r.crtnDay), rows: [] };
   }
+  const byId = new Map(Object.values(records).map((r) => [r.registerId, r]));
   for (const r of areas) {
-    const dong = cleanText(r.dongNm) || "\uB3D9 \uAD6C\uBD84 \uC5C6\uC74C", ho = cleanText(r.hoNm), unit = records[dong + "|" + ho];
+    const id = cleanText(r.mgmBldrgstPk), unit = id ? byId.get(id) : records[dongLabel(r) + "|" + cleanText(r.hoNm)];
     if (!unit) continue;
     const kind = cleanText(r.exposPubuseGbCdNm), area = finite(r.area);
     if (!["\uC804\uC720", "\uACF5\uC6A9"].includes(kind) || area === null || area < 0) continue;
     unit.rows.push({ kind, floor: cleanText(r.flrNoNm || r.flrNo), floorGroup: cleanText(r.flrGbCdNm), purpose: cleanText(r.etcPurps) || cleanText(r.mainPurpsCdNm), area, producedAt: cleanText(r.crtnDay) });
   }
+  for (const [key, r] of Object.entries(records)) {
+    if (/^(복도|계단|현관|옥탑|지하실|보일러실|변전실|기계실)$/.test(r.ho) && r.rows.length && r.rows.every((a) => a.kind === "\uACF5\uC6A9")) {
+      delete records[key];
+      continue;
+    }
+    (units[r.dong] ??= []).push(r.ho);
+  }
   for (const dong of Object.keys(units)) units[dong] = [...new Set(units[dong])].sort(sortNames);
-  return { status: "ready", name: cleanText(matched[0].bldNm), address: cleanText(matched[0].platPlc), source: SOURCES.building, checkedAt: (/* @__PURE__ */ new Date()).toISOString(), units, records, buildings: matched.map((r) => ({ dong: cleanText(r.dongNm) || "\uB3D9 \uAD6C\uBD84 \uC5C6\uC74C", name: cleanText(r.bldNm), address: cleanText(r.newPlatPlc || r.platPlc), purpose: cleanText(r.mainPurpsCdNm), structure: cleanText(r.strctCdNm), approval: cleanText(r.useAprDay), floors: finite(r.grndFlrCnt), basementFloors: finite(r.ugrndFlrCnt), households: finite(r.hhldCnt), coverage: finite(r.bcRat), floorAreaRatio: finite(r.vlRat) })) };
+  return { status: "ready", name: cleanText(matched[0].bldNm), address: cleanText(matched[0].platPlc), source: SOURCES.building, checkedAt: (/* @__PURE__ */ new Date()).toISOString(), units, records, buildings: matched.map((r) => ({ dong: dongLabel(r), name: cleanText(r.bldNm), address: cleanText(r.newPlatPlc || r.platPlc), purpose: cleanText(r.mainPurpsCdNm), structure: cleanText(r.strctCdNm), approval: cleanText(r.useAprDay), floors: finite(r.grndFlrCnt), basementFloors: finite(r.ugrndFlrCnt), households: finite(r.hhldCnt), coverage: finite(r.bcRat), floorAreaRatio: finite(r.vlRat) })) };
 }
 
 // server/register-buildings.mjs

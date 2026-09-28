@@ -1,0 +1,915 @@
+{
+  "source": "국토교통부 건축HUB 월간 건축물대장 공개자료",
+  "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+  "sourceAsOf": "2026-08-31",
+  "downloadedAt": "2026-09-28",
+  "datasets": {
+    "titles": {
+      "complete": true,
+      "kind": "titles",
+      "archive": "hub-titles-202608.zip",
+      "sha256": "0e1789435deb8b636452961069beb5f45fc92fa19045308fc863fe0a158f6724",
+      "sourceAsOf": "2026-08-31",
+      "sourceUrl": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+      "scanned": 8064406,
+      "matched": 2710,
+      "sourceFileId": "OPN202609201224352200",
+      "matchedParcels": 281,
+      "targetParcels": 307,
+      "schema": [
+        {
+          "position": 1,
+          "name": "관리_건축물대장_PK",
+          "type": "VARCHAR(33)"
+        },
+        {
+          "position": 2,
+          "name": "대장_구분_코드",
+          "type": "VARCHAR(1)"
+        },
+        {
+          "position": 3,
+          "name": "대장_구분_코드_명",
+          "type": "VARCHAR(100)"
+        },
+        {
+          "position": 4,
+          "name": "대장_종류_코드",
+          "type": "VARCHAR(1)"
+        },
+        {
+          "position": 5,
+          "name": "대장_종류_코드_명",
+          "type": "VARCHAR(100)"
+        },
+        {
+          "position": 6,
+          "name": "대지_위치",
+          "type": "VARCHAR(500)"
+        },
+        {
+          "position": 7,
+          "name": "도로명_대지_위치",
+          "type": "VARCHAR(400)"
+        },
+        {
+          "position": 8,
+          "name": "건물_명",
+          "type": "VARCHAR(100)"
+        },
+        {
+          "position": 9,
+          "name": "시군구_코드",
+          "type": "VARCHAR(5)"
+        },
+        {
+          "position": 10,
+          "name": "법정동_코드",
+          "type": "VARCHAR(5)"
+        },
+        {
+          "position": 11,
+          "name": "대지_구분_코드",
+          "type": "VARCHAR(1)"
+        },
+        {
+          "position": 12,
+          "name": "번",
+          "type": "VARCHAR(4)"
+        },
+        {
+          "position": 13,
+          "name": "지",
+          "type": "VARCHAR(4)"
+        },
+        {
+          "position": 14,
+          "name": "특수지_명",
+          "type": "VARCHAR(200)"
+        },
+        {
+          "position": 15,
+          "name": "블록",
+          "type": "VARCHAR(20)"
+        },
+        {
+          "position": 16,
+          "name": "로트",
+          "type": "VARCHAR(20)"
+        },
+        {
+          "position": 17,
+          "name": "외필지_수",
+          "type": "NUMERIC(5)"
+        },
+        {
+          "position": 18,
+          "name": "새주소_도로_코드",
+          "type": "VARCHAR(12)"
+        },
+        {
+          "position": 19,
+          "name": "새주소_법정동_코드",
+          "type": "VARCHAR(5)"
+        },
+        {
+          "position": 20,
+          "name": "새주소_지상지하_코드",
+          "type": "VARCHAR(1)"
+        },
+        {
+          "position": 21,
+          "name": "새주소_본_번",
+          "type": "NUMERIC(5)"
+        },
+        {
+          "position": 22,
+          "name": "새주소_부_번",
+          "type": "NUMERIC(5)"
+        },
+        {
+          "position": 23,
+          "name": "동_명",
+          "type": "VARCHAR(100)"
+        },
+        {
+          "position": 24,
+          "name": "주_부속_구분_코드",
+          "type": "CHAR(1)"
+        },
+        {
+          "position": 25,
+          "name": "주_부속_구분_코드_명",
+          "type": "VARCHAR(100)"
+        },
+        {
+          "position": 26,
+          "name": "대지_면적(㎡)",
+          "type": "NUMERIC(19,9)"
+        },
+        {
+          "position": 27,
+          "name": "건축_면적(㎡)",
+          "type": "NUMERIC(19,9)"
+        },
+        {
+          "position": 28,
+          "name": "건폐_율(%)",
+          "type": "NUMERIC(19,9)"
+        },
+        {
+          "position": 29,
+          "name": "연면적(㎡)",
+          "type": "NUMERIC(19,9)"
+        },
+        {
+          "position": 30,
+          "name": "용적_률_산정_연면적(㎡)",
+          "type": "NUMERIC(19,9)"
+        },
+        {
+          "position": 31,
+          "name": "용적_률(%)",
+          "type": "NUMERIC(19,9)"
+        },
+        {
+          "position": 32,
+          "name": "구조_코드",
+          "type": "VARCHAR(2)"
+        },
+        {
+          "position": 33,
+          "name": "구조_코드_명",
+          "type": "VARCHAR(100)"
+        },
+        {
+          "position": 34,
+          "name": "기타_구조",
+          "type": "VARCHAR(500)"
+        },
+        {
+          "position": 35,
+          "name": "주_용도_코드",
+          "type": "VARCHAR(5)"
+        },
+        {
+          "position": 36,
+          "name": "주_용도_코드_명",
+          "type": "VARCHAR(100)"
+        },
+        {
+          "position": 37,
+          "name": "기타_용도",
+          "type": "VARCHAR(500)"
+        },
+        {
+          "position": 38,
+          "name": "지붕_코드",
+          "type": "VARCHAR(2)"
+        },
+        {
+          "position": 39,
+          "name": "지붕_코드_명",
+          "type": "VARCHAR(100)"
+        },
+        {
+          "position": 40,
+          "name": "기타_지붕",
+          "type": "VARCHAR(500)"
+        },
+        {
+          "position": 41,
+          "name": "세대_수(세대)",
+          "type": "NUMERIC(5)"
+        },
+        {
+          "position": 42,
+          "name": "가구_수(가구)",
+          "type": "NUMERIC(5)"
+        },
+        {
+          "position": 43,
+          "name": "높이(m)",
+          "type": "NUMERIC(19,9)"
+        },
+        {
+          "position": 44,
+          "name": "지상_층_수",
+          "type": "NUMERIC(5)"
+        },
+        {
+          "position": 45,
+          "name": "지하_층_수",
+          "type": "NUMERIC(5)"
+        },
+        {
+          "position": 46,
+          "name": "승용_승강기_수",
+          "type": "NUMERIC(5)"
+        },
+        {
+          "position": 47,
+          "name": "비상용_승강기_수",
+          "type": "NUMERIC(5)"
+        },
+        {
+          "position": 48,
+          "name": "부속_건축물_수",
+          "type": "NUMERIC(5)"
+        },
+        {
+          "position": 49,
+          "name": "부속_건축물_면적(㎡)",
+          "type": "NUMERIC(19,9)"
+        },
+        {
+          "position": 50,
+          "name": "총_동_연면적(㎡)",
+          "type": "NUMERIC(19,9)"
+        },
+        {
+          "position": 51,
+          "name": "옥내_기계식_대수(대)",
+          "type": "NUMERIC(6)"
+        },
+        {
+          "position": 52,
+          "name": "옥내_기계식_면적(㎡)",
+          "type": "NUMERIC(19,9)"
+        },
+        {
+          "position": 53,
+          "name": "옥외_기계식_대수(대)",
+          "type": "NUMERIC(6)"
+        },
+        {
+          "position": 54,
+          "name": "옥외_기계식_면적(㎡)",
+          "type": "NUMERIC(19,9)"
+        },
+        {
+          "position": 55,
+          "name": "옥내_자주식_대수(대)",
+          "type": "NUMERIC(6)"
+        },
+        {
+          "position": 56,
+          "name": "옥내_자주식_면적(㎡)",
+          "type": "NUMERIC(19,9)"
+        },
+        {
+          "position": 57,
+          "name": "옥외_자주식_대수(대)",
+          "type": "NUMERIC(6)"
+        },
+        {
+          "position": 58,
+          "name": "옥외_자주식_면적(㎡)",
+          "type": "NUMERIC(19,9)"
+        },
+        {
+          "position": 59,
+          "name": "허가_일",
+          "type": "VARCHAR(8)"
+        },
+        {
+          "position": 60,
+          "name": "착공_일",
+          "type": "VARCHAR(8)"
+        },
+        {
+          "position": 61,
+          "name": "사용승인_일",
+          "type": "VARCHAR(8)"
+        },
+        {
+          "position": 62,
+          "name": "허가번호_년",
+          "type": "VARCHAR(4)"
+        },
+        {
+          "position": 63,
+          "name": "허가번호_기관_코드",
+          "type": "CHAR(7)"
+        },
+        {
+          "position": 64,
+          "name": "허가번호_기관_코드_명",
+          "type": "VARCHAR(100)"
+        },
+        {
+          "position": 65,
+          "name": "허가번호_구분_코드",
+          "type": "VARCHAR(4)"
+        },
+        {
+          "position": 66,
+          "name": "허가번호_구분_코드_명",
+          "type": "VARCHAR(100)"
+        },
+        {
+          "position": 67,
+          "name": "호_수(호)",
+          "type": "NUMERIC(5)"
+        },
+        {
+          "position": 68,
+          "name": "에너지효율_등급",
+          "type": "VARCHAR(4)"
+        },
+        {
+          "position": 69,
+          "name": "에너지절감_율",
+          "type": "NUMERIC(19,9)"
+        },
+        {
+          "position": 70,
+          "name": "에너지_EPI점수",
+          "type": "NUMERIC(5)"
+        },
+        {
+          "position": 71,
+          "name": "친환경_건축물_등급",
+          "type": "CHAR(1)"
+        },
+        {
+          "position": 72,
+          "name": "친환경_건축물_인증점수",
+          "type": "NUMERIC(5)"
+        },
+        {
+          "position": 73,
+          "name": "지능형_건축물_등급",
+          "type": "CHAR(1)"
+        },
+        {
+          "position": 74,
+          "name": "지능형_건축물_인증점수",
+          "type": "NUMERIC(5)"
+        },
+        {
+          "position": 75,
+          "name": "생성_일자",
+          "type": "VARCHAR(8)"
+        },
+        {
+          "position": 76,
+          "name": "내진_설계_적용_여부",
+          "type": "VARCHAR(1)"
+        },
+        {
+          "position": 77,
+          "name": "내진_능력",
+          "type": "VARCHAR(200)"
+        }
+      ]
+    },
+    "expos": {
+      "complete": true,
+      "kind": "expos",
+      "archive": "hub-expos-202608.zip",
+      "sha256": "981961bc6141d45c15643573c5e391c30518d0e329ef8af24c38eea4b0064fc1",
+      "sourceAsOf": "2026-08-31",
+      "sourceUrl": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+      "scanned": 19847604,
+      "matched": 202214,
+      "sourceFileId": "OPN202609200110200980",
+      "matchedParcels": 280,
+      "targetParcels": 307,
+      "schema": [
+        {
+          "position": 1,
+          "name": "관리_건축물대장_PK",
+          "type": "VARCHAR(33)"
+        },
+        {
+          "position": 2,
+          "name": "대장_구분_코드",
+          "type": "VARCHAR(1)"
+        },
+        {
+          "position": 3,
+          "name": "대장_구분_코드_명",
+          "type": "VARCHAR(100)"
+        },
+        {
+          "position": 4,
+          "name": "대장_종류_코드",
+          "type": "VARCHAR(1)"
+        },
+        {
+          "position": 5,
+          "name": "대장_종류_코드_명",
+          "type": "VARCHAR(100)"
+        },
+        {
+          "position": 6,
+          "name": "대지_위치",
+          "type": "VARCHAR(500)"
+        },
+        {
+          "position": 7,
+          "name": "도로명_대지_위치",
+          "type": "VARCHAR(400)"
+        },
+        {
+          "position": 8,
+          "name": "건물_명",
+          "type": "VARCHAR(100)"
+        },
+        {
+          "position": 9,
+          "name": "시군구_코드",
+          "type": "VARCHAR(5)"
+        },
+        {
+          "position": 10,
+          "name": "법정동_코드",
+          "type": "VARCHAR(5)"
+        },
+        {
+          "position": 11,
+          "name": "대지_구분_코드",
+          "type": "VARCHAR(1)"
+        },
+        {
+          "position": 12,
+          "name": "번",
+          "type": "VARCHAR(4)"
+        },
+        {
+          "position": 13,
+          "name": "지",
+          "type": "VARCHAR(4)"
+        },
+        {
+          "position": 14,
+          "name": "특수지_명",
+          "type": "VARCHAR(200)"
+        },
+        {
+          "position": 15,
+          "name": "블록",
+          "type": "VARCHAR(20)"
+        },
+        {
+          "position": 16,
+          "name": "로트",
+          "type": "VARCHAR(20)"
+        },
+        {
+          "position": 17,
+          "name": "새주소_도로_코드",
+          "type": "VARCHAR(12)"
+        },
+        {
+          "position": 18,
+          "name": "새주소_법정동_코드",
+          "type": "VARCHAR(5)"
+        },
+        {
+          "position": 19,
+          "name": "새주소_지상지하_코드",
+          "type": "VARCHAR(1)"
+        },
+        {
+          "position": 20,
+          "name": "새주소_본_번",
+          "type": "NUMERIC(5)"
+        },
+        {
+          "position": 21,
+          "name": "새주소_부_번",
+          "type": "NUMERIC(5)"
+        },
+        {
+          "position": 22,
+          "name": "동_명",
+          "type": "VARCHAR(100)"
+        },
+        {
+          "position": 23,
+          "name": "호_명",
+          "type": "VARCHAR(100)"
+        },
+        {
+          "position": 24,
+          "name": "층_구분_코드",
+          "type": "VARCHAR(2)"
+        },
+        {
+          "position": 25,
+          "name": "층_구분_코드_명",
+          "type": "VARCHAR(100)"
+        },
+        {
+          "position": 26,
+          "name": "층_번호",
+          "type": "NUMERIC(4)"
+        },
+        {
+          "position": 27,
+          "name": "생성_일자",
+          "type": "VARCHAR(8)"
+        }
+      ]
+    },
+    "areas": {
+      "complete": true,
+      "kind": "areas",
+      "archive": "hub-areas-202608.zip",
+      "sha256": "ccf99ab5f2423f73bfdc4ffb825a0a7642057d853eff16ec4a10339cd7832fe5",
+      "sourceAsOf": "2026-08-31",
+      "sourceUrl": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+      "scanned": 114368383,
+      "matched": 1234587,
+      "sourceFileId": "OPN202609201240548820",
+      "matchedParcels": 280,
+      "targetParcels": 307,
+      "schema": [
+        {
+          "position": 1,
+          "name": "관리_건축물대장_PK",
+          "type": "VARCHAR(33)"
+        },
+        {
+          "position": 2,
+          "name": "대장_구분_코드",
+          "type": "VARCHAR(1)"
+        },
+        {
+          "position": 3,
+          "name": "대장_구분_코드_명",
+          "type": "VARCHAR(100)"
+        },
+        {
+          "position": 4,
+          "name": "대장_종류_코드",
+          "type": "VARCHAR(1)"
+        },
+        {
+          "position": 5,
+          "name": "대장_종류_코드_명",
+          "type": "VARCHAR(100)"
+        },
+        {
+          "position": 6,
+          "name": "대지_위치",
+          "type": "VARCHAR(500)"
+        },
+        {
+          "position": 7,
+          "name": "도로명_대지_위치",
+          "type": "VARCHAR(400)"
+        },
+        {
+          "position": 8,
+          "name": "건물_명",
+          "type": "VARCHAR(100)"
+        },
+        {
+          "position": 9,
+          "name": "시군구_코드",
+          "type": "VARCHAR(5)"
+        },
+        {
+          "position": 10,
+          "name": "법정동_코드",
+          "type": "VARCHAR(5)"
+        },
+        {
+          "position": 11,
+          "name": "대지_구분_코드",
+          "type": "VARCHAR(1)"
+        },
+        {
+          "position": 12,
+          "name": "번",
+          "type": "VARCHAR(4)"
+        },
+        {
+          "position": 13,
+          "name": "지",
+          "type": "VARCHAR(4)"
+        },
+        {
+          "position": 14,
+          "name": "특수지_명",
+          "type": "VARCHAR(200)"
+        },
+        {
+          "position": 15,
+          "name": "블록",
+          "type": "VARCHAR(20)"
+        },
+        {
+          "position": 16,
+          "name": "로트",
+          "type": "VARCHAR(20)"
+        },
+        {
+          "position": 17,
+          "name": "새주소_도로_코드",
+          "type": "VARCHAR(12)"
+        },
+        {
+          "position": 18,
+          "name": "새주소_법정동_코드",
+          "type": "VARCHAR(5)"
+        },
+        {
+          "position": 19,
+          "name": "새주소_지상지하_코드",
+          "type": "VARCHAR(1)"
+        },
+        {
+          "position": 20,
+          "name": "새주소_본_번",
+          "type": "NUMERIC(5)"
+        },
+        {
+          "position": 21,
+          "name": "새주소_부_번",
+          "type": "NUMERIC(5)"
+        },
+        {
+          "position": 22,
+          "name": "동_명",
+          "type": "VARCHAR(100)"
+        },
+        {
+          "position": 23,
+          "name": "호_명",
+          "type": "VARCHAR(100)"
+        },
+        {
+          "position": 24,
+          "name": "층_구분_코드",
+          "type": "VARCHAR(2)"
+        },
+        {
+          "position": 25,
+          "name": "층_구분_코드_명",
+          "type": "VARCHAR(100)"
+        },
+        {
+          "position": 26,
+          "name": "층_번호",
+          "type": "NUMERIC(4)"
+        },
+        {
+          "position": 27,
+          "name": "전유_공용_구분_코드",
+          "type": "CHAR(1)"
+        },
+        {
+          "position": 28,
+          "name": "전유_공용_구분_코드_명",
+          "type": "VARCHAR(100)"
+        },
+        {
+          "position": 29,
+          "name": "주_부속_구분_코드",
+          "type": "CHAR(1)"
+        },
+        {
+          "position": 30,
+          "name": "주_부속_구분_코드_명",
+          "type": "VARCHAR(100)"
+        },
+        {
+          "position": 31,
+          "name": "층_번호_명",
+          "type": "VARCHAR(100)"
+        },
+        {
+          "position": 32,
+          "name": "구조_코드",
+          "type": "VARCHAR(2)"
+        },
+        {
+          "position": 33,
+          "name": "구조_코드_명",
+          "type": "VARCHAR(100)"
+        },
+        {
+          "position": 34,
+          "name": "기타_구조",
+          "type": "VARCHAR(500)"
+        },
+        {
+          "position": 35,
+          "name": "주_용도_코드",
+          "type": "VARCHAR(5)"
+        },
+        {
+          "position": 36,
+          "name": "주_용도_코드_명",
+          "type": "VARCHAR(100)"
+        },
+        {
+          "position": 37,
+          "name": "기타_용도",
+          "type": "VARCHAR(500)"
+        },
+        {
+          "position": 38,
+          "name": "면적(㎡)",
+          "type": "NUMERIC(19,9)"
+        },
+        {
+          "position": 39,
+          "name": "생성_일자",
+          "type": "VARCHAR(8)"
+        }
+      ]
+    },
+    "prices": {
+      "complete": true,
+      "archive": "hub-prices-202608.zip",
+      "sha256": "07d6e993ddcc7079301f22739276e34dea938d47c2761eca988f8b1157fcd2d9",
+      "sourceAsOf": "2026-08-31",
+      "sourceUrl": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+      "sourceFileId": "OPN202609200104466670",
+      "scanned": 202097817,
+      "matched": 1140859,
+      "years": [
+        "2022",
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ],
+      "matchedParcels": 270,
+      "targetParcels": 307,
+      "schema": [
+        {
+          "position": 1,
+          "name": "관리_건축물대장_PK",
+          "type": "VARCHAR(33)"
+        },
+        {
+          "position": 2,
+          "name": "대장_구분_코드",
+          "type": "VARCHAR(1)"
+        },
+        {
+          "position": 3,
+          "name": "대장_구분_코드_명",
+          "type": "VARCHAR(100)"
+        },
+        {
+          "position": 4,
+          "name": "대장_종류_코드",
+          "type": "VARCHAR(1)"
+        },
+        {
+          "position": 5,
+          "name": "대장_종류_코드_명",
+          "type": "VARCHAR(100)"
+        },
+        {
+          "position": 6,
+          "name": "대지_위치",
+          "type": "VARCHAR(500)"
+        },
+        {
+          "position": 7,
+          "name": "도로명_대지_위치",
+          "type": "VARCHAR(400)"
+        },
+        {
+          "position": 8,
+          "name": "건물_명",
+          "type": "VARCHAR(100)"
+        },
+        {
+          "position": 9,
+          "name": "시군구_코드",
+          "type": "VARCHAR(5)"
+        },
+        {
+          "position": 10,
+          "name": "법정동_코드",
+          "type": "VARCHAR(5)"
+        },
+        {
+          "position": 11,
+          "name": "대지_구분_코드",
+          "type": "CHAR(1)"
+        },
+        {
+          "position": 12,
+          "name": "번",
+          "type": "VARCHAR(4)"
+        },
+        {
+          "position": 13,
+          "name": "지",
+          "type": "VARCHAR(4)"
+        },
+        {
+          "position": 14,
+          "name": "특수지_명",
+          "type": "VARCHAR(200)"
+        },
+        {
+          "position": 15,
+          "name": "블록",
+          "type": "VARCHAR(20)"
+        },
+        {
+          "position": 16,
+          "name": "로트",
+          "type": "VARCHAR(20)"
+        },
+        {
+          "position": 17,
+          "name": "외필지_수",
+          "type": "NUMERIC(5)"
+        },
+        {
+          "position": 18,
+          "name": "새주소_도로_코드",
+          "type": "VARCHAR(12)"
+        },
+        {
+          "position": 19,
+          "name": "새주소_법정동_코드",
+          "type": "VARCHAR(5)"
+        },
+        {
+          "position": 20,
+          "name": "새주소_지상지하_코드",
+          "type": "VARCHAR(1)"
+        },
+        {
+          "position": 21,
+          "name": "새주소_본_번",
+          "type": "NUMERIC(5)"
+        },
+        {
+          "position": 22,
+          "name": "새주소_부_번",
+          "type": "NUMERIC(5)"
+        },
+        {
+          "position": 23,
+          "name": "기준_일자",
+          "type": "VARCHAR(8)"
+        },
+        {
+          "position": 24,
+          "name": "주택가격",
+          "type": "NUMERIC(15)"
+        },
+        {
+          "position": 25,
+          "name": "생성_일자",
+          "type": "VARCHAR(8)"
+        }
+      ],
+      "kind": "prices"
+    }
+  }
+}

@@ -1,0 +1,3393 @@
+{
+  "source": {
+    "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+    "sourceAsOf": "2026-08-31",
+    "sourceFileId": "OPN202609201224352200"
+  },
+  "reviewed": [
+    {
+      "id": 366,
+      "name": "잠실 우성1·2·3차",
+      "priorIdentity": [
+        {
+          "singleComplex": true,
+          "complexId": "11710100002358",
+          "residentialBuildings": 26,
+          "households": 1842,
+          "address": "서울특별시 송파구 잠실동 101-1",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+        }
+      ],
+      "expectedBuildings": 26,
+      "observedHouseholds": 1842,
+      "titles": [
+        {
+          "registerId": "102511835",
+          "name": "우성아파트",
+          "dong": "21동",
+          "address": "서울특별시 송파구 잠실동 101-1번지",
+          "roadAddress": "서울특별시 송파구 올림픽로4길 42 (잠실동)",
+          "purpose": "공동주택",
+          "households": "72",
+          "unitCount": "0",
+          "pnu": "1171010100101010001"
+        },
+        {
+          "registerId": "102511836",
+          "name": "우성아파트",
+          "dong": "19동",
+          "address": "서울특별시 송파구 잠실동 101-1번지",
+          "roadAddress": "서울특별시 송파구 올림픽로4길 42 (잠실동)",
+          "purpose": "공동주택",
+          "households": "84",
+          "unitCount": "0",
+          "pnu": "1171010100101010001"
+        },
+        {
+          "registerId": "102511838",
+          "name": "우성아파트",
+          "dong": "16동",
+          "address": "서울특별시 송파구 잠실동 101-1번지",
+          "roadAddress": "서울특별시 송파구 올림픽로4길 42 (잠실동)",
+          "purpose": "공동주택",
+          "households": "48",
+          "unitCount": "0",
+          "pnu": "1171010100101010001"
+        },
+        {
+          "registerId": "102511830",
+          "name": "우성아파트",
+          "dong": "10동",
+          "address": "서울특별시 송파구 잠실동 101-1번지",
+          "roadAddress": "서울특별시 송파구 올림픽로4길 42 (잠실동)",
+          "purpose": "공동주택",
+          "households": "96",
+          "unitCount": "0",
+          "pnu": "1171010100101010001"
+        },
+        {
+          "registerId": "102511829",
+          "name": "우성아파트",
+          "dong": "11동",
+          "address": "서울특별시 송파구 잠실동 101-1번지",
+          "roadAddress": "서울특별시 송파구 올림픽로4길 42 (잠실동)",
+          "purpose": "공동주택",
+          "households": "72",
+          "unitCount": "0",
+          "pnu": "1171010100101010001"
+        },
+        {
+          "registerId": "102511819",
+          "name": "우성아파트",
+          "dong": "5동",
+          "address": "서울특별시 송파구 잠실동 101-1번지",
+          "roadAddress": "서울특별시 송파구 올림픽로4길 42 (잠실동)",
+          "purpose": "공동주택",
+          "households": "48",
+          "unitCount": "0",
+          "pnu": "1171010100101010001"
+        },
+        {
+          "registerId": "102511824",
+          "name": "우성아파트",
+          "dong": "3동",
+          "address": "서울특별시 송파구 잠실동 101-1번지",
+          "roadAddress": "서울특별시 송파구 올림픽로4길 42 (잠실동)",
+          "purpose": "공동주택",
+          "households": "72",
+          "unitCount": "0",
+          "pnu": "1171010100101010001"
+        },
+        {
+          "registerId": "102511823",
+          "name": "우성아파트",
+          "dong": "13동",
+          "address": "서울특별시 송파구 잠실동 101-1번지",
+          "roadAddress": "서울특별시 송파구 올림픽로4길 42 (잠실동)",
+          "purpose": "공동주택",
+          "households": "48",
+          "unitCount": "0",
+          "pnu": "1171010100101010001"
+        },
+        {
+          "registerId": "102511841",
+          "name": "우성아파트 28동",
+          "dong": "28동",
+          "address": "서울특별시 송파구 잠실동 101-2번지",
+          "roadAddress": "서울특별시 송파구 올림픽로4길 42 (잠실동)",
+          "purpose": "공동주택",
+          "households": "90",
+          "unitCount": "0",
+          "pnu": "1171010100101010002"
+        },
+        {
+          "registerId": "102511822",
+          "name": "우성아파트",
+          "dong": "17동",
+          "address": "서울특별시 송파구 잠실동 101-1번지",
+          "roadAddress": "서울특별시 송파구 올림픽로4길 42 (잠실동)",
+          "purpose": "공동주택",
+          "households": "72",
+          "unitCount": "0",
+          "pnu": "1171010100101010001"
+        },
+        {
+          "registerId": "102511839",
+          "name": "우성아파트",
+          "dong": "25동",
+          "address": "서울특별시 송파구 잠실동 101-1번지",
+          "roadAddress": "서울특별시 송파구 올림픽로4길 42 (잠실동)",
+          "purpose": "공동주택",
+          "households": "84",
+          "unitCount": "0",
+          "pnu": "1171010100101010001"
+        },
+        {
+          "registerId": "102511818",
+          "name": "우성아파트",
+          "dong": "9동",
+          "address": "서울특별시 송파구 잠실동 101-1번지",
+          "roadAddress": "서울특별시 송파구 올림픽로4길 42 (잠실동)",
+          "purpose": "공동주택",
+          "households": "48",
+          "unitCount": "0",
+          "pnu": "1171010100101010001"
+        },
+        {
+          "registerId": "102511820",
+          "name": "우성아파트",
+          "dong": "23동",
+          "address": "서울특별시 송파구 잠실동 101-1번지",
+          "roadAddress": "서울특별시 송파구 올림픽로4길 42 (잠실동)",
+          "purpose": "공동주택",
+          "households": "96",
+          "unitCount": "0",
+          "pnu": "1171010100101010001"
+        },
+        {
+          "registerId": "102511831",
+          "name": "우성아파트",
+          "dong": "8동",
+          "address": "서울특별시 송파구 잠실동 101-1번지",
+          "roadAddress": "서울특별시 송파구 올림픽로4길 42 (잠실동)",
+          "purpose": "공동주택",
+          "households": "72",
+          "unitCount": "0",
+          "pnu": "1171010100101010001"
+        },
+        {
+          "registerId": "102511842",
+          "name": "우성아파트 27동",
+          "dong": "27동",
+          "address": "서울특별시 송파구 잠실동 101-2번지",
+          "roadAddress": "서울특별시 송파구 올림픽로4길 42 (잠실동)",
+          "purpose": "공동주택",
+          "households": "90",
+          "unitCount": "0",
+          "pnu": "1171010100101010002"
+        },
+        {
+          "registerId": "102511837",
+          "name": "우성아파트",
+          "dong": "18동",
+          "address": "서울특별시 송파구 잠실동 101-1번지",
+          "roadAddress": "서울특별시 송파구 올림픽로4길 42 (잠실동)",
+          "purpose": "공동주택",
+          "households": "48",
+          "unitCount": "0",
+          "pnu": "1171010100101010001"
+        },
+        {
+          "registerId": "102511840",
+          "name": "우성아파트 29동",
+          "dong": "29동",
+          "address": "서울특별시 송파구 잠실동 101-2번지",
+          "roadAddress": "서울특별시 송파구 올림픽로4길 42 (잠실동)",
+          "purpose": "공동주택",
+          "households": "90",
+          "unitCount": "0",
+          "pnu": "1171010100101010002"
+        },
+        {
+          "registerId": "102511825",
+          "name": "우성아파트",
+          "dong": "2동",
+          "address": "서울특별시 송파구 잠실동 101-1번지",
+          "roadAddress": "서울특별시 송파구 올림픽로4길 42 (잠실동)",
+          "purpose": "공동주택",
+          "households": "72",
+          "unitCount": "0",
+          "pnu": "1171010100101010001"
+        },
+        {
+          "registerId": "102511834",
+          "name": "우성아파트",
+          "dong": "22동",
+          "address": "서울특별시 송파구 잠실동 101-1번지",
+          "roadAddress": "서울특별시 송파구 올림픽로4길 42 (잠실동)",
+          "purpose": "공동주택",
+          "households": "72",
+          "unitCount": "0",
+          "pnu": "1171010100101010001"
+        },
+        {
+          "registerId": "102511832",
+          "name": "우성아파트",
+          "dong": "7동",
+          "address": "서울특별시 송파구 잠실동 101-1번지",
+          "roadAddress": "서울특별시 송파구 올림픽로4길 42 (잠실동)",
+          "purpose": "공동주택",
+          "households": "96",
+          "unitCount": "0",
+          "pnu": "1171010100101010001"
+        },
+        {
+          "registerId": "102511827",
+          "name": "우성아파트",
+          "dong": "6동",
+          "address": "서울특별시 송파구 잠실동 101-1번지",
+          "roadAddress": "서울특별시 송파구 올림픽로4길 42 (잠실동)",
+          "purpose": "공동주택",
+          "households": "72",
+          "unitCount": "0",
+          "pnu": "1171010100101010001"
+        },
+        {
+          "registerId": "102511828",
+          "name": "우성아파트",
+          "dong": "12동",
+          "address": "서울특별시 송파구 잠실동 101-1번지",
+          "roadAddress": "서울특별시 송파구 올림픽로4길 42 (잠실동)",
+          "purpose": "공동주택",
+          "households": "48",
+          "unitCount": "0",
+          "pnu": "1171010100101010001"
+        },
+        {
+          "registerId": "102511821",
+          "name": "우성아파트",
+          "dong": "20동",
+          "address": "서울특별시 송파구 잠실동 101-1번지",
+          "roadAddress": "서울특별시 송파구 올림픽로4길 42 (잠실동)",
+          "purpose": "공동주택",
+          "households": "48",
+          "unitCount": "0",
+          "pnu": "1171010100101010001"
+        },
+        {
+          "registerId": "102511826",
+          "name": "",
+          "dong": "1동",
+          "address": "서울특별시 송파구 잠실동 101-1번지",
+          "roadAddress": "서울특별시 송파구 올림픽로4길 42 (잠실동)",
+          "purpose": "공동주택",
+          "households": "72",
+          "unitCount": "0",
+          "pnu": "1171010100101010001"
+        },
+        {
+          "registerId": "102511833",
+          "name": "우성아파트",
+          "dong": "15동",
+          "address": "서울특별시 송파구 잠실동 101-1번지",
+          "roadAddress": "서울특별시 송파구 올림픽로4길 42 (잠실동)",
+          "purpose": "공동주택",
+          "households": "72",
+          "unitCount": "0",
+          "pnu": "1171010100101010001"
+        },
+        {
+          "registerId": "102511843",
+          "name": "우성아파트 26동",
+          "dong": "26동",
+          "address": "서울특별시 송파구 잠실동 101-2번지",
+          "roadAddress": "서울특별시 송파구 올림픽로4길 42 (잠실동)",
+          "purpose": "공동주택",
+          "households": "60",
+          "unitCount": "0",
+          "pnu": "1171010100101010002"
+        }
+      ]
+    },
+    {
+      "id": 515,
+      "name": "한강맨션아파트",
+      "priorIdentity": [
+        {
+          "singleComplex": true,
+          "complexId": "11170100000874",
+          "residentialBuildings": 23,
+          "households": 660,
+          "address": "서울특별시 용산구 이촌동 300-23",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+        }
+      ],
+      "expectedBuildings": 23,
+      "observedHouseholds": 717,
+      "titles": [
+        {
+          "registerId": "100415908",
+          "name": "맨숀아파트",
+          "dong": "25동",
+          "address": "서울특별시 용산구 이촌동 300-25번지",
+          "roadAddress": "서울특별시 용산구 이촌로 248 (이촌동)",
+          "purpose": "공동주택",
+          "households": "30",
+          "unitCount": "0",
+          "pnu": "1117012900103000025"
+        },
+        {
+          "registerId": "1004110320",
+          "name": "맨숀아파트",
+          "dong": "17동",
+          "address": "서울특별시 용산구 이촌동 300-130번지",
+          "roadAddress": "서울특별시 용산구 이촌로 248 (이촌동)",
+          "purpose": "공동주택",
+          "households": "30",
+          "unitCount": "0",
+          "pnu": "1117012900103000130"
+        },
+        {
+          "registerId": "1004113148",
+          "name": "맨숀아파트",
+          "dong": "18동",
+          "address": "서울특별시 용산구 이촌동 300-127번지",
+          "roadAddress": "서울특별시 용산구 이촌로 248 (이촌동)",
+          "purpose": "공동주택",
+          "households": "20",
+          "unitCount": "0",
+          "pnu": "1117012900103000127"
+        },
+        {
+          "registerId": "100412391",
+          "name": "맨숀아파트",
+          "dong": "22동",
+          "address": "서울특별시 용산구 이촌동 300-77번지",
+          "roadAddress": "서울특별시 용산구 이촌로 248 (이촌동)",
+          "purpose": "공동주택",
+          "households": "30",
+          "unitCount": "0",
+          "pnu": "1117012900103000077"
+        },
+        {
+          "registerId": "1004124043",
+          "name": "맨숀아파트",
+          "dong": "23동",
+          "address": "서울특별시 용산구 이촌동 300-80번지",
+          "roadAddress": "서울특별시 용산구 이촌로 248 (이촌동)",
+          "purpose": "공동주택",
+          "households": "30",
+          "unitCount": "0",
+          "pnu": "1117012900103000080"
+        },
+        {
+          "registerId": "1004126652",
+          "name": "맨숀아파트",
+          "dong": "12동",
+          "address": "서울특별시 용산구 이촌동 300-157번지",
+          "roadAddress": "서울특별시 용산구 이촌로 248 (이촌동)",
+          "purpose": "공동주택",
+          "households": "30",
+          "unitCount": "0",
+          "pnu": "1117012900103000157"
+        },
+        {
+          "registerId": "1004119994",
+          "name": "맨숀아파트",
+          "dong": "15동",
+          "address": "서울특별시 용산구 이촌동 300-166번지",
+          "roadAddress": "서울특별시 용산구 이촌로 248 (이촌동)",
+          "purpose": "공동주택",
+          "households": "30",
+          "unitCount": "0",
+          "pnu": "1117012900103000166"
+        },
+        {
+          "registerId": "1004112069",
+          "name": "맨숀아파트",
+          "dong": "31동",
+          "address": "서울특별시 용산구 이촌동 300-23번지",
+          "roadAddress": "서울특별시 용산구 이촌로 248 (이촌동)",
+          "purpose": "공동주택",
+          "households": "46",
+          "unitCount": "0",
+          "pnu": "1117012900103000023"
+        },
+        {
+          "registerId": "1004111064",
+          "name": "맨숀아파트",
+          "dong": "14동",
+          "address": "서울특별시 용산구 이촌동 300-163번지",
+          "roadAddress": "서울특별시 용산구 이촌로 248 (이촌동)",
+          "purpose": "공동주택",
+          "households": "30",
+          "unitCount": "0",
+          "pnu": "1117012900103000163"
+        },
+        {
+          "registerId": "100414087",
+          "name": "맨숀아파트",
+          "dong": "26동",
+          "address": "서울특별시 용산구 이촌동 300-107번지",
+          "roadAddress": "서울특별시 용산구 이촌로 248 (이촌동)",
+          "purpose": "공동주택",
+          "households": "30",
+          "unitCount": "0",
+          "pnu": "1117012900103000107"
+        },
+        {
+          "registerId": "1004121587",
+          "name": "맨숀아파트",
+          "dong": "16동",
+          "address": "서울특별시 용산구 이촌동 300-133번지",
+          "roadAddress": "서울특별시 용산구 이촌로 248 (이촌동)",
+          "purpose": "공동주택",
+          "households": "30",
+          "unitCount": "0",
+          "pnu": "1117012900103000133"
+        },
+        {
+          "registerId": "100412522",
+          "name": "맨숀아파트",
+          "dong": "24동",
+          "address": "서울특별시 용산구 이촌동 300-83번지",
+          "roadAddress": "서울특별시 용산구 이촌로 248 (이촌동)",
+          "purpose": "공동주택",
+          "households": "30",
+          "unitCount": "0",
+          "pnu": "1117012900103000083"
+        },
+        {
+          "registerId": "1004116671",
+          "name": "맨숀아파트",
+          "dong": "27동",
+          "address": "서울특별시 용산구 이촌동 300-104번지",
+          "roadAddress": "서울특별시 용산구 이촌로 248 (이촌동)",
+          "purpose": "공동주택",
+          "households": "30",
+          "unitCount": "0",
+          "pnu": "1117012900103000104"
+        },
+        {
+          "registerId": "1004119923",
+          "name": "맨숀아파트",
+          "dong": "28동",
+          "address": "서울특별시 용산구 이촌동 300-101번지",
+          "roadAddress": "서울특별시 용산구 이촌로 248 (이촌동)",
+          "purpose": "공동주택",
+          "households": "20",
+          "unitCount": "0",
+          "pnu": "1117012900103000101"
+        },
+        {
+          "registerId": "1004126656",
+          "name": "맨숀아파트",
+          "dong": "34동",
+          "address": "서울특별시 용산구 이촌동 300-68번지",
+          "roadAddress": "서울특별시 용산구 이촌로 248 (이촌동)",
+          "purpose": "공동주택",
+          "households": "40",
+          "unitCount": "0",
+          "pnu": "1117012900103000068"
+        },
+        {
+          "registerId": "1004116951",
+          "name": "맨숀아파트",
+          "dong": "36동",
+          "address": "서울특별시 용산구 이촌동 300-89번지",
+          "roadAddress": "서울특별시 용산구 이촌로 248 (이촌동)",
+          "purpose": "공동주택",
+          "households": "30",
+          "unitCount": "0",
+          "pnu": "1117012900103000089"
+        },
+        {
+          "registerId": "1004118852",
+          "name": "맨숀아파트",
+          "dong": "13동",
+          "address": "서울특별시 용산구 이촌동 300-160번지",
+          "roadAddress": "서울특별시 용산구 이촌로 248 (이촌동)",
+          "purpose": "공동주택",
+          "households": "30",
+          "unitCount": "0",
+          "pnu": "1117012900103000160"
+        },
+        {
+          "registerId": "1004117119",
+          "name": "맨숀아파트",
+          "dong": "11동",
+          "address": "서울특별시 용산구 이촌동 300-153번지",
+          "roadAddress": "서울특별시 용산구 이촌로 248 (이촌동)",
+          "purpose": "공동주택",
+          "households": "36",
+          "unitCount": "0",
+          "pnu": "1117012900103000153"
+        },
+        {
+          "registerId": "1004117273",
+          "name": "맨숀아파트",
+          "dong": "33동",
+          "address": "서울특별시 용산구 이촌동 300-65번지",
+          "roadAddress": "서울특별시 용산구 이촌로 248 (이촌동)",
+          "purpose": "공동주택",
+          "households": "40",
+          "unitCount": "0",
+          "pnu": "1117012900103000065"
+        },
+        {
+          "registerId": "1004119054",
+          "name": "맨숀아파트",
+          "dong": "21동",
+          "address": "서울특별시 용산구 이촌동 300-26번지",
+          "roadAddress": "서울특별시 용산구 이촌로 248 (이촌동)",
+          "purpose": "공동주택",
+          "households": "35",
+          "unitCount": "0",
+          "pnu": "1117012900103000026"
+        },
+        {
+          "registerId": "1004124592",
+          "name": "맨숀아파트",
+          "dong": "38동",
+          "address": "서울특별시 용산구 이촌동 300-95번지",
+          "roadAddress": "서울특별시 용산구 이촌로 248 (이촌동)",
+          "purpose": "공동주택",
+          "households": "20",
+          "unitCount": "0",
+          "pnu": "1117012900103000095"
+        },
+        {
+          "registerId": "100419434",
+          "name": "맨숀아파트",
+          "dong": "32동",
+          "address": "서울특별시 용산구 이촌동 300-62번지",
+          "roadAddress": "서울특별시 용산구 이촌로 248 (이촌동)",
+          "purpose": "공동주택",
+          "households": "40",
+          "unitCount": "0",
+          "pnu": "1117012900103000062"
+        },
+        {
+          "registerId": "1004122616",
+          "name": "맨숀아파트",
+          "dong": "37동",
+          "address": "서울특별시 용산구 이촌동 300-92번지",
+          "roadAddress": "서울특별시 용산구 이촌로 248 (이촌동)",
+          "purpose": "공동주택",
+          "households": "30",
+          "unitCount": "0",
+          "pnu": "1117012900103000092"
+        }
+      ]
+    },
+    {
+      "id": 606,
+      "name": "우신빌라",
+      "priorIdentity": [],
+      "expectedBuildings": 28,
+      "observedHouseholds": 762,
+      "titles": [
+        {
+          "registerId": "101813376",
+          "name": "우신빌라",
+          "dong": "4동",
+          "address": "서울특별시 구로구 궁동 213-21번지",
+          "roadAddress": "서울특별시 구로구 오리로 1265 (궁동)",
+          "purpose": "공동주택",
+          "households": "24",
+          "unitCount": "0",
+          "pnu": "1153010900102130021"
+        },
+        {
+          "registerId": "101813381",
+          "name": "우신빌라",
+          "dong": "8동",
+          "address": "서울특별시 구로구 궁동 213-21번지",
+          "roadAddress": "서울특별시 구로구 오리로 1265 (궁동)",
+          "purpose": "공동주택",
+          "households": "30",
+          "unitCount": "0",
+          "pnu": "1153010900102130021"
+        },
+        {
+          "registerId": "101813386",
+          "name": "우신빌라",
+          "dong": "2동",
+          "address": "서울특별시 구로구 궁동 213-21번지",
+          "roadAddress": "서울특별시 구로구 오리로 1265 (궁동)",
+          "purpose": "공동주택",
+          "households": "24",
+          "unitCount": "0",
+          "pnu": "1153010900102130021"
+        },
+        {
+          "registerId": "101813390",
+          "name": "우신빌라",
+          "dong": "25동",
+          "address": "서울특별시 구로구 궁동 213-21번지",
+          "roadAddress": "서울특별시 구로구 오리로 1265 (궁동)",
+          "purpose": "공동주택",
+          "households": "30",
+          "unitCount": "0",
+          "pnu": "1153010900102130021"
+        },
+        {
+          "registerId": "101813387",
+          "name": "우신빌라",
+          "dong": "28동",
+          "address": "서울특별시 구로구 궁동 213-21번지",
+          "roadAddress": "서울특별시 구로구 오리로 1265 (궁동)",
+          "purpose": "공동주택",
+          "households": "18",
+          "unitCount": "0",
+          "pnu": "1153010900102130021"
+        },
+        {
+          "registerId": "101813378",
+          "name": "우신빌라",
+          "dong": "15동",
+          "address": "서울특별시 구로구 궁동 213-21번지",
+          "roadAddress": "서울특별시 구로구 오리로 1265 (궁동)",
+          "purpose": "공동주택",
+          "households": "24",
+          "unitCount": "0",
+          "pnu": "1153010900102130021"
+        },
+        {
+          "registerId": "101813377",
+          "name": "우신빌라",
+          "dong": "21동",
+          "address": "서울특별시 구로구 궁동 213-21번지",
+          "roadAddress": "서울특별시 구로구 오리로 1265 (궁동)",
+          "purpose": "공동주택",
+          "households": "30",
+          "unitCount": "0",
+          "pnu": "1153010900102130021"
+        },
+        {
+          "registerId": "101813391",
+          "name": "우신빌라",
+          "dong": "24동",
+          "address": "서울특별시 구로구 궁동 213-21번지",
+          "roadAddress": "서울특별시 구로구 오리로 1265 (궁동)",
+          "purpose": "공동주택",
+          "households": "30",
+          "unitCount": "0",
+          "pnu": "1153010900102130021"
+        },
+        {
+          "registerId": "101813385",
+          "name": "우신빌라",
+          "dong": "3동",
+          "address": "서울특별시 구로구 궁동 213-21번지",
+          "roadAddress": "서울특별시 구로구 오리로 1265 (궁동)",
+          "purpose": "공동주택",
+          "households": "24",
+          "unitCount": "0",
+          "pnu": "1153010900102130021"
+        },
+        {
+          "registerId": "101813383",
+          "name": "우신빌라",
+          "dong": "6동",
+          "address": "서울특별시 구로구 궁동 213-21번지",
+          "roadAddress": "서울특별시 구로구 오리로 1265 (궁동)",
+          "purpose": "공동주택",
+          "households": "30",
+          "unitCount": "0",
+          "pnu": "1153010900102130021"
+        },
+        {
+          "registerId": "101813384",
+          "name": "우신빌라",
+          "dong": "5동",
+          "address": "서울특별시 구로구 궁동 213-21번지",
+          "roadAddress": "서울특별시 구로구 오리로 1265 (궁동)",
+          "purpose": "공동주택",
+          "households": "30",
+          "unitCount": "0",
+          "pnu": "1153010900102130021"
+        },
+        {
+          "registerId": "101813389",
+          "name": "우신빌라",
+          "dong": "26동",
+          "address": "서울특별시 구로구 궁동 213-21번지",
+          "roadAddress": "서울특별시 구로구 오리로 1265 (궁동)",
+          "purpose": "공동주택",
+          "households": "24",
+          "unitCount": "0",
+          "pnu": "1153010900102130021"
+        },
+        {
+          "registerId": "101813393",
+          "name": "우신빌라",
+          "dong": "22동",
+          "address": "서울특별시 구로구 궁동 213-21번지",
+          "roadAddress": "서울특별시 구로구 오리로 1265 (궁동)",
+          "purpose": "공동주택",
+          "households": "30",
+          "unitCount": "0",
+          "pnu": "1153010900102130021"
+        },
+        {
+          "registerId": "101813403",
+          "name": "우신빌라",
+          "dong": "10동",
+          "address": "서울특별시 구로구 궁동 213-21번지",
+          "roadAddress": "서울특별시 구로구 오리로 1265 (궁동)",
+          "purpose": "공동주택",
+          "households": "30",
+          "unitCount": "0",
+          "pnu": "1153010900102130021"
+        },
+        {
+          "registerId": "101813382",
+          "name": "우신빌라",
+          "dong": "7동",
+          "address": "서울특별시 구로구 궁동 213-21번지",
+          "roadAddress": "서울특별시 구로구 오리로 1265 (궁동)",
+          "purpose": "공동주택",
+          "households": "30",
+          "unitCount": "0",
+          "pnu": "1153010900102130021"
+        },
+        {
+          "registerId": "101813394",
+          "name": "우신빌라",
+          "dong": "20동",
+          "address": "서울특별시 구로구 궁동 213-21번지",
+          "roadAddress": "서울특별시 구로구 오리로 1265 (궁동)",
+          "purpose": "공동주택",
+          "households": "30",
+          "unitCount": "0",
+          "pnu": "1153010900102130021"
+        },
+        {
+          "registerId": "101813400",
+          "name": "우신빌라",
+          "dong": "13동",
+          "address": "서울특별시 구로구 궁동 213-21번지",
+          "roadAddress": "서울특별시 구로구 오리로 1265 (궁동)",
+          "purpose": "공동주택",
+          "households": "30",
+          "unitCount": "0",
+          "pnu": "1153010900102130021"
+        },
+        {
+          "registerId": "101813379",
+          "name": "우신빌라",
+          "dong": "16동",
+          "address": "서울특별시 구로구 궁동 213-21번지",
+          "roadAddress": "서울특별시 구로구 오리로 1265 (궁동)",
+          "purpose": "공동주택",
+          "households": "30",
+          "unitCount": "0",
+          "pnu": "1153010900102130021"
+        },
+        {
+          "registerId": "101813402",
+          "name": "우신빌라",
+          "dong": "11동",
+          "address": "서울특별시 구로구 궁동 213-21번지",
+          "roadAddress": "서울특별시 구로구 오리로 1265 (궁동)",
+          "purpose": "공동주택",
+          "households": "24",
+          "unitCount": "0",
+          "pnu": "1153010900102130021"
+        },
+        {
+          "registerId": "101813395",
+          "name": "우신빌라",
+          "dong": "1동",
+          "address": "서울특별시 구로구 궁동 213-21번지",
+          "roadAddress": "서울특별시 구로구 오리로 1265 (궁동)",
+          "purpose": "공동주택",
+          "households": "12",
+          "unitCount": "0",
+          "pnu": "1153010900102130021"
+        },
+        {
+          "registerId": "101813398",
+          "name": "우신빌라",
+          "dong": "17동",
+          "address": "서울특별시 구로구 궁동 213-21번지",
+          "roadAddress": "서울특별시 구로구 오리로 1265 (궁동)",
+          "purpose": "공동주택",
+          "households": "24",
+          "unitCount": "0",
+          "pnu": "1153010900102130021"
+        },
+        {
+          "registerId": "101813380",
+          "name": "우신빌라",
+          "dong": "9동",
+          "address": "서울특별시 구로구 궁동 213-21번지",
+          "roadAddress": "서울특별시 구로구 오리로 1265 (궁동)",
+          "purpose": "공동주택",
+          "households": "24",
+          "unitCount": "0",
+          "pnu": "1153010900102130021"
+        },
+        {
+          "registerId": "101813396",
+          "name": "우신빌라",
+          "dong": "19동",
+          "address": "서울특별시 구로구 궁동 213-21번지",
+          "roadAddress": "서울특별시 구로구 오리로 1265 (궁동)",
+          "purpose": "공동주택",
+          "households": "36",
+          "unitCount": "0",
+          "pnu": "1153010900102130021"
+        },
+        {
+          "registerId": "101813397",
+          "name": "우신빌라",
+          "dong": "18동",
+          "address": "서울특별시 구로구 궁동 213-21번지",
+          "roadAddress": "서울특별시 구로구 오리로 1265 (궁동)",
+          "purpose": "공동주택",
+          "households": "36",
+          "unitCount": "0",
+          "pnu": "1153010900102130021"
+        },
+        {
+          "registerId": "101813401",
+          "name": "우신빌라",
+          "dong": "12동",
+          "address": "서울특별시 구로구 궁동 213-21번지",
+          "roadAddress": "서울특별시 구로구 오리로 1265 (궁동)",
+          "purpose": "공동주택",
+          "households": "30",
+          "unitCount": "0",
+          "pnu": "1153010900102130021"
+        },
+        {
+          "registerId": "101813399",
+          "name": "우신빌라",
+          "dong": "14동",
+          "address": "서울특별시 구로구 궁동 213-21번지",
+          "roadAddress": "서울특별시 구로구 오리로 1265 (궁동)",
+          "purpose": "공동주택",
+          "households": "30",
+          "unitCount": "0",
+          "pnu": "1153010900102130021"
+        },
+        {
+          "registerId": "101813392",
+          "name": "우신빌라",
+          "dong": "23동",
+          "address": "서울특별시 구로구 궁동 213-21번지",
+          "roadAddress": "서울특별시 구로구 오리로 1265 (궁동)",
+          "purpose": "공동주택",
+          "households": "30",
+          "unitCount": "0",
+          "pnu": "1153010900102130021"
+        },
+        {
+          "registerId": "101813388",
+          "name": "우신빌라",
+          "dong": "27동",
+          "address": "서울특별시 구로구 궁동 213-21번지",
+          "roadAddress": "서울특별시 구로구 오리로 1265 (궁동)",
+          "purpose": "공동주택",
+          "households": "18",
+          "unitCount": "0",
+          "pnu": "1153010900102130021"
+        }
+      ]
+    },
+    {
+      "id": 667,
+      "name": "방학신동아1차",
+      "priorIdentity": [
+        {
+          "singleComplex": true,
+          "complexId": "11320100000408",
+          "residentialBuildings": 30,
+          "households": 3169,
+          "address": "서울특별시 도봉구 방학동 271-1",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+        }
+      ],
+      "expectedBuildings": 30,
+      "observedHouseholds": 3169,
+      "titles": [
+        {
+          "registerId": "101118363",
+          "name": "신동아아파트",
+          "dong": "12동",
+          "address": "서울특별시 도봉구 방학동 272번지",
+          "roadAddress": "서울특별시 도봉구 방학로 193 (방학동)",
+          "purpose": "공동주택",
+          "households": "100",
+          "unitCount": "0",
+          "pnu": "1132010600102720000"
+        },
+        {
+          "registerId": "101118338",
+          "name": "신동아아파트",
+          "dong": "21동",
+          "address": "서울특별시 도봉구 방학동 271-1번지",
+          "roadAddress": "서울특별시 도봉구 시루봉로 107 (방학동)",
+          "purpose": "공동주택",
+          "households": "140",
+          "unitCount": "0",
+          "pnu": "1132010600102710001"
+        },
+        {
+          "registerId": "101118341",
+          "name": "신동아아파트",
+          "dong": "23동",
+          "address": "서울특별시 도봉구 방학동 271-1번지",
+          "roadAddress": "서울특별시 도봉구 시루봉로 107 (방학동)",
+          "purpose": "공동주택",
+          "households": "179",
+          "unitCount": "0",
+          "pnu": "1132010600102710001"
+        },
+        {
+          "registerId": "101118367",
+          "name": "신동아아파트",
+          "dong": "20동",
+          "address": "서울특별시 도봉구 방학동 272-1번지",
+          "roadAddress": "서울특별시 도봉구 방학로 193 (방학동)",
+          "purpose": "공동주택",
+          "households": "72",
+          "unitCount": "0",
+          "pnu": "1132010600102720001"
+        },
+        {
+          "registerId": "101118340",
+          "name": "신동아아파트",
+          "dong": "22동",
+          "address": "서울특별시 도봉구 방학동 271-1번지",
+          "roadAddress": "서울특별시 도봉구 시루봉로 107 (방학동)",
+          "purpose": "공동주택",
+          "households": "91",
+          "unitCount": "0",
+          "pnu": "1132010600102710001"
+        },
+        {
+          "registerId": "101118358",
+          "name": "신동아아파트",
+          "dong": "6동",
+          "address": "서울특별시 도봉구 방학동 272번지",
+          "roadAddress": "서울특별시 도봉구 방학로 193 (방학동)",
+          "purpose": "공동주택",
+          "households": "72",
+          "unitCount": "0",
+          "pnu": "1132010600102720000"
+        },
+        {
+          "registerId": "101118339",
+          "name": "신동아아파트",
+          "dong": "24동",
+          "address": "서울특별시 도봉구 방학동 271-1번지",
+          "roadAddress": "서울특별시 도봉구 시루봉로 107 (방학동)",
+          "purpose": "공동주택",
+          "households": "194",
+          "unitCount": "0",
+          "pnu": "1132010600102710001"
+        },
+        {
+          "registerId": "101118365",
+          "name": "신동아아파트",
+          "dong": "16동",
+          "address": "서울특별시 도봉구 방학동 272-1번지",
+          "roadAddress": "서울특별시 도봉구 방학로 193 (방학동)",
+          "purpose": "공동주택",
+          "households": "108",
+          "unitCount": "0",
+          "pnu": "1132010600102720001"
+        },
+        {
+          "registerId": "101118346",
+          "name": "신동아아파트",
+          "dong": "31동",
+          "address": "서울특별시 도봉구 방학동 271-4번지",
+          "roadAddress": "서울특별시 도봉구 시루봉로 107 (방학동)",
+          "purpose": "공동주택",
+          "households": "60",
+          "unitCount": "0",
+          "pnu": "1132010600102710004"
+        },
+        {
+          "registerId": "101118359",
+          "name": "신동아아파트",
+          "dong": "3동",
+          "address": "서울특별시 도봉구 방학동 272번지",
+          "roadAddress": "서울특별시 도봉구 방학로 193 (방학동)",
+          "purpose": "공동주택",
+          "households": "112",
+          "unitCount": "0",
+          "pnu": "1132010600102720000"
+        },
+        {
+          "registerId": "101118345",
+          "name": "신동아아파트",
+          "dong": "29동",
+          "address": "서울특별시 도봉구 방학동 271-4번지",
+          "roadAddress": "서울특별시 도봉구 시루봉로 107 (방학동)",
+          "purpose": "공동주택",
+          "households": "144",
+          "unitCount": "0",
+          "pnu": "1132010600102710004"
+        },
+        {
+          "registerId": "101118357",
+          "name": "신동아아파트",
+          "dong": "8동",
+          "address": "서울특별시 도봉구 방학동 272번지",
+          "roadAddress": "서울특별시 도봉구 방학로 193 (방학동)",
+          "purpose": "공동주택",
+          "households": "108",
+          "unitCount": "0",
+          "pnu": "1132010600102720000"
+        },
+        {
+          "registerId": "101118353",
+          "name": "신동아아파트",
+          "dong": "5동",
+          "address": "서울특별시 도봉구 방학동 272번지",
+          "roadAddress": "서울특별시 도봉구 방학로 193 (방학동)",
+          "purpose": "공동주택",
+          "households": "84",
+          "unitCount": "0",
+          "pnu": "1132010600102720000"
+        },
+        {
+          "registerId": "101118344",
+          "name": "신동아아파트",
+          "dong": "30동",
+          "address": "서울특별시 도봉구 방학동 271-4번지",
+          "roadAddress": "서울특별시 도봉구 시루봉로 107 (방학동)",
+          "purpose": "공동주택",
+          "households": "60",
+          "unitCount": "0",
+          "pnu": "1132010600102710004"
+        },
+        {
+          "registerId": "101118369",
+          "name": "신동아아파트",
+          "dong": "17동",
+          "address": "서울특별시 도봉구 방학동 272-1번지",
+          "roadAddress": "서울특별시 도봉구 방학로 193 (방학동)",
+          "purpose": "공동주택",
+          "households": "108",
+          "unitCount": "0",
+          "pnu": "1132010600102720001"
+        },
+        {
+          "registerId": "101118349",
+          "name": "신동아아파트",
+          "dong": "26동",
+          "address": "서울특별시 도봉구 방학동 271-5번지",
+          "roadAddress": "서울특별시 도봉구 시루봉로 107 (방학동)",
+          "purpose": "공동주택",
+          "households": "153",
+          "unitCount": "0",
+          "pnu": "1132010600102710005"
+        },
+        {
+          "registerId": "101118361",
+          "name": "신동아아파트",
+          "dong": "14동",
+          "address": "서울특별시 도봉구 방학동 272번지",
+          "roadAddress": "서울특별시 도봉구 방학로 193 (방학동)",
+          "purpose": "공동주택",
+          "households": "124",
+          "unitCount": "0",
+          "pnu": "1132010600102720000"
+        },
+        {
+          "registerId": "101118355",
+          "name": "신동아아파트",
+          "dong": "10동",
+          "address": "서울특별시 도봉구 방학동 272번지",
+          "roadAddress": "서울특별시 도봉구 방학로 193 (방학동)",
+          "purpose": "공동주택",
+          "households": "84",
+          "unitCount": "0",
+          "pnu": "1132010600102720000"
+        },
+        {
+          "registerId": "101118366",
+          "name": "신동아아파트",
+          "dong": "18동",
+          "address": "서울특별시 도봉구 방학동 272-1번지",
+          "roadAddress": "서울특별시 도봉구 방학로 193 (방학동)",
+          "purpose": "공동주택",
+          "households": "48",
+          "unitCount": "0",
+          "pnu": "1132010600102720001"
+        },
+        {
+          "registerId": "101118351",
+          "name": "신동아아파트",
+          "dong": "15동",
+          "address": "서울특별시 도봉구 방학동 272번지",
+          "roadAddress": "서울특별시 도봉구 방학로 193 (방학동)",
+          "purpose": "공동주택",
+          "households": "84",
+          "unitCount": "0",
+          "pnu": "1132010600102720000"
+        },
+        {
+          "registerId": "101118354",
+          "name": "신동아아파트",
+          "dong": "7동",
+          "address": "서울특별시 도봉구 방학동 272번지",
+          "roadAddress": "서울특별시 도봉구 방학로 193 (방학동)",
+          "purpose": "공동주택",
+          "households": "84",
+          "unitCount": "0",
+          "pnu": "1132010600102720000"
+        },
+        {
+          "registerId": "101118362",
+          "name": "신동아아파트",
+          "dong": "11동",
+          "address": "서울특별시 도봉구 방학동 272번지",
+          "roadAddress": "서울특별시 도봉구 방학로 193 (방학동)",
+          "purpose": "공동주택",
+          "households": "72",
+          "unitCount": "0",
+          "pnu": "1132010600102720000"
+        },
+        {
+          "registerId": "101118368",
+          "name": "신동아아파트",
+          "dong": "19동",
+          "address": "서울특별시 도봉구 방학동 272-1번지",
+          "roadAddress": "서울특별시 도봉구 방학로 193 (방학동)",
+          "purpose": "공동주택",
+          "households": "48",
+          "unitCount": "0",
+          "pnu": "1132010600102720001"
+        },
+        {
+          "registerId": "101118343",
+          "name": "신동아아파트",
+          "dong": "27동",
+          "address": "서울특별시 도봉구 방학동 271-4번지",
+          "roadAddress": "서울특별시 도봉구 시루봉로 107 (방학동)",
+          "purpose": "공동주택",
+          "households": "80",
+          "unitCount": "0",
+          "pnu": "1132010600102710004"
+        },
+        {
+          "registerId": "101118347",
+          "name": "신동아아파트",
+          "dong": "25동",
+          "address": "서울특별시 도봉구 방학동 271-5번지",
+          "roadAddress": "서울특별시 도봉구 시루봉로 107 (방학동)",
+          "purpose": "공동주택",
+          "households": "240",
+          "unitCount": "0",
+          "pnu": "1132010600102710005"
+        },
+        {
+          "registerId": "101118360",
+          "name": "신동아아파트",
+          "dong": "1동",
+          "address": "서울특별시 도봉구 방학동 272번지",
+          "roadAddress": "서울특별시 도봉구 방학로 193 (방학동)",
+          "purpose": "공동주택",
+          "households": "84",
+          "unitCount": "0",
+          "pnu": "1132010600102720000"
+        },
+        {
+          "registerId": "101118364",
+          "name": "신동아아파트",
+          "dong": "13동",
+          "address": "서울특별시 도봉구 방학동 272번지",
+          "roadAddress": "서울특별시 도봉구 방학로 193 (방학동)",
+          "purpose": "공동주택",
+          "households": "84",
+          "unitCount": "0",
+          "pnu": "1132010600102720000"
+        },
+        {
+          "registerId": "101118348",
+          "name": "신동아아파트",
+          "dong": "28동",
+          "address": "서울특별시 도봉구 방학동 271-5번지",
+          "roadAddress": "서울특별시 도봉구 시루봉로 107 (방학동)",
+          "purpose": "공동주택",
+          "households": "160",
+          "unitCount": "0",
+          "pnu": "1132010600102710005"
+        },
+        {
+          "registerId": "101118356",
+          "name": "신동아아파트",
+          "dong": "9동",
+          "address": "서울특별시 도봉구 방학동 272번지",
+          "roadAddress": "서울특별시 도봉구 방학로 193 (방학동)",
+          "purpose": "공동주택",
+          "households": "108",
+          "unitCount": "0",
+          "pnu": "1132010600102720000"
+        },
+        {
+          "registerId": "101118352",
+          "name": "신동아아파트",
+          "dong": "2동",
+          "address": "서울특별시 도봉구 방학동 272번지",
+          "roadAddress": "서울특별시 도봉구 방학로 193 (방학동)",
+          "purpose": "공동주택",
+          "households": "84",
+          "unitCount": "0",
+          "pnu": "1132010600102720000"
+        }
+      ]
+    },
+    {
+      "id": 814,
+      "name": "여의도삼부아파트",
+      "priorIdentity": [
+        {
+          "singleComplex": true,
+          "complexId": "11560100000961",
+          "residentialBuildings": 10,
+          "households": 866,
+          "address": "서울특별시 영등포구 여의도동 30-2",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+        }
+      ],
+      "expectedBuildings": 10,
+      "observedHouseholds": 873,
+      "titles": [
+        {
+          "registerId": "102017159",
+          "name": "",
+          "dong": "11동",
+          "address": "서울특별시 영등포구 여의도동 30-2번지",
+          "roadAddress": "서울특별시 영등포구 국제금융로7길 27 (여의도동)",
+          "purpose": "공동주택",
+          "households": "60",
+          "unitCount": "0",
+          "pnu": "1156011000100300002"
+        },
+        {
+          "registerId": "102017162",
+          "name": "",
+          "dong": "9동",
+          "address": "서울특별시 영등포구 여의도동 30-2번지",
+          "roadAddress": "서울특별시 영등포구 국제금융로7길 27 (여의도동)",
+          "purpose": "공동주택",
+          "households": "60",
+          "unitCount": "0",
+          "pnu": "1156011000100300002"
+        },
+        {
+          "registerId": "102017164",
+          "name": "",
+          "dong": "10동",
+          "address": "서울특별시 영등포구 여의도동 30-2번지",
+          "roadAddress": "서울특별시 영등포구 국제금융로7길 27 (여의도동)",
+          "purpose": "공동주택",
+          "households": "60",
+          "unitCount": "0",
+          "pnu": "1156011000100300002"
+        },
+        {
+          "registerId": "102017163",
+          "name": "",
+          "dong": "6동",
+          "address": "서울특별시 영등포구 여의도동 30-2번지",
+          "roadAddress": "서울특별시 영등포구 국제금융로7길 27 (여의도동)",
+          "purpose": "공동주택",
+          "households": "120",
+          "unitCount": "0",
+          "pnu": "1156011000100300002"
+        },
+        {
+          "registerId": "102017166",
+          "name": "",
+          "dong": "5동",
+          "address": "서울특별시 영등포구 여의도동 30-3번지",
+          "roadAddress": "서울특별시 영등포구 국제금융로7길 27 (여의도동)",
+          "purpose": "공동주택",
+          "households": "121",
+          "unitCount": "0",
+          "pnu": "1156011000100300003"
+        },
+        {
+          "registerId": "102017165",
+          "name": "",
+          "dong": "1동",
+          "address": "서울특별시 영등포구 여의도동 30-3번지",
+          "roadAddress": "서울특별시 영등포구 국제금융로7길 27 (여의도동)",
+          "purpose": "공동주택",
+          "households": "90",
+          "unitCount": "0",
+          "pnu": "1156011000100300003"
+        },
+        {
+          "registerId": "102017161",
+          "name": "",
+          "dong": "7동",
+          "address": "서울특별시 영등포구 여의도동 30-2번지",
+          "roadAddress": "서울특별시 영등포구 국제금융로7길 27 (여의도동)",
+          "purpose": "공동주택",
+          "households": "90",
+          "unitCount": "0",
+          "pnu": "1156011000100300002"
+        },
+        {
+          "registerId": "102017167",
+          "name": "",
+          "dong": "2동",
+          "address": "서울특별시 영등포구 여의도동 30-3번지",
+          "roadAddress": "서울특별시 영등포구 국제금융로7길 27 (여의도동)",
+          "purpose": "공동주택",
+          "households": "91",
+          "unitCount": "0",
+          "pnu": "1156011000100300003"
+        },
+        {
+          "registerId": "102017160",
+          "name": "",
+          "dong": "8동",
+          "address": "서울특별시 영등포구 여의도동 30-2번지",
+          "roadAddress": "서울특별시 영등포구 국제금융로7길 27 (여의도동)",
+          "purpose": "공동주택",
+          "households": "60",
+          "unitCount": "0",
+          "pnu": "1156011000100300002"
+        },
+        {
+          "registerId": "102017168",
+          "name": "",
+          "dong": "3동",
+          "address": "서울특별시 영등포구 여의도동 30-3번지",
+          "roadAddress": "서울특별시 영등포구 국제금융로7길 27 (여의도동)",
+          "purpose": "공동주택",
+          "households": "121",
+          "unitCount": "0",
+          "pnu": "1156011000100300003"
+        }
+      ]
+    },
+    {
+      "id": 824,
+      "name": "삼익파크",
+      "priorIdentity": [
+        {
+          "singleComplex": true,
+          "complexId": "11740100001579",
+          "residentialBuildings": 12,
+          "households": 1092,
+          "address": "서울특별시 강동구 길동 53",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+        }
+      ],
+      "expectedBuildings": 12,
+      "observedHouseholds": 1092,
+      "titles": [
+        {
+          "registerId": "102611945",
+          "name": "삼익파크",
+          "dong": "502동",
+          "address": "서울특별시 강동구 길동 54번지",
+          "roadAddress": "서울특별시 강동구 명일로 293 (길동)",
+          "purpose": "공동주택",
+          "households": "72",
+          "unitCount": "0",
+          "pnu": "1174010500100540000"
+        },
+        {
+          "registerId": "102611943",
+          "name": "삼익파크",
+          "dong": "505동",
+          "address": "서울특별시 강동구 길동 54번지",
+          "roadAddress": "서울특별시 강동구 명일로 293 (길동)",
+          "purpose": "공동주택",
+          "households": "96",
+          "unitCount": "0",
+          "pnu": "1174010500100540000"
+        },
+        {
+          "registerId": "1026119474",
+          "name": "삼익파크맨션",
+          "dong": "513동",
+          "address": "서울특별시 강동구 길동 55번지",
+          "roadAddress": "서울특별시 강동구 명일로 286 (길동)",
+          "purpose": "공동주택",
+          "households": "36",
+          "unitCount": "0",
+          "pnu": "1174010500100550000"
+        },
+        {
+          "registerId": "102611939",
+          "name": "삼익파크",
+          "dong": "508동",
+          "address": "서울특별시 강동구 길동 54번지",
+          "roadAddress": "서울특별시 강동구 명일로 293 (길동)",
+          "purpose": "공동주택",
+          "households": "72",
+          "unitCount": "0",
+          "pnu": "1174010500100540000"
+        },
+        {
+          "registerId": "102611942",
+          "name": "삼익파크",
+          "dong": "506동",
+          "address": "서울특별시 강동구 길동 54번지",
+          "roadAddress": "서울특별시 강동구 명일로 293 (길동)",
+          "purpose": "공동주택",
+          "households": "108",
+          "unitCount": "0",
+          "pnu": "1174010500100540000"
+        },
+        {
+          "registerId": "102611944",
+          "name": "삼익파크",
+          "dong": "503동",
+          "address": "서울특별시 강동구 길동 54번지",
+          "roadAddress": "서울특별시 강동구 명일로 293 (길동)",
+          "purpose": "공동주택",
+          "households": "48",
+          "unitCount": "0",
+          "pnu": "1174010500100540000"
+        },
+        {
+          "registerId": "102611938",
+          "name": "삼익파크",
+          "dong": "509동",
+          "address": "서울특별시 강동구 길동 54번지",
+          "roadAddress": "서울특별시 강동구 명일로 293 (길동)",
+          "purpose": "공동주택",
+          "households": "48",
+          "unitCount": "0",
+          "pnu": "1174010500100540000"
+        },
+        {
+          "registerId": "102611937",
+          "name": "삼익파크",
+          "dong": "510동",
+          "address": "서울특별시 강동구 길동 54번지",
+          "roadAddress": "서울특별시 강동구 명일로 293 (길동)",
+          "purpose": "공동주택",
+          "households": "156",
+          "unitCount": "0",
+          "pnu": "1174010500100540000"
+        },
+        {
+          "registerId": "102611935",
+          "name": "삼익파크맨션",
+          "dong": "511동",
+          "address": "서울특별시 강동구 길동 53번지",
+          "roadAddress": "서울특별시 강동구 명일로 286 (길동)",
+          "purpose": "공동주택",
+          "households": "120",
+          "unitCount": "0",
+          "pnu": "1174010500100530000"
+        },
+        {
+          "registerId": "102611940",
+          "name": "삼익파크",
+          "dong": "501동",
+          "address": "서울특별시 강동구 길동 54번지",
+          "roadAddress": "서울특별시 강동구 명일로 293 (길동)",
+          "purpose": "공동주택",
+          "households": "48",
+          "unitCount": "0",
+          "pnu": "1174010500100540000"
+        },
+        {
+          "registerId": "102611941",
+          "name": "삼익파크",
+          "dong": "507동",
+          "address": "서울특별시 강동구 길동 54번지",
+          "roadAddress": "서울특별시 강동구 명일로 293 (길동)",
+          "purpose": "공동주택",
+          "households": "96",
+          "unitCount": "0",
+          "pnu": "1174010500100540000"
+        },
+        {
+          "registerId": "102611934",
+          "name": "삼익파크맨션",
+          "dong": "512동",
+          "address": "서울특별시 강동구 길동 53번지",
+          "roadAddress": "서울특별시 강동구 명일로 286 (길동)",
+          "purpose": "공동주택",
+          "households": "192",
+          "unitCount": "0",
+          "pnu": "1174010500100530000"
+        }
+      ]
+    },
+    {
+      "id": 875,
+      "name": "여의도진주아파트",
+      "priorIdentity": [
+        {
+          "singleComplex": true,
+          "complexId": "11560100000969",
+          "residentialBuildings": 4,
+          "households": 376,
+          "address": "서울특별시 영등포구 여의도동 54",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+        }
+      ],
+      "expectedBuildings": 4,
+      "observedHouseholds": 376,
+      "titles": [
+        {
+          "registerId": "102017277",
+          "name": "",
+          "dong": "씨동",
+          "address": "서울특별시 영등포구 여의도동 54-3번지",
+          "roadAddress": "서울특별시 영등포구 국제금융로 108-6 (여의도동)",
+          "purpose": "공동주택",
+          "households": "156",
+          "unitCount": "0",
+          "pnu": "1156011000100540003"
+        },
+        {
+          "registerId": "102017275",
+          "name": "",
+          "dong": "비동",
+          "address": "서울특별시 영등포구 여의도동 54번지",
+          "roadAddress": "서울특별시 영등포구 국제금융로 108-6 (여의도동)",
+          "purpose": "공동주택",
+          "households": "88",
+          "unitCount": "0",
+          "pnu": "1156011000100540000"
+        },
+        {
+          "registerId": "102017278",
+          "name": "",
+          "dong": "에이동",
+          "address": "서울특별시 영등포구 여의도동 54-4번지",
+          "roadAddress": "서울특별시 영등포구 국제금융로 108-6 (여의도동)",
+          "purpose": "공동주택",
+          "households": "88",
+          "unitCount": "0",
+          "pnu": "1156011000100540004"
+        },
+        {
+          "registerId": "102017280",
+          "name": "",
+          "dong": "디동",
+          "address": "서울특별시 영등포구 여의도동 54-8번지",
+          "roadAddress": "서울특별시 영등포구 국제금융로 108-6 (여의도동)",
+          "purpose": "공동주택",
+          "households": "44",
+          "unitCount": "0",
+          "pnu": "1156011000100540008"
+        }
+      ]
+    },
+    {
+      "id": 880,
+      "name": "방배임광3차",
+      "priorIdentity": [
+        {
+          "singleComplex": true,
+          "complexId": "11650100003013",
+          "residentialBuildings": 4,
+          "households": 316,
+          "address": "서울특별시 서초구 방배동 1010-1",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+        }
+      ],
+      "expectedBuildings": 4,
+      "observedHouseholds": 316,
+      "titles": [
+        {
+          "registerId": "102317614",
+          "name": "방배임광아파트",
+          "dong": "11동",
+          "address": "서울특별시 서초구 방배동 1011-1번지",
+          "roadAddress": "서울특별시 서초구 방배로2길 24-6 (방배동)",
+          "purpose": "공동주택",
+          "households": "79",
+          "unitCount": "0",
+          "pnu": "1165010100110110001"
+        },
+        {
+          "registerId": "102317613",
+          "name": "방배임광아파트",
+          "dong": "15동",
+          "address": "서울특별시 서초구 방배동 1010-1번지",
+          "roadAddress": "서울특별시 서초구 방배로2길 24-5 (방배동)",
+          "purpose": "공동주택",
+          "households": "79",
+          "unitCount": "0",
+          "pnu": "1165010100110100001"
+        },
+        {
+          "registerId": "102317612",
+          "name": "방배임광아파트",
+          "dong": "13동",
+          "address": "서울특별시 서초구 방배동 1010-1번지",
+          "roadAddress": "서울특별시 서초구 방배로2길 24-5 (방배동)",
+          "purpose": "공동주택",
+          "households": "79",
+          "unitCount": "0",
+          "pnu": "1165010100110100001"
+        },
+        {
+          "registerId": "102317615",
+          "name": "방배임광아파트",
+          "dong": "12동",
+          "address": "서울특별시 서초구 방배동 1011-1번지",
+          "roadAddress": "서울특별시 서초구 방배로2길 24-6 (방배동)",
+          "purpose": "공동주택",
+          "households": "79",
+          "unitCount": "0",
+          "pnu": "1165010100110110001"
+        }
+      ]
+    },
+    {
+      "id": 1041,
+      "name": "염창우성1,2삼천리",
+      "priorIdentity": [
+        {
+          "singleComplex": true,
+          "complexId": "11500112041903",
+          "residentialBuildings": 4,
+          "households": 339,
+          "address": "서울특별시 강서구 염창동 66-9",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+        },
+        {
+          "singleComplex": true,
+          "complexId": "11500100001760",
+          "residentialBuildings": 1,
+          "households": 77,
+          "address": "서울특별시 강서구 염창동 70-20",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+        },
+        {
+          "singleComplex": true,
+          "complexId": "11500100001765",
+          "residentialBuildings": 1,
+          "households": 186,
+          "address": "서울특별시 강서구 염창동 287-1",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+        }
+      ],
+      "expectedBuildings": 6,
+      "observedHouseholds": 602,
+      "titles": [
+        {
+          "registerId": "101713830",
+          "name": "염창동우성아파트",
+          "dong": "1동",
+          "address": "서울특별시 강서구 염창동 66-9번지",
+          "roadAddress": "서울특별시 강서구 양천로67길 77 (염창동)",
+          "purpose": "공동주택",
+          "households": "80",
+          "unitCount": "0",
+          "pnu": "1150010100100660009"
+        },
+        {
+          "registerId": "101713834",
+          "name": "염창동우성아파트",
+          "dong": "3동",
+          "address": "서울특별시 강서구 염창동 66-9번지",
+          "roadAddress": "서울특별시 강서구 양천로67길 77 (염창동)",
+          "purpose": "공동주택",
+          "households": "159",
+          "unitCount": "0",
+          "pnu": "1150010100100660009"
+        },
+        {
+          "registerId": "101713831",
+          "name": "염창동우성아파트",
+          "dong": "2동",
+          "address": "서울특별시 강서구 염창동 66-9번지",
+          "roadAddress": "서울특별시 강서구 양천로67길 77 (염창동)",
+          "purpose": "공동주택",
+          "households": "88",
+          "unitCount": "0",
+          "pnu": "1150010100100660009"
+        },
+        {
+          "registerId": "1017114583",
+          "name": "삼천리아파트",
+          "dong": "",
+          "address": "서울특별시 강서구 염창동 70-20번지",
+          "roadAddress": "서울특별시 강서구 양천로67길 71-16 (염창동)",
+          "purpose": "공동주택",
+          "households": "77",
+          "unitCount": "0",
+          "pnu": "1150010100100700020"
+        },
+        {
+          "registerId": "101713833",
+          "name": "염창동우성연립",
+          "dong": "4동",
+          "address": "서울특별시 강서구 염창동 66-9번지",
+          "roadAddress": "서울특별시 강서구 양천로67길 77 (염창동)",
+          "purpose": "공동주택",
+          "households": "12",
+          "unitCount": "0",
+          "pnu": "1150010100100660009"
+        },
+        {
+          "registerId": "101714296",
+          "name": "염창2차우성아파트",
+          "dong": "201동",
+          "address": "서울특별시 강서구 염창동 287-1번지",
+          "roadAddress": "서울특별시 강서구 양천로67길 54 (염창동)",
+          "purpose": "공동주택",
+          "households": "186",
+          "unitCount": "0",
+          "pnu": "1150010100102870001"
+        }
+      ]
+    },
+    {
+      "id": 1052,
+      "name": "청량리 미주아파트",
+      "priorIdentity": [
+        {
+          "singleComplex": true,
+          "complexId": "11230100000190",
+          "residentialBuildings": 8,
+          "households": 1089,
+          "address": "서울특별시 동대문구 청량리동 235-1",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+        }
+      ],
+      "expectedBuildings": 8,
+      "observedHouseholds": 1089,
+      "titles": [
+        {
+          "registerId": "100716013",
+          "name": "미주아파트",
+          "dong": "4동",
+          "address": "서울특별시 동대문구 청량리동 235-11번지",
+          "roadAddress": "서울특별시 동대문구 약령시로 154 (청량리동)",
+          "purpose": "공동주택",
+          "households": "225",
+          "unitCount": "0",
+          "pnu": "1123010700102350011"
+        },
+        {
+          "registerId": "100716015",
+          "name": "미주아파트",
+          "dong": "2동",
+          "address": "서울특별시 동대문구 청량리동 235-11번지",
+          "roadAddress": "서울특별시 동대문구 약령시로 154 (청량리동)",
+          "purpose": "공동주택",
+          "households": "165",
+          "unitCount": "0",
+          "pnu": "1123010700102350011"
+        },
+        {
+          "registerId": "100716394",
+          "name": "미주아파트",
+          "dong": "5동",
+          "address": "서울특별시 동대문구 청량리동 235-1번지",
+          "roadAddress": "서울특별시 동대문구 약령시로 147 (청량리동)",
+          "purpose": "공동주택",
+          "households": "90",
+          "unitCount": "0",
+          "pnu": "1123010700102350001"
+        },
+        {
+          "registerId": "100716392",
+          "name": "미주아파트",
+          "dong": "7동",
+          "address": "서울특별시 동대문구 청량리동 235-1번지",
+          "roadAddress": "서울특별시 동대문구 약령시로 147 (청량리동)",
+          "purpose": "공동주택",
+          "households": "90",
+          "unitCount": "0",
+          "pnu": "1123010700102350001"
+        },
+        {
+          "registerId": "100716393",
+          "name": "미주아파트",
+          "dong": "6동",
+          "address": "서울특별시 동대문구 청량리동 235-1번지",
+          "roadAddress": "서울특별시 동대문구 약령시로 147 (청량리동)",
+          "purpose": "공동주택",
+          "households": "165",
+          "unitCount": "0",
+          "pnu": "1123010700102350001"
+        },
+        {
+          "registerId": "100716391",
+          "name": "미주아파트",
+          "dong": "8동",
+          "address": "서울특별시 동대문구 청량리동 235-1번지",
+          "roadAddress": "서울특별시 동대문구 약령시로 147 (청량리동)",
+          "purpose": "공동주택",
+          "households": "78",
+          "unitCount": "0",
+          "pnu": "1123010700102350001"
+        },
+        {
+          "registerId": "100716016",
+          "name": "미주아파트",
+          "dong": "1동",
+          "address": "서울특별시 동대문구 청량리동 235-11번지",
+          "roadAddress": "서울특별시 동대문구 약령시로 154 (청량리동)",
+          "purpose": "공동주택",
+          "households": "126",
+          "unitCount": "0",
+          "pnu": "1123010700102350011"
+        },
+        {
+          "registerId": "100716014",
+          "name": "미주아파트",
+          "dong": "3동",
+          "address": "서울특별시 동대문구 청량리동 235-11번지",
+          "roadAddress": "서울특별시 동대문구 약령시로 154 (청량리동)",
+          "purpose": "공동주택",
+          "households": "150",
+          "unitCount": "0",
+          "pnu": "1123010700102350011"
+        }
+      ]
+    },
+    {
+      "id": 1058,
+      "name": "여의도미성아파트",
+      "priorIdentity": [
+        {
+          "singleComplex": true,
+          "complexId": "11560100000959",
+          "residentialBuildings": 5,
+          "households": 577,
+          "address": "서울특별시 영등포구 여의도동 37",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+        }
+      ],
+      "expectedBuildings": 5,
+      "observedHouseholds": 577,
+      "titles": [
+        {
+          "registerId": "102017186",
+          "name": "미성아파트",
+          "dong": "씨동",
+          "address": "서울특별시 영등포구 여의도동 37-2번지",
+          "roadAddress": "서울특별시 영등포구 의사당대로 110 (여의도동)",
+          "purpose": "공동주택",
+          "households": "96",
+          "unitCount": "0",
+          "pnu": "1156011000100370002"
+        },
+        {
+          "registerId": "102017187",
+          "name": "미성아파트",
+          "dong": "비동",
+          "address": "서울특별시 영등포구 여의도동 37-2번지",
+          "roadAddress": "서울특별시 영등포구 의사당대로 110 (여의도동)",
+          "purpose": "공동주택",
+          "households": "96",
+          "unitCount": "0",
+          "pnu": "1156011000100370002"
+        },
+        {
+          "registerId": "102017183",
+          "name": "이동",
+          "dong": "이동",
+          "address": "서울특별시 영등포구 여의도동 37번지",
+          "roadAddress": "서울특별시 영등포구 의사당대로 110 (여의도동)",
+          "purpose": "공동주택",
+          "households": "72",
+          "unitCount": "0",
+          "pnu": "1156011000100370000"
+        },
+        {
+          "registerId": "102017184",
+          "name": "디동",
+          "dong": "디동",
+          "address": "서울특별시 영등포구 여의도동 37번지",
+          "roadAddress": "서울특별시 영등포구 의사당대로 110 (여의도동)",
+          "purpose": "공동주택",
+          "households": "144",
+          "unitCount": "0",
+          "pnu": "1156011000100370000"
+        },
+        {
+          "registerId": "102017185",
+          "name": "미성아파트",
+          "dong": "에이동",
+          "address": "서울특별시 영등포구 여의도동 37-1번지",
+          "roadAddress": "서울특별시 영등포구 의사당대로 110 (여의도동)",
+          "purpose": "공동주택",
+          "households": "169",
+          "unitCount": "0",
+          "pnu": "1156011000100370001"
+        }
+      ]
+    },
+    {
+      "id": 1320,
+      "name": "삼익그린2차",
+      "priorIdentity": [
+        {
+          "singleComplex": true,
+          "complexId": "11740100001538",
+          "residentialBuildings": 18,
+          "households": 2400,
+          "address": "서울특별시 강동구 명일동 15",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+        }
+      ],
+      "expectedBuildings": 18,
+      "observedHouseholds": 2400,
+      "titles": [
+        {
+          "registerId": "102611211",
+          "name": "삼익그린맨션",
+          "dong": "607동",
+          "address": "서울특별시 강동구 명일동 28번지",
+          "roadAddress": "서울특별시 강동구 고덕로 210 (명일동)",
+          "purpose": "공동주택",
+          "households": "225",
+          "unitCount": "0",
+          "pnu": "1174010100100280000"
+        },
+        {
+          "registerId": "102611218",
+          "name": "삼익그린맨션",
+          "dong": "509동",
+          "address": "서울특별시 강동구 명일동 29-5번지",
+          "roadAddress": "서울특별시 강동구 고덕로 210 (명일동)",
+          "purpose": "공동주택",
+          "households": "60",
+          "unitCount": "0",
+          "pnu": "1174010100100290005"
+        },
+        {
+          "registerId": "102611217",
+          "name": "삼익그린맨션",
+          "dong": "608동",
+          "address": "서울특별시 강동구 명일동 29-5번지",
+          "roadAddress": "서울특별시 강동구 고덕로 210 (명일동)",
+          "purpose": "공동주택",
+          "households": "90",
+          "unitCount": "0",
+          "pnu": "1174010100100290005"
+        },
+        {
+          "registerId": "102611212",
+          "name": "삼익그린맨션",
+          "dong": "303동",
+          "address": "서울특별시 강동구 명일동 28번지",
+          "roadAddress": "서울특별시 강동구 고덕로 210 (명일동)",
+          "purpose": "공동주택",
+          "households": "90",
+          "unitCount": "0",
+          "pnu": "1174010100100280000"
+        },
+        {
+          "registerId": "102611216",
+          "name": "삼익그린맨션",
+          "dong": "507동",
+          "address": "서울특별시 강동구 명일동 28번지",
+          "roadAddress": "서울특별시 강동구 고덕로 210 (명일동)",
+          "purpose": "공동주택",
+          "households": "120",
+          "unitCount": "0",
+          "pnu": "1174010100100280000"
+        },
+        {
+          "registerId": "102611215",
+          "name": "삼익그린맨션",
+          "dong": "508동",
+          "address": "서울특별시 강동구 명일동 28번지",
+          "roadAddress": "서울특별시 강동구 고덕로 210 (명일동)",
+          "purpose": "공동주택",
+          "households": "90",
+          "unitCount": "0",
+          "pnu": "1174010100100280000"
+        },
+        {
+          "registerId": "102611214",
+          "name": "삼익그린맨션",
+          "dong": "606동",
+          "address": "서울특별시 강동구 명일동 28번지",
+          "roadAddress": "서울특별시 강동구 고덕로 210 (명일동)",
+          "purpose": "공동주택",
+          "households": "105",
+          "unitCount": "0",
+          "pnu": "1174010100100280000"
+        },
+        {
+          "registerId": "102611205",
+          "name": "삼익그린맨션",
+          "dong": "505동",
+          "address": "서울특별시 강동구 명일동 15번지",
+          "roadAddress": "서울특별시 강동구 고덕로 210 (명일동)",
+          "purpose": "공동주택",
+          "households": "90",
+          "unitCount": "0",
+          "pnu": "1174010100100150000"
+        },
+        {
+          "registerId": "102611201",
+          "name": "삼익그린맨션",
+          "dong": "603동",
+          "address": "서울특별시 강동구 명일동 15번지",
+          "roadAddress": "서울특별시 강동구 고덕로 210 (명일동)",
+          "purpose": "공동주택",
+          "households": "225",
+          "unitCount": "0",
+          "pnu": "1174010100100150000"
+        },
+        {
+          "registerId": "102611202",
+          "name": "삼익그린맨션",
+          "dong": "602동",
+          "address": "서울특별시 강동구 명일동 15번지",
+          "roadAddress": "서울특별시 강동구 고덕로 210 (명일동)",
+          "purpose": "공동주택",
+          "households": "225",
+          "unitCount": "0",
+          "pnu": "1174010100100150000"
+        },
+        {
+          "registerId": "102611204",
+          "name": "삼익그린맨션",
+          "dong": "506동",
+          "address": "서울특별시 강동구 명일동 15번지",
+          "roadAddress": "서울특별시 강동구 고덕로 210 (명일동)",
+          "purpose": "공동주택",
+          "households": "120",
+          "unitCount": "0",
+          "pnu": "1174010100100150000"
+        },
+        {
+          "registerId": "102611200",
+          "name": "삼익그린맨션",
+          "dong": "605동",
+          "address": "서울특별시 강동구 명일동 15번지",
+          "roadAddress": "서울특별시 강동구 고덕로 210 (명일동)",
+          "purpose": "공동주택",
+          "households": "225",
+          "unitCount": "0",
+          "pnu": "1174010100100150000"
+        },
+        {
+          "registerId": "102611209",
+          "name": "삼익그린맨션",
+          "dong": "302동",
+          "address": "서울특별시 강동구 명일동 15번지",
+          "roadAddress": "서울특별시 강동구 고덕로 210 (명일동)",
+          "purpose": "공동주택",
+          "households": "72",
+          "unitCount": "0",
+          "pnu": "1174010100100150000"
+        },
+        {
+          "registerId": "102611203",
+          "name": "삼익그린맨션",
+          "dong": "601동",
+          "address": "서울특별시 강동구 명일동 15번지",
+          "roadAddress": "서울특별시 강동구 고덕로 210 (명일동)",
+          "purpose": "공동주택",
+          "households": "135",
+          "unitCount": "0",
+          "pnu": "1174010100100150000"
+        },
+        {
+          "registerId": "102611206",
+          "name": "삼익그린맨션",
+          "dong": "503동",
+          "address": "서울특별시 강동구 명일동 15번지",
+          "roadAddress": "서울특별시 강동구 고덕로 210 (명일동)",
+          "purpose": "공동주택",
+          "households": "90",
+          "unitCount": "0",
+          "pnu": "1174010100100150000"
+        },
+        {
+          "registerId": "102611210",
+          "name": "삼익그린맨션",
+          "dong": "301동",
+          "address": "서울특별시 강동구 명일동 15번지",
+          "roadAddress": "서울특별시 강동구 고덕로 210 (명일동)",
+          "purpose": "공동주택",
+          "households": "108",
+          "unitCount": "0",
+          "pnu": "1174010100100150000"
+        },
+        {
+          "registerId": "102611207",
+          "name": "삼익그린맨션",
+          "dong": "502동",
+          "address": "서울특별시 강동구 명일동 15번지",
+          "roadAddress": "서울특별시 강동구 고덕로 210 (명일동)",
+          "purpose": "공동주택",
+          "households": "150",
+          "unitCount": "0",
+          "pnu": "1174010100100150000"
+        },
+        {
+          "registerId": "102611208",
+          "name": "삼익그린맨션",
+          "dong": "501동",
+          "address": "서울특별시 강동구 명일동 15번지",
+          "roadAddress": "서울특별시 강동구 고덕로 210 (명일동)",
+          "purpose": "공동주택",
+          "households": "180",
+          "unitCount": "0",
+          "pnu": "1174010100100150000"
+        }
+      ]
+    },
+    {
+      "id": 1423,
+      "name": "상계주공6단지",
+      "priorIdentity": [
+        {
+          "singleComplex": true,
+          "complexId": "11350100002512",
+          "residentialBuildings": 28,
+          "households": 2646,
+          "address": "서울특별시 노원구 상계동 720",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+        }
+      ],
+      "expectedBuildings": 28,
+      "observedHouseholds": 2646,
+      "titles": [
+        {
+          "registerId": "101213315",
+          "name": "상계주공아파트",
+          "dong": "614동",
+          "address": "서울특별시 노원구 상계동 720번지",
+          "roadAddress": "서울특별시 노원구 노해로 508 (상계동)",
+          "purpose": "공동주택",
+          "households": "88",
+          "unitCount": "0",
+          "pnu": "1135010500107200000"
+        },
+        {
+          "registerId": "101213320",
+          "name": "상계주공아파트",
+          "dong": "617동",
+          "address": "서울특별시 노원구 상계동 720번지",
+          "roadAddress": "서울특별시 노원구 노해로 508 (상계동)",
+          "purpose": "공동주택",
+          "households": "180",
+          "unitCount": "0",
+          "pnu": "1135010500107200000"
+        },
+        {
+          "registerId": "101213331",
+          "name": "상계주공아파트",
+          "dong": "612동",
+          "address": "서울특별시 노원구 상계동 720번지",
+          "roadAddress": "서울특별시 노원구 노해로 508 (상계동)",
+          "purpose": "공동주택",
+          "households": "88",
+          "unitCount": "0",
+          "pnu": "1135010500107200000"
+        },
+        {
+          "registerId": "101213328",
+          "name": "상계주공아파트",
+          "dong": "624동",
+          "address": "서울특별시 노원구 상계동 720번지",
+          "roadAddress": "서울특별시 노원구 노해로 508 (상계동)",
+          "purpose": "공동주택",
+          "households": "70",
+          "unitCount": "0",
+          "pnu": "1135010500107200000"
+        },
+        {
+          "registerId": "101213317",
+          "name": "상계주공아파트",
+          "dong": "621동",
+          "address": "서울특별시 노원구 상계동 720번지",
+          "roadAddress": "서울특별시 노원구 노해로 508 (상계동)",
+          "purpose": "공동주택",
+          "households": "70",
+          "unitCount": "0",
+          "pnu": "1135010500107200000"
+        },
+        {
+          "registerId": "101213318",
+          "name": "상계주공아파트",
+          "dong": "619동",
+          "address": "서울특별시 노원구 상계동 720번지",
+          "roadAddress": "서울특별시 노원구 노해로 508 (상계동)",
+          "purpose": "공동주택",
+          "households": "88",
+          "unitCount": "0",
+          "pnu": "1135010500107200000"
+        },
+        {
+          "registerId": "101213329",
+          "name": "상계주공아파트",
+          "dong": "604동",
+          "address": "서울특별시 노원구 상계동 720번지",
+          "roadAddress": "서울특별시 노원구 노해로 508 (상계동)",
+          "purpose": "공동주택",
+          "households": "88",
+          "unitCount": "0",
+          "pnu": "1135010500107200000"
+        },
+        {
+          "registerId": "101213311",
+          "name": "상계주공아파트",
+          "dong": "613동",
+          "address": "서울특별시 노원구 상계동 720번지",
+          "roadAddress": "서울특별시 노원구 노해로 508 (상계동)",
+          "purpose": "공동주택",
+          "households": "88",
+          "unitCount": "0",
+          "pnu": "1135010500107200000"
+        },
+        {
+          "registerId": "101213310",
+          "name": "상계주공아파트",
+          "dong": "620동",
+          "address": "서울특별시 노원구 상계동 720번지",
+          "roadAddress": "서울특별시 노원구 노해로 508 (상계동)",
+          "purpose": "공동주택",
+          "households": "88",
+          "unitCount": "0",
+          "pnu": "1135010500107200000"
+        },
+        {
+          "registerId": "101213319",
+          "name": "상계주공아파트",
+          "dong": "618동",
+          "address": "서울특별시 노원구 상계동 720번지",
+          "roadAddress": "서울특별시 노원구 노해로 508 (상계동)",
+          "purpose": "공동주택",
+          "households": "88",
+          "unitCount": "0",
+          "pnu": "1135010500107200000"
+        },
+        {
+          "registerId": "101213312",
+          "name": "상계주공아파트",
+          "dong": "608동",
+          "address": "서울특별시 노원구 상계동 720번지",
+          "roadAddress": "서울특별시 노원구 노해로 508 (상계동)",
+          "purpose": "공동주택",
+          "households": "88",
+          "unitCount": "0",
+          "pnu": "1135010500107200000"
+        },
+        {
+          "registerId": "101213314",
+          "name": "상계주공아파트",
+          "dong": "606동",
+          "address": "서울특별시 노원구 상계동 720번지",
+          "roadAddress": "서울특별시 노원구 노해로 508 (상계동)",
+          "purpose": "공동주택",
+          "households": "180",
+          "unitCount": "0",
+          "pnu": "1135010500107200000"
+        },
+        {
+          "registerId": "101213330",
+          "name": "상계주공아파트",
+          "dong": "605동",
+          "address": "서울특별시 노원구 상계동 720번지",
+          "roadAddress": "서울특별시 노원구 노해로 508 (상계동)",
+          "purpose": "공동주택",
+          "households": "88",
+          "unitCount": "0",
+          "pnu": "1135010500107200000"
+        },
+        {
+          "registerId": "101213551",
+          "name": "상계주공아파트",
+          "dong": "602동",
+          "address": "서울특별시 노원구 상계동 728-3번지",
+          "roadAddress": "서울특별시 노원구 동일로 1390 (상계동)",
+          "purpose": "공동주택",
+          "households": "49",
+          "unitCount": "0",
+          "pnu": "1135010500107280003"
+        },
+        {
+          "registerId": "101213322",
+          "name": "상계주공아파트",
+          "dong": "615동",
+          "address": "서울특별시 노원구 상계동 720번지",
+          "roadAddress": "서울특별시 노원구 노해로 508 (상계동)",
+          "purpose": "공동주택",
+          "households": "180",
+          "unitCount": "0",
+          "pnu": "1135010500107200000"
+        },
+        {
+          "registerId": "101213333",
+          "name": "상계주공아파트",
+          "dong": "610동",
+          "address": "서울특별시 노원구 상계동 720번지",
+          "roadAddress": "서울특별시 노원구 노해로 508 (상계동)",
+          "purpose": "공동주택",
+          "households": "88",
+          "unitCount": "0",
+          "pnu": "1135010500107200000"
+        },
+        {
+          "registerId": "101213325",
+          "name": "상계주공아파트",
+          "dong": "627동",
+          "address": "서울특별시 노원구 상계동 720번지",
+          "roadAddress": "서울특별시 노원구 노해로 508 (상계동)",
+          "purpose": "공동주택",
+          "households": "88",
+          "unitCount": "0",
+          "pnu": "1135010500107200000"
+        },
+        {
+          "registerId": "101213321",
+          "name": "상계주공아파트",
+          "dong": "616동",
+          "address": "서울특별시 노원구 상계동 720번지",
+          "roadAddress": "서울특별시 노원구 노해로 508 (상계동)",
+          "purpose": "공동주택",
+          "households": "180",
+          "unitCount": "0",
+          "pnu": "1135010500107200000"
+        },
+        {
+          "registerId": "101213334",
+          "name": "상계주공아파트",
+          "dong": "609동",
+          "address": "서울특별시 노원구 상계동 720번지",
+          "roadAddress": "서울특별시 노원구 노해로 508 (상계동)",
+          "purpose": "공동주택",
+          "households": "88",
+          "unitCount": "0",
+          "pnu": "1135010500107200000"
+        },
+        {
+          "registerId": "101213316",
+          "name": "상계주공아파트",
+          "dong": "622동",
+          "address": "서울특별시 노원구 상계동 720번지",
+          "roadAddress": "서울특별시 노원구 노해로 508 (상계동)",
+          "purpose": "공동주택",
+          "households": "70",
+          "unitCount": "0",
+          "pnu": "1135010500107200000"
+        },
+        {
+          "registerId": "101213309",
+          "name": "상계주공아파트",
+          "dong": "603동",
+          "address": "서울특별시 노원구 상계동 720번지",
+          "roadAddress": "서울특별시 노원구 노해로 508 (상계동)",
+          "purpose": "공동주택",
+          "households": "88",
+          "unitCount": "0",
+          "pnu": "1135010500107200000"
+        },
+        {
+          "registerId": "101213549",
+          "name": "상계주공아파트",
+          "dong": "601동",
+          "address": "서울특별시 노원구 상계동 728-3번지",
+          "roadAddress": "서울특별시 노원구 동일로 1384 (상계동)",
+          "purpose": "공동주택",
+          "households": "49",
+          "unitCount": "0",
+          "pnu": "1135010500107280003"
+        },
+        {
+          "registerId": "101213332",
+          "name": "상계주공아파트",
+          "dong": "611동",
+          "address": "서울특별시 노원구 상계동 720번지",
+          "roadAddress": "서울특별시 노원구 노해로 508 (상계동)",
+          "purpose": "공동주택",
+          "households": "88",
+          "unitCount": "0",
+          "pnu": "1135010500107200000"
+        },
+        {
+          "registerId": "101213327",
+          "name": "상계주공아파트",
+          "dong": "625동",
+          "address": "서울특별시 노원구 상계동 720번지",
+          "roadAddress": "서울특별시 노원구 노해로 508 (상계동)",
+          "purpose": "공동주택",
+          "households": "70",
+          "unitCount": "0",
+          "pnu": "1135010500107200000"
+        },
+        {
+          "registerId": "101213323",
+          "name": "상계주공아파트",
+          "dong": "623동",
+          "address": "서울특별시 노원구 상계동 720번지",
+          "roadAddress": "서울특별시 노원구 노해로 508 (상계동)",
+          "purpose": "공동주택",
+          "households": "70",
+          "unitCount": "0",
+          "pnu": "1135010500107200000"
+        },
+        {
+          "registerId": "101213324",
+          "name": "상계주공아파트",
+          "dong": "628동",
+          "address": "서울특별시 노원구 상계동 720번지",
+          "roadAddress": "서울특별시 노원구 노해로 508 (상계동)",
+          "purpose": "공동주택",
+          "households": "88",
+          "unitCount": "0",
+          "pnu": "1135010500107200000"
+        },
+        {
+          "registerId": "101213313",
+          "name": "상계주공아파트",
+          "dong": "607동",
+          "address": "서울특별시 노원구 상계동 720번지",
+          "roadAddress": "서울특별시 노원구 노해로 508 (상계동)",
+          "purpose": "공동주택",
+          "households": "88",
+          "unitCount": "0",
+          "pnu": "1135010500107200000"
+        },
+        {
+          "registerId": "101213326",
+          "name": "상계주공아파트",
+          "dong": "626동",
+          "address": "서울특별시 노원구 상계동 720번지",
+          "roadAddress": "서울특별시 노원구 노해로 508 (상계동)",
+          "purpose": "공동주택",
+          "households": "70",
+          "unitCount": "0",
+          "pnu": "1135010500107200000"
+        }
+      ]
+    },
+    {
+      "id": 1630,
+      "name": "풍납극동",
+      "priorIdentity": [
+        {
+          "singleComplex": true,
+          "complexId": "11710100002201",
+          "residentialBuildings": 4,
+          "households": 415,
+          "address": "서울특별시 송파구 풍납동 391",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+        }
+      ],
+      "expectedBuildings": 4,
+      "observedHouseholds": 415,
+      "titles": [
+        {
+          "registerId": "1025122484",
+          "name": "극동아파트",
+          "dong": "5동",
+          "address": "서울특별시 송파구 풍납동 400-6번지",
+          "roadAddress": "서울특별시 송파구 올림픽로45길 12 (풍납동)",
+          "purpose": "공동주택",
+          "households": "108",
+          "unitCount": "0",
+          "pnu": "1171010300104000006"
+        },
+        {
+          "registerId": "10251989",
+          "name": "극동아파트",
+          "dong": "2동",
+          "address": "서울특별시 송파구 풍납동 391번지",
+          "roadAddress": "서울특별시 송파구 올림픽로45길 11 (풍납동)",
+          "purpose": "공동주택",
+          "households": "75",
+          "unitCount": "0",
+          "pnu": "1171010300103910000"
+        },
+        {
+          "registerId": "10251991",
+          "name": "극동아파트",
+          "dong": "3동",
+          "address": "서울특별시 송파구 풍납동 391번지",
+          "roadAddress": "서울특별시 송파구 올림픽로45길 11 (풍납동)",
+          "purpose": "공동주택",
+          "households": "116",
+          "unitCount": "0",
+          "pnu": "1171010300103910000"
+        },
+        {
+          "registerId": "10251992",
+          "name": "극동아파트",
+          "dong": "1동",
+          "address": "서울특별시 송파구 풍납동 391번지",
+          "roadAddress": "서울특별시 송파구 올림픽로45길 11 (풍납동)",
+          "purpose": "공동주택",
+          "households": "116",
+          "unitCount": "0",
+          "pnu": "1171010300103910000"
+        }
+      ]
+    },
+    {
+      "id": 1724,
+      "name": "시흥성지",
+      "priorIdentity": [],
+      "expectedBuildings": 2,
+      "observedHouseholds": 233,
+      "titles": [
+        {
+          "registerId": "101911616",
+          "name": "성지아파트",
+          "dong": "2동",
+          "address": "서울특별시 금천구 시흥동 산173-8번지",
+          "roadAddress": "서울특별시 금천구 시흥대로51길 55 (시흥동)",
+          "purpose": "공동주택",
+          "households": "122",
+          "unitCount": "0",
+          "pnu": "1154510300201730008"
+        },
+        {
+          "registerId": "101911618",
+          "name": "성지아파트",
+          "dong": "1동",
+          "address": "서울특별시 금천구 시흥동 산173-8번지",
+          "roadAddress": "서울특별시 금천구 시흥대로51길 55 (시흥동)",
+          "purpose": "공동주택",
+          "households": "111",
+          "unitCount": "0",
+          "pnu": "1154510300201730008"
+        }
+      ]
+    },
+    {
+      "id": 1730,
+      "name": "상계주공3",
+      "priorIdentity": [
+        {
+          "singleComplex": true,
+          "complexId": "11350100002509",
+          "residentialBuildings": 21,
+          "households": 2113,
+          "address": "서울특별시 노원구 상계동 730-2",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+        },
+        {
+          "singleComplex": true,
+          "complexId": "11350100050455",
+          "residentialBuildings": 5,
+          "households": 100,
+          "address": "서울특별시 노원구 상계동 737",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+        }
+      ],
+      "expectedBuildings": 26,
+      "observedHouseholds": 2213,
+      "titles": [
+        {
+          "registerId": "101213561",
+          "name": "상계주공아파트",
+          "dong": "311동",
+          "address": "서울특별시 노원구 상계동 737번지",
+          "roadAddress": "서울특별시 노원구 동일로215길 48 (상계동)",
+          "purpose": "공동주택",
+          "households": "20",
+          "unitCount": "0",
+          "pnu": "1135010500107370000"
+        },
+        {
+          "registerId": "101213556",
+          "name": "상계주공아파트",
+          "dong": "303동",
+          "address": "서울특별시 노원구 상계동 737번지",
+          "roadAddress": "서울특별시 노원구 동일로215길 48 (상계동)",
+          "purpose": "공동주택",
+          "households": "88",
+          "unitCount": "0",
+          "pnu": "1135010500107370000"
+        },
+        {
+          "registerId": "101213571",
+          "name": "상계주공아파트",
+          "dong": "318동",
+          "address": "서울특별시 노원구 상계동 737번지",
+          "roadAddress": "서울특별시 노원구 동일로215길 48 (상계동)",
+          "purpose": "공동주택",
+          "households": "120",
+          "unitCount": "0",
+          "pnu": "1135010500107370000"
+        },
+        {
+          "registerId": "101213576",
+          "name": "상계주공아파트",
+          "dong": "325동",
+          "address": "서울특별시 노원구 상계동 737번지",
+          "roadAddress": "서울특별시 노원구 동일로215길 48 (상계동)",
+          "purpose": "공동주택",
+          "households": "88",
+          "unitCount": "0",
+          "pnu": "1135010500107370000"
+        },
+        {
+          "registerId": "101213555",
+          "name": "상계주공아파트",
+          "dong": "304동",
+          "address": "서울특별시 노원구 상계동 737번지",
+          "roadAddress": "서울특별시 노원구 동일로215길 48 (상계동)",
+          "purpose": "공동주택",
+          "households": "88",
+          "unitCount": "0",
+          "pnu": "1135010500107370000"
+        },
+        {
+          "registerId": "101213554",
+          "name": "상계주공아파트",
+          "dong": "305동",
+          "address": "서울특별시 노원구 상계동 737번지",
+          "roadAddress": "서울특별시 노원구 동일로215길 48 (상계동)",
+          "purpose": "공동주택",
+          "households": "88",
+          "unitCount": "0",
+          "pnu": "1135010500107370000"
+        },
+        {
+          "registerId": "101213565",
+          "name": "상계주공아파트",
+          "dong": "315동",
+          "address": "서울특별시 노원구 상계동 737번지",
+          "roadAddress": "서울특별시 노원구 동일로215길 48 (상계동)",
+          "purpose": "공동주택",
+          "households": "88",
+          "unitCount": "0",
+          "pnu": "1135010500107370000"
+        },
+        {
+          "registerId": "101213568",
+          "name": "상계주공아파트",
+          "dong": "321동",
+          "address": "서울특별시 노원구 상계동 737번지",
+          "roadAddress": "서울특별시 노원구 동일로215길 48 (상계동)",
+          "purpose": "공동주택",
+          "households": "70",
+          "unitCount": "0",
+          "pnu": "1135010500107370000"
+        },
+        {
+          "registerId": "101213572",
+          "name": "상계주공아파트",
+          "dong": "317동",
+          "address": "서울특별시 노원구 상계동 737번지",
+          "roadAddress": "서울특별시 노원구 동일로215길 48 (상계동)",
+          "purpose": "공동주택",
+          "households": "120",
+          "unitCount": "0",
+          "pnu": "1135010500107370000"
+        },
+        {
+          "registerId": "101213355",
+          "name": "상계주공아파트",
+          "dong": "301동",
+          "address": "서울특별시 노원구 상계동 730-2번지",
+          "roadAddress": "서울특별시 노원구 동일로 1383 (상계동)",
+          "purpose": "공동주택",
+          "households": "49",
+          "unitCount": "0",
+          "pnu": "1135010500107300002"
+        },
+        {
+          "registerId": "101213560",
+          "name": "상계주공아파트",
+          "dong": "312동",
+          "address": "서울특별시 노원구 상계동 737번지",
+          "roadAddress": "서울특별시 노원구 동일로215길 48 (상계동)",
+          "purpose": "공동주택",
+          "households": "120",
+          "unitCount": "0",
+          "pnu": "1135010500107370000"
+        },
+        {
+          "registerId": "101213552",
+          "name": "상계주공아파트",
+          "dong": "310동",
+          "address": "서울특별시 노원구 상계동 737번지",
+          "roadAddress": "서울특별시 노원구 동일로215길 48 (상계동)",
+          "purpose": "공동주택",
+          "households": "20",
+          "unitCount": "0",
+          "pnu": "1135010500107370000"
+        },
+        {
+          "registerId": "101213566",
+          "name": "상계주공아파트",
+          "dong": "323동",
+          "address": "서울특별시 노원구 상계동 737번지",
+          "roadAddress": "서울특별시 노원구 동일로215길 48 (상계동)",
+          "purpose": "공동주택",
+          "households": "88",
+          "unitCount": "0",
+          "pnu": "1135010500107370000"
+        },
+        {
+          "registerId": "101213558",
+          "name": "상계주공아파트",
+          "dong": "314동",
+          "address": "서울특별시 노원구 상계동 737번지",
+          "roadAddress": "서울특별시 노원구 동일로215길 48 (상계동)",
+          "purpose": "공동주택",
+          "households": "120",
+          "unitCount": "0",
+          "pnu": "1135010500107370000"
+        },
+        {
+          "registerId": "101213562",
+          "name": "상계주공아파트",
+          "dong": "309동",
+          "address": "서울특별시 노원구 상계동 737번지",
+          "roadAddress": "서울특별시 노원구 동일로215길 48 (상계동)",
+          "purpose": "공동주택",
+          "households": "20",
+          "unitCount": "0",
+          "pnu": "1135010500107370000"
+        },
+        {
+          "registerId": "101213567",
+          "name": "상계주공아파트",
+          "dong": "322동",
+          "address": "서울특별시 노원구 상계동 737번지",
+          "roadAddress": "서울특별시 노원구 동일로215길 48 (상계동)",
+          "purpose": "공동주택",
+          "households": "70",
+          "unitCount": "0",
+          "pnu": "1135010500107370000"
+        },
+        {
+          "registerId": "101213553",
+          "name": "상계주공아파트",
+          "dong": "316동",
+          "address": "서울특별시 노원구 상계동 737번지",
+          "roadAddress": "서울특별시 노원구 동일로215길 48 (상계동)",
+          "purpose": "공동주택",
+          "households": "88",
+          "unitCount": "0",
+          "pnu": "1135010500107370000"
+        },
+        {
+          "registerId": "101213569",
+          "name": "상계주공아파트",
+          "dong": "320동",
+          "address": "서울특별시 노원구 상계동 737번지",
+          "roadAddress": "서울특별시 노원구 동일로215길 48 (상계동)",
+          "purpose": "공동주택",
+          "households": "88",
+          "unitCount": "0",
+          "pnu": "1135010500107370000"
+        },
+        {
+          "registerId": "101213570",
+          "name": "상계주공아파트",
+          "dong": "319동",
+          "address": "서울특별시 노원구 상계동 737번지",
+          "roadAddress": "서울특별시 노원구 동일로215길 48 (상계동)",
+          "purpose": "공동주택",
+          "households": "120",
+          "unitCount": "0",
+          "pnu": "1135010500107370000"
+        },
+        {
+          "registerId": "101213573",
+          "name": "상계주공아파트",
+          "dong": "324동",
+          "address": "서울특별시 노원구 상계동 737번지",
+          "roadAddress": "서울특별시 노원구 동일로215길 48 (상계동)",
+          "purpose": "공동주택",
+          "households": "88",
+          "unitCount": "0",
+          "pnu": "1135010500107370000"
+        },
+        {
+          "registerId": "101213557",
+          "name": "상계주공아파트",
+          "dong": "306동",
+          "address": "서울특별시 노원구 상계동 737번지",
+          "roadAddress": "서울특별시 노원구 동일로215길 48 (상계동)",
+          "purpose": "공동주택",
+          "households": "180",
+          "unitCount": "0",
+          "pnu": "1135010500107370000"
+        },
+        {
+          "registerId": "101213564",
+          "name": "상계주공아파트",
+          "dong": "307동",
+          "address": "서울특별시 노원구 상계동 737번지",
+          "roadAddress": "서울특별시 노원구 동일로215길 48 (상계동)",
+          "purpose": "공동주택",
+          "households": "20",
+          "unitCount": "0",
+          "pnu": "1135010500107370000"
+        },
+        {
+          "registerId": "101213559",
+          "name": "상계주공아파트",
+          "dong": "313동",
+          "address": "서울특별시 노원구 상계동 737번지",
+          "roadAddress": "서울특별시 노원구 동일로215길 48 (상계동)",
+          "purpose": "공동주택",
+          "households": "88",
+          "unitCount": "0",
+          "pnu": "1135010500107370000"
+        },
+        {
+          "registerId": "101213563",
+          "name": "상계주공아파트",
+          "dong": "308동",
+          "address": "서울특별시 노원구 상계동 737번지",
+          "roadAddress": "서울특별시 노원구 동일로215길 48 (상계동)",
+          "purpose": "공동주택",
+          "households": "20",
+          "unitCount": "0",
+          "pnu": "1135010500107370000"
+        },
+        {
+          "registerId": "101213357",
+          "name": "상계주공아파트",
+          "dong": "302동",
+          "address": "서울특별시 노원구 상계동 730-2번지",
+          "roadAddress": "서울특별시 노원구 동일로 1389 (상계동)",
+          "purpose": "공동주택",
+          "households": "49",
+          "unitCount": "0",
+          "pnu": "1135010500107300002"
+        },
+        {
+          "registerId": "101213575",
+          "name": "상계주공아파트",
+          "dong": "326동",
+          "address": "서울특별시 노원구 상계동 737번지",
+          "roadAddress": "서울특별시 노원구 동일로215길 48 (상계동)",
+          "purpose": "공동주택",
+          "households": "215",
+          "unitCount": "0",
+          "pnu": "1135010500107370000"
+        }
+      ]
+    },
+    {
+      "id": 1732,
+      "name": "창동주공4단지",
+      "priorIdentity": [
+        {
+          "singleComplex": true,
+          "complexId": "11320100050299",
+          "residentialBuildings": 10,
+          "households": 1710,
+          "address": "서울특별시 도봉구 창동 373",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+        }
+      ],
+      "expectedBuildings": 10,
+      "observedHouseholds": 1710,
+      "titles": [
+        {
+          "registerId": "1011113021",
+          "name": "창동4단지주공아파트",
+          "dong": "402동",
+          "address": "서울특별시 도봉구 창동 380번지",
+          "roadAddress": "서울특별시 도봉구 덕릉로 350 (창동)",
+          "purpose": "공동주택",
+          "households": "180",
+          "unitCount": "0",
+          "pnu": "1132010700103800000"
+        },
+        {
+          "registerId": "1011113013",
+          "name": "창동4단지주공아파트",
+          "dong": "409동",
+          "address": "서울특별시 도봉구 창동 373번지",
+          "roadAddress": "서울특별시 도봉구 덕릉로 349 (창동)",
+          "purpose": "공동주택",
+          "households": "150",
+          "unitCount": "0",
+          "pnu": "1132010700103730000"
+        },
+        {
+          "registerId": "1011113019",
+          "name": "창동4단지주공아파트",
+          "dong": "404동",
+          "address": "서울특별시 도봉구 창동 380번지",
+          "roadAddress": "서울특별시 도봉구 덕릉로 350 (창동)",
+          "purpose": "공동주택",
+          "households": "120",
+          "unitCount": "0",
+          "pnu": "1132010700103800000"
+        },
+        {
+          "registerId": "1011113014",
+          "name": "창동4단지주공아파트",
+          "dong": "408동",
+          "address": "서울특별시 도봉구 창동 373번지",
+          "roadAddress": "서울특별시 도봉구 덕릉로 349 (창동)",
+          "purpose": "공동주택",
+          "households": "210",
+          "unitCount": "0",
+          "pnu": "1132010700103730000"
+        },
+        {
+          "registerId": "1011113011",
+          "name": "창동4단지주공아파트",
+          "dong": "406동",
+          "address": "서울특별시 도봉구 창동 373번지",
+          "roadAddress": "서울특별시 도봉구 덕릉로 349 (창동)",
+          "purpose": "공동주택",
+          "households": "180",
+          "unitCount": "0",
+          "pnu": "1132010700103730000"
+        },
+        {
+          "registerId": "1011113018",
+          "name": "창동4단지주공아파트",
+          "dong": "403동",
+          "address": "서울특별시 도봉구 창동 380번지",
+          "roadAddress": "서울특별시 도봉구 덕릉로 350 (창동)",
+          "purpose": "공동주택",
+          "households": "180",
+          "unitCount": "0",
+          "pnu": "1132010700103800000"
+        },
+        {
+          "registerId": "1011113020",
+          "name": "창동4단지주공아파트",
+          "dong": "405동",
+          "address": "서울특별시 도봉구 창동 380번지",
+          "roadAddress": "서울특별시 도봉구 덕릉로 350 (창동)",
+          "purpose": "공동주택",
+          "households": "180",
+          "unitCount": "0",
+          "pnu": "1132010700103800000"
+        },
+        {
+          "registerId": "1011113012",
+          "name": "창동4단지주공아파트",
+          "dong": "410동",
+          "address": "서울특별시 도봉구 창동 373번지",
+          "roadAddress": "서울특별시 도봉구 덕릉로 349 (창동)",
+          "purpose": "공동주택",
+          "households": "150",
+          "unitCount": "0",
+          "pnu": "1132010700103730000"
+        },
+        {
+          "registerId": "1011113017",
+          "name": "창동4단지주공아파트",
+          "dong": "401동",
+          "address": "서울특별시 도봉구 창동 380번지",
+          "roadAddress": "서울특별시 도봉구 덕릉로 350 (창동)",
+          "purpose": "공동주택",
+          "households": "180",
+          "unitCount": "0",
+          "pnu": "1132010700103800000"
+        },
+        {
+          "registerId": "1011113015",
+          "name": "창동4단지주공아파트",
+          "dong": "407동",
+          "address": "서울특별시 도봉구 창동 373번지",
+          "roadAddress": "서울특별시 도봉구 덕릉로 349 (창동)",
+          "purpose": "공동주택",
+          "households": "180",
+          "unitCount": "0",
+          "pnu": "1132010700103730000"
+        }
+      ]
+    },
+    {
+      "id": 1735,
+      "name": "중계그린",
+      "priorIdentity": [
+        {
+          "singleComplex": true,
+          "complexId": "11350100002592",
+          "residentialBuildings": 25,
+          "households": 3481,
+          "address": "서울특별시 노원구 중계동 502-1",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+        }
+      ],
+      "expectedBuildings": 25,
+      "observedHouseholds": 3480,
+      "titles": [
+        {
+          "registerId": "101213680",
+          "name": "중계그린아파트",
+          "dong": "113동",
+          "address": "서울특별시 노원구 중계동 503번지",
+          "roadAddress": "서울특별시 노원구 동일로207길 17 (중계동)",
+          "purpose": "공동주택",
+          "households": "159",
+          "unitCount": "0",
+          "pnu": "1135010600105030000"
+        },
+        {
+          "registerId": "101212554",
+          "name": "중계그린아파트",
+          "dong": "122동",
+          "address": "서울특별시 노원구 중계동 504-1번지",
+          "roadAddress": "서울특별시 노원구 섬밭로 285 (중계동)",
+          "purpose": "공동주택",
+          "households": "159",
+          "unitCount": "0",
+          "pnu": "1135010600105040001"
+        },
+        {
+          "registerId": "101212551",
+          "name": "중계그린아파트",
+          "dong": "125동",
+          "address": "서울특별시 노원구 중계동 504-1번지",
+          "roadAddress": "서울특별시 노원구 섬밭로 285 (중계동)",
+          "purpose": "공동주택",
+          "households": "100",
+          "unitCount": "0",
+          "pnu": "1135010600105040001"
+        },
+        {
+          "registerId": "101213675",
+          "name": "중계그린아파트",
+          "dong": "110동",
+          "address": "서울특별시 노원구 중계동 503번지",
+          "roadAddress": "서울특별시 노원구 동일로207길 17 (중계동)",
+          "purpose": "공동주택",
+          "households": "52",
+          "unitCount": "0",
+          "pnu": "1135010600105030000"
+        },
+        {
+          "registerId": "101213681",
+          "name": "중계그린아파트",
+          "dong": "112동",
+          "address": "서울특별시 노원구 중계동 503번지",
+          "roadAddress": "서울특별시 노원구 동일로207길 17 (중계동)",
+          "purpose": "공동주택",
+          "households": "189",
+          "unitCount": "0",
+          "pnu": "1135010600105030000"
+        },
+        {
+          "registerId": "101213674",
+          "name": "중계그린아파트",
+          "dong": "107동",
+          "address": "서울특별시 노원구 중계동 503번지",
+          "roadAddress": "서울특별시 노원구 동일로207길 17 (중계동)",
+          "purpose": "공동주택",
+          "households": "60",
+          "unitCount": "0",
+          "pnu": "1135010600105030000"
+        },
+        {
+          "registerId": "101213683",
+          "name": "중계그린아파트",
+          "dong": "109동",
+          "address": "서울특별시 노원구 중계동 503번지",
+          "roadAddress": "서울특별시 노원구 동일로207길 17 (중계동)",
+          "purpose": "공동주택",
+          "households": "189",
+          "unitCount": "0",
+          "pnu": "1135010600105030000"
+        },
+        {
+          "registerId": "101213677",
+          "name": "중계그린아파트",
+          "dong": "116동",
+          "address": "서울특별시 노원구 중계동 503번지",
+          "roadAddress": "서울특별시 노원구 동일로207길 17 (중계동)",
+          "purpose": "공동주택",
+          "households": "209",
+          "unitCount": "0",
+          "pnu": "1135010600105030000"
+        },
+        {
+          "registerId": "101213678",
+          "name": "중계그린아파트",
+          "dong": "115동",
+          "address": "서울특별시 노원구 중계동 503번지",
+          "roadAddress": "서울특별시 노원구 동일로207길 17 (중계동)",
+          "purpose": "공동주택",
+          "households": "100",
+          "unitCount": "0",
+          "pnu": "1135010600105030000"
+        },
+        {
+          "registerId": "101213679",
+          "name": "중계그린아파트",
+          "dong": "114동",
+          "address": "서울특별시 노원구 중계동 503번지",
+          "roadAddress": "서울특별시 노원구 동일로207길 17 (중계동)",
+          "purpose": "공동주택",
+          "households": "234",
+          "unitCount": "0",
+          "pnu": "1135010600105030000"
+        },
+        {
+          "registerId": "101212556",
+          "name": "중계그린아파트",
+          "dong": "120동",
+          "address": "서울특별시 노원구 중계동 504-1번지",
+          "roadAddress": "서울특별시 노원구 섬밭로 285 (중계동)",
+          "purpose": "공동주택",
+          "households": "60",
+          "unitCount": "0",
+          "pnu": "1135010600105040001"
+        },
+        {
+          "registerId": "101212553",
+          "name": "중계그린아파트",
+          "dong": "123동",
+          "address": "서울특별시 노원구 중계동 504-1번지",
+          "roadAddress": "서울특별시 노원구 섬밭로 285 (중계동)",
+          "purpose": "공동주택",
+          "households": "60",
+          "unitCount": "0",
+          "pnu": "1135010600105040001"
+        },
+        {
+          "registerId": "101213685",
+          "name": "중계그린아파트",
+          "dong": "106동",
+          "address": "서울특별시 노원구 중계동 503번지",
+          "roadAddress": "서울특별시 노원구 동일로207길 17 (중계동)",
+          "purpose": "공동주택",
+          "households": "190",
+          "unitCount": "0",
+          "pnu": "1135010600105030000"
+        },
+        {
+          "registerId": "101212558",
+          "name": "중계그린아파트",
+          "dong": "118동",
+          "address": "서울특별시 노원구 중계동 504-1번지",
+          "roadAddress": "서울특별시 노원구 섬밭로 285 (중계동)",
+          "purpose": "공동주택",
+          "households": "60",
+          "unitCount": "0",
+          "pnu": "1135010600105040001"
+        },
+        {
+          "registerId": "101213662",
+          "name": "중계그린아파트",
+          "dong": "103동",
+          "address": "서울특별시 노원구 중계동 502-1번지",
+          "roadAddress": "서울특별시 노원구 동일로207길 18 (중계동)",
+          "purpose": "공동주택",
+          "households": "198",
+          "unitCount": "0",
+          "pnu": "1135010600105020001"
+        },
+        {
+          "registerId": "101212559",
+          "name": "중계그린아파트",
+          "dong": "117동",
+          "address": "서울특별시 노원구 중계동 504-1번지",
+          "roadAddress": "서울특별시 노원구 섬밭로 285 (중계동)",
+          "purpose": "공동주택",
+          "households": "135",
+          "unitCount": "0",
+          "pnu": "1135010600105040001"
+        },
+        {
+          "registerId": "101212557",
+          "name": "중계그린아파트",
+          "dong": "119동",
+          "address": "서울특별시 노원구 중계동 504-1번지",
+          "roadAddress": "서울특별시 노원구 섬밭로 285 (중계동)",
+          "purpose": "공동주택",
+          "households": "60",
+          "unitCount": "0",
+          "pnu": "1135010600105040001"
+        },
+        {
+          "registerId": "101213668",
+          "name": "중계그린아파트",
+          "dong": "101동",
+          "address": "서울특별시 노원구 중계동 502-1번지",
+          "roadAddress": "서울특별시 노원구 동일로207길 18 (중계동)",
+          "purpose": "공동주택",
+          "households": "176",
+          "unitCount": "0",
+          "pnu": "1135010600105020001"
+        },
+        {
+          "registerId": "101213684",
+          "name": "중계그린아파트",
+          "dong": "108동",
+          "address": "서울특별시 노원구 중계동 503번지",
+          "roadAddress": "서울특별시 노원구 동일로207길 17 (중계동)",
+          "purpose": "공동주택",
+          "households": "190",
+          "unitCount": "0",
+          "pnu": "1135010600105030000"
+        },
+        {
+          "registerId": "101213665",
+          "name": "중계그린아파트",
+          "dong": "102동",
+          "address": "서울특별시 노원구 중계동 502-1번지",
+          "roadAddress": "서울특별시 노원구 동일로207길 18 (중계동)",
+          "purpose": "공동주택",
+          "households": "167",
+          "unitCount": "0",
+          "pnu": "1135010600105020001"
+        },
+        {
+          "registerId": "101213667",
+          "name": "중계그린아파트",
+          "dong": "104동",
+          "address": "서울특별시 노원구 중계동 502-1번지",
+          "roadAddress": "서울특별시 노원구 동일로207길 18 (중계동)",
+          "purpose": "공동주택",
+          "households": "198",
+          "unitCount": "0",
+          "pnu": "1135010600105020001"
+        },
+        {
+          "registerId": "101212555",
+          "name": "중계그린아파트",
+          "dong": "121동",
+          "address": "서울특별시 노원구 중계동 504-1번지",
+          "roadAddress": "서울특별시 노원구 섬밭로 285 (중계동)",
+          "purpose": "공동주택",
+          "households": "135",
+          "unitCount": "0",
+          "pnu": "1135010600105040001"
+        },
+        {
+          "registerId": "101213682",
+          "name": "중계그린아파트",
+          "dong": "111동",
+          "address": "서울특별시 노원구 중계동 503번지",
+          "roadAddress": "서울특별시 노원구 동일로207길 17 (중계동)",
+          "purpose": "공동주택",
+          "households": "52",
+          "unitCount": "0",
+          "pnu": "1135010600105030000"
+        },
+        {
+          "registerId": "101213666",
+          "name": "중계그린아파트",
+          "dong": "105동",
+          "address": "서울특별시 노원구 중계동 502-1번지",
+          "roadAddress": "서울특별시 노원구 동일로207길 18 (중계동)",
+          "purpose": "공동주택",
+          "households": "139",
+          "unitCount": "0",
+          "pnu": "1135010600105020001"
+        },
+        {
+          "registerId": "101212552",
+          "name": "중계그린아파트",
+          "dong": "124동",
+          "address": "서울특별시 노원구 중계동 504-1번지",
+          "roadAddress": "서울특별시 노원구 섬밭로 285 (중계동)",
+          "purpose": "공동주택",
+          "households": "209",
+          "unitCount": "0",
+          "pnu": "1135010600105040001"
+        }
+      ]
+    },
+    {
+      "id": 1737,
+      "name": "오금대림",
+      "priorIdentity": [
+        {
+          "singleComplex": true,
+          "complexId": "11710100002320",
+          "residentialBuildings": 7,
+          "households": 749,
+          "address": "서울특별시 송파구 오금동 2",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+        }
+      ],
+      "expectedBuildings": 7,
+      "observedHouseholds": 749,
+      "titles": [
+        {
+          "registerId": "102511033",
+          "name": "대림아파트",
+          "dong": "5동",
+          "address": "서울특별시 송파구 오금동 2번지",
+          "roadAddress": "서울특별시 송파구 위례성대로 176 (오금동)",
+          "purpose": "공동주택",
+          "households": "90",
+          "unitCount": "0",
+          "pnu": "1171011200100020000"
+        },
+        {
+          "registerId": "102511032",
+          "name": "대림아파트",
+          "dong": "6동",
+          "address": "서울특별시 송파구 오금동 2번지",
+          "roadAddress": "서울특별시 송파구 위례성대로 176 (오금동)",
+          "purpose": "공동주택",
+          "households": "90",
+          "unitCount": "0",
+          "pnu": "1171011200100020000"
+        },
+        {
+          "registerId": "102511031",
+          "name": "대림아파트",
+          "dong": "1동",
+          "address": "서울특별시 송파구 오금동 2번지",
+          "roadAddress": "서울특별시 송파구 위례성대로 176 (오금동)",
+          "purpose": "공동주택",
+          "households": "90",
+          "unitCount": "0",
+          "pnu": "1171011200100020000"
+        },
+        {
+          "registerId": "102511259",
+          "name": "대림아파트",
+          "dong": "8동",
+          "address": "서울특별시 송파구 오금동 19번지",
+          "roadAddress": "서울특별시 송파구 마천로7길 4 (오금동)",
+          "purpose": "공동주택",
+          "households": "120",
+          "unitCount": "0",
+          "pnu": "1171011200100190000"
+        },
+        {
+          "registerId": "102511260",
+          "name": "대림아파트",
+          "dong": "7동",
+          "address": "서울특별시 송파구 오금동 19번지",
+          "roadAddress": "서울특별시 송파구 마천로7길 4 (오금동)",
+          "purpose": "공동주택",
+          "households": "149",
+          "unitCount": "0",
+          "pnu": "1171011200100190000"
+        },
+        {
+          "registerId": "102511035",
+          "name": "대림아파트",
+          "dong": "2동",
+          "address": "서울특별시 송파구 오금동 2번지",
+          "roadAddress": "서울특별시 송파구 위례성대로 176 (오금동)",
+          "purpose": "공동주택",
+          "households": "150",
+          "unitCount": "0",
+          "pnu": "1171011200100020000"
+        },
+        {
+          "registerId": "102511034",
+          "name": "대림아파트",
+          "dong": "3동",
+          "address": "서울특별시 송파구 오금동 2번지",
+          "roadAddress": "서울특별시 송파구 위례성대로 176 (오금동)",
+          "purpose": "공동주택",
+          "households": "60",
+          "unitCount": "0",
+          "pnu": "1171011200100020000"
+        }
+      ]
+    }
+  ]
+}

@@ -700,21 +700,73 @@
       {
         "pnu": "1171010100101010001",
         "names": [
-          "우성아파트",
           "잠실 우성1·2·3차",
-          "잠실우성1,2,3차"
+          "잠실우성1,2,3차",
+          "우성아파트"
         ],
         "aliasSource": {
-          "url": "https://www.data.go.kr/data/15106861/fileData.do",
-          "sourceAsOf": "2025-09-18"
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
         },
         "identity": {
-          "singleComplex": true,
-          "complexId": "11710100002358",
-          "residentialBuildings": 26,
-          "households": 1842,
-          "address": "서울특별시 송파구 잠실동 101-1",
-          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+          "coversWholeParcel": true,
+          "residentialBuildings": 22,
+          "complexResidentialBuildings": 26,
+          "reviewedTitleIds": [
+            "102511835",
+            "102511836",
+            "102511838",
+            "102511830",
+            "102511829",
+            "102511819",
+            "102511824",
+            "102511823",
+            "102511822",
+            "102511839",
+            "102511818",
+            "102511820",
+            "102511831",
+            "102511837",
+            "102511825",
+            "102511834",
+            "102511832",
+            "102511827",
+            "102511828",
+            "102511821",
+            "102511826",
+            "102511833"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
+        "pnu": "1171010100101010002",
+        "names": [
+          "잠실 우성1·2·3차",
+          "잠실우성1,2,3차",
+          "우성아파트",
+          "우성아파트 28동",
+          "우성아파트 27동",
+          "우성아파트 29동",
+          "우성아파트 26동"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 4,
+          "complexResidentialBuildings": 26,
+          "reviewedTitleIds": [
+            "102511841",
+            "102511842",
+            "102511840",
+            "102511843"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
         }
       }
     ],
@@ -2046,23 +2098,509 @@
     "locatorStatus": "candidate",
     "registerCandidates": [
       {
-        "pnu": "1117012900103000023",
+        "pnu": "1117012900103000025",
         "names": [
-          "한강맨숀",
           "한강맨션아파트",
+          "한강맨숀",
           "맨숀아파트"
         ],
         "aliasSource": {
-          "url": "https://www.data.go.kr/data/15106861/fileData.do",
-          "sourceAsOf": "2025-09-18"
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
         },
         "identity": {
-          "singleComplex": true,
-          "complexId": "11170100000874",
-          "residentialBuildings": 23,
-          "households": 660,
-          "address": "서울특별시 용산구 이촌동 300-23",
-          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+          "coversWholeParcel": true,
+          "residentialBuildings": 1,
+          "complexResidentialBuildings": 23,
+          "reviewedTitleIds": [
+            "100415908"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
+        "pnu": "1117012900103000130",
+        "names": [
+          "한강맨션아파트",
+          "한강맨숀",
+          "맨숀아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 1,
+          "complexResidentialBuildings": 23,
+          "reviewedTitleIds": [
+            "1004110320"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
+        "pnu": "1117012900103000127",
+        "names": [
+          "한강맨션아파트",
+          "한강맨숀",
+          "맨숀아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 1,
+          "complexResidentialBuildings": 23,
+          "reviewedTitleIds": [
+            "1004113148"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
+        "pnu": "1117012900103000077",
+        "names": [
+          "한강맨션아파트",
+          "한강맨숀",
+          "맨숀아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 1,
+          "complexResidentialBuildings": 23,
+          "reviewedTitleIds": [
+            "100412391"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
+        "pnu": "1117012900103000080",
+        "names": [
+          "한강맨션아파트",
+          "한강맨숀",
+          "맨숀아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 1,
+          "complexResidentialBuildings": 23,
+          "reviewedTitleIds": [
+            "1004124043"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
+        "pnu": "1117012900103000157",
+        "names": [
+          "한강맨션아파트",
+          "한강맨숀",
+          "맨숀아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 1,
+          "complexResidentialBuildings": 23,
+          "reviewedTitleIds": [
+            "1004126652"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
+        "pnu": "1117012900103000166",
+        "names": [
+          "한강맨션아파트",
+          "한강맨숀",
+          "맨숀아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 1,
+          "complexResidentialBuildings": 23,
+          "reviewedTitleIds": [
+            "1004119994"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
+        "pnu": "1117012900103000023",
+        "names": [
+          "한강맨션아파트",
+          "한강맨숀",
+          "맨숀아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 1,
+          "complexResidentialBuildings": 23,
+          "reviewedTitleIds": [
+            "1004112069"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
+        "pnu": "1117012900103000163",
+        "names": [
+          "한강맨션아파트",
+          "한강맨숀",
+          "맨숀아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 1,
+          "complexResidentialBuildings": 23,
+          "reviewedTitleIds": [
+            "1004111064"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
+        "pnu": "1117012900103000107",
+        "names": [
+          "한강맨션아파트",
+          "한강맨숀",
+          "맨숀아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 1,
+          "complexResidentialBuildings": 23,
+          "reviewedTitleIds": [
+            "100414087"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
+        "pnu": "1117012900103000133",
+        "names": [
+          "한강맨션아파트",
+          "한강맨숀",
+          "맨숀아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 1,
+          "complexResidentialBuildings": 23,
+          "reviewedTitleIds": [
+            "1004121587"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
+        "pnu": "1117012900103000083",
+        "names": [
+          "한강맨션아파트",
+          "한강맨숀",
+          "맨숀아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 1,
+          "complexResidentialBuildings": 23,
+          "reviewedTitleIds": [
+            "100412522"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
+        "pnu": "1117012900103000104",
+        "names": [
+          "한강맨션아파트",
+          "한강맨숀",
+          "맨숀아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 1,
+          "complexResidentialBuildings": 23,
+          "reviewedTitleIds": [
+            "1004116671"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
+        "pnu": "1117012900103000101",
+        "names": [
+          "한강맨션아파트",
+          "한강맨숀",
+          "맨숀아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 1,
+          "complexResidentialBuildings": 23,
+          "reviewedTitleIds": [
+            "1004119923"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
+        "pnu": "1117012900103000068",
+        "names": [
+          "한강맨션아파트",
+          "한강맨숀",
+          "맨숀아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 1,
+          "complexResidentialBuildings": 23,
+          "reviewedTitleIds": [
+            "1004126656"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
+        "pnu": "1117012900103000089",
+        "names": [
+          "한강맨션아파트",
+          "한강맨숀",
+          "맨숀아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 1,
+          "complexResidentialBuildings": 23,
+          "reviewedTitleIds": [
+            "1004116951"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
+        "pnu": "1117012900103000160",
+        "names": [
+          "한강맨션아파트",
+          "한강맨숀",
+          "맨숀아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 1,
+          "complexResidentialBuildings": 23,
+          "reviewedTitleIds": [
+            "1004118852"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
+        "pnu": "1117012900103000153",
+        "names": [
+          "한강맨션아파트",
+          "한강맨숀",
+          "맨숀아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 1,
+          "complexResidentialBuildings": 23,
+          "reviewedTitleIds": [
+            "1004117119"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
+        "pnu": "1117012900103000065",
+        "names": [
+          "한강맨션아파트",
+          "한강맨숀",
+          "맨숀아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 1,
+          "complexResidentialBuildings": 23,
+          "reviewedTitleIds": [
+            "1004117273"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
+        "pnu": "1117012900103000026",
+        "names": [
+          "한강맨션아파트",
+          "한강맨숀",
+          "맨숀아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 1,
+          "complexResidentialBuildings": 23,
+          "reviewedTitleIds": [
+            "1004119054"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
+        "pnu": "1117012900103000095",
+        "names": [
+          "한강맨션아파트",
+          "한강맨숀",
+          "맨숀아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 1,
+          "complexResidentialBuildings": 23,
+          "reviewedTitleIds": [
+            "1004124592"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
+        "pnu": "1117012900103000062",
+        "names": [
+          "한강맨션아파트",
+          "한강맨숀",
+          "맨숀아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 1,
+          "complexResidentialBuildings": 23,
+          "reviewedTitleIds": [
+            "100419434"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
+        "pnu": "1117012900103000092",
+        "names": [
+          "한강맨션아파트",
+          "한강맨숀",
+          "맨숀아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 1,
+          "complexResidentialBuildings": 23,
+          "reviewedTitleIds": [
+            "1004122616"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
         }
       }
     ],
@@ -2287,7 +2825,57 @@
       "우신빌라",
       "궁동우신빌라"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1153010900102130021",
+        "names": [
+          "우신빌라",
+          "궁동우신빌라"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 28,
+          "complexResidentialBuildings": 28,
+          "reviewedTitleIds": [
+            "101813376",
+            "101813381",
+            "101813386",
+            "101813390",
+            "101813387",
+            "101813378",
+            "101813377",
+            "101813391",
+            "101813385",
+            "101813383",
+            "101813384",
+            "101813389",
+            "101813393",
+            "101813403",
+            "101813382",
+            "101813394",
+            "101813400",
+            "101813379",
+            "101813402",
+            "101813395",
+            "101813398",
+            "101813380",
+            "101813396",
+            "101813397",
+            "101813401",
+            "101813399",
+            "101813392",
+            "101813388"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      }
+    ]
   },
   {
     "id": 607,
@@ -2566,24 +3154,143 @@
     "locatorStatus": "candidate",
     "registerCandidates": [
       {
-        "pnu": "1132010600102710001",
+        "pnu": "1132010600102720000",
         "names": [
-          "신동아아파트1",
           "방학신동아1차",
           "신동아1단지",
+          "신동아아파트1",
           "신동아아파트"
         ],
         "aliasSource": {
-          "url": "https://www.data.go.kr/data/15106861/fileData.do",
-          "sourceAsOf": "2025-09-18"
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
         },
         "identity": {
-          "singleComplex": true,
-          "complexId": "11320100000408",
-          "residentialBuildings": 30,
-          "households": 3169,
-          "address": "서울특별시 도봉구 방학동 271-1",
-          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+          "coversWholeParcel": true,
+          "residentialBuildings": 14,
+          "complexResidentialBuildings": 30,
+          "reviewedTitleIds": [
+            "101118363",
+            "101118358",
+            "101118359",
+            "101118357",
+            "101118353",
+            "101118361",
+            "101118355",
+            "101118351",
+            "101118354",
+            "101118362",
+            "101118360",
+            "101118364",
+            "101118356",
+            "101118352"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
+        "pnu": "1132010600102710001",
+        "names": [
+          "방학신동아1차",
+          "신동아1단지",
+          "신동아아파트1",
+          "신동아아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 4,
+          "complexResidentialBuildings": 30,
+          "reviewedTitleIds": [
+            "101118338",
+            "101118341",
+            "101118340",
+            "101118339"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
+        "pnu": "1132010600102720001",
+        "names": [
+          "방학신동아1차",
+          "신동아1단지",
+          "신동아아파트1",
+          "신동아아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 5,
+          "complexResidentialBuildings": 30,
+          "reviewedTitleIds": [
+            "101118367",
+            "101118365",
+            "101118369",
+            "101118366",
+            "101118368"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
+        "pnu": "1132010600102710004",
+        "names": [
+          "방학신동아1차",
+          "신동아1단지",
+          "신동아아파트1",
+          "신동아아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 4,
+          "complexResidentialBuildings": 30,
+          "reviewedTitleIds": [
+            "101118346",
+            "101118345",
+            "101118344",
+            "101118343"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
+        "pnu": "1132010600102710005",
+        "names": [
+          "방학신동아1차",
+          "신동아1단지",
+          "신동아아파트1",
+          "신동아아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 3,
+          "complexResidentialBuildings": 30,
+          "reviewedTitleIds": [
+            "101118349",
+            "101118347",
+            "101118348"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
         }
       }
     ],
@@ -3382,21 +4089,53 @@
       {
         "pnu": "1156011000100300002",
         "names": [
-          "삼부",
           "여의도삼부아파트",
-          "여의도삼부"
+          "여의도삼부",
+          "삼부"
         ],
         "aliasSource": {
-          "url": "https://www.data.go.kr/data/15106861/fileData.do",
-          "sourceAsOf": "2025-09-18"
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
         },
         "identity": {
-          "singleComplex": true,
-          "complexId": "11560100000961",
-          "residentialBuildings": 10,
-          "households": 866,
-          "address": "서울특별시 영등포구 여의도동 30-2",
-          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+          "coversWholeParcel": true,
+          "residentialBuildings": 6,
+          "complexResidentialBuildings": 10,
+          "reviewedTitleIds": [
+            "102017159",
+            "102017162",
+            "102017164",
+            "102017163",
+            "102017161",
+            "102017160"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
+        "pnu": "1156011000100300003",
+        "names": [
+          "여의도삼부아파트",
+          "여의도삼부",
+          "삼부"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 4,
+          "complexResidentialBuildings": 10,
+          "reviewedTitleIds": [
+            "102017166",
+            "102017165",
+            "102017167",
+            "102017168"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
         }
       }
     ],
@@ -3419,23 +4158,78 @@
     "locatorStatus": "candidate",
     "registerCandidates": [
       {
-        "pnu": "1174010500100530000",
+        "pnu": "1174010500100540000",
         "names": [
-          "삼익파크맨션",
           "삼익파크",
-          "길동삼익파크"
+          "길동삼익파크",
+          "삼익파크맨션"
         ],
         "aliasSource": {
-          "url": "https://www.data.go.kr/data/15106861/fileData.do",
-          "sourceAsOf": "2025-09-18"
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
         },
         "identity": {
-          "singleComplex": true,
-          "complexId": "11740100001579",
-          "residentialBuildings": 12,
-          "households": 1092,
-          "address": "서울특별시 강동구 길동 53",
-          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+          "coversWholeParcel": true,
+          "residentialBuildings": 9,
+          "complexResidentialBuildings": 12,
+          "reviewedTitleIds": [
+            "102611945",
+            "102611943",
+            "102611939",
+            "102611942",
+            "102611944",
+            "102611938",
+            "102611937",
+            "102611940",
+            "102611941"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
+        "pnu": "1174010500100550000",
+        "names": [
+          "삼익파크",
+          "길동삼익파크",
+          "삼익파크맨션"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 1,
+          "complexResidentialBuildings": 12,
+          "reviewedTitleIds": [
+            "1026119474"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
+        "pnu": "1174010500100530000",
+        "names": [
+          "삼익파크",
+          "길동삼익파크",
+          "삼익파크맨션"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 2,
+          "complexResidentialBuildings": 12,
+          "reviewedTitleIds": [
+            "102611935",
+            "102611934"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
         }
       }
     ],
@@ -3647,22 +4441,87 @@
     "locatorStatus": "candidate",
     "registerCandidates": [
       {
-        "pnu": "1156011000100540000",
+        "pnu": "1156011000100540003",
         "names": [
-          "진주",
-          "여의도진주아파트"
+          "여의도진주아파트",
+          "진주"
         ],
         "aliasSource": {
-          "url": "https://www.data.go.kr/data/15106861/fileData.do",
-          "sourceAsOf": "2025-09-18"
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
         },
         "identity": {
-          "singleComplex": true,
-          "complexId": "11560100000969",
-          "residentialBuildings": 4,
-          "households": 376,
-          "address": "서울특별시 영등포구 여의도동 54",
-          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+          "coversWholeParcel": true,
+          "residentialBuildings": 1,
+          "complexResidentialBuildings": 4,
+          "reviewedTitleIds": [
+            "102017277"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
+        "pnu": "1156011000100540000",
+        "names": [
+          "여의도진주아파트",
+          "진주"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 1,
+          "complexResidentialBuildings": 4,
+          "reviewedTitleIds": [
+            "102017275"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
+        "pnu": "1156011000100540004",
+        "names": [
+          "여의도진주아파트",
+          "진주"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 1,
+          "complexResidentialBuildings": 4,
+          "reviewedTitleIds": [
+            "102017278"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
+        "pnu": "1156011000100540008",
+        "names": [
+          "여의도진주아파트",
+          "진주"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 1,
+          "complexResidentialBuildings": 4,
+          "reviewedTitleIds": [
+            "102017280"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
         }
       }
     ],
@@ -3724,6 +4583,30 @@
     "locatorStatus": "candidate",
     "registerCandidates": [
       {
+        "pnu": "1165010100110110001",
+        "names": [
+          "방배임광3차",
+          "임광3차",
+          "임광아파트",
+          "방배임광아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 2,
+          "complexResidentialBuildings": 4,
+          "reviewedTitleIds": [
+            "102317614",
+            "102317615"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
         "pnu": "1165010100110100001",
         "names": [
           "방배임광3차",
@@ -3732,16 +4615,19 @@
           "방배임광아파트"
         ],
         "aliasSource": {
-          "url": "https://www.data.go.kr/data/15106861/fileData.do",
-          "sourceAsOf": "2025-09-18"
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
         },
         "identity": {
-          "singleComplex": true,
-          "complexId": "11650100003013",
-          "residentialBuildings": 4,
-          "households": 316,
-          "address": "서울특별시 서초구 방배동 1010-1",
-          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+          "coversWholeParcel": true,
+          "residentialBuildings": 2,
+          "complexResidentialBuildings": 4,
+          "reviewedTitleIds": [
+            "102317613",
+            "102317612"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
         }
       }
     ],
@@ -4983,61 +5869,83 @@
       {
         "pnu": "1150010100100660009",
         "names": [
-          "염창동한강우성",
           "염창우성1,2삼천리",
-          "염창동우성아파트"
+          "염창동한강우성",
+          "염창동우성아파트",
+          "삼천리",
+          "삼천리아파트",
+          "우성2",
+          "염창2차우성아파트",
+          "염창동우성연립"
         ],
         "aliasSource": {
-          "url": "https://www.data.go.kr/data/15106861/fileData.do",
-          "sourceAsOf": "2025-09-18"
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
         },
         "identity": {
-          "singleComplex": true,
-          "complexId": "11500112041903",
+          "coversWholeParcel": true,
           "residentialBuildings": 4,
-          "households": 339,
-          "address": "서울특별시 강서구 염창동 66-9",
-          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+          "complexResidentialBuildings": 6,
+          "reviewedTitleIds": [
+            "101713830",
+            "101713834",
+            "101713831",
+            "101713833"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
         }
       },
       {
         "pnu": "1150010100100700020",
         "names": [
-          "삼천리",
           "염창우성1,2삼천리",
-          "삼천리아파트"
+          "염창동한강우성",
+          "염창동우성아파트",
+          "삼천리",
+          "삼천리아파트",
+          "우성2",
+          "염창2차우성아파트"
         ],
         "aliasSource": {
-          "url": "https://www.data.go.kr/data/15106861/fileData.do",
-          "sourceAsOf": "2025-09-18"
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
         },
         "identity": {
-          "singleComplex": true,
-          "complexId": "11500100001760",
+          "coversWholeParcel": true,
           "residentialBuildings": 1,
-          "households": 77,
-          "address": "서울특별시 강서구 염창동 70-20",
-          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+          "complexResidentialBuildings": 6,
+          "reviewedTitleIds": [
+            "1017114583"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
         }
       },
       {
         "pnu": "1150010100102870001",
         "names": [
-          "우성2",
           "염창우성1,2삼천리",
+          "염창동한강우성",
+          "염창동우성아파트",
+          "삼천리",
+          "삼천리아파트",
+          "우성2",
           "염창2차우성아파트"
         ],
         "aliasSource": {
-          "url": "https://www.data.go.kr/data/15106861/fileData.do",
-          "sourceAsOf": "2025-09-18"
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
         },
         "identity": {
-          "singleComplex": true,
-          "complexId": "11500100001765",
+          "coversWholeParcel": true,
           "residentialBuildings": 1,
-          "households": 186,
-          "address": "서울특별시 강서구 염창동 287-1",
-          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+          "complexResidentialBuildings": 6,
+          "reviewedTitleIds": [
+            "101714296"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
         }
       }
     ],
@@ -5098,24 +6006,55 @@
     "locatorStatus": "candidate",
     "registerCandidates": [
       {
-        "pnu": "1123010700102350001",
+        "pnu": "1123010700102350011",
         "names": [
-          "미주",
           "청량리 미주아파트",
           "청량리미주",
+          "미주",
           "미주아파트"
         ],
         "aliasSource": {
-          "url": "https://www.data.go.kr/data/15106861/fileData.do",
-          "sourceAsOf": "2025-09-18"
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
         },
         "identity": {
-          "singleComplex": true,
-          "complexId": "11230100000190",
-          "residentialBuildings": 8,
-          "households": 1089,
-          "address": "서울특별시 동대문구 청량리동 235-1",
-          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+          "coversWholeParcel": true,
+          "residentialBuildings": 4,
+          "complexResidentialBuildings": 8,
+          "reviewedTitleIds": [
+            "100716013",
+            "100716015",
+            "100716016",
+            "100716014"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
+        "pnu": "1123010700102350001",
+        "names": [
+          "청량리 미주아파트",
+          "청량리미주",
+          "미주",
+          "미주아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 4,
+          "complexResidentialBuildings": 8,
+          "reviewedTitleIds": [
+            "100716394",
+            "100716392",
+            "100716393",
+            "100716391"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
         }
       }
     ],
@@ -5240,24 +6179,75 @@
     "locatorStatus": "candidate",
     "registerCandidates": [
       {
-        "pnu": "1156011000100370000",
+        "pnu": "1156011000100370002",
         "names": [
-          "미성",
           "여의도미성아파트",
           "미성아파트",
+          "미성",
           "이동"
         ],
         "aliasSource": {
-          "url": "https://www.data.go.kr/data/15106861/fileData.do",
-          "sourceAsOf": "2025-09-18"
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
         },
         "identity": {
-          "singleComplex": true,
-          "complexId": "11560100000959",
-          "residentialBuildings": 5,
-          "households": 577,
-          "address": "서울특별시 영등포구 여의도동 37",
-          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+          "coversWholeParcel": true,
+          "residentialBuildings": 2,
+          "complexResidentialBuildings": 5,
+          "reviewedTitleIds": [
+            "102017186",
+            "102017187"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
+        "pnu": "1156011000100370000",
+        "names": [
+          "여의도미성아파트",
+          "미성아파트",
+          "미성",
+          "이동",
+          "디동"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 2,
+          "complexResidentialBuildings": 5,
+          "reviewedTitleIds": [
+            "102017183",
+            "102017184"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
+        "pnu": "1156011000100370001",
+        "names": [
+          "여의도미성아파트",
+          "미성아파트",
+          "미성",
+          "이동"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 1,
+          "complexResidentialBuildings": 5,
+          "reviewedTitleIds": [
+            "102017185"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
         }
       }
     ],
@@ -6466,6 +7456,57 @@
     "locatorStatus": "candidate",
     "registerCandidates": [
       {
+        "pnu": "1174010100100280000",
+        "names": [
+          "삼익그린2차",
+          "명일삼익그린2차",
+          "삼익그린맨션아파트",
+          "삼익그린맨션"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 5,
+          "complexResidentialBuildings": 18,
+          "reviewedTitleIds": [
+            "102611211",
+            "102611212",
+            "102611216",
+            "102611215",
+            "102611214"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
+        "pnu": "1174010100100290005",
+        "names": [
+          "삼익그린2차",
+          "명일삼익그린2차",
+          "삼익그린맨션아파트",
+          "삼익그린맨션"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 2,
+          "complexResidentialBuildings": 18,
+          "reviewedTitleIds": [
+            "102611218",
+            "102611217"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
         "pnu": "1174010100100150000",
         "names": [
           "삼익그린2차",
@@ -6474,16 +7515,28 @@
           "삼익그린맨션"
         ],
         "aliasSource": {
-          "url": "https://www.data.go.kr/data/15106861/fileData.do",
-          "sourceAsOf": "2025-09-18"
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
         },
         "identity": {
-          "singleComplex": true,
-          "complexId": "11740100001538",
-          "residentialBuildings": 18,
-          "households": 2400,
-          "address": "서울특별시 강동구 명일동 15",
-          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+          "coversWholeParcel": true,
+          "residentialBuildings": 11,
+          "complexResidentialBuildings": 18,
+          "reviewedTitleIds": [
+            "102611205",
+            "102611201",
+            "102611202",
+            "102611204",
+            "102611200",
+            "102611209",
+            "102611203",
+            "102611206",
+            "102611210",
+            "102611207",
+            "102611208"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
         }
       }
     ]
@@ -6848,22 +7901,73 @@
       {
         "pnu": "1135010500107200000",
         "names": [
-          "상계주공6(고층)",
           "상계주공6단지",
+          "상계주공6(고층)",
           "상계주공아파트",
           "상계주공6단지아파트"
         ],
         "aliasSource": {
-          "url": "https://www.data.go.kr/data/15106861/fileData.do",
-          "sourceAsOf": "2025-09-18"
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
         },
         "identity": {
-          "singleComplex": true,
-          "complexId": "11350100002512",
-          "residentialBuildings": 28,
-          "households": 2646,
-          "address": "서울특별시 노원구 상계동 720",
-          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+          "coversWholeParcel": true,
+          "residentialBuildings": 26,
+          "complexResidentialBuildings": 28,
+          "reviewedTitleIds": [
+            "101213315",
+            "101213320",
+            "101213331",
+            "101213328",
+            "101213317",
+            "101213318",
+            "101213329",
+            "101213311",
+            "101213310",
+            "101213319",
+            "101213312",
+            "101213314",
+            "101213330",
+            "101213322",
+            "101213333",
+            "101213325",
+            "101213321",
+            "101213334",
+            "101213316",
+            "101213309",
+            "101213332",
+            "101213327",
+            "101213323",
+            "101213324",
+            "101213313",
+            "101213326"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
+        "pnu": "1135010500107280003",
+        "names": [
+          "상계주공6단지",
+          "상계주공6(고층)",
+          "상계주공아파트",
+          "상계주공6단지아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 2,
+          "complexResidentialBuildings": 28,
+          "reviewedTitleIds": [
+            "101213551",
+            "101213549"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
         }
       }
     ],
@@ -7499,23 +8603,49 @@
     "locatorStatus": "candidate",
     "registerCandidates": [
       {
-        "pnu": "1171010300103910000",
+        "pnu": "1171010300104000006",
         "names": [
-          "극동",
           "풍납극동",
+          "극동",
           "극동아파트"
         ],
         "aliasSource": {
-          "url": "https://www.data.go.kr/data/15106861/fileData.do",
-          "sourceAsOf": "2025-09-18"
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
         },
         "identity": {
-          "singleComplex": true,
-          "complexId": "11710100002201",
-          "residentialBuildings": 4,
-          "households": 415,
-          "address": "서울특별시 송파구 풍납동 391",
-          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+          "coversWholeParcel": true,
+          "residentialBuildings": 1,
+          "complexResidentialBuildings": 4,
+          "reviewedTitleIds": [
+            "1025122484"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
+        "pnu": "1171010300103910000",
+        "names": [
+          "풍납극동",
+          "극동",
+          "극동아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 3,
+          "complexResidentialBuildings": 4,
+          "reviewedTitleIds": [
+            "10251989",
+            "10251991",
+            "10251992"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
         }
       }
     ],
@@ -8123,7 +9253,31 @@
       "시흥성지",
       "시흥성지"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1154510300201730008",
+        "names": [
+          "시흥성지",
+          "성지아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 2,
+          "complexResidentialBuildings": 2,
+          "reviewedTitleIds": [
+            "101911616",
+            "101911618"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      }
+    ]
   },
   {
     "id": 1725,
@@ -8354,45 +9508,75 @@
     "locatorStatus": "candidate",
     "registerCandidates": [
       {
-        "pnu": "1135010500107300002",
+        "pnu": "1135010500107370000",
         "names": [
-          "상계주공3(고층)",
           "상계주공3",
+          "상계주공3(고층)",
           "상계주공아파트",
-          "상계주공3단지아파트"
+          "상계주공3단지아파트",
+          "상계주공3(저층)"
         ],
         "aliasSource": {
-          "url": "https://www.data.go.kr/data/15106861/fileData.do",
-          "sourceAsOf": "2025-09-18"
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
         },
         "identity": {
-          "singleComplex": true,
-          "complexId": "11350100002509",
-          "residentialBuildings": 21,
-          "households": 2113,
-          "address": "서울특별시 노원구 상계동 730-2",
-          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+          "coversWholeParcel": true,
+          "residentialBuildings": 24,
+          "complexResidentialBuildings": 26,
+          "reviewedTitleIds": [
+            "101213561",
+            "101213556",
+            "101213571",
+            "101213576",
+            "101213555",
+            "101213554",
+            "101213565",
+            "101213568",
+            "101213572",
+            "101213560",
+            "101213552",
+            "101213566",
+            "101213558",
+            "101213562",
+            "101213567",
+            "101213553",
+            "101213569",
+            "101213570",
+            "101213573",
+            "101213557",
+            "101213564",
+            "101213559",
+            "101213563",
+            "101213575"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
         }
       },
       {
-        "pnu": "1135010500107370000",
+        "pnu": "1135010500107300002",
         "names": [
-          "상계주공3(저층)",
           "상계주공3",
+          "상계주공3(고층)",
           "상계주공아파트",
-          "상계주공3단지아파트"
+          "상계주공3단지아파트",
+          "상계주공3(저층)"
         ],
         "aliasSource": {
-          "url": "https://www.data.go.kr/data/15106861/fileData.do",
-          "sourceAsOf": "2025-09-18"
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
         },
         "identity": {
-          "singleComplex": true,
-          "complexId": "11350100050455",
-          "residentialBuildings": 5,
-          "households": 100,
-          "address": "서울특별시 노원구 상계동 737",
-          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+          "coversWholeParcel": true,
+          "residentialBuildings": 2,
+          "complexResidentialBuildings": 26,
+          "reviewedTitleIds": [
+            "101213355",
+            "101213357"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
         }
       }
     ],
@@ -8454,22 +9638,53 @@
     "locatorStatus": "candidate",
     "registerCandidates": [
       {
+        "pnu": "1132010700103800000",
+        "names": [
+          "창동주공4단지",
+          "창동4단지주공아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 5,
+          "complexResidentialBuildings": 10,
+          "reviewedTitleIds": [
+            "1011113021",
+            "1011113019",
+            "1011113018",
+            "1011113020",
+            "1011113017"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
         "pnu": "1132010700103730000",
         "names": [
           "창동주공4단지",
           "창동4단지주공아파트"
         ],
         "aliasSource": {
-          "url": "https://www.data.go.kr/data/15106861/fileData.do",
-          "sourceAsOf": "2025-09-18"
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
         },
         "identity": {
-          "singleComplex": true,
-          "complexId": "11320100050299",
-          "residentialBuildings": 10,
-          "households": 1710,
-          "address": "서울특별시 도봉구 창동 373",
-          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+          "coversWholeParcel": true,
+          "residentialBuildings": 5,
+          "complexResidentialBuildings": 10,
+          "reviewedTitleIds": [
+            "1011113013",
+            "1011113014",
+            "1011113011",
+            "1011113012",
+            "1011113015"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
         }
       }
     ],
@@ -8570,24 +9785,94 @@
     "locatorStatus": "candidate",
     "registerCandidates": [
       {
-        "pnu": "1135010600105020001",
+        "pnu": "1135010600105030000",
         "names": [
-          "중계그린1단지",
           "중계그린",
+          "중계그린1단지",
           "중계그린아파트",
           "시영아파트1단지"
         ],
         "aliasSource": {
-          "url": "https://www.data.go.kr/data/15106861/fileData.do",
-          "sourceAsOf": "2025-09-18"
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
         },
         "identity": {
-          "singleComplex": true,
-          "complexId": "11350100002592",
-          "residentialBuildings": 25,
-          "households": 3481,
-          "address": "서울특별시 노원구 중계동 502-1",
-          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+          "coversWholeParcel": true,
+          "residentialBuildings": 11,
+          "complexResidentialBuildings": 25,
+          "reviewedTitleIds": [
+            "101213680",
+            "101213675",
+            "101213681",
+            "101213674",
+            "101213683",
+            "101213677",
+            "101213678",
+            "101213679",
+            "101213685",
+            "101213684",
+            "101213682"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
+        "pnu": "1135010600105040001",
+        "names": [
+          "중계그린",
+          "중계그린1단지",
+          "중계그린아파트",
+          "시영아파트1단지"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 9,
+          "complexResidentialBuildings": 25,
+          "reviewedTitleIds": [
+            "101212554",
+            "101212551",
+            "101212556",
+            "101212553",
+            "101212558",
+            "101212559",
+            "101212557",
+            "101212555",
+            "101212552"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
+        "pnu": "1135010600105020001",
+        "names": [
+          "중계그린",
+          "중계그린1단지",
+          "중계그린아파트",
+          "시영아파트1단지"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 5,
+          "complexResidentialBuildings": 25,
+          "reviewedTitleIds": [
+            "101213662",
+            "101213668",
+            "101213665",
+            "101213667",
+            "101213666"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
         }
       }
     ],
@@ -8652,21 +9937,50 @@
       {
         "pnu": "1171011200100020000",
         "names": [
-          "대림",
           "오금대림",
+          "대림",
           "대림아파트"
         ],
         "aliasSource": {
-          "url": "https://www.data.go.kr/data/15106861/fileData.do",
-          "sourceAsOf": "2025-09-18"
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
         },
         "identity": {
-          "singleComplex": true,
-          "complexId": "11710100002320",
-          "residentialBuildings": 7,
-          "households": 749,
-          "address": "서울특별시 송파구 오금동 2",
-          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+          "coversWholeParcel": true,
+          "residentialBuildings": 5,
+          "complexResidentialBuildings": 7,
+          "reviewedTitleIds": [
+            "102511033",
+            "102511032",
+            "102511031",
+            "102511035",
+            "102511034"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
+        }
+      },
+      {
+        "pnu": "1171011200100190000",
+        "names": [
+          "오금대림",
+          "대림",
+          "대림아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do",
+          "sourceAsOf": "2026-08-31",
+          "sourceFileId": "OPN202609201224352200"
+        },
+        "identity": {
+          "coversWholeParcel": true,
+          "residentialBuildings": 2,
+          "complexResidentialBuildings": 7,
+          "reviewedTitleIds": [
+            "102511259",
+            "102511260"
+          ],
+          "source": "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
         }
       }
     ],
