@@ -1178,12 +1178,26 @@
     "name": "새절역 두산위브 트레지움",
     "lat": 37.591258,
     "lng": 126.906666,
-    "pnu": null,
+    "pnu": "1138010900101700012",
     "names": [
       "새절역 두산위브 트레지움",
       "새절역 두산위브 트레지움"
     ],
-    "locatorStatus": "needs_review"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1138010900101700012",
+        "names": [
+          "새절역두산위브트레지움",
+          "새절역 두산위브 트레지움"
+        ]
+      }
+    ],
+    "registerCandidateSource": {
+      "type": "reviewed-molit-transactions",
+      "checkedAt": "2026-09-27",
+      "codeSource": "https://www.code.go.kr/stdcode/regCodeL.do"
+    }
   },
   {
     "id": 552,
@@ -1288,12 +1302,25 @@
     "name": "청담르엘",
     "lat": 37.522102,
     "lng": 127.059547,
-    "pnu": null,
+    "pnu": "1168010400101340018",
     "names": [
       "청담르엘",
       "청담르엘"
     ],
-    "locatorStatus": "needs_review"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1168010400101340018",
+        "names": [
+          "청담르엘"
+        ]
+      }
+    ],
+    "registerCandidateSource": {
+      "type": "reviewed-molit-transactions",
+      "checkedAt": "2026-09-27",
+      "codeSource": "https://www.code.go.kr/stdcode/regCodeL.do"
+    }
   },
   {
     "id": 637,
@@ -1594,12 +1621,26 @@
     "name": "삼환도봉아파트",
     "lat": 37.680923,
     "lng": 127.049349,
-    "pnu": null,
+    "pnu": "1132010800100870000",
     "names": [
       "삼환도봉아파트",
       "삼환도봉아파트"
     ],
-    "locatorStatus": "needs_review"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1132010800100870000",
+        "names": [
+          "삼환도봉",
+          "삼환도봉아파트"
+        ]
+      }
+    ],
+    "registerCandidateSource": {
+      "type": "reviewed-molit-transactions",
+      "checkedAt": "2026-09-27",
+      "codeSource": "https://www.code.go.kr/stdcode/regCodeL.do"
+    }
   },
   {
     "id": 723,
@@ -1721,12 +1762,26 @@
     "name": "래미안 원페를라",
     "lat": 37.490717,
     "lng": 126.988164,
-    "pnu": null,
+    "pnu": "1165010100108180014",
     "names": [
       "래미안 원페를라",
       "래미안 원페를라"
     ],
-    "locatorStatus": "needs_review"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1165010100108180014",
+        "names": [
+          "래미안원페를라",
+          "래미안 원페를라"
+        ]
+      }
+    ],
+    "registerCandidateSource": {
+      "type": "reviewed-molit-transactions",
+      "checkedAt": "2026-09-27",
+      "codeSource": "https://www.code.go.kr/stdcode/regCodeL.do"
+    }
   },
   {
     "id": 771,
@@ -3539,12 +3594,26 @@
     "name": "e편한세상 강동 프레스티지원",
     "lat": 37.542703,
     "lng": 127.126751,
-    "pnu": null,
+    "pnu": "1174010900104230076",
     "names": [
       "e편한세상 강동 프레스티지원",
       "e편한세상 강동 프레스티지원"
     ],
-    "locatorStatus": "needs_review"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1174010900104230076",
+        "names": [
+          "e편한세상강동프레스티지원",
+          "e편한세상 강동 프레스티지원"
+        ]
+      }
+    ],
+    "registerCandidateSource": {
+      "type": "reviewed-molit-transactions",
+      "checkedAt": "2026-09-27",
+      "codeSource": "https://www.code.go.kr/stdcode/regCodeL.do"
+    }
   },
   {
     "id": 1206,
@@ -4445,12 +4514,26 @@
     "name": "오티에르 신반포",
     "lat": 37.520114,
     "lng": 127.013491,
-    "pnu": null,
+    "pnu": "1165010600100490017",
     "names": [
       "오티에르 신반포",
       "오티에르 신반포"
     ],
-    "locatorStatus": "needs_review"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1165010600100490017",
+        "names": [
+          "오티에르신반포",
+          "오티에르 신반포"
+        ]
+      }
+    ],
+    "registerCandidateSource": {
+      "type": "reviewed-molit-transactions",
+      "checkedAt": "2026-09-27",
+      "codeSource": "https://www.code.go.kr/stdcode/regCodeL.do"
+    }
   },
   {
     "id": 1607,
@@ -4633,12 +4716,25 @@
     "name": "잠실르엘",
     "lat": 37.517602,
     "lng": 127.107111,
-    "pnu": null,
+    "pnu": "1171010200100170006",
     "names": [
       "잠실르엘",
       "잠실르엘"
     ],
-    "locatorStatus": "needs_review"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1171010200100170006",
+        "names": [
+          "잠실르엘"
+        ]
+      }
+    ],
+    "registerCandidateSource": {
+      "type": "reviewed-molit-transactions",
+      "checkedAt": "2026-09-27",
+      "codeSource": "https://www.code.go.kr/stdcode/regCodeL.do"
+    }
   },
   {
     "id": 1673,
@@ -4775,12 +4871,25 @@
     "name": "서초현대",
     "lat": null,
     "lng": null,
-    "pnu": null,
+    "pnu": "1165010800116480002",
     "names": [
       "서초현대",
       "서초현대"
     ],
-    "locatorStatus": "needs_review"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1165010800116480002",
+        "names": [
+          "서초현대"
+        ]
+      }
+    ],
+    "registerCandidateSource": {
+      "type": "reviewed-molit-transactions",
+      "checkedAt": "2026-09-27",
+      "codeSource": "https://www.code.go.kr/stdcode/regCodeL.do"
+    }
   },
   {
     "id": 1719,
@@ -4838,12 +4947,25 @@
     "name": "남산대림",
     "lat": null,
     "lng": null,
-    "pnu": null,
+    "pnu": "1117013000107290000",
     "names": [
       "남산대림",
       "남산대림"
     ],
-    "locatorStatus": "needs_review"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1117013000107290000",
+        "names": [
+          "남산대림"
+        ]
+      }
+    ],
+    "registerCandidateSource": {
+      "type": "reviewed-molit-transactions",
+      "checkedAt": "2026-09-27",
+      "codeSource": "https://www.code.go.kr/stdcode/regCodeL.do"
+    }
   },
   {
     "id": 1723,
@@ -4956,24 +5078,50 @@
     "name": "당산한양",
     "lat": null,
     "lng": null,
-    "pnu": null,
+    "pnu": "1156011300100020006",
     "names": [
       "당산한양",
       "당산한양"
     ],
-    "locatorStatus": "needs_review"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1156011300100020006",
+        "names": [
+          "당산한양"
+        ]
+      }
+    ],
+    "registerCandidateSource": {
+      "type": "reviewed-molit-transactions",
+      "checkedAt": "2026-09-27",
+      "codeSource": "https://www.code.go.kr/stdcode/regCodeL.do"
+    }
   },
   {
     "id": 1729,
     "name": "한신동성",
     "lat": null,
     "lng": null,
-    "pnu": null,
+    "pnu": "1135010400102560005",
     "names": [
       "한신동성",
       "한신동성"
     ],
-    "locatorStatus": "needs_review"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1135010400102560005",
+        "names": [
+          "한신동성"
+        ]
+      }
+    ],
+    "registerCandidateSource": {
+      "type": "reviewed-molit-transactions",
+      "checkedAt": "2026-09-27",
+      "codeSource": "https://www.code.go.kr/stdcode/regCodeL.do"
+    }
   },
   {
     "id": 1730,
@@ -5039,12 +5187,25 @@
     "name": "창동주공4단지",
     "lat": null,
     "lng": null,
-    "pnu": null,
+    "pnu": "1132010700103730000",
     "names": [
       "창동주공4단지",
       "창동주공4단지"
     ],
-    "locatorStatus": "needs_review"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1132010700103730000",
+        "names": [
+          "창동주공4단지"
+        ]
+      }
+    ],
+    "registerCandidateSource": {
+      "type": "reviewed-molit-transactions",
+      "checkedAt": "2026-09-27",
+      "codeSource": "https://www.code.go.kr/stdcode/regCodeL.do"
+    }
   },
   {
     "id": 1733,
@@ -5235,24 +5396,50 @@
     "name": "DMC한양",
     "lat": null,
     "lng": null,
-    "pnu": null,
+    "pnu": "1141011900104310000",
     "names": [
       "DMC한양",
       "DMC한양"
     ],
-    "locatorStatus": "needs_review"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1141011900104310000",
+        "names": [
+          "DMC한양"
+        ]
+      }
+    ],
+    "registerCandidateSource": {
+      "type": "reviewed-molit-transactions",
+      "checkedAt": "2026-09-27",
+      "codeSource": "https://www.code.go.kr/stdcode/regCodeL.do"
+    }
   },
   {
     "id": 1741,
     "name": "마포현대",
     "lat": null,
     "lng": null,
-    "pnu": null,
+    "pnu": "1144010200101880108",
     "names": [
       "마포현대",
       "마포현대"
     ],
-    "locatorStatus": "needs_review"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1144010200101880108",
+        "names": [
+          "마포현대"
+        ]
+      }
+    ],
+    "registerCandidateSource": {
+      "type": "reviewed-molit-transactions",
+      "checkedAt": "2026-09-27",
+      "codeSource": "https://www.code.go.kr/stdcode/regCodeL.do"
+    }
   },
   {
     "id": 1742,
@@ -5311,12 +5498,25 @@
     "name": "명수대현대",
     "lat": null,
     "lng": null,
-    "pnu": null,
+    "pnu": "1159010500100100000",
     "names": [
       "명수대현대",
       "명수대현대"
     ],
-    "locatorStatus": "needs_review"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1159010500100100000",
+        "names": [
+          "명수대현대"
+        ]
+      }
+    ],
+    "registerCandidateSource": {
+      "type": "reviewed-molit-transactions",
+      "checkedAt": "2026-09-27",
+      "codeSource": "https://www.code.go.kr/stdcode/regCodeL.do"
+    }
   },
   {
     "id": 1745,
