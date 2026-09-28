@@ -4300,6 +4300,22 @@ async function collectBuildingParcels(candidate, previous, getRows) {
   return { building, registerParcels: parcels.map((p) => p.pnu) };
 }
 
+// server/assessment-years.mjs
+function assessmentYears(selection = "recent5", currentYear = (/* @__PURE__ */ new Date()).getUTCFullYear()) {
+  const value = String(selection).trim();
+  if (value === "all") return null;
+  if (value === "recent5") return Array.from({ length: 5 }, (_, i) => String(currentYear - 4 + i));
+  const match = value.match(/^(20\d{2})(?:-(20\d{2}))?$/);
+  if (!match) throw Error("Invalid assessment year");
+  const start = Number(match[1]), end = Number(match[2] || match[1]);
+  if (end < start || end - start > 49) throw Error("Invalid assessment year range");
+  return Array.from({ length: end - start + 1 }, (_, i) => String(start + i));
+}
+function assessmentSelection(selection = "recent5") {
+  const years = assessmentYears(selection);
+  return !years ? "all" : years.length === 1 ? years[0] : years[0] + "-" + years.at(-1);
+}
+
 // server/official-prices.mjs
 async function pricePages(pnu, year2, key, domain, fetcher = fetch) {
   if (!key) throw Error("not_configured");
@@ -4339,9 +4355,10 @@ function priceProfile(candidate, rows, year2) {
 }
 function registerPriceProfile(building, rows, selectedYear) {
   const byId = new Map(Object.values(building.records || {}).filter((r) => r.registerId).map((r) => [r.registerId, r])), units = {}, records = {}, years = /* @__PURE__ */ new Set();
+  const selected = selectedYear ? assessmentYears(selectedYear) : null;
   for (const r of rows) {
     const unit = byId.get(cleanText(r.mgmBldrgstPk)), price = finite(r.hsprc), day = cleanText(r.stdDay);
-    if (!unit || price === null || price <= 0 || !/^\d{8}$/.test(day) || selectedYear && day.slice(0, 4) !== String(selectedYear)) continue;
+    if (!unit || price === null || price <= 0 || !/^\d{8}$/.test(day) || selected && !selected.includes(day.slice(0, 4))) continue;
     const year2 = day.slice(0, 4), key = unit.dong + "|" + unit.ho, privateRows = unit.rows.filter((x) => x.kind === "\uC804\uC720");
     const record = records[key] ??= { dong: unit.dong, ho: unit.ho, rows: [] };
     const value = { year: year2, date: year2 + "." + day.slice(4, 6) + "." + day.slice(6, 8), area: privateRows.length ? privateRows.reduce((sum, x) => sum + x.area, 0) : null, areaSource: "building-register", price, updatedAt: cleanText(r.crtnDay) };
@@ -4361,12 +4378,13 @@ function expectsHousingPrice(unit) {
 async function collectRegisterPrices(candidate, snapshot, year2, getRows) {
   const parcels = snapshot.registerParcels?.length ? snapshot.registerParcels : [candidate.pnu];
   if (parcels.some((p) => !/^11\d{17}$/.test(p) || p.slice(0, 10) !== candidate.pnu.slice(0, 10) && !candidate.registerCandidates?.some((c) => c.pnu === p && p.slice(0, 5) === candidate.pnu.slice(0, 5)))) throw Error("needs_review");
-  if (year2 !== "all") {
+  const selected = assessmentYears(year2);
+  if (selected) {
     const recent = [];
-    for (const pnu of [...new Set(parcels)]) recent.push(...await getRows("getBrHsprcInfo", pnu, { startDate: String(Number(year2) - 1) + "0101", endDate: year2 + "1231" }));
+    for (const pnu of [...new Set(parcels)]) recent.push(...await getRows("getBrHsprcInfo", pnu, { startDate: String(Number(selected[0]) - 1) + "0101", endDate: selected.at(-1) + "1231" }));
     const expected = Object.values(snapshot.building.records || {}).filter(expectsHousingPrice).map((r) => cleanText(r.registerId));
-    const found = new Set(recent.filter((r) => /^\d{8}$/.test(cleanText(r.stdDay)) && cleanText(r.stdDay).startsWith(year2) && finite(r.hsprc) > 0).map((r) => cleanText(r.mgmBldrgstPk)));
-    if (expected.length && expected.every((id) => id && found.has(id))) return registerPriceProfile(snapshot.building, recent, year2);
+    const found = new Set(recent.filter((r) => /^\d{8}$/.test(cleanText(r.stdDay)) && selected.includes(cleanText(r.stdDay).slice(0, 4)) && finite(r.hsprc) > 0).map((r) => cleanText(r.mgmBldrgstPk) + "|" + cleanText(r.stdDay).slice(0, 4)));
+    if (expected.length && expected.every((id) => id && selected.every((y) => found.has(id + "|" + y)))) return registerPriceProfile(snapshot.building, recent, year2);
   }
   const rows = [];
   for (const pnu of [...new Set(parcels)]) rows.push(...await getRows("getBrHsprcInfo", pnu));
@@ -4374,10 +4392,11 @@ async function collectRegisterPrices(candidate, snapshot, year2, getRows) {
 }
 function mergePriceYears(previous, next2, year2) {
   if (previous?.status !== "ready" || next2.status !== "ready" || year2 === "all") return next2;
+  const refreshed = new Set(assessmentYears(year2));
   const records = {}, units = {};
   for (const key of /* @__PURE__ */ new Set([...Object.keys(previous.records || {}), ...Object.keys(next2.records || {})])) {
     const current = next2.records[key], prior = previous.records[key];
-    const rows = [...current?.rows || [], ...(prior?.rows || []).filter((r) => r.year !== year2)].sort((a, b) => b.date.localeCompare(a.date));
+    const rows = [...current?.rows || [], ...(prior?.rows || []).filter((r) => !refreshed.has(r.year))].sort((a, b) => b.date.localeCompare(a.date));
     if (!rows.length) continue;
     const { dong, ho } = current || prior;
     records[key] = { dong, ho, rows };
@@ -4444,8 +4463,7 @@ var root = process.cwd();
 var catalog = JSON.parse(fs.readFileSync(path.join(root, "data/parcel-candidates.json"), "utf8"));
 var output = path.join(root, "data/property");
 fs.mkdirSync(output, { recursive: true });
-var year = process.env.PROPERTY_PRICE_YEAR || String((/* @__PURE__ */ new Date()).getUTCFullYear());
-if (year !== "all" && !/^20\d{2}$/.test(year)) throw Error("Invalid assessment year");
+var year = assessmentSelection(process.env.PROPERTY_PRICE_YEAR || "recent5");
 var preferRegister = process.env.PROPERTY_PRICE_SOURCE === "building";
 var reuseDays = Number(process.env.PROPERTY_BUILDING_REUSE_DAYS ?? 7);
 var ids = (process.env.PROPERTY_PROJECT_IDS || "").split(",").map((s) => s.trim()).filter(Boolean);
@@ -4485,7 +4503,14 @@ async function collect(candidate) {
   if (result.prices?.status !== "ready" || result.prices.collectionVersion !== 2 || result.prices.collectedYear !== year || !result.prices.checkedAt?.startsWith(summary.checkedAt.slice(0, 10))) {
     if (!preferRegister) try {
       if (priceBlocked) throw Error(priceBlocked);
-      result.prices = priceProfile(c, await pricePages(c.pnu, year, process.env.VWORLD_API_KEY, process.env.VWORLD_DOMAIN || "https://seoul-redevelopment-map-yuhyu.whisky88.chatgpt.site", officialTransport), year);
+      const years = assessmentYears(year);
+      if (!years) throw Error("unsupported_year_range");
+      let prices;
+      for (const y of years) {
+        const next2 = priceProfile(c, await pricePages(c.pnu, y, process.env.VWORLD_API_KEY, process.env.VWORLD_DOMAIN || "https://seoul-redevelopment-map-yuhyu.whisky88.chatgpt.site", officialTransport), y);
+        if (next2.status === "ready") prices = mergePriceYears(prices, next2, y);
+      }
+      result.prices = prices || { status: "empty", source: SOURCES.price };
       priceFailures = 0;
     } catch (e) {
       if (e.apiCode) (summary.apiErrors ??= []).push({ id: c.id, code: e.apiCode });

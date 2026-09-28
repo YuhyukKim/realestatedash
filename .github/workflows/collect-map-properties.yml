@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       year:
-        description: '공동주택 공시가격 기준연도 (빈 값은 올해)'
+        description: '공시연도: 빈 값/recent5=최근 5개년, 2022-2026=기간, all=전체'
         required: false
       project_ids:
         description: '단지 ID를 쉼표로 구분 (빈 값은 전체)'
