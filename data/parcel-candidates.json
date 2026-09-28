@@ -22,6 +22,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100001179",
+          "residentialBuildings": 9,
+          "households": 911,
+          "address": "서울특별시 강남구 압구정동 397",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       },
       {
@@ -35,6 +43,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100050389",
+          "residentialBuildings": 3,
+          "households": 322,
+          "address": "서울특별시 강남구 압구정동 414",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -67,6 +83,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100051424",
+          "residentialBuildings": 8,
+          "households": 559,
+          "address": "서울특별시 강남구 압구정동 433",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       },
       {
@@ -80,6 +104,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100051425",
+          "residentialBuildings": 12,
+          "households": 765,
+          "address": "서울특별시 강남구 압구정동 434",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       },
       {
@@ -93,6 +125,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100051422",
+          "residentialBuildings": 7,
+          "households": 600,
+          "address": "서울특별시 강남구 압구정동 426",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -125,6 +165,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100051423",
+          "residentialBuildings": 2,
+          "households": 144,
+          "address": "서울특별시 강남구 압구정동 436",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       },
       {
@@ -153,6 +201,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100051418",
+          "residentialBuildings": 2,
+          "households": 224,
+          "address": "서울특별시 강남구 압구정동 455",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       },
       {
@@ -180,6 +236,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100051426",
+          "residentialBuildings": 4,
+          "households": 234,
+          "address": "서울특별시 강남구 압구정동 448",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       },
       {
@@ -193,6 +257,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100051427",
+          "residentialBuildings": 4,
+          "households": 388,
+          "address": "서울특별시 강남구 압구정동 447",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       },
       {
@@ -206,6 +278,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100051415",
+          "residentialBuildings": 4,
+          "households": 432,
+          "address": "서울특별시 강남구 압구정동 443",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       },
       {
@@ -219,6 +299,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100051416",
+          "residentialBuildings": 6,
+          "households": 170,
+          "address": "서울특별시 강남구 압구정동 462",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -251,6 +339,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100051421",
+          "residentialBuildings": 5,
+          "households": 515,
+          "address": "서울특별시 강남구 압구정동 481",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       },
       {
@@ -264,6 +360,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100050365",
+          "residentialBuildings": 5,
+          "households": 312,
+          "address": "서울특별시 강남구 압구정동 489",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       },
       {
@@ -277,6 +381,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100001180",
+          "residentialBuildings": 2,
+          "households": 227,
+          "address": "서울특별시 강남구 압구정동 484",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       },
       {
@@ -290,6 +402,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100050367",
+          "residentialBuildings": 4,
+          "households": 286,
+          "address": "서울특별시 강남구 압구정동 486",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -322,6 +442,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100050362",
+          "residentialBuildings": 10,
+          "households": 936,
+          "address": "서울특별시 강남구 압구정동 490",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       },
       {
@@ -335,6 +463,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100050364",
+          "residentialBuildings": 5,
+          "households": 296,
+          "address": "서울특별시 강남구 압구정동 493",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -367,6 +503,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100050370",
+          "residentialBuildings": 4,
+          "households": 343,
+          "address": "서울특별시 강남구 압구정동 513",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       },
       {
@@ -380,6 +524,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100050373",
+          "residentialBuildings": 2,
+          "households": 239,
+          "address": "서울특별시 강남구 압구정동 528",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       },
       {
@@ -392,6 +544,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100050371",
+          "residentialBuildings": 1,
+          "households": 90,
+          "address": "서울특별시 강남구 압구정동 510",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -424,6 +584,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11710100002363",
+          "residentialBuildings": 30,
+          "households": 3930,
+          "address": "서울특별시 송파구 잠실동 27",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -455,6 +623,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11710100002369",
+          "residentialBuildings": 21,
+          "households": 2100,
+          "address": "서울특별시 송파구 신천동 7",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       },
       {
@@ -500,6 +676,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11710100002358",
+          "residentialBuildings": 26,
+          "households": 1842,
+          "address": "서울특별시 송파구 잠실동 101-1",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -532,6 +716,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100001381",
+          "residentialBuildings": 28,
+          "households": 4424,
+          "address": "서울특별시 강남구 대치동 316",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -558,6 +750,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11560100000966",
+          "residentialBuildings": 24,
+          "households": 1584,
+          "address": "서울특별시 영등포구 여의도동 50",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -589,6 +789,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11560100000972",
+          "residentialBuildings": 8,
+          "households": 588,
+          "address": "서울특별시 영등포구 여의도동 42",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -620,6 +828,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11560100000956",
+          "residentialBuildings": 4,
+          "households": 576,
+          "address": "서울특별시 영등포구 여의도동 41",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -651,6 +867,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11560100000954",
+          "residentialBuildings": 4,
+          "households": 373,
+          "address": "서울특별시 영등포구 여의도동 21-2",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -682,6 +906,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11650100002786",
+          "residentialBuildings": 13,
+          "households": 1572,
+          "address": "서울특별시 서초구 잠원동 73",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -713,6 +945,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11650100002785",
+          "residentialBuildings": 2,
+          "households": 242,
+          "address": "서울특별시 서초구 잠원동 61-2",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       },
       {
@@ -725,6 +965,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11650100002791",
+          "residentialBuildings": 2,
+          "households": 169,
+          "address": "서울특별시 서초구 잠원동 61-1",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -758,6 +1006,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11470100003172",
+          "residentialBuildings": 34,
+          "households": 1882,
+          "address": "서울특별시 양천구 목동 901",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -786,6 +1042,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11470100003173",
+          "residentialBuildings": 37,
+          "households": 1640,
+          "address": "서울특별시 양천구 목동 902",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -814,6 +1078,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11470100003174",
+          "residentialBuildings": 30,
+          "households": 1588,
+          "address": "서울특별시 양천구 목동 903",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -849,6 +1121,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11470100003175",
+          "residentialBuildings": 16,
+          "households": 1382,
+          "address": "서울특별시 양천구 목동 904",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -877,6 +1157,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11470100003176",
+          "residentialBuildings": 36,
+          "households": 1848,
+          "address": "서울특별시 양천구 목동 912",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -905,6 +1193,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11470100003177",
+          "residentialBuildings": 15,
+          "households": 1362,
+          "address": "서울특별시 양천구 목동 911",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -933,6 +1229,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11470100003178",
+          "residentialBuildings": 34,
+          "households": 2550,
+          "address": "서울특별시 양천구 목동 925",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -960,6 +1264,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11470100003280",
+          "residentialBuildings": 12,
+          "households": 1352,
+          "address": "서울특별시 양천구 신정동 314",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -988,6 +1300,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11470100003281",
+          "residentialBuildings": 32,
+          "households": 2030,
+          "address": "서울특별시 양천구 신정동 312",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -1021,6 +1341,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11470100003275",
+          "residentialBuildings": 34,
+          "households": 2160,
+          "address": "서울특별시 양천구 신정동 311",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -1055,6 +1383,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11470100003276",
+          "residentialBuildings": 19,
+          "households": 1595,
+          "address": "서울특별시 양천구 신정동 325",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -1082,6 +1418,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11470100003277",
+          "residentialBuildings": 26,
+          "households": 1860,
+          "address": "서울특별시 양천구 신정동 326",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -1109,6 +1453,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11470100003278",
+          "residentialBuildings": 33,
+          "households": 2280,
+          "address": "서울특별시 양천구 신정동 327",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -1136,6 +1488,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11470100003279",
+          "residentialBuildings": 34,
+          "households": 3100,
+          "address": "서울특별시 양천구 신정동 329",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -1165,6 +1525,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11215212006195",
+          "residentialBuildings": 10,
+          "households": 156,
+          "address": "서울특별시 광진구 중곡동 18-24",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -1191,6 +1559,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11560100000991",
+          "residentialBuildings": 5,
+          "households": 410,
+          "address": "서울특별시 영등포구 당산동5가 7-2",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -1250,6 +1626,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11620100002146",
+          "residentialBuildings": 3,
+          "households": 492,
+          "address": "서울특별시 관악구 신림동 746-43",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -1281,6 +1665,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11710100002253",
+          "residentialBuildings": 9,
+          "households": 648,
+          "address": "서울특별시 송파구 가락동 176",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -1312,6 +1704,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11530100001981",
+          "residentialBuildings": 9,
+          "households": 340,
+          "address": "서울특별시 구로구 구로동 440",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -1338,6 +1738,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11170100000937",
+          "residentialBuildings": 15,
+          "households": 1326,
+          "address": "서울특별시 용산구 서빙고동 241-21",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -1364,6 +1772,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11710100002287",
+          "residentialBuildings": 56,
+          "households": 4494,
+          "address": "서울특별시 송파구 문정동 150",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -1391,6 +1807,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100001457",
+          "residentialBuildings": 6,
+          "households": 416,
+          "address": "서울특별시 강남구 개포동 653",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       },
       {
@@ -1419,6 +1843,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100001447",
+          "residentialBuildings": 5,
+          "households": 405,
+          "address": "서울특별시 강남구 개포동 652",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -1451,6 +1883,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100050343",
+          "residentialBuildings": 5,
+          "households": 630,
+          "address": "서울특별시 강남구 대치동 66",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -1482,6 +1922,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11650100002865",
+          "residentialBuildings": 3,
+          "households": 168,
+          "address": "서울특별시 서초구 반포동 30-1",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -1537,6 +1985,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11560100000958",
+          "residentialBuildings": 2,
+          "households": 312,
+          "address": "서울특별시 영등포구 여의도동 30",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -1568,6 +2024,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11170100000874",
+          "residentialBuildings": 23,
+          "households": 660,
+          "address": "서울특별시 용산구 이촌동 300-23",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -1601,6 +2065,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100001497",
+          "residentialBuildings": 2,
+          "households": 247,
+          "address": "서울특별시 강남구 도곡동 869",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -1631,6 +2103,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11470100003239",
+          "residentialBuildings": 20,
+          "households": 2256,
+          "address": "서울특별시 양천구 신월동 987-1",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -1811,6 +2291,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11215100003445",
+          "residentialBuildings": 6,
+          "households": 444,
+          "address": "서울특별시 광진구 자양동 695",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -1841,6 +2329,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11500200001902",
+          "residentialBuildings": 8,
+          "households": 234,
+          "address": "서울특별시 강서구 마곡동 327-53",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -1871,6 +2367,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11230100000183",
+          "residentialBuildings": 8,
+          "households": 456,
+          "address": "서울특별시 동대문구 장안동 95-1",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -1922,6 +2426,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11710100002251",
+          "residentialBuildings": 4,
+          "households": 435,
+          "address": "서울특별시 송파구 가락동 138",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -1947,6 +2459,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11740100001535",
+          "residentialBuildings": 10,
+          "households": 768,
+          "address": "서울특별시 강동구 명일동 270",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -2025,6 +2545,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11320100000408",
+          "residentialBuildings": 30,
+          "households": 3169,
+          "address": "서울특별시 도봉구 방학동 271-1",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -2054,6 +2582,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11110211999804",
+          "residentialBuildings": 9,
+          "households": 252,
+          "address": "서울특별시 종로구 평창동 64-3",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -2099,6 +2635,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100001514",
+          "residentialBuildings": 8,
+          "households": 620,
+          "address": "서울특별시 강남구 도곡동 464",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -2177,6 +2721,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11560100001012",
+          "residentialBuildings": 3,
+          "households": 160,
+          "address": "서울특별시 영등포구 문래동5가 22",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -2208,6 +2760,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100001504",
+          "residentialBuildings": 2,
+          "households": 390,
+          "address": "서울특별시 강남구 도곡동 934-10",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -2239,6 +2799,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11560100001002",
+          "residentialBuildings": 2,
+          "households": 390,
+          "address": "서울특별시 영등포구 문래동2가 35",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -2270,6 +2838,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11650100002981",
+          "residentialBuildings": 5,
+          "households": 264,
+          "address": "서울특별시 서초구 방배동 758-4",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -2300,6 +2876,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11320100000447",
+          "residentialBuildings": 4,
+          "households": 660,
+          "address": "서울특별시 도봉구 도봉동 87",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -2332,6 +2916,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11320100000386",
+          "residentialBuildings": 8,
+          "households": 824,
+          "address": "서울특별시 도봉구 쌍문동 388-33",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -2363,6 +2955,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11710100002265",
+          "residentialBuildings": 11,
+          "households": 672,
+          "address": "서울특별시 송파구 가락동 199",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -2395,6 +2995,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100001283",
+          "residentialBuildings": 6,
+          "households": 548,
+          "address": "서울특별시 강남구 논현동 105",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -2425,6 +3033,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11260212011627",
+          "residentialBuildings": 7,
+          "households": 96,
+          "address": "서울특별시 중랑구 중화동 195-2",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -2449,6 +3065,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11710100002225",
+          "residentialBuildings": 14,
+          "households": 936,
+          "address": "서울특별시 송파구 송파동 166",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -2617,6 +3241,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100001464",
+          "residentialBuildings": 13,
+          "households": 496,
+          "address": "서울특별시 강남구 일원동 735",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -2648,6 +3280,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11560100000962",
+          "residentialBuildings": 4,
+          "households": 360,
+          "address": "서울특별시 영등포구 여의도동 51",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -2679,6 +3319,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11560100000967",
+          "residentialBuildings": 4,
+          "households": 360,
+          "address": "서울특별시 영등포구 여의도동 52",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -2710,6 +3358,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11560100000961",
+          "residentialBuildings": 10,
+          "households": 866,
+          "address": "서울특별시 영등포구 여의도동 30-2",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -2741,6 +3397,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11740100001579",
+          "residentialBuildings": 12,
+          "households": 1092,
+          "address": "서울특별시 강동구 길동 53",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -2810,6 +3474,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11650100002793",
+          "residentialBuildings": 1,
+          "households": 156,
+          "address": "서울특별시 서초구 잠원동 56-2",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -2867,6 +3539,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11170100000840",
+          "residentialBuildings": 2,
+          "households": 33,
+          "address": "서울특별시 용산구 이촌동 193-5",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -2894,6 +3574,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11350100002511",
+          "residentialBuildings": 19,
+          "households": 840,
+          "address": "서울특별시 노원구 상계동 721",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -2936,6 +3624,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11560100000969",
+          "residentialBuildings": 4,
+          "households": 376,
+          "address": "서울특별시 영등포구 여의도동 54",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -2967,6 +3663,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11560100000964",
+          "residentialBuildings": 3,
+          "households": 329,
+          "address": "서울특별시 영등포구 여의도동 32",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -2999,6 +3703,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11650100003013",
+          "residentialBuildings": 4,
+          "households": 316,
+          "address": "서울특별시 서초구 방배동 1010-1",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -3031,6 +3743,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11320100000426",
+          "residentialBuildings": 5,
+          "households": 694,
+          "address": "서울특별시 도봉구 창동 299",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -3061,6 +3781,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11560100000984",
+          "residentialBuildings": 6,
+          "households": 509,
+          "address": "서울특별시 영등포구 당산동4가 88",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -3087,6 +3815,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11560100050197",
+          "residentialBuildings": 4,
+          "households": 435,
+          "address": "서울특별시 영등포구 대림동 696",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -3117,6 +3853,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11560100001010",
+          "residentialBuildings": 3,
+          "households": 383,
+          "address": "서울특별시 영등포구 문래동5가 14",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -3144,6 +3888,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11200100000223",
+          "residentialBuildings": 9,
+          "households": 811,
+          "address": "서울특별시 성동구 마장동 784",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -3175,6 +3927,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11650100002813",
+          "residentialBuildings": 5,
+          "households": 450,
+          "address": "서울특별시 서초구 잠원동 49-8",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -3202,6 +3962,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11440100000698",
+          "residentialBuildings": 15,
+          "households": 1222,
+          "address": "서울특별시 마포구 도화동 82",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -3232,6 +4000,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11530100002022",
+          "residentialBuildings": 10,
+          "households": 342,
+          "address": "서울특별시 구로구 고척동 57-9",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -3275,6 +4051,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11740100001680",
+          "residentialBuildings": 2,
+          "households": 277,
+          "address": "서울특별시 강동구 성내동 30-2",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -3300,8 +4084,22 @@
         "pnu": "1168011400107390000",
         "names": [
           "일원청솔빌리지",
-          "일원청솔"
-        ]
+          "일원청솔",
+          "청솔빌리지",
+          "청솔빌리지 103동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680200001472",
+          "residentialBuildings": 13,
+          "households": 291,
+          "address": "서울특별시 강남구 일원동 739",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -3332,6 +4130,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100001474",
+          "residentialBuildings": 19,
+          "households": 570,
+          "address": "서울특별시 강남구 일원동 731",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -3363,6 +4169,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11740100001542",
+          "residentialBuildings": 8,
+          "households": 572,
+          "address": "서울특별시 강동구 명일동 42",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -3389,6 +4203,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100050341",
+          "residentialBuildings": 9,
+          "households": 690,
+          "address": "서울특별시 강남구 대치동 503",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       },
       {
@@ -3401,6 +4223,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100001379",
+          "residentialBuildings": 5,
+          "households": 450,
+          "address": "서울특별시 강남구 대치동 500",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -3432,6 +4262,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100001468",
+          "residentialBuildings": 22,
+          "households": 740,
+          "address": "서울특별시 강남구 일원동 734",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -3493,6 +4331,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11560100001059",
+          "residentialBuildings": 5,
+          "households": 477,
+          "address": "서울특별시 영등포구 신길동 4656",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -3524,6 +4370,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11650100002993",
+          "residentialBuildings": 6,
+          "households": 493,
+          "address": "서울특별시 서초구 방배동 988-1",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -3556,6 +4410,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100001380",
+          "residentialBuildings": 6,
+          "households": 476,
+          "address": "서울특별시 강남구 대치동 63",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -3588,6 +4450,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11350100002609",
+          "residentialBuildings": 7,
+          "households": 864,
+          "address": "서울특별시 노원구 월계동 436",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -3618,6 +4488,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11470100003291",
+          "residentialBuildings": 4,
+          "households": 220,
+          "address": "서울특별시 양천구 신정동 733-31",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -3644,6 +4522,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11710100002245",
+          "residentialBuildings": 7,
+          "households": 555,
+          "address": "서울특별시 송파구 가락동 192",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -3676,6 +4562,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11710100002285",
+          "residentialBuildings": 8,
+          "households": 514,
+          "address": "서울특별시 송파구 문정동 3",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -3707,6 +4601,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11350100002520",
+          "residentialBuildings": 5,
+          "households": 348,
+          "address": "서울특별시 노원구 상계동 458",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -3739,6 +4641,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11350100002650",
+          "residentialBuildings": 9,
+          "households": 432,
+          "address": "서울특별시 노원구 공릉동 254",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -3769,6 +4679,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11350100002615",
+          "residentialBuildings": 7,
+          "households": 910,
+          "address": "서울특별시 노원구 월계동 12",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -3834,6 +4752,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100001377",
+          "residentialBuildings": 4,
+          "households": 364,
+          "address": "서울특별시 강남구 대치동 65",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       },
       {
@@ -3847,6 +4773,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100001380",
+          "residentialBuildings": 6,
+          "households": 476,
+          "address": "서울특별시 강남구 대치동 63",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -3878,6 +4812,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11710120399739",
+          "residentialBuildings": 3,
+          "households": 226,
+          "address": "서울특별시 송파구 오금동 166",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -3908,6 +4850,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11560100000955",
+          "residentialBuildings": 8,
+          "households": 576,
+          "address": "서울특별시 영등포구 여의도동 28",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -3952,6 +4902,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11560100001060",
+          "residentialBuildings": 4,
+          "households": 476,
+          "address": "서울특별시 영등포구 신길동 102-8",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -3983,6 +4941,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11500112041903",
+          "residentialBuildings": 4,
+          "households": 339,
+          "address": "서울특별시 강서구 염창동 66-9",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       },
       {
@@ -3995,6 +4961,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11500100001760",
+          "residentialBuildings": 1,
+          "households": 77,
+          "address": "서울특별시 강서구 염창동 70-20",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       },
       {
@@ -4007,6 +4981,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11500100001765",
+          "residentialBuildings": 1,
+          "households": 186,
+          "address": "서울특별시 강서구 염창동 287-1",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -4077,6 +5059,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11230100000190",
+          "residentialBuildings": 8,
+          "households": 1089,
+          "address": "서울특별시 동대문구 청량리동 235-1",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -4132,6 +5122,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11650100002782",
+          "residentialBuildings": 2,
+          "households": 396,
+          "address": "서울특별시 서초구 잠원동 55-12",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -4163,6 +5161,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11650100002779",
+          "residentialBuildings": 3,
+          "households": 324,
+          "address": "서울특별시 서초구 잠원동 50-5",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -4195,6 +5201,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11560100000959",
+          "residentialBuildings": 5,
+          "households": 577,
+          "address": "서울특별시 영등포구 여의도동 37",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -4225,6 +5239,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11650100002994",
+          "residentialBuildings": 6,
+          "households": 481,
+          "address": "서울특별시 서초구 방배동 725",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -4250,6 +5272,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11560120396415",
+          "residentialBuildings": 2,
+          "households": 168,
+          "address": "서울특별시 영등포구 여의도동 38-1",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -4282,6 +5312,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11545100003510",
+          "residentialBuildings": 5,
+          "households": 639,
+          "address": "서울특별시 금천구 시흥동 109-1",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -4311,6 +5349,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11650200050378",
+          "residentialBuildings": 15,
+          "households": 103,
+          "address": "서울특별시 서초구 반포동 590-25",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -4342,6 +5388,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11560100000962",
+          "residentialBuildings": 4,
+          "households": 360,
+          "address": "서울특별시 영등포구 여의도동 51",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -4399,6 +5453,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11560100001058",
+          "residentialBuildings": 7,
+          "households": 725,
+          "address": "서울특별시 영등포구 신길동 4518",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       },
       {
@@ -4411,6 +5473,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11560100001062",
+          "residentialBuildings": 2,
+          "households": 214,
+          "address": "서울특별시 영등포구 신길동 4501",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -4442,6 +5512,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11560100001003",
+          "residentialBuildings": 2,
+          "households": 270,
+          "address": "서울특별시 영등포구 문래동3가 76-1",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -4473,6 +5551,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11170100000859",
+          "residentialBuildings": 5,
+          "households": 250,
+          "address": "서울특별시 용산구 이촌동 300-11",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -4499,6 +5585,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11620100002155",
+          "residentialBuildings": 2,
+          "households": 120,
+          "address": "서울특별시 관악구 신림동 739",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -4530,6 +5624,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11710100002259",
+          "residentialBuildings": 7,
+          "households": 838,
+          "address": "서울특별시 송파구 가락동 96-1",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -4562,6 +5664,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11620100002161",
+          "residentialBuildings": 2,
+          "households": 280,
+          "address": "서울특별시 관악구 신림동 1656",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -4593,6 +5703,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11530100002038",
+          "residentialBuildings": 3,
+          "households": 290,
+          "address": "서울특별시 구로구 고척동 52-332",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -4619,6 +5737,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11710100002359",
+          "residentialBuildings": 7,
+          "households": 555,
+          "address": "서울특별시 송파구 잠실동 320",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -4663,6 +5789,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100001475",
+          "residentialBuildings": 4,
+          "households": 364,
+          "address": "서울특별시 강남구 일원동 615-1",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -4690,6 +5824,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11710100002292",
+          "residentialBuildings": 6,
+          "households": 480,
+          "address": "서울특별시 송파구 방이동 217",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -4720,6 +5862,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11710100002222",
+          "residentialBuildings": 5,
+          "households": 378,
+          "address": "서울특별시 송파구 송파동 161",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -4752,6 +5902,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11350100050287",
+          "residentialBuildings": 21,
+          "households": 3315,
+          "address": "서울특별시 노원구 상계동 639",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -4783,6 +5941,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11650100002841",
+          "residentialBuildings": 8,
+          "households": 1260,
+          "address": "서울특별시 서초구 반포동 60-4",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -4839,6 +6005,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11530100001992",
+          "residentialBuildings": 3,
+          "households": 344,
+          "address": "서울특별시 구로구 구로동 23",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -4870,6 +6044,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11650100002794",
+          "residentialBuildings": 12,
+          "households": 1212,
+          "address": "서울특별시 서초구 잠원동 70",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -4927,6 +6109,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11650100002797",
+          "residentialBuildings": 3,
+          "households": 320,
+          "address": "서울특별시 서초구 잠원동 65-32",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -4959,6 +6149,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11230100000150",
+          "residentialBuildings": 3,
+          "households": 228,
+          "address": "서울특별시 동대문구 제기동 892-68",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -4990,6 +6188,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11170100000820",
+          "residentialBuildings": 6,
+          "households": 554,
+          "address": "서울특별시 용산구 원효로4가 118-16",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -5016,6 +6222,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11710100002205",
+          "residentialBuildings": 4,
+          "households": 275,
+          "address": "서울특별시 송파구 풍납동 219",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -5047,6 +6261,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11710100002327",
+          "residentialBuildings": 4,
+          "households": 264,
+          "address": "서울특별시 송파구 오금동 164",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -5077,6 +6299,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11710100002228",
+          "residentialBuildings": 6,
+          "households": 576,
+          "address": "서울특별시 송파구 송파동 119",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -5133,6 +6363,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11170100000855",
+          "residentialBuildings": 2,
+          "households": 252,
+          "address": "서울특별시 용산구 이촌동 300-301",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -5189,6 +6427,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11740100001538",
+          "residentialBuildings": 18,
+          "households": 2400,
+          "address": "서울특별시 강동구 명일동 15",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -5214,6 +6460,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11530100002071",
+          "residentialBuildings": 4,
+          "households": 198,
+          "address": "서울특별시 구로구 오류동 150-42",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -5241,6 +6495,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11710100002329",
+          "residentialBuildings": 21,
+          "households": 1316,
+          "address": "서울특별시 송파구 오금동 43",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -5309,6 +6571,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11650100002829",
+          "residentialBuildings": 2,
+          "households": 108,
+          "address": "서울특별시 서초구 반포동 65-1",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -5342,6 +6612,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100001448",
+          "residentialBuildings": 8,
+          "households": 270,
+          "address": "서울특별시 강남구 개포동 658-1",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -5372,6 +6650,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11170100000883",
+          "residentialBuildings": 9,
+          "households": 578,
+          "address": "서울특별시 용산구 이태원동 22-2",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -5403,6 +6689,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11710100002229",
+          "residentialBuildings": 10,
+          "households": 744,
+          "address": "서울특별시 송파구 송파동 151",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -5433,6 +6727,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11215100050247",
+          "residentialBuildings": 3,
+          "households": 120,
+          "address": "서울특별시 광진구 중곡동 190-26",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -5465,6 +6767,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11740100001541",
+          "residentialBuildings": 7,
+          "households": 570,
+          "address": "서울특별시 강동구 명일동 44",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -5497,6 +6807,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11350100002512",
+          "residentialBuildings": 28,
+          "households": 2646,
+          "address": "서울특별시 노원구 상계동 720",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -5528,6 +6846,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11740100001545",
+          "residentialBuildings": 6,
+          "households": 540,
+          "address": "서울특별시 강동구 명일동 54",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -5596,6 +6922,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11170100000866",
+          "residentialBuildings": 6,
+          "households": 228,
+          "address": "서울특별시 용산구 이촌동 211-2",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -5627,6 +6961,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11740100001532",
+          "residentialBuildings": 14,
+          "households": 1320,
+          "address": "서울특별시 강동구 명일동 257",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -5654,6 +6996,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100001458",
+          "residentialBuildings": 13,
+          "households": 558,
+          "address": "서울특별시 강남구 개포동 654",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -5684,6 +7034,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11200100000255",
+          "residentialBuildings": 8,
+          "households": 535,
+          "address": "서울특별시 성동구 옥수동 220-1",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -5709,6 +7067,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11740100001706",
+          "residentialBuildings": 6,
+          "households": 479,
+          "address": "서울특별시 강동구 천호동 19-1",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -5740,6 +7106,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11740100001546",
+          "residentialBuildings": 7,
+          "households": 524,
+          "address": "서울특별시 강동구 명일동 56",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -5771,6 +7145,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11650100002735",
+          "residentialBuildings": 7,
+          "households": 615,
+          "address": "서울특별시 서초구 서초동 1315",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -5802,6 +7184,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11380100000585",
+          "residentialBuildings": 10,
+          "households": 1340,
+          "address": "서울특별시 은평구 불광동 248",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -5846,6 +7236,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11305100003352",
+          "residentialBuildings": 14,
+          "households": 1429,
+          "address": "서울특별시 강북구 번동 242",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -5877,6 +7275,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11530100001997",
+          "residentialBuildings": 13,
+          "households": 1400,
+          "address": "서울특별시 구로구 구로동 685-222",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -5908,6 +7314,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11350100002544",
+          "residentialBuildings": 15,
+          "households": 1880,
+          "address": "서울특별시 노원구 하계동 273",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -5966,6 +7380,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100001502",
+          "residentialBuildings": 8,
+          "households": 459,
+          "address": "서울특별시 강남구 도곡동 465",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -5998,6 +7420,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100001471",
+          "residentialBuildings": 15,
+          "households": 802,
+          "address": "서울특별시 강남구 일원동 615",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -6029,6 +7459,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11710100002201",
+          "residentialBuildings": 4,
+          "households": 415,
+          "address": "서울특별시 송파구 풍납동 391",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -6112,6 +7550,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11650100002787",
+          "residentialBuildings": 1,
+          "households": 112,
+          "address": "서울특별시 서초구 잠원동 60-78",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -6143,6 +7589,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100050421",
+          "residentialBuildings": 6,
+          "households": 940,
+          "address": "서울특별시 강남구 개포동 187",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -6231,6 +7685,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11710100002311",
+          "residentialBuildings": 3,
+          "households": 252,
+          "address": "서울특별시 송파구 방이동 225",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -6301,6 +7763,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100001377",
+          "residentialBuildings": 4,
+          "households": 364,
+          "address": "서울특별시 강남구 대치동 65",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -6333,6 +7803,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11560100001052",
+          "residentialBuildings": 2,
+          "households": 384,
+          "address": "서울특별시 영등포구 신길동 4759",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -6364,6 +7842,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11650100002842",
+          "residentialBuildings": 3,
+          "households": 435,
+          "address": "서울특별시 서초구 반포동 60-5",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -6389,6 +7875,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11650100002715",
+          "residentialBuildings": 2,
+          "households": 299,
+          "address": "서울특별시 서초구 서초동 1648-2",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -6421,6 +7915,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11650100002942",
+          "residentialBuildings": 6,
+          "households": 364,
+          "address": "서울특별시 서초구 방배동 1038",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -6448,6 +7950,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11170100000852",
+          "residentialBuildings": 2,
+          "households": 192,
+          "address": "서울특별시 용산구 이촌동 301-170",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -6490,6 +8000,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11170100000878",
+          "residentialBuildings": 16,
+          "households": 400,
+          "address": "서울특별시 용산구 이태원동 729",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -6568,6 +8086,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11350100002518",
+          "residentialBuildings": 4,
+          "households": 420,
+          "address": "서울특별시 노원구 상계동 135",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -6600,6 +8126,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11350100002519",
+          "residentialBuildings": 3,
+          "households": 471,
+          "address": "서울특별시 노원구 상계동 451",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -6624,14 +8158,42 @@
       {
         "pnu": "1165010200101540002",
         "names": [
-          "양재우성"
-        ]
+          "양재우성",
+          "우성",
+          "우성아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11650100003112",
+          "residentialBuildings": 10,
+          "households": 794,
+          "address": "서울특별시 서초구 양재동 154-2",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+        }
       },
       {
         "pnu": "1165010200101370001",
         "names": [
-          "양재우성"
-        ]
+          "양재우성",
+          "우성112",
+          "양재대웅아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11650100003105",
+          "residentialBuildings": 1,
+          "households": 54,
+          "address": "서울특별시 서초구 양재동 137-1",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -6661,6 +8223,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11560100000980",
+          "residentialBuildings": 3,
+          "households": 338,
+          "address": "서울특별시 영등포구 당산동3가 2-6",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -6692,6 +8262,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11350100002555",
+          "residentialBuildings": 6,
+          "households": 498,
+          "address": "서울특별시 노원구 하계동 256-5",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -6724,6 +8302,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11350100002509",
+          "residentialBuildings": 21,
+          "households": 2113,
+          "address": "서울특별시 노원구 상계동 730-2",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       },
       {
@@ -6737,6 +8323,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11350100050455",
+          "residentialBuildings": 5,
+          "households": 100,
+          "address": "서울특별시 노원구 상계동 737",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -6768,6 +8362,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11350100002522",
+          "residentialBuildings": 5,
+          "households": 492,
+          "address": "서울특별시 노원구 상계동 757",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -6798,6 +8400,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11320100050299",
+          "residentialBuildings": 10,
+          "households": 1710,
+          "address": "서울특별시 도봉구 창동 373",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -6829,6 +8439,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11320100000422",
+          "residentialBuildings": 6,
+          "households": 600,
+          "address": "서울특별시 도봉구 창동 26",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -6860,6 +8478,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11350100002541",
+          "residentialBuildings": 6,
+          "households": 685,
+          "address": "서울특별시 노원구 하계동 280",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -6892,6 +8518,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11350100002592",
+          "residentialBuildings": 25,
+          "households": 3481,
+          "address": "서울특별시 노원구 중계동 502-1",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -6924,6 +8558,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11350100002585",
+          "residentialBuildings": 5,
+          "households": 690,
+          "address": "서울특별시 노원구 중계동 358-2",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -6955,6 +8597,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11710100002320",
+          "residentialBuildings": 7,
+          "households": 749,
+          "address": "서울특별시 송파구 오금동 2",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -6987,6 +8637,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11350100002589",
+          "residentialBuildings": 6,
+          "households": 696,
+          "address": "서울특별시 노원구 중계동 362-1",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -7018,6 +8676,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11530100002105",
+          "residentialBuildings": 6,
+          "households": 824,
+          "address": "서울특별시 구로구 신도림동 290",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -7047,6 +8713,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11410100000567",
+          "residentialBuildings": 6,
+          "households": 660,
+          "address": "서울특별시 서대문구 북가좌동 431",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -7077,6 +8751,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11440100000687",
+          "residentialBuildings": 5,
+          "households": 480,
+          "address": "서울특별시 마포구 공덕동 188-108",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -7108,6 +8790,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11200100000263",
+          "residentialBuildings": 3,
+          "households": 390,
+          "address": "서울특별시 성동구 성수동1가 656-320",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -7139,6 +8829,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11590100001150",
+          "residentialBuildings": 16,
+          "households": 1335,
+          "address": "서울특별시 동작구 신대방동 565",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -7169,6 +8867,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11590100001108",
+          "residentialBuildings": 8,
+          "households": 660,
+          "address": "서울특별시 동작구 흑석동 10",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -7201,6 +8907,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100001484",
+          "residentialBuildings": 8,
+          "households": 1162,
+          "address": "서울특별시 강남구 수서동 736",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -7232,6 +8946,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11680100001483",
+          "residentialBuildings": 7,
+          "households": 498,
+          "address": "서울특별시 강남구 수서동 712",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ]
@@ -7324,6 +9046,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11380100000635",
+          "residentialBuildings": 4,
+          "households": 292,
+          "address": "서울특별시 은평구 응암동 694-1",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -7355,6 +9085,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11380100000643",
+          "residentialBuildings": 5,
+          "households": 570,
+          "address": "서울특별시 은평구 신사동 140-1",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -7386,6 +9124,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11215100003430",
+          "residentialBuildings": 7,
+          "households": 464,
+          "address": "서울특별시 광진구 자양동 516",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],
@@ -7417,6 +9163,14 @@
         "aliasSource": {
           "url": "https://www.data.go.kr/data/15106861/fileData.do",
           "sourceAsOf": "2025-09-18"
+        },
+        "identity": {
+          "singleComplex": true,
+          "complexId": "11230100000195",
+          "residentialBuildings": 8,
+          "households": 736,
+          "address": "서울특별시 동대문구 회기동 65",
+          "source": "https://www.data.go.kr/data/15106861/fileData.do"
         }
       }
     ],

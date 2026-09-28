@@ -4132,7 +4132,24 @@ var finite = (v) => v == null || v === "" ? null : Number.isFinite(Number(v)) ? 
 var array = (v) => Array.isArray(v) ? v : v ? [v] : [];
 var normalizeName = (v) => cleanText(v).normalize("NFKC").replace(/아파트|신시가지|[\s()·.\-]/g, "");
 var sortNames = (a, b) => a.localeCompare(b, "ko", { numeric: true });
-var matchedBuildingTitles = (candidate, titles) => titles.filter((r) => candidate.names.map(normalizeName).includes(normalizeName(r.bldNm)) && (!r.mainPurpsCdNm || /공동주택|아파트|연립주택|다세대주택/.test(r.mainPurpsCdNm)));
+function matchedBuildingTitles(candidate, titles) {
+  const names = new Set(candidate.names.map(normalizeName));
+  if (candidate.registerIdentity?.singleComplex) for (const name of [...names]) {
+    if (/[가-힣].*?(?:제)?\d+동$/.test(name)) names.add(name.replace(/(?:제)?\d+동$/, ""));
+  }
+  const residential = titles.filter((r) => !r.mainPurpsCdNm || /공동주택|아파트|연립주택|다세대주택/.test(r.mainPurpsCdNm));
+  const named = (r) => {
+    const name = normalizeName(r.bldNm);
+    if (!name) return false;
+    if (names.has(name)) return true;
+    const dong = normalizeName(r.dongNm).replace(/^제/, "").replace(/동$/, "");
+    if (!dong) return false;
+    return [dong + "\uB3D9", "\uC81C" + dong + "\uB3D9", dong].some((suffix) => name.endsWith(suffix) && names.has(name.slice(0, -suffix.length)));
+  };
+  const identity = candidate.registerIdentity;
+  const allowBlank = identity?.singleComplex && residential.length === identity.residentialBuildings && residential.every((r) => !cleanText(r.bldNm) || named(r));
+  return residential.filter((r) => named(r) || allowBlank && !cleanText(r.bldNm));
+}
 async function officialResponseText(url, fetcher = fetch) {
   for (let attempt = 0; attempt < 3; attempt++) {
     try {
@@ -4225,14 +4242,15 @@ function registerCandidates(candidate, previous = {}) {
   const entries = candidate.registerCandidates?.length ? candidate.registerCandidates : (previous.registerParcels || [candidate.pnu]).map((pnu) => ({ pnu, names: candidate.names }));
   return entries.map((p) => {
     if (!/^11\d{17}$/.test(p.pnu) || p.pnu.slice(0, 5) !== candidate.pnu.slice(0, 5)) throw Error("needs_review");
-    return { ...candidate, pnu: p.pnu, names: [.../* @__PURE__ */ new Set([...p.names, ...candidate.id >= 374 && candidate.id <= 387 ? ["\uBAA9\uB3D9\uC2E0\uC2DC\uAC00\uC9C0\uC544\uD30C\uD2B8"] : []])] };
+    return { ...candidate, pnu: p.pnu, registerIdentity: p.identity, names: [.../* @__PURE__ */ new Set([...p.names, ...candidate.id >= 374 && candidate.id <= 387 ? ["\uBAA9\uB3D9\uC2E0\uC2DC\uAC00\uC9C0\uC544\uD30C\uD2B8"] : []])] };
   });
 }
 async function collectBuildingParcels(candidate, previous, getRows) {
   const parcels = registerCandidates(candidate, previous), profiles = [];
   for (const parcel of parcels) {
     const titles = await getRows("getBrTitleInfo", parcel.pnu);
-    if (!matchedBuildingTitles(parcel, titles).length) {
+    const matched = matchedBuildingTitles(parcel, titles);
+    if (!matched.length || parcel.registerIdentity?.singleComplex && matched.length < parcel.registerIdentity.residentialBuildings) {
       const e = Error("needs_review");
       e.observedBuildings = titles.map((t) => ({ name: t.bldNm, dong: t.dongNm, address: t.platPlc, purpose: t.mainPurpsCdNm }));
       throw e;
@@ -4420,6 +4438,11 @@ async function collect(candidate) {
   }
   const result = { version: 1, id: c.id, pnu: c.pnu, registerParcels: old.registerParcels || [c.pnu], building: old.building, prices: old.prices };
   let connectionFailed = false;
+  const expectedBuildings = (c.registerCandidates || []).reduce((sum, p) => sum + (p.identity?.residentialBuildings || 0), 0);
+  if (result.building?.status === "ready" && (result.building.buildings?.length || 0) < expectedBuildings) {
+    result.building = { ...result.building, status: "needs_review", reviewReason: "incomplete_building_coverage" };
+    if (result.prices?.status === "ready") result.prices = { ...result.prices, status: "needs_review", reviewReason: "incomplete_building_coverage" };
+  }
   const buildingFresh = result.building?.status === "ready" && Date.now() - Date.parse(result.building.checkedAt) < reuseDays * 864e5 && (!c.registerCandidates?.length || c.registerCandidates.every((p) => result.registerParcels.includes(p.pnu)));
   try {
     if (buildingBlocked) throw Error(buildingBlocked);
