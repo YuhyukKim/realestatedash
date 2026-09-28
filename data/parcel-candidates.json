@@ -4115,12 +4115,31 @@
     "name": "신반포16차",
     "lat": 37.516663,
     "lng": 127.009361,
-    "pnu": null,
+    "pnu": "1165010600100550012",
     "names": [
       "신반포16차",
       "신반포16차"
     ],
-    "locatorStatus": "needs_review"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1165010600100550012",
+        "names": [
+          "신반포16차",
+          "신반포16",
+          "신반포아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ],
+    "registerCandidateSource": {
+      "type": "official-reb-complex",
+      "url": "https://www.data.go.kr/data/15106861/fileData.do",
+      "sourceAsOf": "2025-09-18"
+    }
   },
   {
     "id": 1057,

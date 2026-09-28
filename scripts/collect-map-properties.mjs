@@ -4308,13 +4308,18 @@ function registerPriceProfile(building, rows, selectedYear) {
   for (const record of Object.values(records)) record.rows.sort((a, b) => b.date.localeCompare(a.date));
   return { status: Object.keys(records).length ? "ready" : "empty", address: building.address, units: Object.fromEntries(Object.entries(units).map(([d, hs]) => [d, [...hs].sort(sortNames)])), records, years: [...years].sort().reverse(), source: { name: "\uAD6D\uD1A0\uAD50\uD1B5\uBD80 \uAC74\uCD95HUB \xB7 \uC8FC\uD0DD\uAC00\uACA9\uC815\uBCF4", url: "https://www.data.go.kr/data/15134735/openapi.do" }, checkedAt: (/* @__PURE__ */ new Date()).toISOString() };
 }
+function expectsHousingPrice(unit) {
+  const privateRows = (unit.rows || []).filter((r) => r.kind === "\uC804\uC720");
+  const business = /근린생활시설|근생활시설|교육연구시설|점포|학원|은행|슈퍼마켓|약국|부동산중개|소매점|음식점|미용원|제조업소/;
+  return !privateRows.length || !privateRows.every((r) => business.test(r.purpose || "") && !/주택|아파트|주거/.test(r.purpose || ""));
+}
 async function collectRegisterPrices(candidate, snapshot, year2, getRows) {
   const parcels = snapshot.registerParcels?.length ? snapshot.registerParcels : [candidate.pnu];
   if (parcels.some((p) => !/^11\d{17}$/.test(p) || p.slice(0, 10) !== candidate.pnu.slice(0, 10) && !candidate.registerCandidates?.some((c) => c.pnu === p && p.slice(0, 5) === candidate.pnu.slice(0, 5)))) throw Error("needs_review");
   if (year2 !== "all") {
     const recent = [];
     for (const pnu of [...new Set(parcels)]) recent.push(...await getRows("getBrHsprcInfo", pnu, { startDate: String(Number(year2) - 1) + "0101", endDate: year2 + "1231" }));
-    const expected = Object.values(snapshot.building.records || {}).map((r) => cleanText(r.registerId));
+    const expected = Object.values(snapshot.building.records || {}).filter(expectsHousingPrice).map((r) => cleanText(r.registerId));
     const found = new Set(recent.filter((r) => /^\d{8}$/.test(cleanText(r.stdDay)) && cleanText(r.stdDay).startsWith(year2) && finite(r.hsprc) > 0).map((r) => cleanText(r.mgmBldrgstPk)));
     if (expected.length && expected.every((id) => id && found.has(id))) return registerPriceProfile(snapshot.building, recent, year2);
   }
