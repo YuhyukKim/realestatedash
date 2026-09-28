@@ -15,15 +15,27 @@
         "pnu": "1168011000103970000",
         "names": [
           "미성2차",
-          "압구정1구역(미성1·2차)"
-        ]
+          "압구정1구역(미성1·2차)",
+          "미성아파트",
+          "미성아파트 제21동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       },
       {
         "pnu": "1168011000104140000",
         "names": [
           "미성1차",
-          "압구정1구역(미성1·2차)"
-        ]
+          "압구정1구역(미성1·2차)",
+          "미성아파트",
+          "미성아파트 제1동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -48,22 +60,40 @@
         "pnu": "1168011000104330000",
         "names": [
           "신현대11차",
-          "압구정2구역(신현대9·11·12차)"
-        ]
+          "압구정2구역(신현대9·11·12차)",
+          "현대아파트",
+          "현대아파트108동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       },
       {
         "pnu": "1168011000104340000",
         "names": [
           "신현대12차",
-          "압구정2구역(신현대9·11·12차)"
-        ]
+          "압구정2구역(신현대9·11·12차)",
+          "현대아파트",
+          "현대아파트 제113동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       },
       {
         "pnu": "1168011000104260000",
         "names": [
           "신현대9차",
-          "압구정2구역(신현대9·11·12차)"
-        ]
+          "압구정2구역(신현대9·11·12차)",
+          "현대아파트",
+          "현대아파트104동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -88,59 +118,108 @@
         "pnu": "1168011000104360000",
         "names": [
           "현대10차(201,202동)",
-          "압구정3구역(현대1~7·10·13·14차)"
-        ]
+          "압구정3구역(현대1~7·10·13·14차)",
+          "현대아파트",
+          "현대아파트201동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       },
       {
         "pnu": "1168011000103690001",
         "names": [
           "현대2차(10,11,20,23,24,25동)",
           "현대1차(12,13,21,22,31,32,33동)",
-          "압구정3구역(현대1~7·10·13·14차)"
-        ]
+          "압구정3구역(현대1~7·10·13·14차)",
+          "현대아파트",
+          "현대아파트13동",
+          "현대아파트11동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       },
       {
         "pnu": "1168011000104550000",
         "names": [
           "현대5차(71,72동)",
-          "압구정3구역(현대1~7·10·13·14차)"
-        ]
+          "압구정3구역(현대1~7·10·13·14차)",
+          "현대아파트",
+          "현대아파트71동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       },
       {
         "pnu": "1168011000104560000",
         "names": [
           "현대7차(73~77,82,85동)",
           "현대6차(78~81,83,84,86,87동)",
-          "압구정3구역(현대1~7·10·13·14차)"
-        ]
+          "압구정3구역(현대1~7·10·13·14차)",
+          "현대아파트",
+          "현대아파트76동",
+          "현대아파트79동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       },
       {
         "pnu": "1168011000104480000",
         "names": [
           "현대13차(208~211동)",
-          "압구정3구역(현대1~7·10·13·14차)"
-        ]
+          "압구정3구역(현대1~7·10·13·14차)",
+          "현대아파트208동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       },
       {
         "pnu": "1168011000104470000",
         "names": [
           "현대14차(203,204,205,206동)",
-          "압구정3구역(현대1~7·10·13·14차)"
-        ]
+          "압구정3구역(현대1~7·10·13·14차)",
+          "현대아파트",
+          "현대아파트204동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       },
       {
         "pnu": "1168011000104430000",
         "names": [
           "현대3차(61~64동)",
-          "압구정3구역(현대1~7·10·13·14차)"
-        ]
+          "압구정3구역(현대1~7·10·13·14차)",
+          "현대아파트",
+          "현대아파트64동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       },
       {
         "pnu": "1168011000104620000",
         "names": [
           "현대4차저층(51~56동)",
-          "압구정3구역(현대1~7·10·13·14차)"
-        ]
+          "압구정3구역(현대1~7·10·13·14차)",
+          "현대아파트",
+          "현대아파트52동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -165,29 +244,53 @@
         "pnu": "1168011000104810000",
         "names": [
           "현대8차(성수현대:91~95동)",
-          "압구정4구역(현대8·한양3·4·6차)"
-        ]
+          "압구정4구역(현대8·한양3·4·6차)",
+          "현대아파트",
+          "현대아파트94동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       },
       {
         "pnu": "1168011000104890000",
         "names": [
           "한양3",
-          "압구정4구역(현대8·한양3·4·6차)"
-        ]
+          "압구정4구역(현대8·한양3·4·6차)",
+          "한양아파트",
+          "한양아파트33동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       },
       {
         "pnu": "1168011000104840000",
         "names": [
           "한양6",
-          "압구정4구역(현대8·한양3·4·6차)"
-        ]
+          "압구정4구역(현대8·한양3·4·6차)",
+          "한양아파트",
+          "한양아파트61동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       },
       {
         "pnu": "1168011000104860000",
         "names": [
           "한양4",
-          "압구정4구역(현대8·한양3·4·6차)"
-        ]
+          "압구정4구역(현대8·한양3·4·6차)",
+          "한양아파트",
+          "한양아파트45동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -212,15 +315,27 @@
         "pnu": "1168011000104900000",
         "names": [
           "한양1차(영동한양)",
-          "압구정5구역(한양1·2차)"
-        ]
+          "압구정5구역(한양1·2차)",
+          "영동한양아파트",
+          "영동한양아파트6동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       },
       {
         "pnu": "1168011000104930000",
         "names": [
           "한양2",
-          "압구정5구역(한양1·2차)"
-        ]
+          "압구정5구역(한양1·2차)",
+          "영동한양아파트",
+          "영동한양아파트21동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -245,22 +360,39 @@
         "pnu": "1168011000105130000",
         "names": [
           "한양5",
-          "압구정6구역(한양5·7·8차)"
-        ]
+          "압구정6구역(한양5·7·8차)",
+          "한양아파트",
+          "한양아파트51동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       },
       {
         "pnu": "1168011000105280000",
         "names": [
           "한양7",
-          "압구정6구역(한양5·7·8차)"
-        ]
+          "압구정6구역(한양5·7·8차)",
+          "한양아파트",
+          "한양아파트71동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       },
       {
         "pnu": "1168011000105100000",
         "names": [
           "한양8(81동한개동)",
-          "압구정6구역(한양5·7·8차)"
-        ]
+          "압구정6구역(한양5·7·8차)",
+          "한양아파트81동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -285,8 +417,14 @@
         "pnu": "1171010100100270000",
         "names": [
           "주공아파트 5단지",
-          "잠실주공5단지"
-        ]
+          "잠실주공5단지",
+          "주공아파트5단지",
+          "주공아파트 507동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -311,16 +449,27 @@
         "pnu": "1171010200100070000",
         "names": [
           "장미1",
-          "잠실 장미1·2·3차"
-        ]
+          "잠실 장미1·2·3차",
+          "장미아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       },
       {
         "pnu": "1171010200100110000",
         "names": [
           "장미2",
           "장미3",
-          "잠실 장미1·2·3차"
-        ]
+          "잠실 장미1·2·3차",
+          "장미아파트",
+          "장미3차맨션"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -347,7 +496,11 @@
           "우성아파트",
           "잠실 우성1·2·3차",
           "잠실우성1,2,3차"
-        ]
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -366,7 +519,22 @@
       "대치 은마",
       "은마아파트"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1168010600103160000",
+        "names": [
+          "대치 은마",
+          "은마아파트",
+          "은마",
+          "은마아파트(10동)"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 368,
@@ -386,7 +554,11 @@
           "시범",
           "여의도 시범",
           "여의도시범아파트"
-        ]
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -413,7 +585,11 @@
           "한양",
           "여의도 한양",
           "여의도한양"
-        ]
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -440,7 +616,11 @@
           "대교",
           "여의도 대교",
           "여의도대교"
-        ]
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -467,7 +647,11 @@
           "공작",
           "여의도 공작",
           "여의도공작"
-        ]
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -492,8 +676,13 @@
         "pnu": "1165010600100730000",
         "names": [
           "신반포2",
-          "신반포2차"
-        ]
+          "신반포2차",
+          "신반포아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -518,15 +707,25 @@
         "pnu": "1165010600100610002",
         "names": [
           "신반포19",
-          "신반포19·25차"
-        ]
+          "신반포19·25차",
+          "신반포아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       },
       {
         "pnu": "1165010600100610001",
         "names": [
           "신반포25",
-          "신반포19·25차"
-        ]
+          "신반포19·25차",
+          "신반포아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -545,7 +744,23 @@
       "목동신시가지 1단지",
       "목동1단지"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1147010200109010000",
+        "names": [
+          "목동신시가지 1단지",
+          "목동1단지",
+          "목동신시가지1",
+          "목동신시가지아파트",
+          "목동신시가지아파트1단지"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 375,
@@ -557,7 +772,23 @@
       "목동신시가지 2단지",
       "목동2단지"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1147010200109020000",
+        "names": [
+          "목동신시가지 2단지",
+          "목동2단지",
+          "목동신시가지2",
+          "목동신시가지아파트",
+          "목동신시가지아파트2단지"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 376,
@@ -569,7 +800,23 @@
       "목동신시가지 3단지",
       "목동3단지"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1147010200109030000",
+        "names": [
+          "목동신시가지 3단지",
+          "목동3단지",
+          "목동신시가지3",
+          "목동신시가지아파트",
+          "목동신시가지아파트3단지"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 377,
@@ -588,7 +835,23 @@
       "checkedAt": "2026-09-27",
       "address": "서울특별시 양천구 목동 904번지",
       "residentialBuildings": "401동~416동"
-    }
+    },
+    "registerCandidates": [
+      {
+        "pnu": "1147010200109040000",
+        "names": [
+          "목동신시가지 4단지",
+          "목동4단지",
+          "목동신시가지아파트",
+          "목동신시가지4",
+          "목동신시가지아파트4단지"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 378,
@@ -600,7 +863,23 @@
       "목동신시가지 5단지",
       "목동5단지"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1147010200109120000",
+        "names": [
+          "목동신시가지 5단지",
+          "목동5단지",
+          "목동신시가지5",
+          "목동신시가지아파트",
+          "목동신시가지아파트5단지"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 379,
@@ -612,7 +891,23 @@
       "목동신시가지 6단지",
       "목동6단지"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1147010200109110000",
+        "names": [
+          "목동신시가지 6단지",
+          "목동6단지",
+          "목동신시가지6",
+          "목동신시가지아파트",
+          "목동신시가지아파트6단지"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 380,
@@ -624,7 +919,23 @@
       "목동신시가지 7단지",
       "목동7단지"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1147010200109250000",
+        "names": [
+          "목동신시가지 7단지",
+          "목동7단지",
+          "목동신시가지7",
+          "목동신시가지아파트",
+          "목동신시가지아파트7단지"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 381,
@@ -636,7 +947,22 @@
       "목동신시가지 8단지",
       "목동8단지"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1147010100103140000",
+        "names": [
+          "목동신시가지 8단지",
+          "목동8단지",
+          "목동신시가지8",
+          "목동신시가지아파트8단지"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 382,
@@ -655,8 +981,14 @@
         "names": [
           "목동신시가지9",
           "목동신시가지 9단지",
-          "목동9단지"
-        ]
+          "목동9단지",
+          "목동신시가지아파트",
+          "목동신시가지아파트9단지"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -675,7 +1007,23 @@
       "목동신시가지 10단지",
       "목동10단지"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1147010100103110000",
+        "names": [
+          "목동신시가지 10단지",
+          "목동10단지",
+          "목동신시가지10",
+          "목동신시가지아파트",
+          "목동신시가지아파트10단지"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 384,
@@ -694,7 +1042,22 @@
       "address": "서울특별시 양천구 신정동 325",
       "tradeMonth": "2026-09",
       "note": "공식 실거래 주소로 필지 후보 확인. 건축물명은 건축HUB 조회 시 검증."
-    }
+    },
+    "registerCandidates": [
+      {
+        "pnu": "1147010100103250000",
+        "names": [
+          "목동신시가지 11단지",
+          "목동신시가지11",
+          "목동신시가지아파트",
+          "목동신시가지아파트11단지"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 385,
@@ -706,7 +1069,22 @@
       "목동신시가지 12단지",
       "목동12단지"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1147010100103260000",
+        "names": [
+          "목동신시가지 12단지",
+          "목동12단지",
+          "목동신시가지12",
+          "목동신시가지아파트12단지"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 386,
@@ -718,7 +1096,22 @@
       "목동신시가지 13단지",
       "목동13단지"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1147010100103270000",
+        "names": [
+          "목동신시가지 13단지",
+          "목동13단지",
+          "목동신시가지13",
+          "목동신시가지아파트13단지"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 387,
@@ -737,8 +1130,13 @@
         "names": [
           "목동신시가지14",
           "목동신시가지 14단지",
-          "목동14단지"
-        ]
+          "목동14단지",
+          "목동신시가지아파트14단지"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -757,7 +1155,19 @@
       "신향빌라",
       "신향빌라"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1121510100100180024",
+        "names": [
+          "신향빌라"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 417,
@@ -769,7 +1179,21 @@
       "유원제일2차아파트",
       "당산유원제일2차"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1156011500100070002",
+        "names": [
+          "유원제일2차아파트",
+          "당산유원제일2차",
+          "유원제일2차"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 457,
@@ -791,7 +1215,11 @@
           "올림픽선수기자촌1단지",
           "올림픽선수기자촌",
           "올림픽선수기자촌아파트"
-        ]
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -816,8 +1244,13 @@
         "pnu": "1162010200107460043",
         "names": [
           "건영1",
-          "미성동 건영아파트"
-        ]
+          "미성동 건영아파트",
+          "건영아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -844,7 +1277,11 @@
           "삼환",
           "삼환가락",
           "삼환가락아파트"
-        ]
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -863,7 +1300,21 @@
       "보광아파트",
       "구로보광"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1153010200104400000",
+        "names": [
+          "보광아파트",
+          "구로보광",
+          "보광"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 484,
@@ -875,7 +1326,21 @@
       "신동아아파트",
       "서빙고신동아"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1117013300102410021",
+        "names": [
+          "신동아아파트",
+          "서빙고신동아",
+          "신동아"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 492,
@@ -887,7 +1352,21 @@
       "올림픽훼미리타운",
       "올림픽훼밀리타운"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1171010800101500000",
+        "names": [
+          "올림픽훼미리타운",
+          "올림픽훼밀리타운",
+          "올림픽훼밀리타운(아파트) 209동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 497,
@@ -905,23 +1384,42 @@
         "pnu": "1168010300106530000",
         "names": [
           "현대1차101동~106동",
-          "개포 통합(경남,우성3차,현대1차 아파트)"
-        ]
+          "개포 통합(경남,우성3차,현대1차 아파트)",
+          "현대아파트",
+          "현대아파트103동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       },
       {
         "pnu": "1168010300106490000",
         "names": [
           "경남1",
           "경남2차",
-          "개포 통합(경남,우성3차,현대1차 아파트)"
-        ]
+          "개포 통합(경남,우성3차,현대1차 아파트)",
+          "경남아파트",
+          "경남아파트8동",
+          "경남아파트2동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       },
       {
         "pnu": "1168010300106520000",
         "names": [
           "개포우성3차",
-          "개포 통합(경남,우성3차,현대1차 아파트)"
-        ]
+          "개포 통합(경남,우성3차,현대1차 아파트)",
+          "우성아파트",
+          "우성아파트제1동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -946,8 +1444,14 @@
         "pnu": "1168010600100660000",
         "names": [
           "쌍용대치아파트1동,2동,3동,5동,6동",
-          "대치쌍용1차"
-        ]
+          "대치쌍용1차",
+          "쌍용대치아파트",
+          "쌍용대치아파트2동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -972,8 +1476,13 @@
         "pnu": "1165010700100300001",
         "names": [
           "삼호가든맨션(5차)",
-          "삼호가든5차"
-        ]
+          "삼호가든5차",
+          "삼호가든맨션"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -1024,7 +1533,11 @@
           "목화",
           "여의도목화아파트",
           "여의도목화"
-        ]
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -1049,8 +1562,13 @@
         "pnu": "1117012900103000023",
         "names": [
           "한강맨숀",
-          "한강맨션아파트"
-        ]
+          "한강맨션아파트",
+          "맨숀아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -1076,8 +1594,14 @@
         "names": [
           "삼익",
           "도곡삼익",
-          "역삼삼익"
-        ]
+          "역삼삼익",
+          "삼익아파트",
+          "삼익아파트1동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -1096,7 +1620,20 @@
       "신월시영",
       "신월시영아파트"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1147010300109870001",
+        "names": [
+          "신월시영",
+          "신월시영아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 532,
@@ -1115,8 +1652,14 @@
         "names": [
           "극동2",
           "극동1",
-          "광장극동"
-        ]
+          "광장극동",
+          "극동아파트",
+          "광장극동아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -1264,7 +1807,11 @@
         "names": [
           "한양",
           "자양한양아파트"
-        ]
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -1278,12 +1825,30 @@
     "name": "신안빌라",
     "lat": 37.571349,
     "lng": 126.823496,
-    "pnu": null,
+    "pnu": "1150010500103270053",
     "names": [
       "신안빌라",
       "신안빌라"
     ],
-    "locatorStatus": "needs_review"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1150010500103270053",
+        "names": [
+          "신안빌라",
+          "신안(327-53)"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ],
+    "registerCandidateSource": {
+      "type": "official-reb-complex",
+      "url": "https://www.data.go.kr/data/15106861/fileData.do",
+      "sourceAsOf": "2025-09-18"
+    }
   },
   {
     "id": 635,
@@ -1295,7 +1860,20 @@
       "장안현대",
       "장안현대"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1123010600100950001",
+        "names": [
+          "장안현대",
+          "현대아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 636,
@@ -1332,19 +1910,51 @@
       "가락미륭",
       "가락미륭아파트"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1171010700101380000",
+        "names": [
+          "가락미륭",
+          "가락미륭아파트",
+          "미륭아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 638,
     "name": "삼익맨션",
     "lat": 37.546877,
     "lng": 127.147837,
-    "pnu": null,
+    "pnu": "1174010100102700000",
     "names": [
       "삼익맨션",
       "삼익맨션"
     ],
-    "locatorStatus": "needs_review"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1174010100102700000",
+        "names": [
+          "삼익맨션",
+          "삼익가든"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ],
+    "registerCandidateSource": {
+      "type": "official-reb-complex",
+      "url": "https://www.data.go.kr/data/15106861/fileData.do",
+      "sourceAsOf": "2025-09-18"
+    }
   },
   {
     "id": 647,
@@ -1363,8 +1973,15 @@
         "names": [
           "한보미도맨션2",
           "한보미도맨션1",
-          "대치미도아파트"
-        ]
+          "대치미도아파트",
+          "미도맨션아파트",
+          "한보미도맨션205동",
+          "미도맨션109동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -1402,8 +2019,13 @@
         "names": [
           "신동아아파트1",
           "방학신동아1차",
-          "신동아1단지"
-        ]
+          "신동아1단지",
+          "신동아아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -1428,7 +2050,11 @@
         "pnu": "1111018300100640003",
         "names": [
           "금강하이츠빌라"
-        ]
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -1466,8 +2092,14 @@
         "names": [
           "한신(개포)",
           "도곡개포한신",
-          "도곡개포한신아파트"
-        ]
+          "도곡개포한신아파트",
+          "개포한신아파트",
+          "개포한신아파트 제7동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -1541,7 +2173,11 @@
         "names": [
           "진주맨션",
           "문래동진주아파트"
-        ]
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -1566,8 +2202,13 @@
         "pnu": "1168011800109340010",
         "names": [
           "도곡우성아파트",
-          "도곡우성"
-        ]
+          "도곡우성",
+          "도곡우성아파트1동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -1592,8 +2233,13 @@
         "pnu": "1156012000100350000",
         "names": [
           "남성",
-          "문래동남성아파트"
-        ]
+          "문래동남성아파트",
+          "남성맨션아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -1620,7 +2266,11 @@
           "삼호2",
           "방배삼호",
           "삼호아파트"
-        ]
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -1646,7 +2296,11 @@
         "names": [
           "삼환도봉",
           "삼환도봉아파트"
-        ]
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -1672,8 +2326,13 @@
         "names": [
           "한양1",
           "쌍문한양1차아파트",
-          "쌍문한양1차"
-        ]
+          "쌍문한양1차",
+          "쌍문한양아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -1698,8 +2357,13 @@
         "pnu": "1171010700101990000",
         "names": [
           "프라자",
-          "가락프라자"
-        ]
+          "가락프라자",
+          "프라자아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -1724,8 +2388,14 @@
         "pnu": "1168010800101050000",
         "names": [
           "동현아파트1~6",
-          "논현동현"
-        ]
+          "논현동현",
+          "동현아파트",
+          "동현아파트 4동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -1744,7 +2414,20 @@
       "중화동 우성타운",
       "우성타운"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1126010300101950002",
+        "names": [
+          "중화동 우성타운",
+          "우성타운"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 749,
@@ -1756,7 +2439,19 @@
       "가락삼익맨숀",
       "가락삼익맨숀"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1171010400101660000",
+        "names": [
+          "가락삼익맨숀"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 751,
@@ -1851,7 +2546,11 @@
           "성산시영(대우)",
           "성산시영(유원)",
           "성산시영아파트"
-        ]
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -1877,8 +2576,15 @@
         "names": [
           "개포주공7단지",
           "개포주공6단지",
-          "개포주공6,7단지"
-        ]
+          "개포주공6,7단지",
+          "개포주공아파트",
+          "개포주공아파트701동",
+          "개포주공아파트607동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -1904,8 +2610,14 @@
         "names": [
           "가람",
           "일원가람",
-          "수서가람"
-        ]
+          "수서가람",
+          "가람아파트",
+          "가람아파트110동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -1932,7 +2644,11 @@
           "삼익",
           "여의도삼익아파트",
           "여의도삼익"
-        ]
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -1959,7 +2675,11 @@
           "은하",
           "여의도은하아파트",
           "여의도은하"
-        ]
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -1986,7 +2706,11 @@
           "삼부",
           "여의도삼부아파트",
           "여의도삼부"
-        ]
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -2013,7 +2737,11 @@
           "삼익파크맨션",
           "삼익파크",
           "길동삼익파크"
-        ]
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -2076,8 +2804,13 @@
         "pnu": "1165010600100560002",
         "names": [
           "신반포27",
-          "신반포27차"
-        ]
+          "신반포27차",
+          "신반포아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -2122,7 +2855,21 @@
       "강변강서아파트",
       "강서아파트"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1117012900101930005",
+        "names": [
+          "강변강서아파트",
+          "강서아파트",
+          "강서"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 846,
@@ -2140,8 +2887,14 @@
         "pnu": "1135010500107210000",
         "names": [
           "상계주공5(저층)",
-          "상계주공5단지"
-        ]
+          "상계주공5단지",
+          "상계주공아파트",
+          "상계주공5단지아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -2179,7 +2932,11 @@
         "names": [
           "진주",
           "여의도진주아파트"
-        ]
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -2206,7 +2963,11 @@
           "수정",
           "여의도수정아파트",
           "여의도수정"
-        ]
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -2231,8 +2992,14 @@
         "pnu": "1165010100110100001",
         "names": [
           "방배임광3차",
-          "임광3차"
-        ]
+          "임광3차",
+          "임광아파트",
+          "방배임광아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -2258,8 +3025,13 @@
         "names": [
           "상아1차아파트",
           "창동상아1차아파트",
-          "창동상아1차"
-        ]
+          "창동상아1차",
+          "상아아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -2278,7 +3050,20 @@
       "당산현대3차",
       "당산현대3차"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1156011400100880000",
+        "names": [
+          "당산현대3차",
+          "당산현대아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 891,
@@ -2296,8 +3081,13 @@
         "pnu": "1156013300106960000",
         "names": [
           "우성1",
-          "대림우성"
-        ]
+          "대림우성",
+          "우성아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -2316,7 +3106,20 @@
       "문래두산위브",
       "문래두산위브"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1156012300100140000",
+        "names": [
+          "문래두산위브",
+          "문래 두산위브"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 893,
@@ -2335,8 +3138,13 @@
         "names": [
           "세림",
           "마장세림아파트",
-          "마장세림"
-        ]
+          "마장세림",
+          "세림아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -2355,7 +3163,21 @@
       "잠원한강",
       "한강아파트"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1165010600100490008",
+        "names": [
+          "잠원한강",
+          "한강아파트",
+          "한강"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 896,
@@ -2374,8 +3196,13 @@
         "names": [
           "우성",
           "도화우성",
-          "마포도화우성아파트"
-        ]
+          "마포도화우성아파트",
+          "도화3지구우성아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -2401,7 +3228,11 @@
         "names": [
           "산업인",
           "고척동 산업인아파트"
-        ]
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -2438,8 +3269,13 @@
         "pnu": "1174010800100300002",
         "names": [
           "현대",
-          "성내현대"
-        ]
+          "성내현대",
+          "현대아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -2490,8 +3326,13 @@
         "pnu": "1168011400107310000",
         "names": [
           "한솔마을",
-          "일원한솔"
-        ]
+          "일원한솔",
+          "한솔마을 204동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -2510,7 +3351,21 @@
       "명일우성",
       "명일동우성"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1174010100100420000",
+        "names": [
+          "명일우성",
+          "명일동우성",
+          "우성아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 904,
@@ -2528,15 +3383,25 @@
         "pnu": "1168010600105030000",
         "names": [
           "개포우성1",
-          "개포우성1,2차"
-        ]
+          "개포우성1,2차",
+          "개포1차우성아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       },
       {
         "pnu": "1168010600105000000",
         "names": [
           "개포우성2",
-          "개포우성1,2차"
-        ]
+          "개포우성1,2차",
+          "개포2차우성아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -2555,7 +3420,21 @@
       "상록수아파트",
       "상록수아파트"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1168011400107340000",
+        "names": [
+          "상록수아파트",
+          "상록수",
+          "상록수아파트104동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 906,
@@ -2574,8 +3453,15 @@
         "names": [
           "선경2차(8동-12동)",
           "선경1차(1동-7동)",
-          "대치선경"
-        ]
+          "대치선경",
+          "선경아파트",
+          "선경아파트12동",
+          "선경아파트2동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -2601,8 +3487,13 @@
         "names": [
           "우성3",
           "신길우성3차",
-          "신길우성3차아파트"
-        ]
+          "신길우성3차아파트",
+          "신길우성아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -2627,8 +3518,13 @@
         "pnu": "1165010100109880001",
         "names": [
           "신동아",
-          "방배신동아"
-        ]
+          "방배신동아",
+          "신동아아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -2653,8 +3549,14 @@
         "pnu": "1168010600100630000",
         "names": [
           "대치우성아파트1동,2동,3동,5동,6동,7동",
-          "대치우성1차(통합재건축)"
-        ]
+          "대치우성1차(통합재건축)",
+          "대치우성아파트",
+          "대치우성아파트1동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -2680,8 +3582,13 @@
         "names": [
           "동신",
           "월계동신아파트",
-          "월계동신"
-        ]
+          "월계동신",
+          "동신아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -2700,7 +3607,20 @@
       "수정아파트",
       "수정아파트"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1147010100107330031",
+        "names": [
+          "수정아파트",
+          "수정"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 951,
@@ -2718,8 +3638,13 @@
         "pnu": "1171010700101920000",
         "names": [
           "극동",
-          "가락극동"
-        ]
+          "가락극동",
+          "극동아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -2745,8 +3670,13 @@
         "names": [
           "문정가락현대1차",
           "가락1차현대",
-          "가락1차현대아파트 "
-        ]
+          "가락1차현대아파트 ",
+          "현대아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -2771,8 +3701,13 @@
         "pnu": "1135010500104580000",
         "names": [
           "한신3차",
-          "상계한신3차"
-        ]
+          "상계한신3차",
+          "한신아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -2798,8 +3733,13 @@
         "names": [
           "태릉우성아파트",
           "태릉우성",
-          "공릉우성"
-        ]
+          "공릉우성",
+          "우성아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -2825,7 +3765,11 @@
         "names": [
           "삼호4",
           "월계삼호4차"
-        ]
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -2852,8 +3796,13 @@
           "미성",
           "삼호3",
           "미륭",
-          "월계시영(미륭,미성,삼호3)"
-        ]
+          "월계시영(미륭,미성,삼호3)",
+          "월계미성아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -2878,15 +3827,27 @@
         "pnu": "1168010600100650000",
         "names": [
           "쌍용대치2",
-          "대치우성1·쌍용2"
-        ]
+          "대치우성1·쌍용2",
+          "쌍용대치아파트",
+          "쌍용대치아파트7동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       },
       {
         "pnu": "1168010600100630000",
         "names": [
           "대치우성아파트1동,2동,3동,5동,6동,7동",
-          "대치우성1·쌍용2"
-        ]
+          "대치우성1·쌍용2",
+          "대치우성아파트",
+          "대치우성아파트1동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -2911,8 +3872,13 @@
         "pnu": "1171011200101660000",
         "names": [
           "상아1차아파트",
-          "가락상아1차"
-        ]
+          "가락상아1차",
+          "가락상아아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -2938,7 +3904,11 @@
         "names": [
           "광장",
           "여의도광장아파트 28번지"
-        ]
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -2976,8 +3946,13 @@
         "names": [
           "우성4",
           "신길우성4차",
-          "신길우성4차아파트 "
-        ]
+          "신길우성4차아파트 ",
+          "신길우성아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -3002,22 +3977,37 @@
         "pnu": "1150010100100660009",
         "names": [
           "염창동한강우성",
-          "염창우성1,2삼천리"
-        ]
+          "염창우성1,2삼천리",
+          "염창동우성아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       },
       {
         "pnu": "1150010100100700020",
         "names": [
           "삼천리",
-          "염창우성1,2삼천리"
-        ]
+          "염창우성1,2삼천리",
+          "삼천리아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       },
       {
         "pnu": "1150010100102870001",
         "names": [
           "우성2",
-          "염창우성1,2삼천리"
-        ]
+          "염창우성1,2삼천리",
+          "염창2차우성아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -3081,8 +4071,13 @@
         "names": [
           "미주",
           "청량리 미주아파트",
-          "청량리미주"
-        ]
+          "청량리미주",
+          "미주아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -3143,8 +4138,13 @@
         "pnu": "1165010600100500005",
         "names": [
           "신반포12",
-          "신반포12차"
-        ]
+          "신반포12차",
+          "신반포아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -3170,8 +4170,13 @@
         "names": [
           "미성",
           "여의도미성아파트",
-          "미성아파트"
-        ]
+          "미성아파트",
+          "이동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -3190,7 +4195,20 @@
       "방배신삼호",
       "방배신삼호"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1165010100107250000",
+        "names": [
+          "방배신삼호",
+          "방배삼호아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 1060,
@@ -3209,7 +4227,11 @@
         "names": [
           "광장(1,2동)",
           "여의도광장아파트 38-1번지"
-        ]
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -3235,8 +4257,13 @@
         "names": [
           "무지개",
           "시흥무지개아파트",
-          "남서울 무지개 "
-        ]
+          "남서울 무지개 ",
+          "무지개아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -3250,12 +4277,29 @@
     "name": "강남원효성빌라",
     "lat": 37.49546,
     "lng": 126.99566,
-    "pnu": null,
+    "pnu": "1165010700105900025",
     "names": [
       "강남원효성빌라",
       "강남원효성빌라"
     ],
-    "locatorStatus": "needs_review"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1165010700105900025",
+        "names": [
+          "강남원효성빌라"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ],
+    "registerCandidateSource": {
+      "type": "official-reb-complex",
+      "url": "https://www.data.go.kr/data/15106861/fileData.do",
+      "sourceAsOf": "2025-09-18"
+    }
   },
   {
     "id": 1066,
@@ -3275,7 +4319,11 @@
           "삼익",
           "여의도 삼익",
           "여의도삼익"
-        ]
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -3328,14 +4376,23 @@
         "names": [
           "우성2",
           "신길동우성2차·우창아파트"
-        ]
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       },
       {
         "pnu": "1156013200145010000",
         "names": [
           "우창",
-          "신길동우성2차·우창아파트"
-        ]
+          "신길동우성2차·우창아파트",
+          "우창아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -3362,7 +4419,11 @@
           "국화맨션",
           "문래동국화아파트",
           "문래국화"
-        ]
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -3381,7 +4442,21 @@
       "왕궁아파트",
       "이촌왕궁"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1117012900103000011",
+        "names": [
+          "왕궁아파트",
+          "이촌왕궁",
+          "왕궁"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 1107,
@@ -3399,8 +4474,13 @@
         "pnu": "1162010200107390000",
         "names": [
           "뉴서울",
-          "뉴서울개나리열망연립"
-        ]
+          "뉴서울개나리열망연립",
+          "뉴서울아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -3425,8 +4505,13 @@
         "pnu": "1171010700100960001",
         "names": [
           "우성",
-          "가락우성1차"
-        ]
+          "가락우성1차",
+          "가락우성아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -3452,8 +4537,13 @@
         "names": [
           "라이프미성",
           "신림미성아파트",
-          "신림미성"
-        ]
+          "신림미성",
+          "미성아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -3472,7 +4562,21 @@
       "한효아파트",
       "고척한효"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1153010600100520332",
+        "names": [
+          "한효아파트",
+          "고척한효",
+          "한효"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 1113,
@@ -3490,8 +4594,13 @@
         "pnu": "1171010100103200000",
         "names": [
           "우성4차",
-          "잠실우성4차"
-        ]
+          "잠실우성4차",
+          "우성아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -3522,7 +4631,22 @@
       "일원개포한신",
       "개포한신아파트"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1168011400106150001",
+        "names": [
+          "일원개포한신",
+          "개포한신아파트",
+          "개포한신",
+          "개포한신아파트101"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 1171,
@@ -3541,8 +4665,13 @@
         "names": [
           "대림",
           "대림가락",
-          "방이대림가락"
-        ]
+          "방이대림가락",
+          "대림가락아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -3568,7 +4697,11 @@
         "names": [
           "미성맨션",
           "송파미성"
-        ]
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -3594,8 +4727,13 @@
         "names": [
           "보람아파트",
           "보람2단지",
-          "상계보람"
-        ]
+          "상계보람",
+          "보람아파트1단지"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -3620,8 +4758,13 @@
         "pnu": "1165010700100600004",
         "names": [
           "반포미도",
-          "반포미도1차"
-        ]
+          "반포미도1차",
+          "반포미도아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -3673,7 +4816,11 @@
         "names": [
           "우성(23)",
           "구로우성아파트"
-        ]
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -3698,8 +4845,13 @@
         "pnu": "1165010600100700000",
         "names": [
           "신반포4",
-          "신반포4차"
-        ]
+          "신반포4차",
+          "신반포아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -3750,8 +4902,13 @@
         "pnu": "1165010600100650032",
         "names": [
           "신반포7",
-          "신반포7차"
-        ]
+          "신반포7차",
+          "신반포아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -3777,8 +4934,13 @@
         "names": [
           "경동미주",
           "제기1(경동미주아파트)",
-          "제기경동미주"
-        ]
+          "제기경동미주",
+          "경동미주아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -3797,7 +4959,21 @@
       "산호아파트",
       "원효산호"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1117011800101180016",
+        "names": [
+          "산호아파트",
+          "원효산호",
+          "산호"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 1231,
@@ -3815,8 +4991,13 @@
         "pnu": "1171010300102190000",
         "names": [
           "미성",
-          "풍납미성"
-        ]
+          "풍납미성",
+          "미성맨션"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -3843,7 +5024,11 @@
           "우창",
           "가락우창",
           "가락우창아파트"
-        ]
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -3869,7 +5054,11 @@
         "names": [
           "한양아파트",
           "송파한양1차"
-        ]
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -3919,8 +5108,13 @@
         "names": [
           "삼익",
           "한강삼익아파트",
-          "한강삼익"
-        ]
+          "한강삼익",
+          "삼익아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -3963,7 +5157,22 @@
       "삼익그린2차",
       "명일삼익그린2차"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1174010100100150000",
+        "names": [
+          "삼익그린2차",
+          "명일삼익그린2차",
+          "삼익그린맨션아파트",
+          "삼익그린맨션"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 1321,
@@ -3975,7 +5184,20 @@
       "길훈아파트",
       "길훈아파트"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1153010800101500042",
+        "names": [
+          "길훈아파트",
+          "길훈"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 1322,
@@ -3994,8 +5216,13 @@
         "names": [
           "현대(2-4차)",
           "오금현대",
-          "오금현대아파트"
-        ]
+          "오금현대아파트",
+          "현대아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -4059,7 +5286,11 @@
           "궁전",
           "신반포궁전",
           "신반포궁전아파트"
-        ]
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -4085,8 +5316,14 @@
         "names": [
           "개포6차우성아파트1동~8동",
           "개포우성6차",
-          "우성6차"
-        ]
+          "우성6차",
+          "개포6차우성아파트",
+          "개포6차우성아파트1동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -4112,7 +5349,11 @@
         "names": [
           "청화1",
           "청화아파트"
-        ]
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -4139,7 +5380,11 @@
           "2차한양아파트",
           "한양2차",
           "송파한양2차"
-        ]
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -4165,7 +5410,11 @@
         "names": [
           "중곡2단지",
           "중곡아파트"
-        ]
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -4191,8 +5440,13 @@
         "names": [
           "신동아",
           "명일 신동아",
-          "명일신동아"
-        ]
+          "명일신동아",
+          "신동아아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -4217,8 +5471,14 @@
         "pnu": "1135010500107200000",
         "names": [
           "상계주공6(고층)",
-          "상계주공6단지"
-        ]
+          "상계주공6단지",
+          "상계주공아파트",
+          "상계주공6단지아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -4243,8 +5503,13 @@
         "pnu": "1174010100100540000",
         "names": [
           "한양",
-          "명일한양"
-        ]
+          "명일한양",
+          "한양아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -4306,8 +5571,13 @@
         "names": [
           "시범(중산1차)",
           "중산시범아파트",
-          "시범아파트"
-        ]
+          "시범아파트",
+          "1차시범아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -4326,7 +5596,21 @@
       "고덕주공9",
       "고덕주공9단지"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1174010100102570000",
+        "names": [
+          "고덕주공9",
+          "고덕주공9단지",
+          "고덕주공아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 1528,
@@ -4344,8 +5628,14 @@
         "pnu": "1168010300106540000",
         "names": [
           "현대2",
-          "개포현대2차"
-        ]
+          "개포현대2차",
+          "현대아파트",
+          "현대아파트212동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -4364,7 +5654,20 @@
       "한남하이츠",
       "한남하이츠아파트"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1120011300102200001",
+        "names": [
+          "한남하이츠",
+          "한남하이츠아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 1549,
@@ -4383,7 +5686,11 @@
         "names": [
           "우성",
           "천호우성아파트"
-        ]
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -4410,7 +5717,11 @@
           "현대(고덕)",
           "고덕 현대",
           "고덕현대아파트"
-        ]
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -4437,7 +5748,11 @@
           "진흥아파트",
           "서초진흥아파트",
           "서초진흥"
-        ]
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -4462,8 +5777,13 @@
         "pnu": "1138010300102480000",
         "names": [
           "라이프미성",
-          "불광미성"
-        ]
+          "불광미성",
+          "미성아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -4500,8 +5820,14 @@
         "pnu": "1130510200102420000",
         "names": [
           "주공1단지",
-          "번동주공1단지"
-        ]
+          "번동주공1단지",
+          "번동주공아파트1단지",
+          "번동1단지주공아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -4528,7 +5854,11 @@
           "주공1",
           "구로주공",
           "구로주공아파트"
-        ]
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -4553,8 +5883,13 @@
         "pnu": "1135010400102730000",
         "names": [
           "장미(시영6)",
-          "하계장미"
-        ]
+          "하계장미",
+          "장미아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -4605,8 +5940,14 @@
         "pnu": "1168011800104650000",
         "names": [
           "우성4",
-          "개포우성4차"
-        ]
+          "개포우성4차",
+          "개포4차우성아파트",
+          "개포4차우성아파트2동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -4631,8 +5972,14 @@
         "pnu": "1168011400106150000",
         "names": [
           "우성7",
-          "개포우성7차"
-        ]
+          "개포우성7차",
+          "일원동우성7차아파트",
+          "일원동우성7차아파트105"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -4657,8 +6004,13 @@
         "pnu": "1171010300103910000",
         "names": [
           "극동",
-          "풍납극동"
-        ]
+          "풍납극동",
+          "극동아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -4703,7 +6055,21 @@
       "서울가든빌라",
       "서울가든빌라"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1153010800100970004",
+        "names": [
+          "서울가든빌라",
+          "서울가든빌라2단지",
+          "서울가든빌라1단지"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 1659,
@@ -4721,8 +6087,13 @@
         "pnu": "1165010600100600078",
         "names": [
           "신반포20",
-          "신반포20차"
-        ]
+          "신반포20차",
+          "신반포아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -4741,7 +6112,21 @@
       "개포주공5단지",
       "개포주공5단지"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1168010300101870000",
+        "names": [
+          "개포주공5단지",
+          "개포주공아파트",
+          "개포주공아파트504동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 1664,
@@ -4821,8 +6206,13 @@
         "names": [
           "한양3",
           "한양3차",
-          "잠실한양3차"
-        ]
+          "잠실한양3차",
+          "잠실3차(방이동) 한양아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -4885,8 +6275,14 @@
         "pnu": "1168010600100650000",
         "names": [
           "쌍용대치2",
-          "대치쌍용2차(통합재건축)"
-        ]
+          "대치쌍용2차(통합재건축)",
+          "쌍용대치아파트",
+          "쌍용대치아파트7동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -4912,8 +6308,13 @@
         "names": [
           "삼성",
           "신길동삼성아파트",
-          "신길삼성"
-        ]
+          "신길삼성",
+          "삼성아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -4932,7 +6333,21 @@
       "반포미도2차",
       "반포미도2차"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1165010700100600005",
+        "names": [
+          "반포미도2차",
+          "반포미도2차아파트",
+          "반포미도2차아파트,상가"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 1718,
@@ -4949,8 +6364,13 @@
       {
         "pnu": "1165010800116480002",
         "names": [
-          "서초현대"
-        ]
+          "서초현대",
+          "서초현대아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -4969,7 +6389,22 @@
       "대우효령",
       "방배대우효령"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1165010100110380000",
+        "names": [
+          "대우효령",
+          "방배대우효령",
+          "대우(효령)",
+          "대우효령아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 1720,
@@ -4988,8 +6423,13 @@
         "names": [
           "반도",
           "용산반도",
-          "이촌반도"
-        ]
+          "이촌반도",
+          "반도아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -5025,8 +6465,13 @@
       {
         "pnu": "1117013000107290000",
         "names": [
-          "남산대림"
-        ]
+          "남산대림",
+          "남산대림아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -5053,8 +6498,14 @@
           "상계주공2(고층)",
           "상계주공2(저층)",
           "상계주공2",
-          "상계주공2단지"
-        ]
+          "상계주공2단지",
+          "상계주공아파트",
+          "상계주공2단지아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -5092,8 +6543,13 @@
         "names": [
           "한신1차",
           "상계한신1",
-          "상계한신1차"
-        ]
+          "상계한신1차",
+          "한신아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -5119,8 +6575,13 @@
         "names": [
           "한신2차",
           "상계한신2",
-          "상계한신2차"
-        ]
+          "상계한신2차",
+          "한신아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -5175,8 +6636,13 @@
       {
         "pnu": "1156011300100020006",
         "names": [
-          "당산한양"
-        ]
+          "당산한양",
+          "당산한양아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -5200,8 +6666,14 @@
       {
         "pnu": "1135010400102560005",
         "names": [
-          "한신동성"
-        ]
+          "한신동성",
+          "한신,동성아파트",
+          "한신.동성아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -5226,15 +6698,27 @@
         "pnu": "1135010500107300002",
         "names": [
           "상계주공3(고층)",
-          "상계주공3"
-        ]
+          "상계주공3",
+          "상계주공아파트",
+          "상계주공3단지아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       },
       {
         "pnu": "1135010500107370000",
         "names": [
           "상계주공3(저층)",
-          "상계주공3"
-        ]
+          "상계주공3",
+          "상계주공아파트",
+          "상계주공3단지아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -5259,8 +6743,13 @@
         "pnu": "1135010500107570000",
         "names": [
           "한양",
-          "상계한양"
-        ]
+          "상계한양",
+          "한양아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -5284,8 +6773,13 @@
       {
         "pnu": "1132010700103730000",
         "names": [
-          "창동주공4단지"
-        ]
+          "창동주공4단지",
+          "창동4단지주공아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -5310,8 +6804,13 @@
         "pnu": "1132010700100260000",
         "names": [
           "동아",
-          "창동동아"
-        ]
+          "창동동아",
+          "동아아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -5336,8 +6835,13 @@
         "pnu": "1135010400102800000",
         "names": [
           "미성",
-          "하계미성"
-        ]
+          "하계미성",
+          "미성아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -5362,8 +6866,14 @@
         "pnu": "1135010600105020001",
         "names": [
           "중계그린1단지",
-          "중계그린"
-        ]
+          "중계그린",
+          "중계그린아파트",
+          "시영아파트1단지"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -5389,8 +6899,13 @@
         "names": [
           "주공4",
           "중계주공4",
-          "중계주공4단지"
-        ]
+          "중계주공4단지",
+          "중계4단지주공아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -5415,8 +6930,13 @@
         "pnu": "1171011200100020000",
         "names": [
           "대림",
-          "오금대림"
-        ]
+          "오금대림",
+          "대림아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -5442,8 +6962,13 @@
         "names": [
           "주공8",
           "중계주공8",
-          "중계주공8단지"
-        ]
+          "중계주공8단지",
+          "중계8단지주공아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -5468,8 +6993,13 @@
         "pnu": "1153010100102900000",
         "names": [
           "미성",
-          "신도림미성"
-        ]
+          "신도림미성",
+          "미성아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -5494,7 +7024,11 @@
         "pnu": "1141011900104310000",
         "names": [
           "DMC한양"
-        ]
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -5518,8 +7052,13 @@
       {
         "pnu": "1144010200101880108",
         "names": [
-          "마포현대"
-        ]
+          "마포현대",
+          "현대아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -5544,8 +7083,13 @@
         "pnu": "1120011400106560320",
         "names": [
           "동아",
-          "성수동아"
-        ]
+          "성수동아",
+          "동아아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -5570,8 +7114,13 @@
         "pnu": "1159010900105650000",
         "names": [
           "우성1차",
-          "신대방우성1차"
-        ]
+          "신대방우성1차",
+          "우성아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -5595,8 +7144,13 @@
       {
         "pnu": "1159010500100100000",
         "names": [
-          "명수대현대"
-        ]
+          "명수대현대",
+          "명수대현대아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -5621,8 +7175,14 @@
         "pnu": "1168011500107360000",
         "names": [
           "신동아",
-          "수서신동아"
-        ]
+          "수서신동아",
+          "신동아아파트",
+          "신동아아파트705동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -5641,7 +7201,21 @@
       "수서한아름",
       "수서한아름아파트"
     ],
-    "locatorStatus": "candidate"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1168011500107120000",
+        "names": [
+          "수서한아름",
+          "수서한아름아파트",
+          "수서한아름아파트107동"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
+      }
+    ]
   },
   {
     "id": 1747,
@@ -5660,8 +7234,14 @@
         "names": [
           "상계주공1(고층)",
           "상계주공1(저층)",
-          "상계주공1"
-        ]
+          "상계주공1",
+          "상계주공아파트",
+          "상계주공1단지아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -5687,8 +7267,14 @@
         "names": [
           "상계주공10(고층)",
           "상계주공10(저층)",
-          "상계주공10"
-        ]
+          "상계주공10",
+          "상계주공아파트",
+          "상계주공10단지아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -5713,8 +7299,13 @@
         "pnu": "1138010700106940001",
         "names": [
           "우성",
-          "응암우성"
-        ]
+          "응암우성",
+          "응암우성아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -5739,8 +7330,13 @@
         "pnu": "1138010900101400001",
         "names": [
           "미성",
-          "신사미성"
-        ]
+          "신사미성",
+          "미성아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -5765,8 +7361,13 @@
         "pnu": "1121510500105160000",
         "names": [
           "우성3",
-          "자양우성3"
-        ]
+          "자양우성3",
+          "자양우성3차아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
@@ -5790,8 +7391,14 @@
       {
         "pnu": "1123010800100650000",
         "names": [
-          "청량리신현대"
-        ]
+          "청량리신현대",
+          "신현대",
+          "청량리신현대아파트"
+        ],
+        "aliasSource": {
+          "url": "https://www.data.go.kr/data/15106861/fileData.do",
+          "sourceAsOf": "2025-09-18"
+        }
       }
     ],
     "registerCandidateSource": {
