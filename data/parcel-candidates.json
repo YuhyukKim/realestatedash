@@ -2453,12 +2453,26 @@
     "name": "일원청솔",
     "lat": 37.480492,
     "lng": 127.083017,
-    "pnu": null,
+    "pnu": "1168011400107390000",
     "names": [
       "일원청솔",
       "일원청솔"
     ],
-    "locatorStatus": "needs_review"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1168011400107390000",
+        "names": [
+          "일원청솔빌리지",
+          "일원청솔"
+        ]
+      }
+    ],
+    "registerCandidateSource": {
+      "type": "official-kapt-address",
+      "url": "https://www.data.go.kr/data/15073271/fileData.do",
+      "sourceAsOf": "2026-08-14"
+    }
   },
   {
     "id": 902,
@@ -4658,12 +4672,26 @@
     "name": "양평동신동아아파트",
     "lat": 37.522101,
     "lng": 126.886872,
-    "pnu": null,
+    "pnu": "1156012500100200000",
     "names": [
       "양평동신동아아파트",
       "양평동신동아아파트"
     ],
-    "locatorStatus": "needs_review"
+    "locatorStatus": "candidate",
+    "registerCandidates": [
+      {
+        "pnu": "1156012500100200000",
+        "names": [
+          "양평신동아아파트",
+          "양평동신동아아파트"
+        ]
+      }
+    ],
+    "registerCandidateSource": {
+      "type": "official-kapt-address",
+      "url": "https://www.data.go.kr/data/15073271/fileData.do",
+      "sourceAsOf": "2026-08-14"
+    }
   },
   {
     "id": 1648,
