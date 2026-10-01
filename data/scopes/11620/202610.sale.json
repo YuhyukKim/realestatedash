@@ -1,1 +1,1 @@
-{"version":1,"district":"관악구","month":"202610","kind":"sale","fetchedAt":"2026-09-30T22:11:00.769Z","expectedCount":0,"records":[]}
+{"version":1,"district":"관악구","month":"202610","kind":"sale","fetchedAt":"2026-10-01T22:38:06.125Z","expectedCount":1,"records":[{"apartment":"서울대입구한양아이클래스","dong":"봉천동","jibun":"1568-1","aptSeq":null,"buildYear":2018,"date":"2026-10-01","type":"sale","priceManwon":18300,"monthlyRent":0,"area":15.96,"floor":12}]}

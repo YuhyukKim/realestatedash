@@ -1,1 +1,1 @@
-{"version":1,"district":"광진구","month":"202610","kind":"rent","fetchedAt":"2026-09-30T22:11:01.346Z","expectedCount":0,"records":[]}
+{"version":1,"district":"광진구","month":"202610","kind":"rent","fetchedAt":"2026-10-01T22:38:06.633Z","expectedCount":1,"records":[{"apartment":"우성2","dong":"자양동","jibun":"520-2","aptSeq":"11215-56","buildYear":1989,"date":"2026-10-01","type":"jeonse","priceManwon":65000,"monthlyRent":0,"area":80.1,"floor":3}]}

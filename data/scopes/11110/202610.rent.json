@@ -1,1 +1,1 @@
-{"version":1,"district":"종로구","month":"202610","kind":"rent","fetchedAt":"2026-09-30T22:11:08.181Z","expectedCount":0,"records":[]}
+{"version":1,"district":"종로구","month":"202610","kind":"rent","fetchedAt":"2026-10-01T22:38:13.082Z","expectedCount":1,"records":[{"apartment":"창신쌍용1","dong":"창신동","jibun":"702","aptSeq":"11110-37","buildYear":1992,"date":"2026-10-01","type":"monthly","priceManwon":5000,"monthlyRent":170,"area":54.7,"floor":3}]}

@@ -1,1 +1,1 @@
-{"version":1,"district":"도봉구","month":"202610","kind":"sale","fetchedAt":"2026-09-30T22:11:02.761Z","expectedCount":0,"records":[]}
+{"version":1,"district":"도봉구","month":"202610","kind":"sale","fetchedAt":"2026-10-01T22:38:08.401Z","expectedCount":1,"records":[{"apartment":"신동아아파트1","dong":"방학동","jibun":"271-1","aptSeq":null,"buildYear":1986,"date":"2026-10-01","type":"sale","priceManwon":44000,"monthlyRent":0,"area":62.22,"floor":6}]}

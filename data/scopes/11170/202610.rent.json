@@ -1,1 +1,1 @@
-{"version":1,"district":"용산구","month":"202610","kind":"rent","fetchedAt":"2026-09-30T22:11:07.405Z","expectedCount":0,"records":[]}
+{"version":1,"district":"용산구","month":"202610","kind":"rent","fetchedAt":"2026-10-01T22:38:12.413Z","expectedCount":1,"records":[{"apartment":"용산파크타워(24-0)","dong":"용산동5가","jibun":"24","aptSeq":"11170-2766","buildYear":2009,"date":"2026-10-01","type":"jeonse","priceManwon":168000,"monthlyRent":0,"area":137.63,"floor":26}]}

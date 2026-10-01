@@ -1,1 +1,1 @@
-{"version":1,"district":"성북구","month":"202610","kind":"rent","fetchedAt":"2026-09-30T22:11:05.715Z","expectedCount":0,"records":[]}
+{"version":1,"district":"성북구","month":"202610","kind":"rent","fetchedAt":"2026-10-01T22:38:10.962Z","expectedCount":1,"records":[{"apartment":"길음뉴타운데시앙","dong":"정릉동","jibun":"1018","aptSeq":"11290-53","buildYear":1999,"date":"2026-10-01","type":"jeonse","priceManwon":33000,"monthlyRent":0,"area":59.42,"floor":1}]}
