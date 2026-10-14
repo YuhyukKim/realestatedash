@@ -1,1 +1,1 @@
-{"version":1,"district":"종로구","month":"202610","kind":"sale","fetchedAt":"2026-10-13T00:34:23.252Z","expectedCount":0,"records":[]}
+{"version":1,"district":"종로구","month":"202610","kind":"sale","fetchedAt":"2026-10-14T21:37:06.167Z","expectedCount":1,"records":[{"apartment":"종로아인스빌","dong":"숭인동","jibun":"1392-1","aptSeq":null,"buildYear":2013,"date":"2026-10-12","type":"sale","priceManwon":11000,"monthlyRent":0,"area":12.15,"floor":13}]}
