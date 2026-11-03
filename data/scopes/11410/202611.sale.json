@@ -1,1 +1,1 @@
-{"version":1,"district":"서대문구","month":"202611","kind":"sale","fetchedAt":"2026-11-01T21:58:23.929Z","expectedCount":0,"records":[]}
+{"version":1,"district":"서대문구","month":"202611","kind":"sale","fetchedAt":"2026-11-03T00:54:38.000Z","expectedCount":1,"records":[{"apartment":"힐스테이트홍은포레스트","dong":"홍은동","jibun":"470","aptSeq":null,"buildYear":2023,"date":"2026-11-02","type":"sale","priceManwon":117000,"monthlyRent":0,"area":72.79,"floor":12}]}

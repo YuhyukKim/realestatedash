@@ -1,1 +1,1 @@
-{"version":1,"district":"송파구","month":"202611","kind":"sale","fetchedAt":"2026-11-01T21:58:25.279Z","expectedCount":0,"records":[]}
+{"version":1,"district":"송파구","month":"202611","kind":"sale","fetchedAt":"2026-11-03T00:54:39.428Z","expectedCount":1,"records":[{"apartment":"솔렌시아","dong":"마천동","jibun":"31-2","aptSeq":null,"buildYear":2003,"date":"2026-11-01","type":"sale","priceManwon":77000,"monthlyRent":0,"area":84.97,"floor":4}]}

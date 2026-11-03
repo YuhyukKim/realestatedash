@@ -1,1 +1,1 @@
-{"version":1,"district":"은평구","month":"202611","kind":"sale","fetchedAt":"2026-11-01T21:58:26.678Z","expectedCount":0,"records":[]}
+{"version":1,"district":"은평구","month":"202611","kind":"sale","fetchedAt":"2026-11-03T00:54:40.947Z","expectedCount":1,"records":[{"apartment":"송학","dong":"구산동","jibun":"24-59","aptSeq":null,"buildYear":2004,"date":"2026-11-01","type":"sale","priceManwon":45000,"monthlyRent":0,"area":77.92,"floor":2}]}

@@ -1,1 +1,1 @@
-{"version":1,"district":"강북구","month":"202611","kind":"rent","fetchedAt":"2026-11-01T21:58:20.368Z","expectedCount":0,"records":[]}
+{"version":1,"district":"강북구","month":"202611","kind":"rent","fetchedAt":"2026-11-03T00:54:34.235Z","expectedCount":1,"records":[{"apartment":"엘리프미아역2단지","dong":"미아동","jibun":"195","aptSeq":"11305-6612","buildYear":2026,"date":"2026-11-02","type":"jeonse","priceManwon":65000,"monthlyRent":0,"area":74.829,"floor":12}]}
