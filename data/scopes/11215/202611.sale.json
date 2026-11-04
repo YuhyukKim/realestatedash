@@ -1,1 +1,1 @@
-{"version":1,"district":"광진구","month":"202611","kind":"sale","fetchedAt":"2026-11-03T00:54:35.175Z","expectedCount":0,"records":[]}
+{"version":1,"district":"광진구","month":"202611","kind":"sale","fetchedAt":"2026-11-04T23:35:37.363Z","expectedCount":1,"records":[{"apartment":"한강아남","dong":"자양동","jibun":"830","aptSeq":null,"buildYear":1995,"date":"2026-11-02","type":"sale","priceManwon":150000,"monthlyRent":0,"area":59.87,"floor":3}]}

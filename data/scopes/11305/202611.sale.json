@@ -1,1 +1,1 @@
-{"version":1,"district":"강북구","month":"202611","kind":"sale","fetchedAt":"2026-11-03T00:54:34.086Z","expectedCount":0,"records":[]}
+{"version":1,"district":"강북구","month":"202611","kind":"sale","fetchedAt":"2026-11-04T23:35:36.352Z","expectedCount":1,"records":[{"apartment":"수유벽산1차","dong":"수유동","jibun":"205","aptSeq":null,"buildYear":1993,"date":"2026-11-04","type":"sale","priceManwon":55300,"monthlyRent":0,"area":63.78,"floor":3}]}

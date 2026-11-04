@@ -1,1 +1,1 @@
-{"version":1,"district":"성동구","month":"202611","kind":"sale","fetchedAt":"2026-11-03T00:54:38.715Z","expectedCount":0,"records":[]}
+{"version":1,"district":"성동구","month":"202611","kind":"sale","fetchedAt":"2026-11-04T23:35:40.693Z","expectedCount":1,"records":[{"apartment":"센트라스","dong":"하왕십리동","jibun":"1070","aptSeq":null,"buildYear":2016,"date":"2026-11-03","type":"sale","priceManwon":243000,"monthlyRent":0,"area":84.96,"floor":8}]}

@@ -1,1 +1,1 @@
-{"version":1,"district":"서초구","month":"202611","kind":"sale","fetchedAt":"2026-11-03T00:54:38.334Z","expectedCount":0,"records":[]}
+{"version":1,"district":"서초구","month":"202611","kind":"sale","fetchedAt":"2026-11-04T23:35:40.342Z","expectedCount":1,"records":[{"apartment":"방배임광3차","dong":"방배동","jibun":"1010-1","aptSeq":null,"buildYear":1988,"date":"2026-11-02","type":"sale","priceManwon":145000,"monthlyRent":0,"area":44.61,"floor":9}]}

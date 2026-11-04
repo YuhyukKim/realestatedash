@@ -1,1 +1,1 @@
-{"version":1,"district":"노원구","month":"202611","kind":"sale","fetchedAt":"2026-11-03T00:54:36.220Z","expectedCount":0,"records":[]}
+{"version":1,"district":"노원구","month":"202611","kind":"sale","fetchedAt":"2026-11-04T23:35:38.359Z","expectedCount":1,"records":[{"apartment":"건영","dong":"하계동","jibun":"271-3","aptSeq":null,"buildYear":1988,"date":"2026-11-02","type":"sale","priceManwon":74900,"monthlyRent":0,"area":53.14,"floor":13}]}
