@@ -1,1 +1,1 @@
-{"version":1,"district":"동작구","month":"202611","kind":"sale","fetchedAt":"2026-11-08T21:58:29.505Z","expectedCount":0,"records":[]}
+{"version":1,"district":"동작구","month":"202611","kind":"sale","fetchedAt":"2026-11-10T01:27:34.022Z","expectedCount":1,"records":[{"apartment":"사당우성2","dong":"사당동","jibun":"105","aptSeq":null,"buildYear":1993,"date":"2026-11-02","type":"sale","priceManwon":170000,"monthlyRent":0,"area":59.89,"floor":8}]}
