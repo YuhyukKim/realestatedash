@@ -1,1 +1,1 @@
-{"version":1,"district":"마포구","month":"202611","kind":"sale","fetchedAt":"2026-11-10T01:27:34.509Z","expectedCount":0,"records":[]}
+{"version":1,"district":"마포구","month":"202611","kind":"sale","fetchedAt":"2026-11-12T00:33:45.130Z","expectedCount":1,"records":[{"apartment":"성산시영(유원)","dong":"성산동","jibun":"446","aptSeq":null,"buildYear":1986,"date":"2026-11-02","type":"sale","priceManwon":167000,"monthlyRent":0,"area":59.43,"floor":10}]}

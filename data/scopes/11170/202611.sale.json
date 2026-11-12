@@ -1,1 +1,1 @@
-{"version":1,"district":"용산구","month":"202611","kind":"sale","fetchedAt":"2026-11-10T01:27:38.008Z","expectedCount":0,"records":[]}
+{"version":1,"district":"용산구","month":"202611","kind":"sale","fetchedAt":"2026-11-12T00:33:53.551Z","expectedCount":1,"records":[{"apartment":"리첸시아용산B","dong":"문배동","jibun":"40-31","aptSeq":null,"buildYear":2010,"date":"2026-11-03","type":"sale","priceManwon":205000,"monthlyRent":0,"area":84.98,"floor":5}]}
